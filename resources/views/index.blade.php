@@ -80,10 +80,10 @@
             <ul class="nav">
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
-                    <a href="/ped"  data-toggle="ajax">
+                    <a href="/reporte"  data-toggle="ajax">
 
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
-                        <span>Pedidos</span>
+                        <span>Reporte</span>
                     </a>
                 </li>
                 <li class="has-sub">

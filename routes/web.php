@@ -38,7 +38,11 @@ Route::get('/agrCli',function (){
 Route::get('/agrusu',function (){
     return view('pagina/usuario/agregarusuario');
 });
-Route::get('/repusu',function (){
+Route::get('/rep',function (){
     return view('pagina/usuario/reportarusuario');
+});
+
+Route::get('/reporte',function (){
+    return view('pagina/Reporte/reporte');
 });
 
