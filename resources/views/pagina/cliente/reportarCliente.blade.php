@@ -111,46 +111,46 @@
 
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 187px; min-width: 187px;">
+                                style="width: 100%;; min-width: 187px;">
                                 Nombres y apellidos
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 187px; min-width: 187px;">
+                                style="width: 100%;; min-width: 187px;">
                                 Telefono
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 187px; min-width: 187px;">
+                                style="width: 100%;; min-width: 187px;">
                                 correo
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 242px; min-width: 242px;">
+                                style="width: 100%;; min-width: 242px;">
                                 Dni
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                style="width: 220px; min-width: 220px;">
+                                style="width: 100%;; min-width: 220px;">
                                 Ruc
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 159px; min-width: 159px;">
+                                style="width: 100%;; min-width: 159px;">
                                 Direccion personal
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 159px; min-width: 159px;">Nombre tienda
+                                style="width: 100%;; min-width: 159px;">Nombre tienda
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 117px; min-width: 117px;">
+                                style="width: 100%;; min-width: 117px;">
                                 Direccion tienda
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 117px; min-width: 117px;">
+                                style="width: 100%;; min-width: 117px;">
                                 Opciones
                             </th>
                             </tr>

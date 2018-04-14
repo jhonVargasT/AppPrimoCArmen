@@ -62,7 +62,7 @@
                     <table id="data-table-fixed-header"
                            class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
                            role="grid"
-                           aria-describedby="data-table-fixed-header_info">
+                           aria-describedby="data-table-fixed-header_info" width="100%">
                         <tbody>
                         <tr class="gradeX odd" role="row">
                             <th>Vargas Trauco, Jhon Anllinson</th>
@@ -104,32 +104,32 @@
 
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 187px; min-width: 187px;">
+                                style="width: 100%; min-width: 187px;">
                                 Nombres y apellidos
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 242px; min-width: 242px;">
+                                style="width: 100%; min-width: 242px;">
                                 Dni
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                style="width: 220px; min-width: 220px;">
+                                style="width: 100%; min-width: 220px;">
                                 Usuario
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 159px; min-width: 159px;">
+                                style="width: 100%; min-width: 159px;">
                                 Contraseña
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 159px; min-width: 159px;">
+                                style="width: 100%; min-width: 159px;">
                                 Rol
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 117px; min-width: 117px;">
+                                style="width: 100%; min-width: 117px;">
                                 Opciones
                             </th>
                         </tr>

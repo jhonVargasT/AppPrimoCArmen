@@ -87,6 +87,13 @@
                     </a>
                 </li>
                 <li class="has-sub">
+                    <a href="/ped"  data-toggle="ajax">
+
+                        <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
+                        <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret"></b>
                         <i class="fas fa-lg fa-fw m-r-10 fa-database"></i>

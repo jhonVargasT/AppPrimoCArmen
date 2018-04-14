@@ -136,37 +136,37 @@
 
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 187px; min-width: 187px;">
+                                style="width: 100%;; min-width: 187px;">
                                 Nombre
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 60px; min-width: 60px;">
+                                style="width: 100%;; min-width: 60px;">
                                 Tipo
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                style="width: 120px; min-width: 100px;">
+                                style="width: 100%;; min-width: 100px;">
                                 stock
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 159px; min-width: 159px;">
+                                style="width: 100%;; min-width: 159px;">
                                 Unidad
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 117px; min-width: 117px;">
+                                style="width: 100%;; min-width: 117px;">
                                 Precio unitario
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 117px; min-width: 117px;">
+                                style="width: 100%;; min-width: 117px;">
                                 Fecha ingreso
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 60px; min-width: 60px;">
+                                style="width: 100%;; min-width: 60px;">
                                 Opciones
                             </th>
                         </tr>
