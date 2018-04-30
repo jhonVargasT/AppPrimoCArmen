@@ -1,3 +1,4 @@
+<script language="JavaScript" type="text/javascript" src="../assets/reporte.js"></script>
 <div class="row">
     <div class="col-lg-3 col-md-6">
         <div class="widget widget-stats bg-red">
@@ -92,11 +93,11 @@
                     </div>
                 </div>
                 <div class="col-sm-8 col-xs-8 col-md-8 row inline" id="busqueda">
-                    <div class="form-group  col-sm-4 col-xs-4 col-md-4" id="Fecha">
+                    <div class="form-group  col-sm-4 col-xs-4 col-md-4" id="Fecha1">
                         <label class=" col-form-label text-md-left">Fecha inicio </label>
                         <input type="text" class="form-control" id="datepicker-autoClose" placeholder="clic aqui">
                     </div>
-                    <div class="form-group  col-sm-4 col-xs-4 col-md-4" id="Fecha">
+                    <div class="form-group  col-sm-4 col-xs-4 col-md-4" id="Fecha2">
                         <label class=" col-form-label text-md-left">Fecha fin</label>
                         <input type="text" class="form-control" id="datepicker-autoClose" placeholder="clic aqui">
                     </div>
@@ -117,9 +118,11 @@
                     <button type="submit" class="btn btn-success"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>Buscar
                     </button>
                 </div>
+                <div class="col-md-3 col-sm-3"></div>
+
             </div>
             <div class="col-sm-12" align="right">
-                    <h5>Total ingresos: 250  </h5>
+                    <h5>Total ingresos: S./ 250  </h5>
             </div>
         </form>
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -157,52 +160,72 @@
                            aria-describedby="data-table-fixed-header_info">
                         <tbody>
                         <tr class="gradeX odd" role="row">
+                            <th> 0025</th>
                             <th>Jhon vargas</th>
                             <th>959025041</th>
+                            <th> 10729787928</th>
+                            <th> 72978792</th>
                             <th>Ñuxtu-soft, Chachapoyas - jr sociego 450</th>
-                            <th>Galleta oreo</th>
-                            <th>20</th>
+
                             <th> 05/04/2018</th>
 
                             <th>s./ 420</th>
                         </tr>
                         <tr class="gradeX odd" role="row">
+                            <th> 0025</th>
                             <th>Jhon vargas</th>
                             <th>959025041</th>
+                            <th> 10729787928</th>
+                            <th> 72978792</th>
                             <th>Ñuxtu-soft, Chachapoyas - jr sociego 450</th>
-                            <th>Galleta oreo</th>
-                            <th>20</th>
+
                             <th> 05/04/2018</th>
 
 
                             <th>s./ 420</th>
                         </tr>
                         <tr class="gradeX odd" role="row">
+                            <th> 0025</th>
                             <th>Jhon vargas</th>
                             <th>959025041</th>
+                            <th> 10729787928</th>
+                            <th> 72978792</th>
                             <th>Ñuxtu-soft, Chachapoyas - jr sociego 450</th>
-                            <th>Galleta oreo</th>
-                            <th>20</th>
+
                             <th> 05/04/2018</th>
                             <th>s./ 420</th>
                         </tr>
                         <tr class="gradeX odd" role="row">
+                            <th> 0025</th>
                             <th>Jhon vargas</th>
                             <th>959025041</th>
+                            <th> 10729787928</th>
+                            <th> 72978792</th>
                             <th>Ñuxtu-soft, Chachapoyas - jr sociego 450</th>
-                            <th>Galleta oreo</th>
-                            <th>20</th>
+
                             <th> 05/04/2018</th>
                             <th>s./ 420</th>
                         </tr>
                         </tbody>
                         <thead>
                         <tr role="row">
-
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                            rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
+                            style="width: 20%; min-width: 100px;text-align: center">boleta</th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
                                 style="width: 100%; min-width: 100px;text-align: center">
                                 Cliente
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                            rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
+                            style="width: 100%; min-width: 100px;text-align: center">
+                                Ruc
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
+                                style="width: 100%; min-width: 100px;text-align: center">
+                                Dni
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
@@ -215,16 +238,7 @@
                                 Tienda y direccion
                             </th>
 
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%; min-width: 70px;text-align: center">
-                                Producto
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 100%; min-width: 40px;text-align: center">
-                                Cantidad
-                            </th>
+
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
                                 style="width: 100%; min-width: 117px;text-align: center">
@@ -267,20 +281,7 @@
                     </div>
                 </div>
             </div>
-            <div class="  col-sm-12 col-xs-12 col-md-12">
-                <dl class=" row dl-horizontal">
-                    <div class="  col-sm-2 col-xs-2 col-md-2">
-                        <dt class="text-inverse">Leyenda para estado:</dt>
-                    </div>
-                    <div class="  col-sm-3 col-xs-3 col-md-3">
-                        <dd><i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Pedido no empaquetado
-                        </dd>
-                        <dd><i style="color: orange" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Empaquetado</dd>
-                        <dd><i style="color: yellow" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>No entregado</dd>
-                        <dd><i style="color: green;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Entregado</dd>
-                    </div>
-                </dl>
-            </div>
+
             <br>
             <br>
 
@@ -291,7 +292,46 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
-    App.setPageTitle('Color Admin | Blank Page');
+    App.setPageTitle('Reporte | ARPEMAR SAC');
     App.restartGlobalFunction();
+    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
+        $.when(
+            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
+            $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
+            $.getScript('../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'),
+            $.getScript('../assets/plugins/masked-input/masked-input.min.js'),
+            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
+            $.getScript('../assets/plugins/password-indicator/js/password-indicator.js'),
+            $.getScript('../assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js'),
+            $.getScript('../assets/plugins/bootstrap-select/bootstrap-select.min.js'),
+            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js'),
+            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js'),
+            $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
+            $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
+            $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),
+            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
+            $.getScript('../assets/plugins/bootstrap-show-password/bootstrap-show-password.js'),
+            $.getScript('../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js'),
+            $.getScript('../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'),
+            $.getScript('../assets/plugins/clipboard/clipboard.min.js'),
+            $.Deferred(function (deferred) {
+                $(deferred.resolve);
+            })
+        ).done(function () {
+            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
+                FormPlugins.init();
+            });
+        });
+    });
+    $.when(
+        $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
+        $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
+        $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
+        $.Deferred(function( deferred ){
+            $(deferred.resolve);
+        })
+    ).done(function() {
+        Notification.init();
+    });
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

@@ -34,6 +34,16 @@
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <script language="JavaScript" type="text/javascript" src="../assets/pedido.js"></script>
+<div class="col-lg-3 col-md-6">
+    <div class="widget widget-stats bg-green">
+        <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
+        <div class="stats-info">
+            <h4>Comision mensual</h4>
+            <p>S/. 790.00</p>
+        </div>
+
+    </div>
+</div>
 <h1 class="page-header">Pedidos
     <small>Aqui puedo administrar pedidos</small>
 </h1>
@@ -56,6 +66,15 @@
 
     <div class="panel-body">
 
+        <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
+
+            <a  href="/vender" href="/prod" data-toggle="ajax" class="btn btn-danger"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>
+                nuevo pedido
+            </a>
+        </div>
+
+        <br>
+        <br>
         <form action="/" method="POST">
             <div class="row col-sm-12 col-xs-12 col-md-12">
                 <div class="form-group row col-sm-4 col-xs-4 col-md-4">
@@ -91,21 +110,19 @@
             </div>
 
 
-            <div class=" row form-group col-sm-12 col-xs-12 col-md-12">
-                <div class="col-sm-5 col-xs-5 col-md-5"></div>
-                <div class="form-group row col-md-1 col-sm-1">
-                    <a href="/prod" data-toggle="ajax" class="btn btn-danger">
-                        <i class="fas fa-lg fa-fw m-r-8 fa-eraser "></i>
-                        Limpiar campos
-                    </a>
-                </div>
-                <div class="col-md-1 col-sm-1"></div>
-                <div class="form-group row col-md-1 col-sm-1">
-                    <button type="submit" class="btn btn-success"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>Buscar
-                    </button>
-                </div>
+            <div class="row  col-sm-12 col-xs-12 col-md-12 " >
+                        <div class=" col-sm-6 col-xs-6 col-md-6 " align="right">
+                            <a href="/prod" data-toggle="ajax" class="btn btn-danger">
+                                <i class="fas fa-lg fa-fw m-r-8 fa-eraser "></i>
+                                Limpiar campos
+                            </a>
+                        </div>
+                        <div class=" col-sm-6 col-xs-6 col-md-6 " align="left">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>Buscar
+                            </button>
+                        </div>
             </div>
-
+            <br>
         </form>
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
             <div class="row">
@@ -140,6 +157,7 @@
                            role="grid"
                            aria-describedby="data-table-fixed-header_info">
                         <tbody>
+
                         <tr class="gradeX odd" role="row">
                             <th>Jhon vargas</th>
                             <th>959025041</th>
@@ -147,10 +165,7 @@
                             <th>20</th>
                             <th> 05/04/2018</th>
                             <th>s./ 420</th>
-                            <th style="text-align: center"><a href="" class="btn btn-link"
-                                                              data-toggle="modal"> <i style="color: red"
-                                                                                      class="fas fa-lg fa-fw fa-circle"></i>
-                                </a></th>
+
                             <th style="text-align: center">
                                 <a href="#modal-dialog" class="btn btn-link" data-toggle="modal"
                                    title="Ver productos"><i
@@ -169,32 +184,7 @@
                             <th>20</th>
                             <th> 05/04/2018</th>
                             <th>s./ 420</th>
-                            <th style="text-align: center"><a href="" class="btn btn-link"
-                                                              data-toggle="modal"> <i style="color: green"
-                                                                                      class="fas fa-lg fa-fw fa-circle"></i>
-                                </a></th>
-                            <th style="text-align: center">
-                                <a href="#modal-dialog" class="btn btn-link" data-toggle="modal"
-                                   title="Ver productos"><i
-                                            class="fas fa-lg fa-fw  fa-eye"></i>
-                                </a>
-                                <a href="#" class="btn btn-link" data-toggle="modal" title="cancelar"><i
-                                            style="color: red"
-                                            class="fas fa-lg fa-fw  fa-times-circle "></i>
-                                </a>
-                            </th>
-                        </tr>
-                        <tr class="gradeX odd" role="row">
-                            <th>Jhon vargas</th>
-                            <th>959025041</th>
-                            <th>Ñuxtu-soft, Chachapoyas - jr sociego 450</th>
-                            <th>20</th>
-                            <th> 05/04/2018</th>
-                            <th>s./ 420</th>
-                            <th style="text-align: center"><a href="" class="btn btn-link"
-                                                              data-toggle="modal"> <i style="color: darkorange"
-                                                                                      class="fas fa-lg fa-fw fa-circle"></i>
-                                </a></th>
+
                             <th style="text-align: center">
                                 <a href="#modal-dialog" class="btn btn-link" data-toggle="modal"
                                    title="Ver productos"><i
@@ -242,11 +232,6 @@
                                 Total
                             </th>
 
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 100%; min-width: 20px;text-align: center">
-                                Estado
-                            </th>
 
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -285,18 +270,7 @@
                     </div>
                 </div>
             </div>
-            <div class="  col-sm-12 col-xs-12 col-md-12">
-                <dl class=" row dl-horizontal">
-                    <div class="  col-sm-2 col-xs-2 col-md-2">
-                        <dt class="text-inverse">Leyenda para estado:</dt>
-                    </div>
-                    <div class="  col-sm-3 col-xs-3 col-md-3">
-                        <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Entregado</dd>
-                        <dd><i style="color: darkorange;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En espera</dd>
-                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Cancelado</dd>
-                    </div>
-                </dl>
-            </div>
+
             <br>
             <br>
 
@@ -350,27 +324,36 @@
                                 <tr class="gradeX odd" role="row">
                                     <th>Oreo negra</th>
                                     <th> 3</th>
-                                    <th> 8 </th>
-                                    <th> <a  href="" style="color: green">
-                                            <i class="fas fa-lg fa-fw m-r-10 fa-check"></i>
-                                        </a> </th>
-                                </tr>
-                                </tbody> <tr class="gradeX odd" role="row">
-                                    <th>Oreo negra</th>
-                                    <th> 3</th>
-                                    <th> 8 </th>
-                                    <th> <a  href="" style="color: red">
-                                            <i class="fas fa-lg fa-fw m-r-10 fa-times"></i>
-                                        </a> </th>
+                                    <th> 8</th>
+                                    <th><a href="#" class="btn btn-link" data-toggle="modal"
+                                           title="eliminar de lista"><i
+                                                    style="color: red"
+                                                    class="fas fa-lg fa-fw  fa-times-circle "></i>
+                                        </a></th>
                                 </tr>
                                 </tbody>
                                 <tr class="gradeX odd" role="row">
                                     <th>Oreo negra</th>
                                     <th> 3</th>
-                                    <th> 8 </th>
-                                    <th> <a  href="" style="color: orange">
-                                            <i class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i>
-                                        </a> </th>
+                                    <th> 8</th>
+                                    <th>
+                                        <a href="#" class="btn btn-link" data-toggle="modal"
+                                           title="eliminar de lista"><i
+                                                    style="color: red"
+                                                    class="fas fa-lg fa-fw  fa-times-circle "></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                                </tbody>
+                                <tr class="gradeX odd" role="row">
+                                    <th>Oreo negra</th>
+                                    <th> 3</th>
+                                    <th> 8</th>
+                                    <th><a href="#" class="btn btn-link" data-toggle="modal"
+                                           title="eliminar de lista"><i
+                                                    style="color: red"
+                                                    class="fas fa-lg fa-fw  fa-times-circle "></i>
+                                        </a></th>
                                 </tr>
                                 </tbody>
                                 <thead>
@@ -397,30 +380,14 @@
                                         rowspan="1" colspan="1"
                                         aria-label="CSS grade: activate to sort column ascending"
                                         style="width: 100%; min-width: 20px;text-align: center">
-                                        Estado
+                                        opciones
                                     </th>
                                 </tr>
                                 </thead>
                             </table>
                         </div>
                     </div>
-                    <div class="  col-sm-12 col-xs-12 col-md-12">
-                        <dl class=" row dl-horizontal">
-                            <div class="  col-sm-6 col-xs-6 col-md-6">
-                                <dt class="text-inverse">Leyenda :</dt>
-                            </div>
-                            <div  class="  col-sm-5 col-xs-5 col-md-5">
-                                <dd ><i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i>
-                                    </i>En espera
-                                </dd>
-                                <dd><i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check">
-                                    </i>Listo
-                                </dd>
-                                <dd><i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i>Cancelado
-                                </dd>
-                            </div>
-                        </dl>
-                    </div>
+
                     <br>
                     <br>
 

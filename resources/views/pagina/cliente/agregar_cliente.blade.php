@@ -48,6 +48,8 @@
         <h4 class="panel-title">Agregar cliente</h4>
     </div>
     <div class="panel-body">
+
+
         <!-- begin wizard-form -->
         <form action="/" method="POST" name="form-wizard" class="form-control-with-bg">
             <!-- begin wizard -->

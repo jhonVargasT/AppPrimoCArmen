@@ -16,6 +16,13 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/admistrador', function () {
+    return view('index_administrador');
+});
+
+Route::get('/vendedor', function () {
+    return view('index_vendedor');
+});
 /*productos*/
 Route::get('/ped',function (){
     return view('pagina/producto/pedido');
@@ -24,25 +31,32 @@ Route::get('/prod',function (){
     return view('pagina/producto/producto');
 });
 Route::get('/agreprod',function (){
-    return view('pagina/producto/agregarproducto');
+    return view('pagina/producto/agregar_producto');
 });
 /*cliente*/
 Route::get('/repCli',function (){
-    return view('pagina/cliente/reportarCliente');
+    return view('pagina/cliente/reportar_cliente');
 });
 Route::get('/agrCli',function (){
-    return view('pagina/cliente/agregarCliente');
+    return view('pagina/cliente/agregar_cliente');
 });
 
 /*personal*/
 Route::get('/agrusu',function (){
-    return view('pagina/usuario/agregarusuario');
+    return view('pagina/usuario/agregar_usuario');
 });
-Route::get('/rep',function (){
-    return view('pagina/usuario/reportarusuario');
+Route::get('/repusu',function (){
+    return view('pagina/usuario/reportar_usuario');
 });
 
 Route::get('/reporte',function (){
     return view('pagina/Reporte/reporte');
 });
 
+Route::get('/vender',function (){
+    return view('pagina/vendedor/vender');
+});
+
+Route::get('/reporte_vendedor',function (){
+    return view('pagina/vendedor/reporte_vendedor');
+});
