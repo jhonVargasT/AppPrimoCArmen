@@ -60,3 +60,15 @@ Route::get('/vender',function (){
 Route::get('/reporte_vendedor',function (){
     return view('pagina/vendedor/reporte_vendedor');
 });
+
+//////////////////////////////////////AGREGAR///////////////////////////////////////////////
+
+Route::prefix('create-cliente')->group(function () {
+    Route::get('/', 'ClienteController@index');
+    Route::get('/create', 'ClienteController@create');
+    Route::post('/store', 'ClienteController@store');
+    Route::get('/{id}/edit', 'ClienteController@show');
+    Route::put('/{id}', 'ClienteController@edit');
+    Route::get('/{id}', 'ClienteController@update');
+    Route::delete('/{id}', 'ClienteController@destroy');
+});
