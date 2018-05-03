@@ -61,13 +61,13 @@
             <div class="login-content">
                 <form action="index.html" method="GET" class="margin-bottom-0">
                     <div class="form-group m-b-15">
-                        <input type="text" class="form-control form-control-lg" placeholder="Email Address" required />
+                        <input type="text" class="form-control form-control-lg" placeholder="Usuario" required />
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control form-control-lg" placeholder="Password" required />
+                        <input type="password" class="form-control form-control-lg" placeholder="Contraseña" required />
                     </div>
                     <div class="login-buttons">
-                        <a href="/vendedor" class="btn btn-success btn-block btn-lg">Ingresar </a>
+                        <a href="/admistrador" class="btn btn-success btn-block btn-lg">Ingresar </a>
                     <!--     <button type="submit" class="btn btn-success btn-block btn-lg">Ingresar</button>
                    -->
                     </div>
