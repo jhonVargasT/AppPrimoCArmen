@@ -1,8 +1,7 @@
 //store and edit
-$("#idForm").submit(function (e) {
+$("#idForm").submit(function (e){
     e.preventDefault();
     var url = "create-cliente";//route
-
     $.ajax({
         type: "POST",//metodo envio
         url: url,

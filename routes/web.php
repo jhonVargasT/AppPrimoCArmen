@@ -63,6 +63,7 @@ Route::get('/reporte_vendedor',function (){
 
 //////////////////////////////////////AGREGAR///////////////////////////////////////////////
 
+
 Route::prefix('create-cliente')->group(function () {
     Route::get('/', 'ClienteController@index');
     Route::get('/create', 'ClienteController@create');
@@ -72,3 +73,6 @@ Route::prefix('create-cliente')->group(function () {
     Route::get('/{id}', 'ClienteController@update');
     Route::delete('/{id}', 'ClienteController@destroy');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
