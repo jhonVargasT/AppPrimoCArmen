@@ -15,7 +15,7 @@ class Tienda extends Model
     public $fechaActualzacion;
 
     /**
-     * Tienda constructor.
+     * TiendaController constructor.
      */
     public function __construct()
     {

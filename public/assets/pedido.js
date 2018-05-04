@@ -11,10 +11,10 @@ $(document).on('change', 'input[type="checkbox"]', function (e) {
     }
     if (this.id === "productocheck") {
         if (this.checked) {
-            agrhtml('producto','Producto');
+            agrhtml('producto','ProductoController');
         }
         else {
-            elimhtml('producto','Producto');
+            elimhtml('producto','ProductoController');
         }
 
     }

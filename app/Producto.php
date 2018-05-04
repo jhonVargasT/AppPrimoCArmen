@@ -21,7 +21,7 @@ class Producto extends Model
     public $descuento;
 
     /**
-     * Producto constructor.
+     * ProductoController constructor.
      */
     public function __construct()
     {

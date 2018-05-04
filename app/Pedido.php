@@ -21,7 +21,7 @@ class Pedido extends Model
     public $totalPago;
 
     /**
-     * Pedido constructor.
+     * PedidoController constructor.
      */
     public function __construct()
     {

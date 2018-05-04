@@ -17,7 +17,7 @@ class Usuario extends Model
    public $idPersona;
 
     /**
-     * Usuario constructor.
+     * UsuarioController constructor.
      * @param $idUsuario
      * @param $contraseña
      * @param $usuario

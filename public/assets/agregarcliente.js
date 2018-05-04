@@ -22,7 +22,7 @@ function agregardireccion(event) {
         '<div class="col-md-6"> <input type="text" id="dist'+click+'" class="form-control" data-parsley-group="step-3" data-parsley-required="true"'+
         'data-parsley-type="alphanum"/> </div> </div>' +
         '<div class="form-group row m-b-10" >' +
-        '<label class="col-md-3 col-form-label text-md-right">Direccion '+click+' <span class="text-danger">*</span></label>' +
+        '<label class="col-md-3 col-form-label text-md-right">DireccionController '+click+' <span class="text-danger">*</span></label>' +
         '<div class="col-md-6"> <input type="text" id="dir'+click+'" class="form-control"' +
         'data-parsley-group="step-3" data-parsley-required="true"/> </div> ';
     html = html + html2;

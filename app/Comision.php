@@ -15,7 +15,7 @@ class Comision extends Model
     public $estado;
 
     /**
-     * Comision constructor.
+     * ComisionController constructor.
      */
     public function __construct()
     {

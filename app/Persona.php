@@ -22,7 +22,7 @@ class Persona extends Model
     public $distrito;
 
     /**
-     * Persona constructor.
+     * PersonaController constructor.
      * @param $idPersona
      * @param $nombres
      * @param $apellidos

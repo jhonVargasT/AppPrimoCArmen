@@ -15,7 +15,7 @@ class ProductoPedido extends Model
     public $fechaCreacion;
 
     /**
-     * ProductoPedido constructor.
+     * ProductoPedidoController constructor.
      */
     public function __construct()
     {
