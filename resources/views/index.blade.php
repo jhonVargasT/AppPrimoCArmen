@@ -67,7 +67,7 @@
                         <input type="password" class="form-control form-control-lg" placeholder="Contraseña" required />
                     </div>
                     <div class="login-buttons">
-                        <a href="/admistrador" class="btn btn-success btn-block btn-lg">Ingresar </a>
+                        <a href="/Administrador" class="btn btn-success btn-block btn-lg">Ingresar </a>
                     <!--     <button type="submit" class="btn btn-success btn-block btn-lg">Ingresar</button>
                    -->
                     </div>

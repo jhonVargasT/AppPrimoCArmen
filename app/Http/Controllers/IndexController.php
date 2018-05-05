@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Yajra\Datatables\Datatables;
 
-class PersonaController extends Controller
+class IndexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +14,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        return view('pagina.cliente.reportar_cliente');
-    }
-
-    public function listado()
-    {
-        return Datatables::of(Persona::all())->make(true);
+        return view('index');
     }
 
     /**
@@ -31,13 +24,13 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        return view('pagina.cliente.agregar_cliente');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -48,7 +41,7 @@ class PersonaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -59,7 +52,7 @@ class PersonaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -70,8 +63,8 @@ class PersonaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,7 +75,7 @@ class PersonaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

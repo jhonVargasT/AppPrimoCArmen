@@ -103,7 +103,7 @@
                         <li><a href="/prod" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-database"></i>
                                 Productos</a></li>
-                        <li><a href="/repCli" data-toggle="ajax">
+                        <li><a href="create-cliente" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-users"></i>Clientes</a></li>
                         <li><a href="/repusu" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-user-secret"></i>Usuarios</a></li>

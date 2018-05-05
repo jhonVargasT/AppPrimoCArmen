@@ -17,7 +17,7 @@ class Direcciontienda extends Migration
             $table->collate = 'latin1_spanish_ci';
 
             $table->increments('idDireccionTienda')->unique();
-            $table->string('nonbreCalle')->nullable();
+            $table->string('nombreCalle')->nullable();
             $table->string('provincia')->nullable();
             $table->string('distrito')->nullable();
             $table->string('nroCalle')->nullable();

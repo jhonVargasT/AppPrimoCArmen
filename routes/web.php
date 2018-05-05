@@ -13,66 +13,57 @@
 /*links simples*/
 /*index */
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/admistrador', function () {
-    return view('index_administrador');
-});
+Route::get('/', 'IndexController@index');
+
+Route::get('/Administrador', 'AdministradorController@index');
 
 Route::get('/vendedor', function () {
     return view('index_vendedor');
 });
+
 /*productos*/
-Route::get('/ped',function (){
+Route::get('/ped', function () {
     return view('pagina/producto/pedido');
 });
-Route::get('/prod',function (){
+Route::get('/prod', function () {
     return view('pagina/producto/producto');
 });
-Route::get('/agreprod',function (){
+Route::get('/agreprod', function () {
     return view('pagina/producto/agregar_producto');
-});
-/*cliente*/
-Route::get('/repCli',function (){
-    return view('pagina/cliente/reportar_cliente');
-});
-Route::get('/agrCli',function (){
-    return view('pagina/cliente/agregar_cliente');
 });
 
 /*personal*/
-Route::get('/agrusu',function (){
+Route::get('/agrusu', function () {
     return view('pagina/usuario/agregar_usuario');
 });
-Route::get('/repusu',function (){
+Route::get('/repusu', function () {
     return view('pagina/usuario/reportar_usuario');
 });
 
-Route::get('/reporte',function (){
+Route::get('/reporte', function () {
     return view('pagina/Reporte/reporte');
 });
 
-Route::get('/vender',function (){
+Route::get('/vender', function () {
     return view('pagina/vendedor/vender');
 });
 
-Route::get('/reporte_vendedor',function (){
+Route::get('/reporte_vendedor', function () {
     return view('pagina/vendedor/reporte_vendedor');
 });
 
-//////////////////////////////////////AGREGAR///////////////////////////////////////////////
+//////////////////////////////////////CLIENTE///////////////////////////////////////////////
 
-
-Route::prefix('create-cliente')->group(function () {
-    Route::get('/', 'ClienteController@index');
-    Route::get('/create', 'ClienteController@create');
-    Route::post('/store', 'ClienteController@store');
-    Route::get('/{id}/edit', 'ClienteController@show');
-    Route::put('/{id}', 'ClienteController@edit');
-    Route::get('/{id}', 'ClienteController@update');
-    Route::delete('/{id}', 'ClienteController@destroy');
+Route::resource('create-cliente', 'PersonaController');
+Route::prefix('/create-cliente')->group(function () {
+    Route::get('/create', 'PersonaController@create');
+    Route::post('/store', 'PersonaController@store');
+    Route::get('/{id}/edit', 'PersonaController@show');
+    Route::put('/{id}', 'PersonaController@edit');
+    Route::get('/{id}', 'PersonaController@update');
+    Route::delete('/{id}', 'PersonaController@destroy');
 });
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('datatables')->group(function () {
+    Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
+});
