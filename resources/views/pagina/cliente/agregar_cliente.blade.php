@@ -51,7 +51,7 @@
 
 
         <!-- begin wizard-form -->
-        <form action="/" method="POST" name="form-wizard" class="form-control-with-bg">
+        <form action="/" method="POST" name="form-wizard" class="form-control-with-bg" id="idFormCliente">
             <!-- begin wizard -->
             <div id="wizard">
                 <!-- begin wizard-step -->
