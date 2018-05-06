@@ -51,7 +51,7 @@
 
 
         <!-- begin wizard-form -->
-        <form action="/" method="POST" name="form-wizard" class="form-control-with-bg">
+        <form action="/" method="POST" name="form-wizard" class="form-control-with-bg" id="idFormCliente">
             <!-- begin wizard -->
             <div id="wizard">
                 <!-- begin wizard-step -->
@@ -128,7 +128,8 @@
                                         <label class="col-md-3 col-form-label text-md-right">Cumpleaños
                                             <span class="text-danger">*</span></label>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" id="datepicker-autoClose" placeholder="clic aqui">
+                                            <input type="text" class="form-control" id="datepicker-autoClose"
+                                                   placeholder="clic aqui">
                                         </div>
                                     </div>
                                     <!-- end form-group -->
@@ -150,7 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row m-b-10">
-                                        <label class="col-md-3 col-form-label text-md-right">Porvincia <span
+                                        <label class="col-md-3 col-form-label text-md-right">Provincia <span
                                                     class="text-danger">*</span></label>
                                         <div class="col-md-6">
                                             <input type="text" name="ic" class="form-control"
@@ -261,6 +262,16 @@
                                                    data-parsley-type="alphanum"/>
                                         </div>
                                     </div>
+
+                                    <div class="form-group row m-b-10">
+                                        <label class="col-md-3 col-form-label text-md-right">Numero de telefono<span
+                                                    class="text-danger">*</span></label>
+                                        <div class="col-md-6">
+                                            <input type="number" name="username" class="form-control"
+                                                   data-parsley-group="step-3" data-parsley-required="true"
+                                                   data-parsley-type="alphanum"/>
+                                        </div>
+                                    </div>
                                     <!-- end form-group -->
                                     <!-- begin form-group -->
                                     <div id="dir">
@@ -274,19 +285,30 @@
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">Provincia<span
+                                                        class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="text" id="dist1" class="form-control"
+                                                       data-parsley-group="step-3" data-parsley-required="true"
+                                                       data-parsley-type="alphanum"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
 
                                             <label class="col-md-3 col-form-label text-md-right">Direccion
                                                 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-md-6">
-                                                <input type="text" id="dir1" class="form-control" data-parsley-group="step-3" data-parsley-required="true"/>
+                                                <input type="text" id="dir1" class="form-control"
+                                                       data-parsley-group="step-3" data-parsley-required="true"/>
                                             </div>
                                             <input hidden id="val1" value="1"/>
 
                                         </div>
                                         <div class="form-group row m-b-10">
                                             <label style="color: #0a8cbd" class="col-md-3 col-form-label text-md-right">
-                                                <a onclick="return agregardireccion(event);" class="btn btn-link" data-toggle="modal">
+                                                <a onclick="return agregardireccion(event);" class="btn btn-link"
+                                                   data-toggle="modal">
                                                     <i class="fas fa-lg fa-fw m-r-10 fa-plus "></i>
                                                     Agregar direccion
                                                 </a> <span class="text-danger">*</span></label>
