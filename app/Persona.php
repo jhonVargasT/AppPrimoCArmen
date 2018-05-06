@@ -12,7 +12,6 @@ class Persona extends Model
 
     public static function listado()
     {
-        //activo.docxpagar_id
         return static::select('persona.nombres as pnombres', 'persona.apellidos as papellidos','persona.nroCelular as pnroCelular',
             'persona.correo as pcorreo', 'persona.dni as pdni', 'persona.ruc as pruc', 'persona.direccion  as pdireccion',
             'persona.estado as pestado','t.nombreTienda as tnombreTienda', 'dt.nombreCalle as dtnombreCalle')

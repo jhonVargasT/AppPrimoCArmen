@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DireccionTienda;
 use App\Persona;
+use App\Tienda;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
+use Exception;
 use Yajra\Datatables\Datatables;
 
 class PersonaController extends Controller
@@ -42,25 +46,51 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        $persona = new Persona();
-        $persona->dni = $request->dni;
-        $persona->apellidos = $request->apellidos;
-        $persona->fechaNacimiento = $request->fechaNacimiento;
-        $persona->direccion = $request->direccion;
-        $persona->nroCelular = $request->nroCelular;
-        $persona->correo = $request->correo;
-        $persona->nroCelular = $request->nroCelular;
-        $persona->fechaCreacion = $request->fechaCreacion;
-        $persona->fechaActualizacion = $request->fechaActualizacion;
-        $persona->usuarioCreacion = $request->usuarioCreacion;
-        $persona->nroCelular = $request->nroCelular;
-        $persona->departamento = $request->departamento;
-        $persona->provincia = $request->provincia;
-        $persona->nroCelular = $request->nroCelular;
-        $persona->distrito = $request->distrito;
-        if($persona->save()){
-            return view('pagina.cliente.reportar_cliente');
-        }else{
+        try {
+            $persona = new Persona();
+            $persona->dni = $request->dni;
+            $persona->ruc = $request->ruc;
+            $persona->apellidos = $request->apellidos;
+            $persona->fechaNacimiento = $request->fechaNacimiento;
+            $persona->direccion = $request->direccion;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->correo = $request->correo;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->fechaCreacion = $request->fechaCreacion;
+            $persona->fechaActualizacion = $request->fechaActualizacion;
+            $persona->usuarioCreacion = $request->usuarioCreacion;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->departamento = $request->departamento;
+            $persona->provincia = $request->provincia;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->distrito = $request->distrito;
+
+            $tienda = new Tienda();
+            $tienda->nombreTienda = $request->nombreTienda;
+            $tienda->telefono = $request->telefono;
+            $tienda->fechaCreacion = $request->fechaCreacion;
+            $tienda->idUsuario = $request->idUsuario;
+
+            $direccionTienda = new DireccionTienda();
+            $direccionTienda->distrito = $request->distrito;
+            $direccionTienda->provincia = $request->provincia;
+            $direccionTienda->nombreCalle = $request->nombreCalle;
+            $direccionTienda->fechaCreacion = $request->fechaCreacion;
+            $direccionTienda->idUsuario = $request->idUsuario;
+            $direccionTienda->id_Tienda = $tienda->idTienda;
+
+            DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
+                $persona->save();
+
+                $tienda->id_Persona = $persona->idPersona;
+                $tienda->save();
+
+                $direccionTienda->id_Tienda = $tienda->idTienda;
+                $direccionTienda->save();
+
+                return view('pagina.cliente.reportar_cliente');
+            });
+        } catch (Exception $e) {
             return view('pagina.cliente.agregar_cliente');
         }
     }
