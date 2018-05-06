@@ -11,6 +11,15 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function logUsuario(Request $request)
+    {
+        $request->usuario;
+        $request->password;
+
+        return back();
+    }
+
     public function index()
     {
         //
