@@ -12,22 +12,23 @@ $('#actualizar').click(function () {
 
 //Crear Datos
 function registrarCliente() {
-    $("#idFormCliente").submit(function (e) {
-        e.preventDefault();
-        var url = "create-cliente/store";
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: $("#idFormCliente").serialize(),
-            success: function (data) {
+    var url = "create-cliente/store";
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#idFormCliente").serialize(),
+        success: function (data) {
+            if (data === 'success') {
+                //ingresado('create-cliente');
                 alert(data);
-                window.location.href = "create-cliente";
-            },
-            beforeSend: function () {
-
-                $("#guardar").prop('disabled', true);
+            } else {
+                //no_ingresado('create-cliente');
+                alert(data);
             }
-        });
+        },
+        beforeSend: function () {
+            $("#guardar").prop('disabled', true);
+        }
     });
 }
 
@@ -68,5 +69,35 @@ function actualizarCliente() {
                 $("#actualizar").prop('disabled', true);
             }
         });
+    });
+}
+
+function no_ingresado(url) {
+    window.location.href = url;
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    toast({
+        type: 'error',
+        title: 'Registrado Insatisfactoriamente'
+    });
+}
+
+function ingresado(url) {
+    window.location.href = url;
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    toast({
+        type: 'success',
+        title: 'Registrado Satisfactoriamente'
     });
 }
