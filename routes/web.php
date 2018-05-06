@@ -51,6 +51,13 @@ Route::get('/vender', function () {
 Route::get('/reporte_vendedor', function () {
     return view('pagina/vendedor/reporte_vendedor');
 });
+//usuario//
+Route::resource('create-usuario', 'UsuarioController');
+Route::prefix('/create-usuario')->group(function () {
+    Route::get('/log', 'UsuarioController@log');
+
+});
+
 
 //////////////////////////////////////CLIENTE///////////////////////////////////////////////
 

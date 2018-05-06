@@ -20,7 +20,7 @@
     <link href="../assets/css/default/style-responsive.min.css" rel="stylesheet" />
     <link href="../assets/css/default/theme/default.css" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
-
+    <script src="{{ asset('js/js_ajax/usuario.js') }}"></script>
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="../assets/plugins/pace/pace.min.js"></script>
     <!-- ================== END BASE JS ================== -->
@@ -59,7 +59,7 @@
             <!-- end login-header -->
             <!-- begin login-content -->
             <div class="login-content">
-                <form action="index.html" method="GET" class="margin-bottom-0">
+                <form  method="GET" class="margin-bottom-0" id="loguear">
                     <div class="form-group m-b-15">
                         <input type="text" class="form-control form-control-lg" placeholder="Usuario" required />
                     </div>
@@ -67,9 +67,8 @@
                         <input type="password" class="form-control form-control-lg" placeholder="Contraseña" required />
                     </div>
                     <div class="login-buttons">
-                        <a href="/Administrador" class="btn btn-success btn-block btn-lg">Ingresar </a>
-                    <!--     <button type="submit" class="btn btn-success btn-block btn-lg">Ingresar</button>
-                   -->
+                        <!--    <a href="/Administrador" class="btn btn-success btn-block btn-lg">Ingresar </a> -->
+                           <button  class="btn btn-success btn-block btn-lg">Ingresar</button>
                     </div>
                     <hr/>
                     <p class="text-center text-grey-darker">

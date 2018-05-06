@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+use Exception;
 
 class UsuarioController extends Controller
 {
@@ -12,12 +15,15 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function logUsuario(Request $request)
+    public function log()
     {
-        $request->usuario;
-        $request->password;
+        try {
 
-        return back();
+            return 'success';
+
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     public function index()
