@@ -22,7 +22,6 @@
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet"/>
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet"/>
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet"/>
-<script href="../../js/js_ajax/cliente.js" type="text/javascript"></script>
 <script src="{{ asset('js/js_ajax/cliente.js') }}"></script>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 

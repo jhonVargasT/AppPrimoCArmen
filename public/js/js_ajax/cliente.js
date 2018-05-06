@@ -35,40 +35,34 @@ function registrarCliente() {
 //Actualizar Datos
 function editarCliente() {
     var id = $("#idCliente").val();
-    $("#idFormCliente").submit(function (e) {
-        e.preventDefault();
-        var url = "create-cliente/" + id;
-        $.ajax({
-            type: "PUT",
-            url: url,
-            data: $("#idFormCliente").serialize(),
-            success: function (data) {
-                alert(data);
-            },
-            beforeSend: function () {
-                $("#editar").prop('disabled', true);
-            }
-        });
+    var url = "create-cliente/" + id;
+    $.ajax({
+        type: "PUT",
+        url: url,
+        data: $("#idFormCliente").serialize(),
+        success: function (data) {
+            alert(data);
+        },
+        beforeSend: function () {
+            $("#editar").prop('disabled', true);
+        }
     });
 }
 
 //Anular o Activar
 function actualizarCliente() {
     var id = $("#idCliente").val();
-    $("#idFormCliente").submit(function (e) {
-        e.preventDefault();
-        var url = "create-cliente/" + id;
-        $.ajax({
-            type: "PUT",
-            url: url,
-            data: $("#idFormCliente").serialize(),
-            success: function (data) {
-                alert(data);
-            },
-            beforeSend: function () {
-                $("#actualizar").prop('disabled', true);
-            }
-        });
+    var url = "create-cliente/" + id;
+    $.ajax({
+        type: "PUT",
+        url: url,
+        data: $("#idFormCliente").serialize(),
+        success: function (data) {
+            alert(data);
+        },
+        beforeSend: function () {
+            $("#actualizar").prop('disabled', true);
+        }
     });
 }
 
@@ -77,7 +71,7 @@ function no_ingresado(url) {
     const toast = swal.mixin({
         toast: true,
         position: 'top-end',
-        showConfirmButton: false,
+        showConfirmButton: true,
         timer: 3000
     });
 
@@ -92,7 +86,7 @@ function ingresado(url) {
     const toast = swal.mixin({
         toast: true,
         position: 'top-end',
-        showConfirmButton: false,
+        showConfirmButton: true,
         timer: 3000
     });
 
