@@ -42,7 +42,27 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $persona = new Persona();
+        $persona->dni = $request->dni;
+        $persona->apellidos = $request->apellidos;
+        $persona->fechaNacimiento = $request->fechaNacimiento;
+        $persona->direccion = $request->direccion;
+        $persona->nroCelular = $request->nroCelular;
+        $persona->correo = $request->correo;
+        $persona->nroCelular = $request->nroCelular;
+        $persona->fechaCreacion = $request->fechaCreacion;
+        $persona->fechaActualizacion = $request->fechaActualizacion;
+        $persona->usuarioCreacion = $request->usuarioCreacion;
+        $persona->nroCelular = $request->nroCelular;
+        $persona->departamento = $request->departamento;
+        $persona->provincia = $request->provincia;
+        $persona->nroCelular = $request->nroCelular;
+        $persona->distrito = $request->distrito;
+        if($persona->save()){
+            return view('pagina.cliente.reportar_cliente');
+        }else{
+            return view('pagina.cliente.agregar_cliente');
+        }
     }
 
     /**
