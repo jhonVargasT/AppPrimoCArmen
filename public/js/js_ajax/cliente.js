@@ -20,7 +20,8 @@ function registrarCliente() {
             url: url,
             data: $("#idFormCliente").serialize(),
             success: function (data) {
-                //redireccionar a pagina
+                alert(data);
+                window.location.href = "create-cliente";
             },
             beforeSend: function () {
 
@@ -41,7 +42,7 @@ function editarCliente() {
             url: url,
             data: $("#idFormCliente").serialize(),
             success: function (data) {
-                //redireccionar a pagina
+                alert(data);
             },
             beforeSend: function () {
                 $("#editar").prop('disabled', true);
@@ -61,7 +62,7 @@ function actualizarCliente() {
             url: url,
             data: $("#idFormCliente").serialize(),
             success: function (data) {
-                //redireccionar a pagina
+                alert(data);
             },
             beforeSend: function () {
                 $("#actualizar").prop('disabled', true);

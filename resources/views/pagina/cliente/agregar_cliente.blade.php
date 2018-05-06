@@ -389,5 +389,5 @@
 
 </script>
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-
+{!! Html::script('js//activos.js') !!}
 <!-- ================== END PAGE LEVEL JS ================== -->
