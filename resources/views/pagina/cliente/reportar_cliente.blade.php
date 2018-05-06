@@ -152,6 +152,3 @@
         });
     });
 </script>
-
-{!! Html::script('sweetalert2//sweetalert2.js') !!}
-{!! Html::css('sweetalert2//sweetalert2.js') !!}

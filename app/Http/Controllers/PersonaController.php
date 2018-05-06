@@ -42,7 +42,7 @@ class PersonaController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function store(Request $request)
     {
@@ -51,14 +51,12 @@ class PersonaController extends Controller
             $persona->dni = $request->dni;
             $persona->ruc = $request->ruc;
             $persona->apellidos = $request->apellidos;
-            $persona->fechaNacimiento = $request->fechaNacimiento;
+            $persona->fechaNacimiento = '1991-01-01';
             $persona->direccion = $request->direccion;
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
-            $persona->fechaCreacion = $request->fechaCreacion;
-            $persona->fechaActualizacion = $request->fechaActualizacion;
-            $persona->usuarioCreacion = $request->usuarioCreacion;
+            $persona->fechaCreacion = '1991-01-01';
             $persona->nroCelular = $request->nroCelular;
             $persona->departamento = $request->departamento;
             $persona->provincia = $request->provincia;
@@ -66,32 +64,31 @@ class PersonaController extends Controller
             $persona->distrito = $request->distrito;
 
             $tienda = new Tienda();
-            $tienda->nombreTienda = $request->nombreTienda;
-            $tienda->telefono = $request->telefono;
-            $tienda->fechaCreacion = $request->fechaCreacion;
-            $tienda->idUsuario = $request->idUsuario;
+            $tienda->nombreTienda = $request->tnombreTienda;
+            $tienda->telefono = $request->ttelefono;
+            $tienda->fechaCreacion = '1991-01-01';
 
             $direccionTienda = new DireccionTienda();
-            $direccionTienda->distrito = $request->distrito;
-            $direccionTienda->provincia = $request->provincia;
-            $direccionTienda->nombreCalle = $request->nombreCalle;
-            $direccionTienda->fechaCreacion = $request->fechaCreacion;
-            $direccionTienda->idUsuario = $request->idUsuario;
-            $direccionTienda->id_Tienda = $tienda->idTienda;
+            $direccionTienda->distrito = $request->dtdistrito;
+            $direccionTienda->provincia = $request->dtprovincia;
+            $direccionTienda->nombreCalle = $request->dtnombreCalle;
+            $direccionTienda->fechaCreacion = '1991-01-01';
+
 
             DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
                 $persona->save();
 
-                $tienda->id_Persona = $persona->idPersona;
+                $tienda->id_Persona = $persona->id;
                 $tienda->save();
 
-                $direccionTienda->id_Tienda = $tienda->idTienda;
+                $direccionTienda->id_Tienda = $tienda->id;
                 $direccionTienda->save();
 
-                return view('pagina.cliente.reportar_cliente');
             });
+            return 'success';
+
         } catch (Exception $e) {
-            return view('pagina.cliente.agregar_cliente');
+            return $e;
         }
     }
 
