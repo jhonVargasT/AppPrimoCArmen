@@ -57,17 +57,32 @@
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
                                 style="width: 100%;; min-width: 187px;">
-                                correo
+                                Correo
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                 style="width: 100%;; min-width: 242px;">
-                                Dni
+                                DNI
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 100%;; min-width: 242px;">
+                                RUC
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
                                 style="width: 100%;; min-width: 159px;">
-                                Direccion personal
+                                Direccion Personal
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
+                                Nombre Tienda
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
+                                Direccion Tienda
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
@@ -115,17 +130,20 @@
             rowId: 'id',
             ajax: '{!! route('datatable.clientes') !!}',
             columns: [
-                {data: 'nombres', name: 'nombres'},
-                {data: 'nroCelular', name: 'nroCelular'},
-                {data: 'correo', name: 'correo'},
-                {data: 'dni', name: 'dni'},
-                {data: 'direccion', name: 'direccion'},
+                {data: 'pnombres', name: 'pnombres'},
+                {data: 'pnroCelular', name: 'pnroCelular'},
+                {data: 'pcorreo', name: 'pcorreo'},
+                {data: 'pdni', name: 'pdni'},
+                {data: 'pruc', name: 'pruc'},
+                {data: 'pdireccion', name: 'pdireccion'},
+                {data: 'tnombreTienda', name: 'tnombreTienda'},
+                {data: 'dtnombreCalle', name: 'dtnombreCalle'},
                 {
                     data: function (row) {
-                        if (row.estado === '1') {
+                        if (row.pestado === '1') {
                             return '<label class="text-success">ACTIVO</label>';
                         }
-                        else if (row.estado === '0') {
+                        else if (row.pestado === '0') {
                             return '<label class="text-danger">ANULADO</label>';
                         }
                     }

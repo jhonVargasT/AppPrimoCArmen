@@ -21,7 +21,7 @@ class PersonaController extends Controller
 
     public function listado()
     {
-        return Datatables::of(Persona::all())->make(true);
+        return Datatables::of(Persona::listado())->make(true);
     }
 
     /**

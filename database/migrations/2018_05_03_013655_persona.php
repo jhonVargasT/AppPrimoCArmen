@@ -18,6 +18,7 @@ class Persona extends Migration
 
             $table->increments('idPersona')->unique();
             $table->string('dni')->nullable();
+            $table->string('ruc')->nullable();
             $table->string('nombres')->nullable();
             $table->string('apellidos')->nullable();
             $table->string('fechaNacimiento')->nullable();
