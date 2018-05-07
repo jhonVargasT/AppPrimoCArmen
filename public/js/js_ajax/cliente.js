@@ -19,15 +19,53 @@ function registrarCliente() {
         data: $("#idFormCliente").serialize(),
         success: function (data) {
             if (data === 'success') {
-                //ingresado('create-cliente');
-                alert(data);
+                redirect('create-cliente');
+                ok();
             } else {
-                //no_ingresado('create-cliente');
-                alert(data);
+                error();
             }
         },
         beforeSend: function () {
             $("#guardar").prop('disabled', true);
+        }
+    });
+}
+
+function ok() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    toast({
+        type: 'success',
+        title: 'Registrado Correctamente'
+    })
+}
+
+function error() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+
+    toast({
+        type: 'error',
+        title: 'Registro no Registrado'
+    })
+}
+
+function redirect(ruta) {
+    $.ajax({
+        type: "GET",
+        url: "/" + ruta,
+        dataType: "html",
+        success: function (data) {
+            $("#response").html(data);
         }
     });
 }
@@ -63,35 +101,5 @@ function actualizarCliente() {
         beforeSend: function () {
             $("#actualizar").prop('disabled', true);
         }
-    });
-}
-
-function no_ingresado(url) {
-    window.location.href = url;
-    const toast = swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: true,
-        timer: 3000
-    });
-
-    toast({
-        type: 'error',
-        title: 'Registrado Insatisfactoriamente'
-    });
-}
-
-function ingresado(url) {
-    window.location.href = url;
-    const toast = swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: true,
-        timer: 3000
-    });
-
-    toast({
-        type: 'success',
-        title: 'Registrado Satisfactoriamente'
     });
 }

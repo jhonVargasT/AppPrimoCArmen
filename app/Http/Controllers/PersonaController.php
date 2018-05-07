@@ -50,6 +50,7 @@ class PersonaController extends Controller
             $persona = new Persona();
             $persona->dni = $request->dni;
             $persona->ruc = $request->ruc;
+            $persona->nombres = $request->nombres;
             $persona->apellidos = $request->apellidos;
             $persona->fechaNacimiento = '1991-01-01';
             $persona->direccion = $request->direccion;
