@@ -19,4 +19,14 @@ class Persona extends Model
             ->join('direcciontienda as dt', 'dt.id_Tienda', '=', 't.idTienda')
             ->get();
     }
+
+    public function usuarios()
+    {
+        return $this->hasMany('App\Usuario');
+    }
+
+    public function tiendas()
+    {
+        return $this->hasMany('App\Tienda');
+    }
 }

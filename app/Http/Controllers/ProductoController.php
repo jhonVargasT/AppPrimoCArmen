@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class ProductoController extends Controller
 {
@@ -13,7 +14,7 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        return view('pagina.producto.reportar_producto');
     }
 
     /**
@@ -23,7 +24,7 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pagina.producto.agregar_producto');
     }
 
     /**

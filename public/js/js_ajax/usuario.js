@@ -1,6 +1,6 @@
 
 $('#ingresar').click(function () {
-       registrar();
+       //registrar();
 });
 
 function registrar() {
@@ -23,5 +23,4 @@ function registrar() {
             $("#ingresar").prop('disabled', true);
         }
     });
-
 }

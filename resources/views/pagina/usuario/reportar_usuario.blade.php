@@ -25,7 +25,7 @@
 
     <div class="panel-body">
         <div class=".row.row-space-2 .p-2">
-            <a href="/agrusu" data-toggle="ajax" class="btn btn-sm btn-primary">
+            <a href="/create-usuario/create" data-toggle="ajax" class="btn btn-sm btn-primary">
                 <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle"></i>
                 Agregar Usuario
             </a>
@@ -33,135 +33,64 @@
         <br>
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
             <div class="row">
-                <div class="col-sm-6">
-                    <div class="dataTables_length" id="data-table-fixed-header_length">
-                        <label>Show
-                            <select name="data-table-fixed-header_length" aria-controls="data-table-fixed-header"
-                                    class="form-control input-sm">
-                                <option value="20">20
-                                </option>
-                                <option value="40">40
-                                </option>
-                                <option value="60">60
-                                </option>
-                            </select> entries
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div id="data-table-fixed-header_filter" class="dataTables_filter">
-                        <label>Search:
-                            <input type="search" class="form-control input-sm" placeholder=""
-                                   aria-controls="data-table-fixed-header">
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-12">
                     <table id="data-table-fixed-header"
                            class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
                            role="grid"
                            aria-describedby="data-table-fixed-header_info" width="100%">
                         <tbody>
-                        <tr class="gradeX odd" role="row">
-                            <th>Vargas Trauco, Jhon Anllinson</th>
-                            <th>72978792</th>
-                            <th>vargastraucoj</th>
-                            <th>10729787928</th>
-                            <th>administrador</th>
-                            <th>
-                                <div align="center">
-                                    <a href="" style="color: red" TITLE="editar">
-                                        <i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>
-                                    <a href=" " style="color: green" title="Eliminar">
-                                        <i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>
-                                    </a>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr class="gradeX odd" role="row">
-                            <th>Maslucan Ramirez, Elizabeth</th>
-                            <th>559578987</th>
-                            <th>MaslucanRamirezeli</th>
-                            <th>5595788987</th>
-                            <th>vendedor</th>
-                            <th>
-                                <div align="center">
-                                    <a href="" style="color: red" TITLE="editar">
-                                        <i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>
-                                    <a href=" " style="color: green" title="Eliminar">
-                                        <i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>
-                                    </a>
-                                </div>
-
-                            </th>
-                        </tr>
-
                         </tbody>
                         <thead>
                         <tr role="row">
-
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%; min-width: 187px;">
+                                rowspan="1" colspan="1"
+                                aria-label="Rendering engine: activate to sort column ascending"
+                                style="width: 100%;; min-width: 187px;">
                                 Nombres y apellidos
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 100%; min-width: 242px;">
-                                Dni
+                                rowspan="1" colspan="1"
+                                aria-label="Rendering engine: activate to sort column ascending"
+                                style="width: 100%;; min-width: 187px;">
+                                Telefono
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                style="width: 100%; min-width: 220px;">
+                                rowspan="1" colspan="1"
+                                aria-label="Rendering engine: activate to sort column ascending"
+                                style="width: 100%;; min-width: 187px;">
+                                Correo
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 100%;; min-width: 242px;">
+                                DNI
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                style="width: 100%;; min-width: 242px;">
+                                RUC
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
+                                Direccion Personal
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
                                 Usuario
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%; min-width: 159px;">
-                                Contraseña
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%; min-width: 159px;">
-                                Rol
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 100%; min-width: 117px;">
-                                Opciones
+                                rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
+                                Estado
                             </th>
                         </tr>
                         </thead>
                     </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-5">
-                    <div class="dataTables_info" id="data-table-fixed-header_info" role="status" aria-live="polite">
-                        Showing 1 to 20 of 57 entries
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="data-table-fixed-header_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button previous disabled" id="data-table-fixed-header_previous"><a
-                                        href="#" aria-controls="data-table-fixed-header" data-dt-idx="0" tabindex="0">Previous</a>
-                            </li>
-                            <li class="paginate_button active"><a href="#" aria-controls="data-table-fixed-header"
-                                                                  data-dt-idx="1" tabindex="0">1</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="data-table-fixed-header"
-                                                            data-dt-idx="2" tabindex="0">2</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="data-table-fixed-header"
-                                                            data-dt-idx="3" tabindex="0">3</a></li>
-                            <li class="paginate_button next" id="data-table-fixed-header_next"><a href="#"
-                                                                                                  aria-controls="data-table-fixed-header"
-                                                                                                  data-dt-idx="4"
-                                                                                                  tabindex="0">Next</a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
@@ -171,7 +100,7 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
-    App.setPageTitle('Productos | ARPEMAR SAC');
+    /*App.setPageTitle('Productos | ARPEMAR SAC');
     App.restartGlobalFunction();
     $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
         $.when(
@@ -184,6 +113,40 @@
         ).done(function () {
             TableManageFixedColumns.init();
         });
-    });
+    });*/
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->
+
+<script>
+    $(function () {
+        $('#data-table-fixed-header').DataTable({
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            processing: true,
+            serverSide: true,
+            select: true,
+            rowId: 'id',
+            ajax: '{!! route('datatable.usuarios') !!}',
+            columns: [
+                {data: 'pnombres', name: 'pnombres'},
+                {data: 'pnroCelular', name: 'pnroCelular'},
+                {data: 'pcorreo', name: 'pcorreo'},
+                {data: 'pdni', name: 'pdni'},
+                {data: 'pruc', name: 'pruc'},
+                {data: 'pdireccion', name: 'pdireccion'},
+                {data: 'uusuario', name: 'uusuario'},
+                {
+                    data: function (row) {
+                        if (row.pestado === '1') {
+                            return '<label class="text-success">ACTIVO</label>';
+                        }
+                        else if (row.pestado === '0') {
+                            return '<label class="text-danger">ANULADO</label>';
+                        }
+                    }
+                }
+            ]
+        });
+    });
+</script>

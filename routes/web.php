@@ -13,32 +13,15 @@
 /*links simples*/
 /*index */
 
+//////////////////////////////////INICIO//////////////////////////////////////////////////////
+
 Route::get('/', 'IndexController@index');
 
 Route::get('/Administrador', 'AdministradorController@index');
 
-Route::get('/vendedor', function () {
-    return view('index_vendedor');
-});
+Route::get('/Vendedor', 'VendedorController@index');
 
-/*productos*/
-Route::get('/ped', function () {
-    return view('pagina/producto/pedido');
-});
-Route::get('/prod', function () {
-    return view('pagina/producto/producto');
-});
-Route::get('/agreprod', function () {
-    return view('pagina/producto/agregar_producto');
-});
-
-/*personal*/
-Route::get('/agrusu', function () {
-    return view('pagina/usuario/agregar_usuario');
-});
-Route::get('/repusu', function () {
-    return view('pagina/usuario/reportar_usuario');
-});
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 Route::get('/reporte', function () {
     return view('pagina/Reporte/reporte');
@@ -51,15 +34,21 @@ Route::get('/vender', function () {
 Route::get('/reporte_vendedor', function () {
     return view('pagina/vendedor/reporte_vendedor');
 });
-//usuario//
-Route::resource('create-usuario', 'UsuarioController');
-Route::prefix('/create-usuario')->group(function () {
-    Route::get('/log', 'UsuarioController@log');
+//////////////////////////////////////USUARIOS///////////////////////////////////////////////
 
+Route::post('/log', 'UsuarioController@log');
+
+Route::resource('create-usuario', 'UsuarioController');
+Route::prefix('create-usuario')->group(function () {
+    Route::get('/create', 'UsuarioController@create');
+    Route::post('/store', 'UsuarioController@store');
+    Route::get('/{id}/edit', 'UsuarioController@show');
+    Route::put('/{id}', 'UsuarioController@edit');
+    Route::get('/{id}', 'UsuarioController@update');
+    Route::delete('/{id}', 'UsuarioController@destroy');
 });
 
-
-//////////////////////////////////////CLIENTE///////////////////////////////////////////////
+//////////////////////////////////////CLIENTES///////////////////////////////////////////////
 
 Route::resource('create-cliente', 'PersonaController');
 Route::prefix('/create-cliente')->group(function () {
@@ -71,6 +60,21 @@ Route::prefix('/create-cliente')->group(function () {
     Route::delete('/{id}', 'PersonaController@destroy');
 });
 
+//////////////////////////////////////DATATABLES///////////////////////////////////////////////
+
 Route::prefix('datatables')->group(function () {
     Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
+    Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
+});
+
+//////////////////////////////////////PRODUCTOS///////////////////////////////////////////////
+
+Route::resource('create-producto', 'ProductoController');
+Route::prefix('/create-producto')->group(function () {
+    Route::get('/create', 'ProductoController@create');
+    Route::post('/store', 'ProductoController@store');
+    Route::get('/{id}/edit', 'ProductoController@show');
+    Route::put('/{id}', 'ProductoController@edit');
+    Route::get('/{id}', 'ProductoController@update');
+    Route::delete('/{id}', 'ProductoController@destroy');
 });

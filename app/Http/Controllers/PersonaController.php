@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Exception;
-use Yajra\Datatables\Datatables;
 
 class PersonaController extends Controller
 {
@@ -25,7 +24,7 @@ class PersonaController extends Controller
 
     public function listado()
     {
-        return Datatables::of(Persona::listado())->make(true);
+        return datatables()->of(Persona::listado())->toJson();
     }
 
     /**
