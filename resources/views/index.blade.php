@@ -20,9 +20,7 @@
     <link href="../assets/css/default/style.min.css" rel="stylesheet"/>
     <link href="../assets/css/default/style-responsive.min.css" rel="stylesheet"/>
     <link href="../assets/css/default/theme/default.css" rel="stylesheet" id="theme"/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- ================== END BASE CSS STYLE ================== -->
-    <script src="{{ asset('js/js_ajax/usuario.js') }}"></script>
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="../assets/plugins/pace/pace.min.js"></script>
     <!-- ================== END BASE JS ================== -->
@@ -61,16 +59,16 @@
             <!-- end login-header -->
             <!-- begin login-content -->
             <div class="login-content">
-                <form method="POST" class="margin-bottom-0" action="/log">
+                <form method="POST" class="margin-bottom-0">
                     {{ csrf_field() }}
                     <div class="form-group m-b-15">
-                        <input type="text" class="form-control form-control-lg" placeholder="Usuario" required name="usuario"/>
+                        <input type="text" class="form-control form-control-lg" placeholder="Usuario"  name="usuario"/>
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control form-control-lg" placeholder="Contraseña" required name="contrasena"/>
+                        <input type="password" class="form-control form-control-lg" placeholder="Contraseña" name="contrasena"/>
                     </div>
                     <div class="login-buttons">
-                        <button class="btn btn-success btn-block btn-lg">Ingresar</button>
+                        <a href="/Administrador" class="btn btn-success btn-block btn-lg">Ingresar</a>
                     </div>
                     <hr/>
                     <p class="text-center text-grey-darker">

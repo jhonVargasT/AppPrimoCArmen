@@ -1,7 +1,29 @@
+<link href="../assets/plugins/jquery-smart-wizard/src/css/smart_wizard.css" rel="stylesheet"/>
+<link href="../assets/plugins/parsley/src/parsley.css" rel="stylesheet"/>
+<link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet"/>
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/jquery-smart-wizard/src/css/smart_wizard.css" rel="stylesheet" />
-<link href="../assets/plugins/parsley/src/parsley.css" rel="stylesheet" />
-<!-- ================== END PAGE LEVEL STYLE ================== -->
+<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet"/>
+<link href="../assets/plugins/ionRangeSlider/css/ion.rangeSlider.css" rel="stylesheet"/>
+<link href="../assets/plugins/ionRangeSlider/css/ion.rangeSlider.skinNice.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet"/>
+<link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet"/>
+<link href="../assets/plugins/jquery-tag-it/css/jquery.tagit.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"/>
+<link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+      rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet"/>
+<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet"/>
+<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet"/>
+<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet"/>
+
+<script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 
 <h1 class="page-header">Agregar usuairo
     <small>Aqui puedo agregar un usuario</small>
@@ -89,26 +111,12 @@
                                     </div>
                                     <!-- end form-group -->
                                     <!-- begin form-group -->
-                                    <div class="form-group row m-b-10">
-                                        <label class="col-md-3 col-form-label text-md-right">Cumpleaños<span class="text-danger">&nbsp;</span></label>
+                                    <div class="form-group row  m-b-10">
+                                        <label class="col-md-3 col-form-label text-md-right">Cumpleaños
+                                            <span class="text-danger">*</span></label>
                                         <div class="col-md-6">
-                                            <div class="row row-space-6">
-                                                <div class="col-4">
-                                                    <select class="form-control" name="year">
-                                                        <option>-- Year --</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-4">
-                                                    <select class="form-control" name="month">
-                                                        <option>-- Month --</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-4">
-                                                    <select class="form-control" name="day">
-                                                        <option>-- Day --</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <input type="text" class="form-control" id="datepicker-autoClose"
+                                                   placeholder="clic aqui" name="fechaNacimiento">
                                         </div>
                                     </div>
                                     <!-- end form-group -->

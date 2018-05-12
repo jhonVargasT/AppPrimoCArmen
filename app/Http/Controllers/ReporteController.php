@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class PedidoController extends Controller
+class ReporteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        return view('pagina/producto/pedido');
+        return view('pagina/Reporte/reporte');
     }
 
     /**

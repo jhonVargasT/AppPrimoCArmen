@@ -15,21 +15,13 @@ class UsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @param Request $request
      * @return \Illuminate\Http\Response
+     * @internal param Request $request
      */
-
-    public function log(Request $request)
-    {
-        $request->usuario;
-        $request->contrasena;
-        return view('index_administrador');
-    }
 
     public function index()
     {
-        return view('pagina.usuario.reportar_usuario');
+        return view('pagina/usuario/reportar_usuario');
     }
 
     public function listado()

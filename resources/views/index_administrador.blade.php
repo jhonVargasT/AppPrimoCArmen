@@ -80,13 +80,13 @@
             <ul class="nav">
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
-                    <a href="/reporte"  data-toggle="ajax">
+                    <a href="/Reportes" data-toggle="ajax">
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
                         <span>Reporte</span>
                     </a>
                 </li>
                 <li class="has-sub">
-                    <a href="/ped"  data-toggle="ajax">
+                    <a href="/Pedidos" data-toggle="ajax">
 
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
                         <span>Pedidos</span>
@@ -100,12 +100,12 @@
                         <span>Administrar datos</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="create-producto" data-toggle="ajax">
+                        <li><a href="/Productos" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-database"></i>
                                 Productos</a></li>
-                        <li><a href="create-cliente" data-toggle="ajax">
+                        <li><a href="/Clientes" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-users"></i>Clientes</a></li>
-                        <li><a href="create-usuario" data-toggle="ajax">
+                        <li><a href="/Usuarios" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-user-secret"></i>Usuarios</a></li>
                     </ul>
 
@@ -154,23 +154,23 @@
 <!-- ================== END BASE JS ================== -->
 
 <script>
-    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function() {
+    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
         $.when(
             $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
             $.getScript('../assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'),
             $.getScript('../assets/js/demo/table-manage-responsive.demo.min.js'),
-            $.Deferred(function( deferred ){
+            $.Deferred(function (deferred) {
                 $(deferred.resolve);
             })
-        ).done(function() {
+        ).done(function () {
             TableManageResponsive.init();
         });
     });
     $(document).ready(function () {
         App.init({
             ajaxMode: true,
-            ajaxDefaultUrl: '/reporte',
-            ajaxType: 'GET',
+            ajaxDefaultUrl: '/Reportes',
+            ajaxType: 'get',
             ajaxDataType: 'html'
         });
     });
