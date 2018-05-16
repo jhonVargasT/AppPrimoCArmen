@@ -20,13 +20,8 @@ class Persona extends Model
             ->get();
     }
 
-    public function usuarios()
+    public function productospedidos()
     {
-        return $this->hasMany('App\Usuario');
-    }
-
-    public function tiendas()
-    {
-        return $this->hasMany('App\Tienda');
+        return $this->hasMany('App\ProductoPedido');
     }
 }

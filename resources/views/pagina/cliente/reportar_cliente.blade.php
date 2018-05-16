@@ -2,6 +2,9 @@
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
 
+<script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
 
@@ -27,13 +30,13 @@
 
     <div class="panel-body">
         <div class=".row.row-space-2 .p-2">
-            <a href="/create-cliente/create" data-toggle="ajax" class="btn btn-sm btn-primary">
+            <a href="/Cliente/create" data-toggle="ajax" class="btn btn-sm btn-primary">
                 <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle"></i>
                 Agregar clientes
             </a>
         </div>
         <br>
-        <div id="data-table-fixed-header_wrapper" class="  dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
             <div class="row">
                 <div class="col-sm-12">
                     <table id="data-table-fixed-header"
@@ -44,7 +47,6 @@
                         </tbody>
                         <thead>
                         <tr role="row">
-
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1"
                                 aria-label="Rendering engine: activate to sort column ascending"
@@ -96,6 +98,12 @@
                                 aria-label="Engine version: activate to sort column ascending"
                                 style="width: 100%;; min-width: 159px;">
                                 Estado
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
+                                Opciones
                             </th>
                         </tr>
                         </thead>
@@ -152,6 +160,32 @@
                         }
                         else if (row.pestado === '0') {
                             return '<label class="text-danger">ANULADO</label>';
+                        }
+                    }
+                },
+                {
+                    data: function (row) {
+                        if (row.pestado === '1') {
+                            return '<div align="center">\n' +
+                                '<a href="" style="color: blue" TITLE="Anular">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
+                                '<a href="" style="color: red" TITLE="Editar">\n' +
+                                '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href=" " style="color: green" title="Eliminar">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
+                                '</a>\n' +
+                                '</div>';
+                        }
+                        else if (row.pestado === '0') {
+                            return '<div align="center">\n' +
+                                '<a href="" style="color: blue" TITLE="Activar">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
+                                '<a href="" style="color: red" TITLE="Editar">\n' +
+                                '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href=" " style="color: green" title="Eliminar">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
+                                '</a>\n' +
+                                '</div>';
                         }
                     }
                 }

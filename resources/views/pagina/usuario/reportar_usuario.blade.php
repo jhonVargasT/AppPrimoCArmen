@@ -25,7 +25,7 @@
 
     <div class="panel-body">
         <div class=".row.row-space-2 .p-2">
-            <a href="/create-usuario/create" data-toggle="ajax" class="btn btn-sm btn-primary">
+            <a href="/Usuario/create" data-toggle="ajax" class="btn btn-sm btn-primary">
                 <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle"></i>
                 Agregar Usuario
             </a>
@@ -66,11 +66,6 @@
                                 DNI
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 100%;; min-width: 242px;">
-                                RUC
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1"
                                 aria-label="Engine version: activate to sort column ascending"
                                 style="width: 100%;; min-width: 159px;">
@@ -87,6 +82,12 @@
                                 aria-label="Engine version: activate to sort column ascending"
                                 style="width: 100%;; min-width: 159px;">
                                 Estado
+                            </th>
+                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                rowspan="1" colspan="1"
+                                aria-label="Engine version: activate to sort column ascending"
+                                style="width: 100%;; min-width: 159px;">
+                                Opciones
                             </th>
                         </tr>
                         </thead>
@@ -133,7 +134,6 @@
                 {data: 'pnroCelular', name: 'pnroCelular'},
                 {data: 'pcorreo', name: 'pcorreo'},
                 {data: 'pdni', name: 'pdni'},
-                {data: 'pruc', name: 'pruc'},
                 {data: 'pdireccion', name: 'pdireccion'},
                 {data: 'uusuario', name: 'uusuario'},
                 {
@@ -143,6 +143,32 @@
                         }
                         else if (row.pestado === '0') {
                             return '<label class="text-danger">ANULADO</label>';
+                        }
+                    }
+                },
+                {
+                    data: function (row) {
+                        if (row.pestado === '1') {
+                            return '<div align="center">\n' +
+                                '<a href="" style="color: blue" TITLE="Anular">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
+                                '<a href="" style="color: red" TITLE="Editar">\n' +
+                                '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href=" " style="color: green" title="Eliminar">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
+                                '</a>\n' +
+                                '</div>';
+                        }
+                        else if (row.pestado === '0') {
+                            return '<div align="center">\n' +
+                                '<a href="" style="color: blue" TITLE="Activar">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
+                                '<a href="" style="color: red" TITLE="Editar">\n' +
+                                '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href=" " style="color: green" title="Eliminar">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
+                                '</a>\n' +
+                                '</div>';
                         }
                     }
                 }

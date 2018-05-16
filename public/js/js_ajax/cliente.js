@@ -12,14 +12,14 @@ $('#actualizar').click(function () {
 
 //Crear Datos
 function registrarCliente() {
-    var url = "create-cliente/store";
+    var url = "Cliente/store";
     $.ajax({
         type: "POST",
         url: url,
         data: $("#idFormCliente").serialize(),
         success: function (data) {
             if (data === 'success') {
-                redirect('create-cliente');
+                redirect('Clientes');
                 ok();
             } else {
                 error();
@@ -73,7 +73,7 @@ function redirect(ruta) {
 //Actualizar Datos
 function editarCliente() {
     var id = $("#idCliente").val();
-    var url = "create-cliente/" + id;
+    var url = "Cliente/" + id;
     $.ajax({
         type: "PUT",
         url: url,
@@ -90,7 +90,7 @@ function editarCliente() {
 //Anular o Activar
 function actualizarCliente() {
     var id = $("#idCliente").val();
-    var url = "create-cliente/" + id;
+    var url = "Cliente/" + id;
     $.ajax({
         type: "PUT",
         url: url,

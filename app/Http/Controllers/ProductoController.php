@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -15,6 +16,11 @@ class ProductoController extends Controller
     public function index()
     {
         return view('pagina.producto.reportar_producto');
+    }
+
+    public function listado()
+    {
+        return datatables()->of(Producto::all())->toJson();
     }
 
     /**

@@ -50,7 +50,6 @@ class UsuarioController extends Controller
         try {
             $persona = new Persona();
             $persona->dni = $request->dni;
-            $persona->ruc = $request->ruc;
             $persona->nombres = $request->nombres;
             $persona->apellidos = $request->apellidos;
             $persona->fechaNacimiento = '1991-01-01';
@@ -66,10 +65,9 @@ class UsuarioController extends Controller
             $persona->distrito = $request->distrito;
 
             $usuario = new Usuario();
-            $usuario->password = $request->tnombreTienda;
-            $usuario->usuario = $request->ttelefono;
+            $usuario->password = $request->password;
+            $usuario->usuario = $request->usuario;
             $usuario->fechaCreacion = '1991-01-01';
-
 
             DB::transaction(function () use ($persona, $usuario) {
                 $persona->save();

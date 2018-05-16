@@ -104,8 +104,7 @@
                                     <!-- begin col-8 -->
                                     <div class="col-md-8 offset-md-2">
                                         <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
-                                            Informacion
-                                            personal
+                                            Informacion personal
                                         </legend>
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
@@ -190,8 +189,7 @@
                                     <!-- begin col-8 -->
                                     <div class="col-md-8 md-offset-2">
                                         <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
-                                            Informacion
-                                            de contacto
+                                            Informacion de contacto
                                         </legend>
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">

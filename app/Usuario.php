@@ -12,8 +12,8 @@ class Usuario extends Model
     public static function listado()
     {
         return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.nroCelular as pnroCelular',
-            'p.correo as pcorreo', 'p.dni as pdni', 'p.ruc as pruc', 'p.direccion  as pdireccion',
-            'p.estado as pestado', 'usuario.usuario as uusuario')
+            'p.correo as pcorreo', 'p.dni as pdni', 'p.direccion  as pdireccion', 'p.estado as pestado'
+            , 'usuario.usuario as uusuario')
             ->join('persona as p', 'p.idPersona', '=', 'usuario.id_Persona')
             ->get();
     }
