@@ -35,8 +35,8 @@
 <!-- end breadcrumb -->
 <div id="response">
     <!-- begin page-header -->
-    <h1 class="page-header">Agregar producto
-        <small>Aqui puedo agregar un producto</small>
+    <h1 class="page-header">Editar producto
+        <small>Aqui puedo editar un producto</small>
     </h1>
     <!-- final cabecera -->
     <!-- begin panel -->
@@ -50,7 +50,7 @@
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
                             class="fa fa-minus"></i></a>
             </div>
-            <h4 class="panel-title">Agregar producto</h4>
+            <h4 class="panel-title">Editar producto</h4>
         </div>
         <div class="panel-body">
             <br>
@@ -90,7 +90,7 @@
                             <a href="#step-4">
                                 <span class="number">4</span>
                                 <span class="info text-ellipsis">
-						Registro completo
+						Edicion completa
 					</span>
                             </a>
                         </li>
@@ -115,19 +115,19 @@
                                             <label class="col-md-2 col-sm-2 col-form-label">Nombre de
                                                 producto:</label>
                                             <div class="col-md-4 col-sm-4">
-                                                <input class="form-control" type="text" id="nombre" name="nombre"
-                                                       data-parsley-group="step-1" data-parsley-required="true">
+                                                <input class="form-control" id="nombre" name="nombre"
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       value="{{$producto->nombre}}">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
-
                                             <label class="col-md-2 col-sm-2 col-form-label">Tipo de producto
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
                                                 <select class="form-control" type="text" id="tipoProducto"
                                                         name="tipoProducto" data-parsley-group="step-1"
                                                         data-parsley-required="true">
-                                                    <option selected disabled>Escoja..</option>
+                                                    <option selected readonly>{{$producto->tipoProducto}}</option>
                                                     <option>Caramelos</option>
                                                     <option>Galleta</option>
                                                     <option>Gaseosa</option>
@@ -163,7 +163,7 @@
                                                 <select class="form-control" type="text" id="tipoPaquete"
                                                         name="tipoPaquete"
                                                         data-parsley-required="true" data-parsley-group="step-2">
-                                                    <option selected disabled>Escoja..</option>
+                                                    <option selected readonly>{{$producto->tipoPaquete}}</option>
                                                     <option>Caja</option>
                                                     <option>Paquete</option>
                                                     <option>Tira</option>
@@ -176,7 +176,9 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadProductosPaquete"
                                                        name="cantidadProductosPaquete" data-parsley-required="true"
-                                                       data-parsley-type="number" data-parsley-group="step-2">
+                                                       data-parsley-type="number"
+                                                       data-parsley-group="step-2"
+                                                       value="{{$producto->cantidadProductosPaquete}}">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -185,7 +187,9 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadPaquete"
                                                        name="cantidadPaquete" data-parsley-required="true"
-                                                       data-parsley-type="number" data-parsley-group="step-2">
+                                                       data-parsley-type="number"
+                                                       data-parsley-group="step-2"
+                                                       value="{{$producto->cantidadPaquete}}">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -198,7 +202,7 @@
                                                 </div>
                                                 <input type="number" class="form-control" name="precioCompra"
                                                        id="precioCompra" data-parsley-group="step-2"
-                                                       data-parsley-required="true">
+                                                       data-parsley-required="true" value="{{$producto->precioCompra}}">
                                             </div>
 
                                         </div>
@@ -212,7 +216,7 @@
                                                 </div>
                                                 <input type="number" class="form-control" name="precioVenta"
                                                        id="precioVenta" data-parsley-group="step-2"
-                                                       data-parsley-required="true">
+                                                       data-parsley-required="true" value="{{$producto->precioVenta}}">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -225,7 +229,8 @@
                                                 </div>
                                                 <input type="number" class="form-control" name="comisionVenta"
                                                        id="comisionVenta" data-parsley-group="step-2"
-                                                       data-parsley-required="true">
+                                                       data-parsley-required="true"
+                                                       value="{{$producto->comisionPaquete}}">
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -257,6 +262,7 @@
                                                 <input class="form-control" type="number" id="cantidadStockUnidad"
                                                        name="cantidadStockUnidad" data-parsley-group="step-3"
                                                        data-parsley-required="true"
+                                                       value="{{$producto->cantidadStockUnidad}}"
                                                        data-parsley-type="number">
                                             </div>
                                         </div>
@@ -269,7 +275,8 @@
                                                 </div>
                                                 <input type="number" class="form-control" id="precioCompraUnidad"
                                                        name="precioCompraUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true">
+                                                       data-parsley-required="true"
+                                                       value="{{$producto->precioCompraUnidad}}">
                                             </div>
                                         </div>
                                         <div class="row form-group row m-b-15">
@@ -281,7 +288,8 @@
                                                 </div>
                                                 <input type="number" class="form-control" name="precioVentaUnidad"
                                                        id="precioVentaUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true">
+                                                       data-parsley-required="true"
+                                                       value="{{$producto->precioVentaUnidad}}">
                                             </div>
                                         </div>
                                     </div>
@@ -295,9 +303,9 @@
                         <!-- begin step-4 -->
                         <div id="step-4">
                             <div class="jumbotron m-b-0 text-center">
-                                <h2 class="text-inverse">Registro finalizado</h2></br>
+                                <h2 class="text-inverse">Edicion finalizado</h2></br>
                                 <p>
-                                    <button class="btn btn-primary btn-lg" id="guardar">Proceder con el registro
+                                    <button class="btn btn-primary btn-lg" id="editar">Proceder con la edicion
                                     </button>
                                 </p>
                             </div>

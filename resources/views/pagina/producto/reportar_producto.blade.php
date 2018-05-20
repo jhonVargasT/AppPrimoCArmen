@@ -3,6 +3,11 @@
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
+<script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+
+<script src="{{ asset('js/js_ajax/producto.js') }}"></script>
+
 <h1 class="page-header">Productos
     <small>Aqui puedo agregar productos, eliminarlos o editarlos...</small>
 </h1>
@@ -39,30 +44,6 @@
                            role="grid"
                            aria-describedby="data-table-fixed-header_info" width="100%">
                         <tbody>
-                        <!--<tr class="gradeX odd" role="row">
-                            <th>Snack oreo</th>
-                            <th>Galleta</th>
-                            <th>
-                                <i style="color:green " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>
-                                25
-                                <a href="#modal-dialog" class="btn btn-link" data-toggle="modal"><i
-                                            class="fas fa-lg fa-fw m-r-10 fa-plus "></i></a>
-                            </th>
-                            <th>Paquete</th>
-                            <th>5.80</th>
-                            <th>Paquete</th>
-                            <th>5.80</th>
-                            <th>82/03/2018</th>
-                            <th>
-                                <div align="center">
-                                    <a href="" style="color: red" TITLE="editar">
-                                        <i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>
-                                    <a href=" " style="color: green" title="Eliminar">
-                                        <i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>
-                                    </a>
-                                </div>
-                            </th>
-                        </tr>-->
                         </tbody>
                         <thead>
                         <tr role="row">
@@ -109,7 +90,7 @@
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 100%;; min-width: 60px;">
+                                style="width: 100%;; min-width: 100px;">
                                 Opciones
                             </th>
                         </tr>
@@ -131,34 +112,36 @@
             </div>
             <div class="modal-body">
                 <div class="row form-group row m-b-15">
-                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nombre :</label>
+                    <input type="hidden" id="idProducto">
+                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nombre producto:</label>
                     <div class="col-md-4 col-sm-4">
                         <br>
-                        <span>
-                            Snack Oreo
+                        <span id="nombrespan">
                         </span>
                     </div>
-
+                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock actual:</label>
+                    <div class="col-md-4 col-sm-4">
+                        <br>
+                        <span id="stockspan">
+                        </span>
+                    </div>
                 </div>
                 <div class="row form-group row m-b-15">
-
-                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">stock unidad:</label>
+                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock paquete adicional :</label>
                     <div class="col-md-4 col-sm-4">
                         <br>
-                        <span>
-                            8
-                        </span>
+                        <input type="number" data-parsley-type="number" placeholder="0" id="paquete"/>
                     </div>
-                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock adicional :</label>
+                    <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock unidad adicional :</label>
                     <div class="col-md-4 col-sm-4">
                         <br>
-                        <input type="text" data-parsley-type="number"/>
+                        <input type="number" data-parsley-type="number" placeholder="0" id="unidad"/>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">Cerrar</a>
-                <a href="javascript:;" class="btn btn-success">Adicionar</a>
+                <button class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button class="btn btn-success" id="adicionar">Adicionar</button>
             </div>
         </div>
     </div>
@@ -205,20 +188,36 @@
             rowId: 'id',
             ajax: '{!! route('datatable.productos') !!}',
             columns: [
-                {data: 'nombres', name: 'nombres'},
+                {data: 'nombre', name: 'nombre'},
                 {data: 'tipoProducto', name: 'tipoProducto'},
                 {
                     data: function (row) {
-                        return row.cantidadPaquete * row.cantidadProductosPaquete;
+                        if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 50)
+                            return '<i style="color:green " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
+                                ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
+                        else if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) < 50 && ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 10) {
+                            return '<i style="color:yellow " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
+                                ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
+                        }
+                        else if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) < 10) {
+                            return '<i style="color:red " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
+                                ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
+                        }
                     }
                 },
                 {
                     data: function (row) {
-                        return row.cantidadPaquete + ' ' + row.tipoPaquete;
+                        return row.tipoPaquete;
                     }
                 },
                 {data: 'precioCompra', name: 'precioCompra'},
-                {data: 'precioCompra', name: 'precioCompra'},
+                {data: 'precioCompraUnidad', name: 'precioCompraUnidad'},
                 {data: 'fechaCreacion', name: 'fechaCreacion'},
                 {
                     data: function (row) {
@@ -236,7 +235,7 @@
                             return '<div align="center">\n' +
                                 '<a href="" style="color: blue" TITLE="Anular">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                                '<a href="" style="color: red" TITLE="Editar">\n' +
+                                '<a href="Producto/'+row.idProducto+'/edit" style="color: red" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href=" " style="color: green" title="Eliminar">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +

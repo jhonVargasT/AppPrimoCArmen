@@ -26,14 +26,14 @@
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet"/>
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet"/>
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet"/>
-<script language="JavaScript" type="text/javascript" src="../assets/agregarcliente.js"></script>
+
 
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
-<script language="JavaScript" type="text/javascript" src="../assets/pedido.js"></script>
+
 <h1 class="page-header">Pedidos
     <small>Aqui puedo administrar pedidos</small>
 </h1>

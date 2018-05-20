@@ -45,13 +45,15 @@ Route::get('/Pedidos', 'PedidoController@index');
 //////////////////////////////////////PRODUCTOS///////////////////////////////////////////////
 
 Route::get('/Productos', 'ProductoController@index');
+Route::get('/actualizarStockModal', 'ProductoController@actualizarStockModal');
+Route::get('/actualizarStock', 'ProductoController@actualizarStock');
 
 Route::prefix('Producto')->group(function () {
     Route::get('/create', 'ProductoController@create');
     Route::post('/store', 'ProductoController@store');
-    Route::get('/{id}/edit', 'ProductoController@show');
-    Route::put('/{id}', 'ProductoController@edit');
-    Route::get('/{id}', 'ProductoController@update');
+    Route::get('/{id}', 'ProductoController@show');
+    Route::get('/{id}/edit', 'ProductoController@edit');
+    Route::put('/{id}', 'ProductoController@update');
     Route::delete('/{id}', 'ProductoController@destroy');
 });
 
@@ -62,9 +64,9 @@ Route::get('Clientes', 'PersonaController@index');
 Route::prefix('Cliente')->group(function () {
     Route::get('/create', 'PersonaController@create');
     Route::post('/store', 'PersonaController@store');
-    Route::get('/{id}/edit', 'PersonaController@show');
-    Route::put('/{id}', 'PersonaController@edit');
-    Route::get('/{id}', 'PersonaController@update');
+    Route::get('/{id}', 'PersonaController@show');
+    Route::get('/{id}/edit', 'PersonaController@edit');
+    Route::put('/{id}', 'PersonaController@update');
     Route::delete('/{id}', 'PersonaController@destroy');
 });
 
@@ -75,9 +77,9 @@ Route::get('Usuarios', 'UsuarioController@index');
 Route::prefix('Usuario')->group(function () {
     Route::get('/create', 'UsuarioController@create');
     Route::post('/store', 'UsuarioController@store');
-    Route::get('/{id}/edit', 'UsuarioController@show');
-    Route::put('/{id}', 'UsuarioController@edit');
-    Route::get('/{id}', 'UsuarioController@update');
+    Route::get('/{id}', 'UsuarioController@show');
+    Route::get('/{id}/edit', 'UsuarioController@edit');
+    Route::put('/{id}', 'UsuarioController@update');
     Route::delete('/{id}', 'UsuarioController@destroy');
 });
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////
