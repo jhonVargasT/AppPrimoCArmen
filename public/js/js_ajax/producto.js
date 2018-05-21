@@ -98,22 +98,6 @@ function editarProducto() {
     });
 }
 
-//Anular o Activar
-/*function actualizarProducto(id, estado) {
-    var url = "/actualizarProducto";
-    $.ajax({
-        type: "PUT",
-        url: url,
-        data: '$id='+id+'estado='+estado,
-        success: function (data) {
-            alert(data);
-        },
-        beforeSend: function () {
-            $("#actualizar").prop('disabled', true);
-        }
-    });
-}*/
-
 //Actualizar Stock
 function actualizarStockModal(id) {
     var url = "/actualizarStockModal";
@@ -140,43 +124,44 @@ function actualizarStock() {
         url: url,
         data: '&id=' + id + '&paquete=' + paquete + '&unidad=' + unidad,
         success: function (data) {
-            if (data !== 'sucess') {
-                $('#modal-dialog').modal('hide');
-                redirect('Productos');
-                error();
-            } else {
-                $('#modal-dialog').modal('hide');
+            if (data === 'sucess') {
+                $("#modal-dialog").modal('fade');
                 redirect('Productos');
                 ok();
+            } else {
+                $("#modal-dialog").modal('fade');
+                redirect('Productos');
+                error();
+                alert(data);
             }
         }
     });
 }
 
 function actualizarProducto(id, estado) {
-    swal.setDefaults({
-        cancelButtonText: "Cancelar"
-    });
     swal({
-        title: "Estas seguro?",
-        text: "Este registro se anulara!",
-        type: "warning",
+        title: 'Esta seguro?',
+        text: "Este registro se actualizara!",
+        type: 'warning',
         showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Si, anular!",
-        closeOnConfirm: false
-    }, function (isConfirm) {
-        if (!isConfirm) return;
-        $.ajax({
-            url: "/actualizarProducto",
-            type: "GET",
-            data: {id: id, estado: estado},
-            success: function () {
-                swal("Done!", "It was succesfully deleted!", "success");
-            },
-            error: function (xhr, ajaxOptions, thrownError) {
-                swal("Error deleting!", "Please try again", "error");
-            }
-        });
-    });
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, actualizar!",
+        showLoaderOnConfirm: true
+    }).then(function (result) {
+        if (result.value) {
+            $.ajax({
+                url: "/actualizarProducto",
+                type: "GET",
+                data: {id: id, estado: estado},
+                success: function (data) {
+                    if (data === 'success') {
+                        redirect('Productos');
+                    } else {
+                        redirect('Productos');
+                    }
+                }
+            });
+        }
+    })
 }

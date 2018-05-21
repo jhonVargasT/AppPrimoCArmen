@@ -101,7 +101,7 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
-    /*App.setPageTitle('Productos | ARPEMAR SAC');
+    App.setPageTitle('Productos | ARPEMAR SAC');
     App.restartGlobalFunction();
     $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
         $.when(
@@ -114,7 +114,7 @@
         ).done(function () {
             TableManageFixedColumns.init();
         });
-    });*/
+    });
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 

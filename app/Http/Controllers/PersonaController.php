@@ -78,10 +78,10 @@ class PersonaController extends Controller
             DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
                 $persona->save();
 
-                $tienda->id_Persona = $persona->id;
+                $tienda->id_Persona = $persona->idPesona;
                 $tienda->save();
 
-                $direccionTienda->id_Tienda = $tienda->id;
+                $direccionTienda->id_Tienda = $tienda->idTienda;
                 $direccionTienda->save();
 
             });

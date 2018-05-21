@@ -158,7 +158,7 @@
                         if (row.pestado === '1') {
                             return '<label class="text-success">ACTIVO</label>';
                         }
-                        else if (row.pestado === '0') {
+                        else {
                             return '<label class="text-danger">ANULADO</label>';
                         }
                     }
@@ -176,7 +176,7 @@
                                 '</a>\n' +
                                 '</div>';
                         }
-                        else if (row.pestado === '0') {
+                        else {
                             return '<div align="center">\n' +
                                 '<a href="" style="color: blue" TITLE="Activar">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +

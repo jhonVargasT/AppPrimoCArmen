@@ -72,7 +72,7 @@ class UsuarioController extends Controller
             DB::transaction(function () use ($persona, $usuario) {
                 $persona->save();
 
-                $usuario->id_Persona = $persona->id;
+                $usuario->id_Persona = $persona->idPersona;
                 $usuario->save();
 
             });

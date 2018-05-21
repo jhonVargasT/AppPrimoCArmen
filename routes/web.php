@@ -47,6 +47,7 @@ Route::get('/Pedidos', 'PedidoController@index');
 Route::get('/Productos', 'ProductoController@index');
 Route::get('/actualizarStockModal', 'ProductoController@actualizarStockModal');
 Route::get('/actualizarStock', 'ProductoController@actualizarStock');
+Route::get('/actualizarProducto', 'ProductoController@actualizarProducto');
 
 Route::prefix('Producto')->group(function () {
     Route::get('/create', 'ProductoController@create');

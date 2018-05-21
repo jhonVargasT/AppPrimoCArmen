@@ -95,16 +95,6 @@ class ProductoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * @return \Illuminate\Http\Response
-     * @internal param int $id
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param $id
@@ -153,14 +143,16 @@ class ProductoController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function actualizarProducto(Request $request)
     {
-        //
+        try {
+            DB::transaction(function () use ($request) {
+                Producto::actualizarProducto($request->id, $request->estado);
+            });
+            return 'success';
+
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }
