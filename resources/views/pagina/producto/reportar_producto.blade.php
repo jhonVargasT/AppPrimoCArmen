@@ -233,20 +233,16 @@
                     data: function (row) {
                         if (row.estado === '1') {
                             return '<div align="center">\n' +
-                                '<a href="" style="color: blue" TITLE="Anular">\n' +
+                                '<a style="color: blue" TITLE="Anular" onclick="actualizarProducto(' + row.idProducto + ', 1)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                                '<a href="Producto/'+row.idProducto+'/edit" style="color: red" TITLE="Editar" data-toggle="ajax">\n' +
+                                '<a href="Producto/' + row.idProducto + '/edit" style="color: red" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href=" " style="color: green" title="Eliminar">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
-                                '</a>\n' +
                                 '</div>';
-                        }
-                        else if (row.estado === '0') {
+                        } else if (row.estado === '0') {
                             return '<div align="center">\n' +
-                                '<a href="" style="color: blue" TITLE="Activar">\n' +
+                                '<a style="color: blue" TITLE="Anular" onclick="actualizarProducto(' + row.idProducto + ', 0)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '<a href="" style="color: red" TITLE="Editar">\n' +
+                                '<a href="Producto/' + row.idProducto + '/edit" style="color: red" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href=" " style="color: green" title="Eliminar">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +

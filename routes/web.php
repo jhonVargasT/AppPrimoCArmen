@@ -51,10 +51,10 @@ Route::get('/actualizarStock', 'ProductoController@actualizarStock');
 Route::prefix('Producto')->group(function () {
     Route::get('/create', 'ProductoController@create');
     Route::post('/store', 'ProductoController@store');
-    Route::get('/{id}', 'ProductoController@show');
+    //Route::get('/{id}', 'ProductoController@show');
     Route::get('/{id}/edit', 'ProductoController@edit');
     Route::put('/{id}', 'ProductoController@update');
-    Route::delete('/{id}', 'ProductoController@destroy');
+    //Route::delete('/{id}', 'ProductoController@destroy');
 });
 
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
@@ -64,10 +64,10 @@ Route::get('Clientes', 'PersonaController@index');
 Route::prefix('Cliente')->group(function () {
     Route::get('/create', 'PersonaController@create');
     Route::post('/store', 'PersonaController@store');
-    Route::get('/{id}', 'PersonaController@show');
+    //Route::get('/{id}', 'PersonaController@show');
     Route::get('/{id}/edit', 'PersonaController@edit');
     Route::put('/{id}', 'PersonaController@update');
-    Route::delete('/{id}', 'PersonaController@destroy');
+    //Route::delete('/{id}', 'PersonaController@destroy');
 });
 
 //////////////////////////////////////USUARIOS///////////////////////////////////////////////
@@ -77,10 +77,10 @@ Route::get('Usuarios', 'UsuarioController@index');
 Route::prefix('Usuario')->group(function () {
     Route::get('/create', 'UsuarioController@create');
     Route::post('/store', 'UsuarioController@store');
-    Route::get('/{id}', 'UsuarioController@show');
+    //Route::get('/{id}', 'UsuarioController@show');
     Route::get('/{id}/edit', 'UsuarioController@edit');
     Route::put('/{id}', 'UsuarioController@update');
-    Route::delete('/{id}', 'UsuarioController@destroy');
+    //Route::delete('/{id}', 'UsuarioController@destroy');
 });
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 

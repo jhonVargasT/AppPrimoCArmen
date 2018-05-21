@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class Persona extends Model
 {
+    protected $primaryKey = 'idPersona';
     protected $table = 'persona';
     public $timestamps = false;
 

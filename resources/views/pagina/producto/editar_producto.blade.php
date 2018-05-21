@@ -56,7 +56,7 @@
             <br>
             <br>
             <br>
-            <form method="POST" name="form-wizard" class="form-control-with-bg" id="idFormProducto">
+            <form name="form-wizard" class="form-control-with-bg" id="idFormProductoEditar">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- begin wizard -->
                 <div id="wizard">
@@ -115,6 +115,7 @@
                                             <label class="col-md-2 col-sm-2 col-form-label">Nombre de
                                                 producto:</label>
                                             <div class="col-md-4 col-sm-4">
+                                                <input type="hidden" value="{{$producto->idProducto}}" id="idProducto">
                                                 <input class="form-control" id="nombre" name="nombre"
                                                        data-parsley-group="step-1" data-parsley-required="true"
                                                        value="{{$producto->nombre}}">

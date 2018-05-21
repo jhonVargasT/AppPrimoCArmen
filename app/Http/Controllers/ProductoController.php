@@ -123,11 +123,34 @@ class ProductoController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $producto = Producto::findOrFail($id);
+            $producto->nombre = $request->nombre;
+            $producto->tipoProducto = $request->tipoProducto;
+            $producto->tipoPaquete = $request->tipoPaquete;
+            $producto->cantidadPaquete = $request->cantidadPaquete;
+            $producto->cantidadProductosPaquete = $request->cantidadProductosPaquete;
+            $producto->precioCompra = $request->precioCompra;
+            $producto->precioVenta = $request->precioVenta;
+            $producto->comisionPaquete = $request->comisionVenta;
+            $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
+            $producto->precioCompraUnidad = $request->precioCompraUnidad;
+            $producto->precioVentaUnidad = $request->precioVentaUnidad;
+            $producto->descuento = 0;
+            $producto->fechaCreacion = '1991-01-01';;
+
+            DB::transaction(function () use ($producto) {
+                $producto->save();
+            });
+            return 'success';
+
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     /**

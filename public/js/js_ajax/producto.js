@@ -2,12 +2,12 @@ $('#guardar').click(function () {
     registrarProducto();
 });
 
-$('#editar').click(function () {
-    editarProducto();
-});
-
 $('#actualizar').click(function () {
     actualizarProducto();
+});
+
+$('#editar').click(function () {
+    editarProducto();
 });
 
 $('#adicionar').click(function () {
@@ -26,6 +26,7 @@ function registrarProducto() {
                 redirect('Productos');
                 ok();
             } else {
+                redirect('Productos');
                 error();
             }
         },
@@ -76,14 +77,20 @@ function redirect(ruta) {
 
 //Actualizar Datos
 function editarProducto() {
-    var id = $("#idFormProducto").val();
+    var id = $('#idProducto').val();
     var url = "Producto/" + id;
     $.ajax({
         type: "PUT",
         url: url,
-        data: $("#idFormCliente").serialize(),
+        data: $("#idFormProductoEditar").serialize(),
         success: function (data) {
-            alert(data);
+            if (data === 'success') {
+                redirect('Productos');
+                ok();
+            } else {
+                redirect('Productos');
+                error();
+            }
         },
         beforeSend: function () {
             $("#editar").prop('disabled', true);
@@ -92,13 +99,12 @@ function editarProducto() {
 }
 
 //Anular o Activar
-function actualizarProducto() {
-    var id = $("#idProducto").val();
-    var url = "Producto/" + id;
+/*function actualizarProducto(id, estado) {
+    var url = "/actualizarProducto";
     $.ajax({
         type: "PUT",
         url: url,
-        data: $("#idFormProdcuto").serialize(),
+        data: '$id='+id+'estado='+estado,
         success: function (data) {
             alert(data);
         },
@@ -106,7 +112,7 @@ function actualizarProducto() {
             $("#actualizar").prop('disabled', true);
         }
     });
-}
+}*/
 
 //Actualizar Stock
 function actualizarStockModal(id) {
@@ -114,7 +120,7 @@ function actualizarStockModal(id) {
     $.ajax({
         type: "GET",
         url: url,
-        data: '&id='+id,
+        data: '&id=' + id,
         success: function (data) {
             $("#nombre").val(data[0]);
             $("#stock").val(data[1]);
@@ -132,23 +138,45 @@ function actualizarStock() {
     $.ajax({
         type: "GET",
         url: url,
-        data: '&id='+id+'&paquete='+paquete+'&unidad='+unidad,
+        data: '&id=' + id + '&paquete=' + paquete + '&unidad=' + unidad,
         success: function (data) {
-            if(data !== 'sucess'){
+            if (data !== 'sucess') {
                 $('#modal-dialog').modal('hide');
+                redirect('Productos');
                 error();
-            }else{
+            } else {
                 $('#modal-dialog').modal('hide');
+                redirect('Productos');
                 ok();
             }
         }
     });
 }
 
-function cerrarModal() {
-    $('#nombre').val('');
-    $('#stock').val('');
-    $('#paquete').val('');
-    $('#unidad').val('');
-    $('#modal-dialog').modal('hide');
+function actualizarProducto(id, estado) {
+    swal.setDefaults({
+        cancelButtonText: "Cancelar"
+    });
+    swal({
+        title: "Estas seguro?",
+        text: "Este registro se anulara!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, anular!",
+        closeOnConfirm: false
+    }, function (isConfirm) {
+        if (!isConfirm) return;
+        $.ajax({
+            url: "/actualizarProducto",
+            type: "GET",
+            data: {id: id, estado: estado},
+            success: function () {
+                swal("Done!", "It was succesfully deleted!", "success");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                swal("Error deleting!", "Please try again", "error");
+            }
+        });
+    });
 }
