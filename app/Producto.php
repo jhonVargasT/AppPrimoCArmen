@@ -12,24 +12,18 @@ class Producto extends Model
 
     public static function actualizarStock($id, $paquete, $unidad)
     {
-        if ($paquete && !$unidad) {
-            static::where('idProducto', $id)
-                ->increment('cantidadPaquete', $paquete);
-        } elseif ($unidad && !$paquete) {
-            static::where('idProducto', $id)
-                ->increment('cantidadStockUnidad', $unidad);
-        } elseif ($paquete && $paquete) {
-            static::where('idProducto', $id)
-                ->increment('cantidadPaquete', $paquete)
-                ->increment('cantidadStockUnidad', $unidad);
-        }
+        static::where('idProducto', $id)
+            ->increment('cantidadPaquete', $paquete);
+
+        static::where('idProducto', $id)
+            ->increment('cantidadUnidad', $unidad);
     }
 
-    public static function actualizarProducto($id, $estado)
-    {
+    public static function actualizarProducto($id, $estado){
         static::where('idProducto', $id)
             ->update(['estado' => $estado]);
     }
+
 
     public function personas()
     {

@@ -10,6 +10,11 @@ class Tienda extends Model
     protected $table = 'tienda';
     public $timestamps = false;
 
+    public static function actualizarTienda($id, $estado){
+        static::where('idTienda', $id)
+            ->update(['estado' => $estado]);
+    }
+
     public function personas()
     {
         return $this->belongsTo('App\Persona');

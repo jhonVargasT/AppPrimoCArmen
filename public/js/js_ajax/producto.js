@@ -43,10 +43,22 @@ function ok() {
         showConfirmButton: false,
         timer: 3000
     });
-
     toast({
         type: 'success',
-        title: 'Registrado Correctamente'
+        title: 'Datos registrados'
+    })
+}
+
+function actualizado() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: 'Datos actualizados'
     })
 }
 
@@ -57,10 +69,9 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-
     toast({
         type: 'error',
-        title: 'Registro no Registrado'
+        title: 'Error'
     })
 }
 
@@ -98,7 +109,7 @@ function editarProducto() {
     });
 }
 
-//Actualizar Stock
+//Stock modal
 function actualizarStockModal(id) {
     var url = "/actualizarStockModal";
     $.ajax({
@@ -114,6 +125,7 @@ function actualizarStockModal(id) {
     });
 }
 
+//Sumar Stock
 function actualizarStock() {
     var url = "/actualizarStock";
     var id = $('#idProducto').val();
@@ -124,20 +136,20 @@ function actualizarStock() {
         url: url,
         data: '&id=' + id + '&paquete=' + paquete + '&unidad=' + unidad,
         success: function (data) {
-            if (data === 'sucess') {
-                $("#modal-dialog").modal('fade');
+            if (data === 'success') {
                 redirect('Productos');
+                $('.modal-backdrop').remove();
                 ok();
-            } else {
-                $("#modal-dialog").modal('fade');
+            } else if (data !== 'success') {
                 redirect('Productos');
+                $('.modal-backdrop').remove();
                 error();
-                alert(data);
             }
         }
     });
 }
 
+//Activar y anular producto
 function actualizarProducto(id, estado) {
     swal({
         title: 'Esta seguro?',
@@ -146,8 +158,7 @@ function actualizarProducto(id, estado) {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: "Si, actualizar!",
-        showLoaderOnConfirm: true
+        confirmButtonText: "Si, actualizar!"
     }).then(function (result) {
         if (result.value) {
             $.ajax({
@@ -156,8 +167,10 @@ function actualizarProducto(id, estado) {
                 data: {id: id, estado: estado},
                 success: function (data) {
                     if (data === 'success') {
+                        actualizado();
                         redirect('Productos');
                     } else {
+                        error();
                         redirect('Productos');
                     }
                 }

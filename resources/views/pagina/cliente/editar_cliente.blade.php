@@ -34,8 +34,8 @@
 
     <!-- end breadcrumb -->
     <!-- begin page-header -->
-    <h1 class="page-header">Agregar cliente
-        <small>Aqui puedo agregar un cliente</small>
+    <h1 class="page-header">Editar cliente
+        <small>Aqui puedo editar a un cliente</small>
     </h1>
     <!-- final cabecera -->
     <!-- begin panel -->
@@ -49,11 +49,11 @@
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
                             class="fa fa-minus"></i></a>
             </div>
-            <h4 class="panel-title">Agregar cliente</h4>
+            <h4 class="panel-title">Editar cliente</h4>
         </div>
         <div class="panel-body">
             <!-- begin wizard-form -->
-            <form method="POST" name="form-wizard" class="form-control-with-bg" id="idFormCliente">
+            <form name="form-wizard" class="form-control-with-bg" id="idFormClienteEditar">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- begin wizard -->
                 <div id="wizard">
@@ -111,8 +111,13 @@
                                             <label class="col-md-3 col-form-label text-md-right">Nombres <span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
+                                                <input type="hidden" value="{{$persona[0]->idPersona}}" id="idPersona">
+                                                <input type="hidden" value="{{$persona[0]->idTienda}}" name="idTienda"
+                                                       id="idTienda">
+                                                <input type="hidden" value="{{$persona[0]->idDireccionTienda}}"
+                                                       id="idDireccionTienda" name="idDireccionTienda">
                                                 <input type="text" name="nombres" id="nombres"
-                                                       data-parsley-group="step-1"
+                                                       data-parsley-group="step-1" value="{{$persona[0]->pnombres}}"
                                                        data-parsley-required="true" class="form-control"/>
                                             </div>
                                         </div>
@@ -123,7 +128,7 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="apellidos" id="apellidos"
-                                                       data-parsley-group="step-1"
+                                                       data-parsley-group="step-1" value="{{$persona[0]->papellidos}}"
                                                        data-parsley-required="true" class="form-control"/>
                                             </div>
                                         </div>
@@ -134,7 +139,8 @@
                                                 <span class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" class="form-control" id="datepicker-autoClose"
-                                                       placeholder="clic aqui" name="fechaNacimiento">
+                                                       placeholder="clic aqui" name="fechaNacimiento"
+                                                       value="{{$persona[0]->pfechaNacimiento}}">
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -144,15 +150,18 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="dni" class="form-control" id="dni"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       value="{{$persona[0]->pdni}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Departamento <span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
-                                                <input type="text" name="departamento" class="form-control" id="departamento"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                <input type="text" name="departamento" class="form-control"
+                                                       id="departamento"
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       value="{{$persona[0]->pdepartamento}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -160,7 +169,8 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="provincia" class="form-control" id="provincia"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       value="{{$persona[0]->pprovincia}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -168,7 +178,8 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="distrito" class="form-control" id="distrito"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       value="{{$persona[0]->pdistrito}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -176,7 +187,8 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       value="{{$persona[0]->pdireccion}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -206,7 +218,8 @@
                                             <div class="col-md-6">
                                                 <input type="number" name="nroCelular" data-parsley-group="step-2"
                                                        data-parsley-required="true" data-parsley-type="number"
-                                                       class="form-control" id="nroCelular"/>
+                                                       class="form-control" id="nroCelular"
+                                                       value="{{$persona[0]->pnroCelular}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -217,7 +230,7 @@
                                             <div class="col-md-6">
                                                 <input type="email" name="correo" class="form-control" id="correo"
                                                        data-parsley-group="step-2" data-parsley-required="true"
-                                                       data-parsley-type="email"/>
+                                                       data-parsley-type="email" value="{{$persona[0]->pcorreo}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -249,7 +262,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="tnombreTienda" class="form-control"
                                                        data-parsley-group="step-3" data-parsley-required="true"
-                                                       id="nombreTienda"/>
+                                                       id="nombreTienda" value="{{$persona[0]->tnombreTienda}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -260,7 +273,8 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="ruc" class="form-control" id="ruc"
                                                        data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="number"/>
+                                                       data-parsley-type="number"
+                                                       value="{{$persona[0]->pruc}}"/>
                                             </div>
                                         </div>
 
@@ -270,7 +284,7 @@
                                             <div class="col-md-6">
                                                 <input type="number" name="ttelefono" class="form-control"
                                                        data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="number"/>
+                                                       data-parsley-type="number" value="{{$persona[0]->ttelefono}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -282,7 +296,8 @@
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtdistrito" class="form-control"
                                                            name="dtdistrito"
-                                                           data-parsley-group="step-3" data-parsley-required="true"/>
+                                                           data-parsley-group="step-3" data-parsley-required="true"
+                                                           value="{{$persona[0]->dtdistrito}}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row m-b-10">
@@ -291,7 +306,8 @@
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtprovincia" class="form-control"
                                                            name="dtprovincia"
-                                                           data-parsley-group="step-3" data-parsley-required="true"/>
+                                                           data-parsley-group="step-3" data-parsley-required="true"
+                                                           value="{{$persona[0]->dtprovincia}}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row m-b-10">
@@ -302,7 +318,8 @@
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtnombreCalle" class="form-control"
                                                            name="dtnombreCalle"
-                                                           data-parsley-group="step-3" data-parsley-required="true"/>
+                                                           data-parsley-group="step-3" data-parsley-required="true"
+                                                           value="{{$persona[0]->dtnombreCalle}}"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row m-b-10">
@@ -329,7 +346,7 @@
                             <div class="jumbotron m-b-0 text-center">
                                 <h2 class="text-inverse">Registro finalizado</h2></br>
                                 <p>
-                                    <button class="btn btn-primary btn-lg" id="guardar">Proceder con el registro
+                                    <button class="btn btn-primary btn-lg" id="editar">Proceder con el registro
                                     </button>
                                 </p>
                             </div>

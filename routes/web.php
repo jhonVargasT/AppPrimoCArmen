@@ -60,7 +60,8 @@ Route::prefix('Producto')->group(function () {
 
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
 
-Route::get('Clientes', 'PersonaController@index');
+Route::get('/Clientes', 'PersonaController@index');
+Route::get('/actualizarCliente', 'PersonaController@actualizarCliente');
 
 Route::prefix('Cliente')->group(function () {
     Route::get('/create', 'PersonaController@create');

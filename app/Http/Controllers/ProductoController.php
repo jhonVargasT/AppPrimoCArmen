@@ -41,7 +41,7 @@ class ProductoController extends Controller
     {
         try {
             DB::transaction(function () use ($request) {
-                Producto::actualizarStock($request->id, $request->paquete, $request->unidad);
+                Producto::actualizarStock($request->id, (int)$request->paquete, (int)$request->unidad);
             });
             return 'success';
 
@@ -82,7 +82,7 @@ class ProductoController extends Controller
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
             $producto->descuento = 0;
-            $producto->fechaCreacion = '1991-01-01';;
+            $producto->fechaCreacion = '1991-01-01';
 
             DB::transaction(function () use ($producto) {
                 $producto->save();
@@ -131,7 +131,7 @@ class ProductoController extends Controller
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
             $producto->descuento = 0;
-            $producto->fechaCreacion = '1991-01-01';;
+            $producto->fechaCreacion = '1991-01-01';
 
             DB::transaction(function () use ($producto) {
                 $producto->save();

@@ -154,9 +154,6 @@
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
                                 '<a href="" style="color: red" TITLE="Editar">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href=" " style="color: green" title="Eliminar">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
-                                '</a>\n' +
                                 '</div>';
                         }
                         else if (row.pestado === '0') {
@@ -165,9 +162,6 @@
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
                                 '<a href="" style="color: red" TITLE="Editar">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href=" " style="color: green" title="Eliminar">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash-alt"></i>\n' +
-                                '</a>\n' +
                                 '</div>';
                         }
                     }
