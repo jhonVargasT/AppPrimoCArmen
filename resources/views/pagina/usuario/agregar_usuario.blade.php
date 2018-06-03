@@ -159,7 +159,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">Direccion</label>
+                                            <label class="col-md-3 col-form-label text-md-right">Direccion<span
+                                                        class="text-danger">*</span></label>
                                             <div class="col-md-9">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
                                                        data-parsley-group="step-1" data-parsley-required="true"/>
