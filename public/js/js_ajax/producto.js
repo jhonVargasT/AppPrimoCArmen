@@ -167,11 +167,11 @@ function actualizarProducto(id, estado) {
                 data: {id: id, estado: estado},
                 success: function (data) {
                     if (data === 'success') {
+                        redirect('Productos');
                         actualizado();
-                        redirect('Productos');
                     } else {
-                        error();
                         redirect('Productos');
+                        error();
                     }
                 }
             });

@@ -26,16 +26,11 @@
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 
-<script src="{{ asset('js/js_ajax/cliente.js') }}"></script>
-<!-- ================== END PAGE LEVEL STYLE ================== -->
+<script src="{{ asset('js/js_ajax/usuario.js') }}"></script>
+
 <div id="response">
-
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
-
-    <!-- end breadcrumb -->
-    <!-- begin page-header -->
-    <h1 class="page-header">Editar cliente
-        <small>Aqui puedo editar a un cliente</small>
+    <h1 class="page-header">Editar usuairo
+        <small>Aqui puedo editar un usuario</small>
     </h1>
     <!-- final cabecera -->
     <!-- begin panel -->
@@ -49,11 +44,11 @@
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
                             class="fa fa-minus"></i></a>
             </div>
-            <h4 class="panel-title">Editar cliente</h4>
+            <h4 class="panel-title">Editar usuario</h4>
         </div>
         <div class="panel-body">
             <!-- begin wizard-form -->
-            <form name="form-wizard" class="form-control-with-bg" id="idFormClienteEditar">
+            <form name="form-wizard" class="form-control-with-bg" id="idFormUsuarioEditar">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- begin wizard -->
                 <div id="wizard">
@@ -79,7 +74,7 @@
                             <a href="#step-3">
                                 <span class="number">3</span>
                                 <span class="info text-ellipsis">
-						Informacion de tienda
+						Cuento de ingreso
 					</span>
                             </a>
                         </li>
@@ -111,14 +106,13 @@
                                             <label class="col-md-3 col-form-label text-md-right">Nombres <span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
-                                                <input type="hidden" value="{{$persona[0]->idPersona}}" id="idPersona">
-                                                <input type="hidden" value="{{$persona[0]->idTienda}}" name="idTienda"
-                                                       id="idTienda">
-                                                <input type="hidden" value="{{$persona[0]->idDireccionTienda}}"
-                                                       id="idDireccionTienda" name="idDireccionTienda">
+                                                <input type="hidden" value="{{$usuario[0]->idUsuario}}" name="idUsuario"
+                                                       id="idUsuario"/>
+                                                <input type="hidden" value="{{$usuario[0]->idPersona}}"
+                                                       name="idPersona"/>
                                                 <input type="text" name="nombres" id="nombres"
-                                                       data-parsley-group="step-1" value="{{$persona[0]->pnombres}}"
-                                                       data-parsley-required="true" class="form-control"/>
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       class="form-control" value="{{$usuario[0]->pnombres}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -128,8 +122,8 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="apellidos" id="apellidos"
-                                                       data-parsley-group="step-1" value="{{$persona[0]->papellidos}}"
-                                                       data-parsley-required="true" class="form-control"/>
+                                                       data-parsley-group="step-1" data-parsley-required="true"
+                                                       class="form-control" value="{{$usuario[0]->papellidos}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -140,7 +134,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" class="form-control" id="datepicker-autoClose"
                                                        placeholder="clic aqui" name="fechaNacimiento"
-                                                       value="{{$persona[0]->pfechaNacimiento}}">
+                                                       value="{{$usuario[0]->pfechaNacimiento}}">
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -151,17 +145,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="dni" class="form-control" id="dni"
                                                        data-parsley-group="step-1" data-parsley-required="true"
-                                                       value="{{$persona[0]->pdni}}"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">Departamento <span
-                                                        class="text-danger">*</span></label>
-                                            <div class="col-md-6">
-                                                <input type="text" name="departamento" class="form-control"
-                                                       id="departamento"
-                                                       data-parsley-group="step-1" data-parsley-required="true"
-                                                       value="{{$persona[0]->pdepartamento}}"/>
+                                                       value="{{$usuario[0]->pdni}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -170,7 +154,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="provincia" class="form-control" id="provincia"
                                                        data-parsley-group="step-1" data-parsley-required="true"
-                                                       value="{{$persona[0]->pprovincia}}"/>
+                                                       value="{{$usuario[0]->pprovincia}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -179,16 +163,16 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="distrito" class="form-control" id="distrito"
                                                        data-parsley-group="step-1" data-parsley-required="true"
-                                                       value="{{$persona[0]->pdistrito}}"/>
+                                                       value="{{$usuario[0]->pdistrito}}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Direccion <span
                                                         class="text-danger">*</span></label>
-                                            <div class="col-md-6">
+                                            <div class="col-md-9">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
                                                        data-parsley-group="step-1" data-parsley-required="true"
-                                                       value="{{$persona[0]->pdireccion}}"/>
+                                                       value="{{$usuario[0]->pdireccion}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -219,7 +203,7 @@
                                                 <input type="number" name="nroCelular" data-parsley-group="step-2"
                                                        data-parsley-required="true" data-parsley-type="number"
                                                        class="form-control" id="nroCelular"
-                                                       value="{{$persona[0]->pnroCelular}}"/>
+                                                       value="{{$usuario[0]->pnroCelular}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -230,11 +214,10 @@
                                             <div class="col-md-6">
                                                 <input type="email" name="correo" class="form-control" id="correo"
                                                        data-parsley-group="step-2" data-parsley-required="true"
-                                                       data-parsley-type="email" value="{{$persona[0]->pcorreo}}"/>
+                                                       data-parsley-type="email" value="{{$usuario[0]->pcorreo}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
-
                                     </div>
                                     <!-- end col-8 -->
                                 </div>
@@ -251,85 +234,39 @@
                                 <div class="row">
                                     <!-- begin col-8 -->
                                     <div class="col-md-8 offset-md-2">
-                                        <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">Ingresa
-                                            informacion de tienda
+                                        <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
+                                            Selecciona tu ususario y contraseña
                                         </legend>
-
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">Nombre de tienda<span
+                                            <label class="col-md-3 col-form-label text-md-right">Usuario<span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
-                                                <input type="text" name="tnombreTienda" class="form-control"
+                                                <input type="text" name="usuario" id="usuario" class="form-control"
                                                        data-parsley-group="step-3" data-parsley-required="true"
-                                                       id="nombreTienda" value="{{$persona[0]->tnombreTienda}}"/>
+                                                       data-parsley-type="alphanum" value="{{$usuario[0]->uusuario}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">R.U.C<span
+                                            <label class="col-md-3 col-form-label text-md-right">Contraseña <span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
-                                                <input type="text" name="ruc" class="form-control" id="ruc"
-                                                       data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="number"
-                                                       value="{{$persona[0]->pruc}}"/>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">Numero de telefono<span
-                                                        class="text-danger">*</span></label>
-                                            <div class="col-md-6">
-                                                <input type="number" name="ttelefono" class="form-control"
-                                                       data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="number" value="{{$persona[0]->ttelefono}}"/>
+                                                <input type="password" name="password" id="password"
+                                                       class="form-control" data-parsley-group="step-3"
+                                                       data-parsley-required="true" value="{{$usuario[0]->upassword}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
                                         <!-- begin form-group -->
-                                        <div id="dir">
-                                            <div class="form-group row m-b-10">
-                                                <label class="col-md-3 col-form-label text-md-right">Distrito<span
-                                                            class="text-danger">*</span></label>
-                                                <div class="col-md-6">
-                                                    <input type="text" id="dtdistrito" class="form-control"
-                                                           name="dtdistrito"
-                                                           data-parsley-group="step-3" data-parsley-required="true"
-                                                           value="{{$persona[0]->dtdistrito}}"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row m-b-10">
-                                                <label class="col-md-3 col-form-label text-md-right">Provincia<span
-                                                            class="text-danger">*</span></label>
-                                                <div class="col-md-6">
-                                                    <input type="text" id="dtprovincia" class="form-control"
-                                                           name="dtprovincia"
-                                                           data-parsley-group="step-3" data-parsley-required="true"
-                                                           value="{{$persona[0]->dtprovincia}}"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row m-b-10">
-
-                                                <label class="col-md-3 col-form-label text-md-right">Direccion
-                                                    <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="col-md-6">
-                                                    <input type="text" id="dtnombreCalle" class="form-control"
-                                                           name="dtnombreCalle"
-                                                           data-parsley-group="step-3" data-parsley-required="true"
-                                                           value="{{$persona[0]->dtnombreCalle}}"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row m-b-10">
-                                                <label style="color: #0a8cbd"
-                                                       class="col-md-3 col-form-label text-md-right">
-                                                    <a onclick="return agregardireccion(event);" class="btn btn-link"
-                                                       data-toggle="modal">
-                                                        <i class="fas fa-lg fa-fw m-r-10 fa-plus "></i>
-                                                        Agregar direccion
-                                                    </a> <span class="text-danger">*</span></label>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">confirmar contraseña
+                                                <span class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="password" name="password2" id="password2"
+                                                       class="form-control" data-parsley-group="step-3"
+                                                       data-parsley-required="true" value="{{$usuario[0]->upassword}}"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -346,7 +283,7 @@
                             <div class="jumbotron m-b-0 text-center">
                                 <h2 class="text-inverse">Edicion finalizado</h2></br>
                                 <p>
-                                    <button class="btn btn-primary btn-lg" id="editar">Proceder con el registro
+                                    <button class="btn btn-primary btn-lg" id="editar">Proceder con la edicion
                                     </button>
                                 </p>
                             </div>
@@ -361,7 +298,9 @@
         </div>
     </div>
 </div>
-<!-- end panel -->
+
+
+<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
     App.setPageTitle('Agregar cliente | ARPEMAR SAC');
     App.restartGlobalFunction();
@@ -408,5 +347,4 @@
     });
 
 </script>
-<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <!-- ================== END PAGE LEVEL JS ================== -->

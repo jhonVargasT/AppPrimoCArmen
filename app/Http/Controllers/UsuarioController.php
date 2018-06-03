@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Persona;
 use App\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
-use Yajra\Datatables\Datatables;
 use Exception;
 
 class UsuarioController extends Controller
@@ -103,7 +101,8 @@ class UsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuario::datos($id);
+        return view('pagina.usuario.editar_usuario')->with('usuario', $usuario);
     }
 
     /**
@@ -111,11 +110,45 @@ class UsuarioController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $persona = Persona::findOrFail($request->idPersona);
+            $persona->dni = $request->dni;
+            $persona->nombres = $request->nombres;
+            $persona->apellidos = $request->apellidos;
+            $persona->fechaNacimiento = '1991-01-01';
+            $persona->direccion = $request->direccion;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->correo = $request->correo;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->fechaCreacion = '1991-01-01';
+            $persona->nroCelular = $request->nroCelular;
+            $persona->departamento = $request->departamento;
+            $persona->provincia = $request->provincia;
+            $persona->nroCelular = $request->nroCelular;
+            $persona->distrito = $request->distrito;
+
+            $usuario = Usuario::findOrFail($id);
+            $usuario->password = $request->password;
+            $usuario->usuario = $request->usuario;
+            $usuario->fechaCreacion = '1991-01-01';
+
+            DB::transaction(function () use ($persona, $usuario) {
+                $persona->save();
+
+                $usuario->id_Persona = $persona->idPersona;
+                $usuario->save();
+
+            });
+
+            return 'success';
+
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     /**
@@ -127,5 +160,18 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function actualizarUsuario(Request $request)
+    {
+        try {
+            DB::transaction(function () use ($request) {
+                Usuario::actualizarUsuario($request->id, $request->estado);
+                Persona::actualizarCliente($request->idp, $request->estado);
+            });
+            return 'success';
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }

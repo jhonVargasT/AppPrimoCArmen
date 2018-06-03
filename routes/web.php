@@ -75,6 +75,7 @@ Route::prefix('Cliente')->group(function () {
 //////////////////////////////////////USUARIOS///////////////////////////////////////////////
 
 Route::get('Usuarios', 'UsuarioController@index');
+Route::get('/actualizarUsuario', 'UsuarioController@actualizarUsuario');
 
 Route::prefix('Usuario')->group(function () {
     Route::get('/create', 'UsuarioController@create');

@@ -6,10 +6,6 @@ $('#editar').click(function () {
     editarUsuario();
 });
 
-$('#actualizar').click(function () {
-    actualizarUsuario();
-});
-
 //Crear Datos
 function registrarUsuario() {
     var url = "Usuario/store";
@@ -59,6 +55,19 @@ function error() {
     })
 }
 
+function actualizado() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: 'Datos actualizados'
+    })
+}
+
 function redirect(ruta) {
     $.ajax({
         type: "GET",
@@ -72,14 +81,20 @@ function redirect(ruta) {
 
 //Actualizar Datos
 function editarUsuario() {
-    var id = $("#idCliente").val();
+    var id = $("#idUsuario").val();
     var url = "Usuario/" + id;
     $.ajax({
         type: "PUT",
         url: url,
-        data: $("#idFormUsuario").serialize(),
+        data: $("#idFormUsuarioEditar").serialize(),
         success: function (data) {
-            alert(data);
+            if (data === 'success') {
+                redirect('Usuarios');
+                ok();
+            } else {
+                redirect('Usuarios');
+                error();
+            }
         },
         beforeSend: function () {
             $("#editar").prop('disabled', true);
@@ -88,18 +103,31 @@ function editarUsuario() {
 }
 
 //Anular o Activar
-function actualizarUsuario() {
-    var id = $("#idCliente").val();
-    var url = "Usuario/" + id;
-    $.ajax({
-        type: "PUT",
-        url: url,
-        data: $("#idFormUsuario").serialize(),
-        success: function (data) {
-            alert(data);
-        },
-        beforeSend: function () {
-            $("#actualizar").prop('disabled', true);
+function actualizarUsuario(idu, idp, estado) {
+    swal({
+        title: 'Esta seguro?',
+        text: "Este registro se actualizara!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, actualizar!"
+    }).then(function (result) {
+        if (result.value) {
+            $.ajax({
+                url: "/actualizarUsuario",
+                type: "GET",
+                data: {id: idu, idp: idp, estado: estado},
+                success: function (data) {
+                    if (data === 'success') {
+                        redirect('Usuarios');
+                        actualizado();
+                    } else {
+                        redirect('Usuarios');
+                        error();
+                    }
+                }
+            });
         }
-    });
+    })
 }
