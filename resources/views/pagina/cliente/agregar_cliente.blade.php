@@ -280,7 +280,7 @@
                                                 <label class="col-md-3 col-form-label text-md-right">Distrito<span
                                                             class="text-danger">*</span></label>
                                                 <div class="col-md-6">
-                                                    <input type="text" id="dtdistrito" class="form-control"
+                                                    <input type="text" id="dtdistrito1" class="form-control"
                                                            name="dtdistrito"
                                                            data-parsley-group="step-3" data-parsley-required="true"/>
                                                 </div>
@@ -300,10 +300,11 @@
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-md-6">
-                                                    <input type="text" id="dtnombreCalle" class="form-control"
+                                                    <input type="text" id="dtnombreCalle1" class="form-control"
                                                            name="dtnombreCalle"
                                                            data-parsley-group="step-3" data-parsley-required="true"/>
                                                 </div>
+                                                <input type="text" id="val1" value="1"/>
                                             </div>
                                             <div class="form-group row m-b-10">
                                                 <label style="color: #0a8cbd"
@@ -312,7 +313,7 @@
                                                        data-toggle="modal">
                                                         <i class="fas fa-lg fa-fw m-r-10 fa-plus "></i>
                                                         Agregar direccion
-                                                    </a> <span class="text-danger">*</span></label>
+                                                    </a></label>
                                             </div>
                                         </div>
                                         <!-- end form-group -->

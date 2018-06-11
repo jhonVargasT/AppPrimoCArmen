@@ -35,6 +35,4 @@ function agregardireccion(event) {
         document.getElementById("dist"+cont).value=valores[i][1];
         document.getElementById("dir"+cont).value=valores[i][0];
     }
-
-
 }

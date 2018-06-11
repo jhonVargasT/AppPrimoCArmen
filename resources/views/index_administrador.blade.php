@@ -58,7 +58,7 @@
 
             <li class="dropdown navbar-user">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{asset('assets/img/user/user-13.jpg')}}" alt=""/>
+                    <img src="" alt=""/>
                     <span class="d-none d-md-inline">Administrador de prueba</span> <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
