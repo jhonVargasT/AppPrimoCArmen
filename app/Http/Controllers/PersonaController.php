@@ -46,7 +46,7 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         try {
-            $persona = new Persona();
+            $persona = new Persona;
             $persona->dni = $request->dni;
             $persona->ruc = $request->ruc;
             $persona->nombres = $request->nombres;
@@ -63,30 +63,53 @@ class PersonaController extends Controller
             $persona->nroCelular = $request->nroCelular;
             $persona->distrito = $request->distrito;
 
-            $tienda = new Tienda();
+            $tienda = new Tienda;
             $tienda->nombreTienda = $request->tnombreTienda;
             $tienda->telefono = $request->ttelefono;
             $tienda->fechaCreacion = '1991-01-01';
 
-            $direccionTienda = new DireccionTienda();
-            $direccionTienda->distrito = $request->dtdistrito;
-            $direccionTienda->provincia = $request->dtprovincia;
-            $direccionTienda->nombreCalle = $request->dtnombreCalle;
-            $direccionTienda->fechaCreacion = '1991-01-01';
+            $contdireccion = $request->val1;
 
+            if ($contdireccion > 1) {
 
-            DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
-                $persona->save();
+                DB::transaction(function () use ($persona, $tienda, $contdireccion, $request) {
+                    $persona->save();
 
-                $tienda->id_Persona = $persona->idPersona;
-                $tienda->save();
+                    $tienda->id_Persona = $persona->idPersona;
+                    $tienda->save();
 
-                $direccionTienda->id_Tienda = $tienda->idTienda;
-                $direccionTienda->save();
+                    for ($i = 1; $i <= $contdireccion; $i++) {
+                        $direccionTienda = new DireccionTienda;
+                        $direccionTienda->distrito = $request->input('dtdistrito'.$i);
+                        $direccionTienda->provincia = $request->input('dtprovincia'.$i);
+                        $direccionTienda->nombreCalle = $request->input('dtnombreCalle'.$i);
+                        $direccionTienda->fechaCreacion = '1991-01-01';
 
-            });
-            return 'success';
+                        $direccionTienda->id_Tienda = $tienda->idTienda;
+                        $direccionTienda->save();
+                    }
+                });
+                return 'success';
 
+            } else {
+                $direccionTienda = new DireccionTienda;
+                $direccionTienda->distrito = $request->dtdistrito1;
+                $direccionTienda->provincia = $request->dtprovincia1;
+                $direccionTienda->nombreCalle = $request->dtnombreCalle1;
+                $direccionTienda->fechaCreacion = '1991-01-01';
+
+                DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
+                    $persona->save();
+
+                    $tienda->id_Persona = $persona->idPersona;
+                    $tienda->save();
+
+                    $direccionTienda->id_Tienda = $tienda->idTienda;
+                    $direccionTienda->save();
+
+                });
+                return 'success';
+            }
         } catch (Exception $e) {
             return $e;
         }
@@ -107,12 +130,12 @@ class PersonaController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     public function edit($id)
     {
-        $persona = Persona::datos($id);
-
+        $ids = explode('-', $id);
+        $persona = Persona::datos($ids[0], $ids[1]);
         return view('pagina.cliente.editar_cliente')->with('persona', $persona);
     }
 
@@ -189,7 +212,7 @@ class PersonaController extends Controller
             DB::transaction(function () use ($request) {
                 Persona::actualizarCliente($request->idp, $request->estado);
                 Tienda::actualizarTienda($request->idt, $request->estado);
-                DireccionTienda::actualizarDireccionTienda($request->iddt, $request->estado);
+                DireccionTienda::actualizarDireccionTienda($request->idt, $request->estado);
             });
             return 'success';
 

@@ -147,17 +147,22 @@ function agregardireccion(event) {
         cont++;
         value = document.getElementById("dtnombreCalle" + cont).value;
         value2 = document.getElementById("dtdistrito" + cont).value;
+        value2 = document.getElementById("dtprovincia" + cont).value;
         valores.push([value, value2]);
     }
     click++;
     html = $('#dir').html();
     html2 = ' <div class="form-group row m-b-10">' +
         '<label class="col-md-3 col-form-label text-md-right">Distrito ' + click + '<span class="text-danger">*</span></label>' +
-        '<div class="col-md-6"> <input type="text" id="dist' + click + '" class="form-control" data-parsley-group="step-3" data-parsley-required="true"' +
+        '<div class="col-md-6"> <input type="text" id="dtdistrito' + click + '" name="dtdistrito' + click + '" class="form-control" data-parsley-group="step-3" data-parsley-required="true"' +
+        'data-parsley-type="alphanum"/> </div> </div>' +
+        ' <div class="form-group row m-b-10">' +
+        '<label class="col-md-3 col-form-label text-md-right">Provincia ' + click + '<span class="text-danger">*</span></label>' +
+        '<div class="col-md-6"> <input type="text" id="dtprovincia' + click + '" name="dtprovincia' + click + '" class="form-control" data-parsley-group="step-3" data-parsley-required="true"' +
         'data-parsley-type="alphanum"/> </div> </div>' +
         '<div class="form-group row m-b-10" >' +
         '<label class="col-md-3 col-form-label text-md-right">Direccion ' + click + ' <span class="text-danger">*</span></label>' +
-        '<div class="col-md-6"> <input type="text" id="dir' + click + '" class="form-control"' +
+        '<div class="col-md-6"> <input type="text" id="dtnombreCalle' + click + '" name="dtnombreCalle' + click + '" class="form-control"' +
         'data-parsley-group="step-3" data-parsley-required="true"/> </div> ';
     html = html + html2;
     $('#dir').html(html);
@@ -165,6 +170,7 @@ function agregardireccion(event) {
     cont = 0;
     for (i = 0; i < valores.length; i++) {
         cont++;
+        document.getElementById("dtdistrito" + cont).value = valores[i][2];
         document.getElementById("dtdistrito" + cont).value = valores[i][1];
         document.getElementById("dtnombreCalle" + cont).value = valores[i][0];
     }

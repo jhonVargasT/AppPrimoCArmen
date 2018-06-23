@@ -322,7 +322,7 @@
                                                            value="{{$persona[0]->dtnombreCalle}}"/>
                                                 </div>
                                             </div>
-                                            <div class="form-group row m-b-10">
+                                            {{--<div class="form-group row m-b-10">
                                                 <label style="color: #0a8cbd"
                                                        class="col-md-3 col-form-label text-md-right">
                                                     <a onclick="return agregardireccion(event);" class="btn btn-link"
@@ -330,7 +330,7 @@
                                                         <i class="fas fa-lg fa-fw m-r-10 fa-plus "></i>
                                                         Agregar direccion
                                                     </a> <span class="text-danger">*</span></label>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                         <!-- end form-group -->
                                     </div>

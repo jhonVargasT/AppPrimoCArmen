@@ -21,7 +21,7 @@ class Persona extends Model
             ->get();
     }
 
-    public static function datos($id)
+    public static function datos($id, $idt)
     {
         return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.nroCelular as pnroCelular', 'p.correo as pcorreo', 'p.dni as pdni',
             'p.ruc as pruc', 'p.direccion as pdireccion', 'p.idPersona as idPersona', 't.nombreTienda as tnombreTienda', 't.telefono as ttelefono',
@@ -32,6 +32,7 @@ class Persona extends Model
             ->join('tienda as t', 't.id_Persona', '=', 'p.idPersona')
             ->join('direcciontienda as dt', 'dt.id_Tienda', '=', 't.idTienda')
             ->where('idPersona', $id)
+            ->where('idDireccionTienda', $idt)
             ->get();
     }
 

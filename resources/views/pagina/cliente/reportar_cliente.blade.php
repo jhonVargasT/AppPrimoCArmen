@@ -172,14 +172,14 @@
                             return '<div align="center">\n' +
                                 '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',0)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                                '<a href="Cliente/' + row.idPersona + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                                '<a href="Cliente/' + row.idPersona +'-'+ row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '</div>';
                         } else {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: red" TITLE="Activar" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',1)">\n' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',1)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-plus"> </i></a>\n' +
-                                '<a href="Cliente/' + row.idPersona + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                                '<a href="Cliente/' + row.idPersona +'-'+ row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '</div>';
                         }

@@ -10,9 +10,9 @@ class DireccionTienda extends Model
     protected $table = 'direcciontienda';
     public $timestamps = false;
 
-    public static function actualizarDireccionTienda($id, $estado)
+    public static function actualizarDireccionTienda($idt, $estado)
     {
-        static::where('idDireccionTienda', $id)
+        static::where('id_Tienda', $idt)
             ->update(['estado' => $estado]);
     }
 }

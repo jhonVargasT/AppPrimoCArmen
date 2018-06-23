@@ -20,7 +20,6 @@ class Direcciontienda extends Migration
             $table->string('nombreCalle')->nullable();
             $table->string('provincia')->nullable();
             $table->string('distrito')->nullable();
-            $table->string('nroCalle')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->dateTime('fechaActualizacion')->nullable();
             $table->integer('idUsuario')->nullable();
