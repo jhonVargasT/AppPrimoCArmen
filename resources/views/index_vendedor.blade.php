@@ -80,7 +80,7 @@
             <ul class="nav">
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
-                    <a href="/reporte_vendedor"  data-toggle="ajax">
+                    <a href="/reportevendedor"  data-toggle="ajax">
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
                         <span>Reporte</span>
                     </a>
@@ -93,7 +93,7 @@
                     </a>
                     <ul class="sub-menu">
 
-                        <li><a href="/repCli" data-toggle="ajax">
+                        <li><a href="/Clientes" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-users"></i>Clientes</a></li>
                     </ul>
 
@@ -157,7 +157,7 @@
     $(document).ready(function () {
         App.init({
             ajaxMode: true,
-            ajaxDefaultUrl: '/reporte_vendedor',
+            ajaxDefaultUrl: '/reportevendedor',
             ajaxType: 'GET',
             ajaxDataType: 'html'
         });

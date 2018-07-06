@@ -15,4 +15,13 @@ class DireccionTienda extends Model
         static::where('id_Tienda', $idt)
             ->update(['estado' => $estado]);
     }
+
+    public static function obtenerDirecciones($idTienda)
+    {
+        return static::select('distrito', 'provincia', 'nombreCalle','idDireccionTienda')
+            ->where('id_Tienda', '=', $idTienda)
+         //   ->where('estado', '=', 1)
+            ->get();
+
+    }
 }

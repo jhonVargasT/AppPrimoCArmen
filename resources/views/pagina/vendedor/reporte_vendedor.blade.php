@@ -68,7 +68,7 @@
 
         <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
 
-            <a  href="/vender" href="/prod" data-toggle="ajax" class="btn btn-danger"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>
+            <a  href="Pedido/nuevopedido"  data-toggle="ajax" class="btn btn-danger"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>
                 nuevo pedido
             </a>
         </div>

@@ -46,4 +46,16 @@ class Persona extends Model
     {
         return $this->hasMany('App\ProductoPedido');
     }
+
+    public static function  obtenerDatosDni($dni)
+    {
+        return static::select('persona.apellidos','persona.nombres','t.nombreTienda as tienda','t.idTienda','persona.idPersona')
+            ->join('tienda as t','t.id_Persona','=','persona.idPersona')
+            ->where('persona.dni',$dni)
+           /* ->where('persona.estado',1)
+            ->where('t.estado',1)*/
+            ->get();
+
+
+    }
 }

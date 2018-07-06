@@ -1,15 +1,24 @@
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+</script>
+
+<script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+<script src="{{ asset('js/js_ajax/producto.js') }}"></script>
+<script src="{{ asset('js/js_ajax/NuevoPedidoAjax.js') }}"></script>
+
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
-<h1 class="page-header">Nueva venta
+<h1 class="page-header">Nuevo pedido
     <small>Aqui puedo vender los productos</small>
 </h1>
 <!-- final cabecera -->
 
 <!-- begin panel -->
 <div class="panel panel-inverse">
+
     <div class="panel-heading">
         <div class="panel-heading-btn">
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
@@ -26,33 +35,32 @@
     <div class="panel-body">
         <div class="col-md-12 " align="center">
             <div class="form-group row m-b-15">
+                <input id="idtienda" name="idtienda" hidden >
+                <input id="idpersona"  name="idpersona" hidden>
                 <label class="col-form-label col-md-3">DNI :</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" placeholder="Enter email">
+                    <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="text" class="form-control m-b-5" placeholder="Ingresa Dni">
                 </div>
             </div>
             <div class="form-group row m-b-15">
                 <label class="col-form-label col-md-3">Nombres y apellidos</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" placeholder="Enter email">
+                    <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos" readonly>
                 </div>
             </div>
             <div class="form-group row m-b-15">
                 <label class="col-form-label col-md-3">Nombre tienda</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" placeholder="Enter email">
+                    <input type="text" class="form-control m-b-5" id="nombretienda" name="nombretienda" readonly>
                 </div>
             </div>
 
             <div class="form-group row m-b-15">
                 <label class="col-form-label col-md-3">Direccion tienda</label>
                 <div class="col-md-9">
-                    <select class=" form-control">
+                    <select  id="direcciones" class=" form-control" onmouseover="llenarOption()">
                         <option>
                             Selecciones
-                        </option>
-                        <option>
-                            jr manzanas 24
                         </option>
                     </select>
                 </div>

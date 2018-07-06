@@ -23,8 +23,7 @@
     return view('pagina/vendedor/vender');
 });
 
-Route::get('/reporte_vendedor', function () {
-    return view('pagina/vendedor/reporte_vendedor');
+
 });*/
 
 //////////////////////////////////INICIO//////////////////////////////////////////////////
@@ -92,3 +91,23 @@ Route::prefix('datatables')->group(function () {
     Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
     Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
 });
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+//////////// *********************** VENDEDOR ***************************/////////////////////////
+Route::get('/vendedor','VendedorController@index')->name('vendedor');
+
+/////////// reporte vendedor ///////////////////
+Route::get('/reportevendedor','ReporteVendedorController@index')->name('vendedor');
+
+////// nuevo pedido //////////////
+Route::prefix('Pedido')->group(function (){
+    Route::get('/nuevopedido','NuevoPedidoController@index')->name('vendedor');
+});
+
+Route::get('autocompletarpedidodni/{dni}','NuevoPedidoController@autoCompletarDni')->name('vendedor');
+Route::get('autocompletarselectdirecciones/{idtienda}','NuevoPedidoController@obtenerDirecciones')->name('vendedor');
+
