@@ -178,3 +178,5 @@ function actualizarProducto(id, estado) {
         }
     })
 }
+
+

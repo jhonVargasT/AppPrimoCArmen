@@ -1,7 +1,7 @@
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
-<script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 </script>
 
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
@@ -35,32 +35,35 @@
     <div class="panel-body">
         <div class="col-md-12 " align="center">
             <div class="form-group row m-b-15">
-                <input id="idtienda" name="idtienda" hidden >
-                <input id="idpersona"  name="idpersona" hidden>
+                <input id="idtienda" name="idtienda" hidden>
+                <input id="idpersona" name="idpersona" hidden>
                 <label class="col-form-label col-md-3">DNI :</label>
                 <div class="col-md-9">
-                    <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="text" class="form-control m-b-5" placeholder="Ingresa Dni">
+                    <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="text"
+                           class="form-control m-b-5" placeholder="Ingresa Dni">
                 </div>
             </div>
             <div class="form-group row m-b-15">
                 <label class="col-form-label col-md-3">Nombres y apellidos</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos" readonly>
+                    <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos"
+                           onkeyup="completarNombresApellidos()">
                 </div>
             </div>
             <div class="form-group row m-b-15">
                 <label class="col-form-label col-md-3">Nombre tienda</label>
                 <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" id="nombretienda" name="nombretienda" readonly>
+                    <input type="text" class="form-control m-b-5" id="nombretienda" name="nombretienda"
+                           onkeyup="completarTienda()">
                 </div>
             </div>
 
             <div class="form-group row m-b-15">
                 <label class="col-form-label col-md-3">Direccion tienda</label>
                 <div class="col-md-9">
-                    <select  id="direcciones" class=" form-control" onmouseover="llenarOption()">
+                    <select id="direcciones" class=" form-control" onclick="llenarDireccion()">
                         <option>
-                            Selecciones
+                            Seleccione
                         </option>
                     </select>
                 </div>
@@ -75,7 +78,7 @@
         </div>
 
         <div class=".row.row-space-2 .p-2" align="center">
-            <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary" data-toggle="modal" >
+            <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary" onclick="resetearModal()" data-toggle="modal">
                 <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle"></i>
                 Añadir producto
             </a>
@@ -208,48 +211,120 @@
             </div>
         </div>
         <div class="col-md-12" align="center">
-            <a href="javascript:;" class="btn btn-danger"  data-dismiss="modal">
+            <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
                 <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                 Cancelar</a>
-           <button href="javascript:;" class="btn btn-success">
-                   <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar</button>
+            <button href="javascript:;" class="btn btn-success">
+                <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
+            </button>
         </div>
     </div>
 </div>
+<!---adicionar stock--->
 <div class="modal fade" id="modal-dialog">
     <div class="modal-dialog ">
-        <div  class="modal-content ">
+        <div class="modal-content ">
             <div class="modal-header">
-                <h4 class="modal-title">Adicionar stock</h4>
+                <h4 class="modal-title">Añadir producto al carrito</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="modal-body">
+
                 <div class="row form-group row m-b-15">
-                    <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto">Nombre producto :</label>
-                    <div class="col-md-4 col-sm-4">
-                        <input id="nombre_producto" type="text" class="form-control m-b-5" data-parsley-type="number" />
+                    <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto"> <strong> Nombre producto
+                            :</strong></label>
+                    <div class="col-md-6 col-sm-6">
+                        <input onkeypress="if(event.keyCode == 13) buscarProductoNombre()" id="nombre_producto"
+                               type="text" class="form-control m-b-12"
+                        />
+                    </div>
+                </div>
+                <div  class="bg-orange-lighter">
+                    <div class="row form-group row m-b-15 ">
+                        <label class=" col-md-12 col-form-label text-center"> <h4><u> <strong> Informacion del producto </strong></u> </h4>
+                        </label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="nompro">Nombre producto
+                            :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="nompro" name="nompro"> </label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippro">Tipo producto :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippro" name="tippro"></label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippa">Tipo paquete :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippa" name="tippa"></label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="capa">Cant unid x paq :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="capa" name="capa"></label>
+                    </div>
+                </div>
+
+
+                <div class="bg-green-lighter">
+                    <div class="row form-group row m-b-15 ">
+                        <label class=" col-md-12 col-form-label text-center">  <h4> <u><strong> Stock del producto </strong> </u></h4>
+                        </label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-3 col-sm-3 col-form-label text-right">Paquete :</label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadpa">Cantidad :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadpa"
+                               name="cantidadpa"> </label>
+                        <label class="col-md-3 col-sm-3 col-form-label text-left" for="preciopa">Precio c/u :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="preciopa"
+                               name="preciopa"> </label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-3 col-sm-3 col-form-label text-right">Unidad :</label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadun">Cantidad :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadun"
+                               name="cantidadun"> </label>
+                        <label class="col-md-3 col-sm-3 col-form-label text-left" for="precioun">Precio c/u :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="precioun"
+                               name="precioun"> </label>
+                    </div>
+                    <hr>
+                </div>
+                <div class="row form-group row m-b-15">
+                    <label class="col-md-5 col-sm-5 col-form-label" for="numero_paquetes"> <strong>Numero de
+                            packetes </strong></label>
+                    <div class="col-md-2 col-sm-2">
+                        <input id="numero_paquetes" type="number" class="form-control m-b-5"
+                               data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
                     </div>
 
+                    <label class="col-md-2 col-sm-2 col-form-label text-right" for="totpaque">Total :</label>
+                    <label class="col-md-1 col-sm-1 col-form-label text-left" id="totpaque"></label>
                 </div>
                 <div class="row form-group row m-b-15">
-                    <label class="col-md-5 col-sm-5 col-form-label" for="numero_packetes">Numero de packetes</label>
-                    <div class="col-md-4 col-sm-4">
-                        <input id="numero_packetes" type="text" class="form-control m-b-5" data-parsley-type="number" />
+                    <label class="col-md-5 col-sm-5 col-form-label" for="numero_unidades"> <strong>Numero de
+                            unidades </strong></label>
+                    <div class="col-md-2 col-sm-2">
+                        <input id="numero_unidades" type="number" class="form-control m-b-5"
+                               data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
                     </div>
+                    <label class="col-md-2 col-sm-2 col-form-label text-right" for="totunu">Total :</label>
+                    <label class="col-md-1 col-sm-1 col-form-label text-left" id="totunu"> </label>
                 </div>
                 <div class="row form-group row m-b-15">
-                    <label class="col-md-5 col-sm-5 col-form-label" for="numero_unidades">Numero de unidades</label>
-                    <div class="col-md-4 col-sm-4">
-                        <input id="numero_unidades" type="text" class="form-control m-b-5" data-parsley-type="number" />
-                    </div>
+                    <label class="col-md-11 col-sm-11 col-form-label  text-right" for="total"> <strong>Total : </strong></label>
+                    <label class="col-md-1 col-sm-1 col-form-label" id="total"></label>
                 </div>
 
             </div>
-            <div class="modal-footer" >
-                <a href="javascript:;" class="btn btn-danger"  data-dismiss="modal">
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal" >
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
-                <a href="javascript:;" class="btn btn-success">
+                <a href="javascript:;" class="btn btn-success disabled" onmouseover="activarBoton()" id="enviar">
                     <i class="fas fa-lg fa-fw m-r-10 fa-shopping-cart"> </i>Agregar carrito</a>
             </div>
         </div>
@@ -258,6 +333,7 @@
 <!-- end panel -->
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+
 <script>
     App.setPageTitle('Vender| ARPEMAR SAC');
     App.restartGlobalFunction();

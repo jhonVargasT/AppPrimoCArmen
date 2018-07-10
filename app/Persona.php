@@ -47,15 +47,42 @@ class Persona extends Model
         return $this->hasMany('App\ProductoPedido');
     }
 
-    public static function  obtenerDatosDni($dni)
+    public static function obtenerDatosDni($dni)
     {
-        return static::select('persona.apellidos','persona.nombres','t.nombreTienda as tienda','t.idTienda','persona.idPersona')
-            ->join('tienda as t','t.id_Persona','=','persona.idPersona')
-            ->where('persona.dni',$dni)
-           /* ->where('persona.estado',1)
-            ->where('t.estado',1)*/
+        return static::select('persona.apellidos', 'persona.nombres', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona')
+            ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
+            ->where('persona.dni', $dni)
+            /* ->where('persona.estado',1)
+             ->where('t.estado',1)*/
             ->get();
 
 
+    }
+
+    public static function obtenerDatosNombresApellidos($nombresApellidos)
+    {
+        try {
+
+            return static::select('persona.apellidos', 'persona.nombres', 'persona.dni')
+                ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
+                ->where('persona.apellidos','like','%'.$nombresApellidos.'%' )
+                /* ->where('persona.estado',1)
+                 ->where('t.estado',1)*/
+                ->get();
+
+        }catch (Exception $e )
+        {
+            return $e;
+        }
+    }
+
+    public static function obtenerDatosNombreTienda($nombreTienda)
+    {
+        return static::select('t.nombreTienda as tienda', 'persona.dni')
+            ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
+            ->where('t.nombreTienda', 'like', '%'.$nombreTienda.'%')
+            /* ->where('persona.estado',1)
+             ->where('t.estado',1)*/
+            ->get();
     }
 }

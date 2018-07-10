@@ -24,6 +24,14 @@ class Producto extends Model
             ->update(['estado' => $estado]);
     }
 
+    public static function consultarProducto($idproducto)
+    {
+            return static::select('*')
+                ->from('producto as p')
+                ->where('p.idProducto', $idproducto)
+                ->get();
+
+    }
 
     public function personas()
     {

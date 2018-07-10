@@ -110,4 +110,9 @@ Route::prefix('Pedido')->group(function (){
 
 Route::get('autocompletarpedidodni/{dni}','NuevoPedidoController@autoCompletarDni')->name('vendedor');
 Route::get('autocompletarselectdirecciones/{idtienda}','NuevoPedidoController@obtenerDirecciones')->name('vendedor');
+Route::get('autocompletarnombresapellidos/{nombresapellidos}','NuevoPedidoController@autocompletarNombresApellidos')->name('vendedor');
+Route::get('autocompletarnombretienda/{nombretienda}','NuevoPedidoController@autoCompletarNombreTiendaTienda')->name('vendedor');
 
+//añadir producto al carrito
+
+Route::get('autocompletarproducto/{idproducto}','NuevoPedidoController@autocompletarproducto')->name('vendedor');
