@@ -2,13 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Usuario extends Model
+class Usuario extends Authenticatable
 {
+    //protected $connection="chino";
     protected $primaryKey = 'idUsuario';
     protected $table = 'usuario';
     public $timestamps = false;
+
+    protected $fillable = ['usuario', 'password'];
+
+    protected $hidden = ['password'];
 
     public static function listado()
     {

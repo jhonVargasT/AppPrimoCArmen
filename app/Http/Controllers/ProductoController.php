@@ -6,7 +6,6 @@ use App\Producto;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class ProductoController extends Controller
 {

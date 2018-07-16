@@ -78,6 +78,17 @@ return [
             'prefix' => '',
         ],
 
+        'chino' => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'chino',
+            'username'  => 'root',
+            'password'  => 'root',
+            'prefix'    => '',
+            'port'      => '3306',
+            'strict'    => false,
+        ],
+
     ],
 
     /*

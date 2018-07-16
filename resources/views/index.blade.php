@@ -68,7 +68,7 @@
                         <input type="password" class="form-control form-control-lg" placeholder="Contraseña" name="contrasena"/>
                     </div>
                     <div class="login-buttons">
-                        <a href="/vendedor" class="btn btn-success btn-block btn-lg">Ingresar</a>
+                        <a href="{{route('login')}}" class="btn btn-success btn-block btn-lg">Ingresar</a>
                     </div>
                     <hr/>
                     <p class="text-center text-grey-darker">

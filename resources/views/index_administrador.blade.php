@@ -63,7 +63,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:;" class="dropdown-item">Mi cuenta</a>
-                    <a href="javascript:;" class="dropdown-item">Salir</a>
+                    <a href="{{route('logout')}}" class="dropdown-item">Salir</a>
                 </div>
             </li>
         </ul>

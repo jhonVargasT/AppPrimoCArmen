@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Persona;
 use App\Usuario;
+use App\util;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -46,6 +46,9 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         try {
+            $util = new util();
+            $fecha = $util->fecha_ingles();
+
             $persona = new Persona();
             $persona->dni = $request->dni;
             $persona->nombres = $request->nombres;
@@ -55,7 +58,7 @@ class UsuarioController extends Controller
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
-            $persona->fechaCreacion = '1991-01-01';
+            $persona->fechaCreacion = $fecha;
             $persona->nroCelular = $request->nroCelular;
             $persona->departamento = $request->departamento;
             $persona->provincia = $request->provincia;
@@ -63,9 +66,9 @@ class UsuarioController extends Controller
             $persona->distrito = $request->distrito;
 
             $usuario = new Usuario();
-            $usuario->password = $request->password;
+            $usuario->password = bcrypt($request->password);
             $usuario->usuario = $request->usuario;
-            $usuario->fechaCreacion = '1991-01-01';
+            $usuario->fechaCreacion = $fecha;
 
             DB::transaction(function () use ($persona, $usuario) {
                 $persona->save();
@@ -115,16 +118,19 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $util = new util();
+            $fecha = $util->fecha_ingles();
+
             $persona = Persona::findOrFail($request->idPersona);
             $persona->dni = $request->dni;
             $persona->nombres = $request->nombres;
             $persona->apellidos = $request->apellidos;
-            $persona->fechaNacimiento = '1991-01-01';
+            $persona->fechaNacimiento = $util->fecha_a_ingles($request->fechaNacimiento);
             $persona->direccion = $request->direccion;
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
-            $persona->fechaCreacion = '1991-01-01';
+            $persona->fechaActualizacion = $fecha;
             $persona->nroCelular = $request->nroCelular;
             $persona->departamento = $request->departamento;
             $persona->provincia = $request->provincia;
@@ -134,7 +140,8 @@ class UsuarioController extends Controller
             $usuario = Usuario::findOrFail($id);
             $usuario->password = $request->password;
             $usuario->usuario = $request->usuario;
-            $usuario->fechaCreacion = '1991-01-01';
+            $usuario->passwordAntigua = '';
+            $usuario->fechaCambioPassword = $fecha;
 
             DB::transaction(function () use ($persona, $usuario) {
                 $persona->save();

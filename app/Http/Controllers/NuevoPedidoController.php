@@ -5,10 +5,6 @@ namespace App\Http\Controllers;
 use App\DireccionTienda;
 use App\Persona;
 use App\Producto;
-use App\Tienda;
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-use App\Http\Requests;
 use Exception;
 
 class NuevoPedidoController extends Controller

@@ -6,7 +6,6 @@ use App\DireccionTienda;
 use App\Persona;
 use App\Tienda;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
