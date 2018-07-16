@@ -1,6 +1,7 @@
 //Crear Datos
 
-var productos;
+var productos = [];
+
 
 function autoCompletar() {
     "use strict";
@@ -215,68 +216,70 @@ function activarBotonAnadirProducto() {
 
 
 function anadirProductoATabla() {
-
+    var res = false;
     var idproducto = $("#nombre_producto").val();
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
     var numerounidades = $("#numero_unidades").val();
-    var total = $("#total").text();
+    var totalpro = $("#total").text();
 
-    var producto=[idproducto,nombreproducto,numeropaquete,numerounidades,total];
-    var productos=[];
-     productos.push(producto);
-    console.log(productos);
-    $("#numero_paquetes").attr('data-dismiss', 'modal');
+    var producto = {
+        id: idproducto,
+        nombre: nombreproducto,
+        paquete: numeropaquete,
+        unidades: numerounidades,
+        total: totalpro
+    };
 
-    /*$('#data-table-fixed-header').DataTable({
+    for (var i = 0; i < productos.length; i++) {
+        if (productos[i]["id"] === producto["id"]) {
+            res = true;
+        }
+    }
+    if (res === false) {
+        productos.push(producto);
+    }
+    llenarTabla();
+    modificarTotal();
+}
+
+function modificarTotal() {
+    var sum = 0;
+    for (var i = 0; i < productos.length; i++) {
+        sum = sum +parseInt(productos[i]["total"]);
+    }
+    $("#totalproducto").html(sum);
+}
+
+function llenarTabla() {
+
+    $('#data-table-fixed-header').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
+        destroy: true,
         processing: true,
-        serverSide: true,
         select: true,
-        rowId: 'id',
-
+        data: productos,
         columns: [
-        {data: 'pnombres', name: 'pnombres'},
-        {data: 'pnroCelular', name: 'pnroCelular'},
-        {data: 'pcorreo', name: 'pcorreo'},
-        {data: 'pdni', name: 'pdni'},
-        {data: 'pruc', name: 'pruc'},
-        {data: 'pdireccion', name: 'pdireccion'},
-        {data: 'tnombreTienda', name: 'tnombreTienda'},
-        {data: 'dtnombreCalle', name: 'dtnombreCalle'},
-        {
-            data: function (row) {
-                if (row.pestado === '1') {
-                    return '<label class="text-success">ACTIVO</label>';
-                }
-                else {
-                    return '<label class="text-danger">ANULADO</label>';
-                }
-            }
-        },
-        {
-            data: function (row) {
-                if (row.pestado === '1') {
+            {title: "Codigo", data: ['id']},
+            {title: "Nombre producto", data: ['nombre']},
+            {title: "Cant paquete", data: ['paquete']},
+            {title: "cant unidade", data: ['unidades']},
+            {title: "Monto total", data: ['total']},
+            {
+                data: function () {
                     return '<div align="center">\n' +
-                        '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',0)">\n' +
+                        '<a href="#" style="color: red" TITLE="Anular" >\n' +
                         '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                        '<a href="Cliente/' + row.idPersona +'-'+ row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
-                        '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                        '</div>';
-                } else {
-                    return '<div align="center">\n' +
-                        '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',1)">\n' +
-                        '<i class="fas fa-lg fa-fw m-r-10 fa-plus"> </i></a>\n' +
-                        '<a href="Cliente/' + row.idPersona +'-'+ row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                        '<a style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                         '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                         '</div>';
                 }
             }
-        }
-    ]
-});*/
+        ]
+    });
+
 
 }
 
