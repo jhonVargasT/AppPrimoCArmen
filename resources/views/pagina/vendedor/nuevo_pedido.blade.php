@@ -324,7 +324,7 @@
                 <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
-                <a href="javascript:;" class="btn btn-success disabled" id="enviar" onmouseover="activarBoton()" onclick="anadirProductoATabla()" data-dismiss="modal">
+                <a href="javascript:;" class="btn btn-success disabled" id="enviar" onmouseover="activarBoton()" onclick="anadirProductoATabla()">
                     <i class="fas fa-lg fa-fw m-r-10 fa-shopping-cart"> </i>Agregar carrito</a>
             </div>
         </div>

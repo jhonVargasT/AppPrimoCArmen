@@ -213,8 +213,9 @@ function activarBotonAnadirProducto() {
     }
 }
 
-/*
+
 function anadirProductoATabla() {
+
     var idproducto = $("#nombre_producto").val();
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
@@ -225,7 +226,8 @@ function anadirProductoATabla() {
     var productos=[];
      productos.push(producto);
     console.log(productos);
-    $("#modal-dialog").modal("hide");
+    $("#numero_paquetes").attr('data-dismiss', 'modal');
+
     /*$('#data-table-fixed-header').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -274,9 +276,9 @@ function anadirProductoATabla() {
             }
         }
     ]
-});
+});*/
 
-}*/
+}
 
 
 
