@@ -3,7 +3,12 @@
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
 </script>
+<link href="../assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+      rel="stylesheet"/>
 
+<link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet"/>
+<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet"/>
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 <script src="{{ asset('js/js_ajax/producto.js') }}"></script>
@@ -39,7 +44,7 @@
                 <input id="idpersona" name="idpersona" hidden>
                 <label class="col-form-label col-md-3">DNI :</label>
                 <div class="col-md-9">
-                    <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="text"
+                    <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="number"
                            class="form-control m-b-5" placeholder="Ingresa Dni">
                 </div>
             </div>
@@ -72,16 +77,21 @@
                 <label class="col-form-label col-md-3">Fecha de entrega</label>
                 <div class="col-md-9">
                     <input type="text" class="form-control" id="datepicker-autoClose"
+                           onmouseover="activarBotonAnadirProducto()"
                            placeholder="Auto Close Datepicker">
                 </div>
             </div>
         </div>
 
-        <div class=".row.row-space-2 .p-2" align="center">
-            <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary" onclick="resetearModal()" data-toggle="modal">
-                <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle"></i>
+        <div class=".row.row-space-2 .p-2 disabled" align="center">
+
+            <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary disabled " onclick="resetearModal()"
+               data-toggle="modal"
+               id="anadirproducto">
+                <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle "></i>
                 Añadir producto
             </a>
+
         </div>
         <div class="col-md-12" align="right">
             <label class="col-form-label ">Total : S/. 180 </label>
@@ -134,19 +144,7 @@
                                             class="fas fa-lg fa-fw  fa-times-circle "></i>
                                 </a></th>
                         </tr>
-                        <tr class="gradeX odd" role="row">
-                            <th>Galleta oreo</th>
-                            <th>4</th>
-                            <th>24
-                            </th>
-                            <th>220</th>
-                            <th><a href="" style="color: green" TITLE="editar">
-                                    <i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>
-                                <a href="#" class="btn btn-link" data-toggle="modal" title="cancelar"><i
-                                            style="color: red"
-                                            class="fas fa-lg fa-fw  fa-times-circle "></i>
-                                </a></th>
-                        </tr>
+
 
                         </tbody>
                         <thead>
@@ -214,7 +212,7 @@
             <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
                 <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                 Cancelar</a>
-            <button href="javascript:;" class="btn btn-success">
+            <button href="javascript:;" class="btn btn-success disabled">
                 <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
             </button>
         </div>
@@ -239,9 +237,10 @@
                         />
                     </div>
                 </div>
-                <div  class="bg-orange-lighter">
+                <div class="bg-orange-lighter">
                     <div class="row form-group row m-b-15 ">
-                        <label class=" col-md-12 col-form-label text-center"> <h4><u> <strong> Informacion del producto </strong></u> </h4>
+                        <label class=" col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
+                                        producto </strong></u></h4>
                         </label>
                     </div>
                     <div class="row form-group row m-b-15">
@@ -266,7 +265,8 @@
 
                 <div class="bg-green-lighter">
                     <div class="row form-group row m-b-15 ">
-                        <label class=" col-md-12 col-form-label text-center">  <h4> <u><strong> Stock del producto </strong> </u></h4>
+                        <label class=" col-md-12 col-form-label text-center"><h4><u><strong> Stock del
+                                        producto </strong> </u></h4>
                         </label>
                     </div>
                     <div class="row form-group row m-b-15">
@@ -321,10 +321,10 @@
 
             </div>
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal" >
+                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
-                <a href="javascript:;" class="btn btn-success disabled" onmouseover="activarBoton()" id="enviar">
+                <a href="javascript:;" class="btn btn-success disabled" id="enviar" onmouseover="activarBoton()" onclick="anadirProductoATabla()" data-dismiss="modal">
                     <i class="fas fa-lg fa-fw m-r-10 fa-shopping-cart"> </i>Agregar carrito</a>
             </div>
         </div>
@@ -347,6 +347,20 @@
         })
     ).done(function () {
         Notification.init();
+    });
+    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
+        $.when(
+            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
+            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
+            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
+            $.Deferred(function (deferred) {
+                $(deferred.resolve);
+            })
+        ).done(function () {
+            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
+                FormPlugins.init();
+            });
+        });
     });
     $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
         $.when(
