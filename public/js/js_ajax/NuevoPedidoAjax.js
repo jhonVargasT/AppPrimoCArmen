@@ -2,6 +2,9 @@
 
 var productos = [];
 
+/*$(document).ready(function () {
+    llenarTabla();
+});*/
 
 function autoCompletar() {
     "use strict";
@@ -163,7 +166,6 @@ function mostrarMonto() {
         }
     }
     activarBoton();
-
 }
 
 function activarBoton() {
@@ -233,20 +235,24 @@ function anadirProductoATabla() {
 
     for (var i = 0; i < productos.length; i++) {
         if (productos[i]["id"] === producto["id"]) {
-            res = true;
+            productos[i]["paquete"]=producto["paquete"];
+            productos[i]["unidades"]=producto["unidades"];
+            productos[i]["total"]=producto["total"];
+            res=true;
         }
     }
     if (res === false) {
         productos.push(producto);
     }
-    llenarTabla();
-    modificarTotal();
+
+        llenarTabla();
+     modificarTotal();
 }
 
 function modificarTotal() {
     var sum = 0;
     for (var i = 0; i < productos.length; i++) {
-        sum = sum +parseInt(productos[i]["total"]);
+        sum = sum + parseInt(productos[i]["total"]);
     }
     $("#totalproducto").html(sum);
 }
@@ -268,12 +274,12 @@ function llenarTabla() {
             {title: "cant unidade", data: ['unidades']},
             {title: "Monto total", data: ['total']},
             {
-                data: function () {
+                data: function (row) {
                     return '<div align="center">\n' +
-                        '<a href="#" style="color: red" TITLE="Anular" >\n' +
-                        '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                        '<a style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                        '<a href="#modal-dialog" style="color: green" TITLE="Editar"   data-toggle="modal" onclick="editarProducto(event,' + row.id + ')">\n' +
                         '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                        '<a href="#" style="color: red" TITLE="Anular" onclick="eliminarProductoTabla(' + row.id + ')" >\n' +
+                        '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
                         '</div>';
                 }
             }
@@ -283,6 +289,60 @@ function llenarTabla() {
 
 }
 
+function eliminarProductoTabla(id) {
+    swal({
+        title: 'Esta seguro?',
+        text: "Este registro se eliminara!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Eliminar!"
+    }).then(function (result) {
+        if (result.value) {
+            var posicion;
+            console.log(id);
+            for (var i = 0; i < productos.length; i++) {
+                if (productos[i]['id'].toString() === id.toString()) {
+                    productos.splice(0, 1);
+                }
+            }
+            llenarTabla();
+        }
+    })
+
+}
+
+function dataDuplicada() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'error',
+        title: 'No puede elegir el mismo producto dos veces'
+    })
+}
+
+function editarProducto(event,id) {
+    event.preventDefault();
+    resetearModal();
+    var res = false;
+    for (var i = 0; i < productos.length; i++) {
+        if (productos[i]['id'].toString() === id.toString()) {
+            $('#nombre_producto').val(productos[i]['id']);
+            $('#numero_paquetes').val(productos[i]['paquete']);
+            $('#numero_unidades').val(productos[i]['unidades']);
+            res = true;
+        }
+    }
+    if (res) {
+        buscarProductoNombre();
+        mostrarMonto();
+    }
+}
 
 
 

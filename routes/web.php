@@ -17,7 +17,7 @@ Auth::routes();
 
 //////////////////////////////////INICIO//////////////////////////////////////////////////
 
-Route::group(['middleware' => 'auth'], function () {
+//Route::group(['middleware' => 'auth'], function () {
     //////////////////////////////////////ADMINISTRADOR///////////////////////////////////////////
 
     Route::get('/Administrador', 'AdministradorController@index');
@@ -101,4 +101,4 @@ Route::group(['middleware' => 'auth'], function () {
 //añadir producto al carrito
 
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto')->name('vendedor');
-});
+//});

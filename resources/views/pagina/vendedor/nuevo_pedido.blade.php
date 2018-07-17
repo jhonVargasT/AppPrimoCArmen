@@ -1,3 +1,7 @@
+
+
+
+
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
@@ -13,6 +17,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 <script src="{{ asset('js/js_ajax/producto.js') }}"></script>
 <script src="{{ asset('js/js_ajax/NuevoPedidoAjax.js') }}"></script>
+
+
 
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 

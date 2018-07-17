@@ -21,6 +21,7 @@ class Usuario extends Migration
             $table->string('usuario')->nullable();
             $table->string('passwordAntigua')->nullable();
             $table->dateTime('fechaCambioPassword')->nullable();
+            $table->integer('tipoUsuario')->nullable();
             $table->integer('usuarioCreacion')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');
