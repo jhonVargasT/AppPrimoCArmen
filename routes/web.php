@@ -83,22 +83,23 @@ Auth::routes();
 
 
 //////////// *********************** VENDEDOR ***************************/////////////////////////
-    Route::get('/vendedor', 'VendedorController@index')->name('vendedor');
+    Route::get('/vendedor', 'VendedorController@index');
 
 /////////// reporte vendedor ///////////////////
-    Route::get('/reportevendedor', 'ReporteVendedorController@index')->name('vendedor');
+    Route::get('/reportevendedor', 'ReporteVendedorController@index');
 
 ////// nuevo pedido //////////////
     Route::prefix('Pedido')->group(function () {
-        Route::get('/nuevopedido', 'NuevoPedidoController@index')->name('vendedor');
+        Route::get('/nuevopedido', 'NuevoPedidoController@index');
     });
 
-    Route::get('autocompletarpedidodni/{dni}', 'NuevoPedidoController@autoCompletarDni')->name('vendedor');
-    Route::get('autocompletarselectdirecciones/{idtienda}', 'NuevoPedidoController@obtenerDirecciones')->name('vendedor');
-    Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos')->name('vendedor');
-    Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda')->name('vendedor');
-
+    Route::get('autocompletarpedidodni/{dni}', 'NuevoPedidoController@autoCompletarDni');
+    Route::get('autocompletarselectdirecciones/{idtienda}', 'NuevoPedidoController@obtenerDirecciones');
+    Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
+    Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
+    Route::get('enviarpedidos/{array}','NuevoPedidoController@enviarPedidos');
 //añadir producto al carrito
 
-    Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto')->name('vendedor');
+    Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
+
 //});

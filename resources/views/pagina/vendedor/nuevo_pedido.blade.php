@@ -1,7 +1,3 @@
-
-
-
-
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
@@ -19,261 +15,273 @@
 <script src="{{ asset('js/js_ajax/NuevoPedidoAjax.js') }}"></script>
 
 
-
 <!-- ================== END PAGE LEVEL STYLE ================== -->
+<div id="response">
+    <h1 class="page-header">Nuevo pedido
+        <small>Aqui puedo vender los productos</small>
+    </h1>
+    <!-- final cabecera -->
 
-<h1 class="page-header">Nuevo pedido
-    <small>Aqui puedo vender los productos</small>
-</h1>
-<!-- final cabecera -->
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
 
-<!-- begin panel -->
-<div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
+                            class="fa fa-minus"></i></a>
 
-    <div class="panel-heading">
-        <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
-                        class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
-                        class="fa fa-redo"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
-                        class="fa fa-minus"></i></a>
-
-        </div>
-        <h4 class="panel-title">Venta</h4>
-    </div>
-
-    <div class="panel-body">
-        <div class="col-md-12 " align="center">
-            <div class="form-group row m-b-15">
-                <input id="idtienda" name="idtienda" hidden>
-                <input id="idpersona" name="idpersona" hidden>
-                <label class="col-form-label col-md-3">DNI :</label>
-                <div class="col-md-9">
-                    <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="number"
-                           class="form-control m-b-5" placeholder="Ingresa Dni">
-                </div>
             </div>
-            <div class="form-group row m-b-15">
-                <label class="col-form-label col-md-3">Nombres y apellidos</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos"
-                           onkeyup="completarNombresApellidos()">
-                </div>
-            </div>
-            <div class="form-group row m-b-15">
-                <label class="col-form-label col-md-3">Nombre tienda</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control m-b-5" id="nombretienda" name="nombretienda"
-                           onkeyup="completarTienda()">
-                </div>
-            </div>
-
-            <div class="form-group row m-b-15">
-                <label class="col-form-label col-md-3">Direccion tienda</label>
-                <div class="col-md-9">
-                    <select id="direcciones" class=" form-control" onclick="llenarDireccion()">
-                        <option>
-                            Seleccione
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row m-b-15">
-                <label class="col-form-label col-md-3">Fecha de entrega</label>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" id="datepicker-autoClose"
-                           onmouseover="activarBotonAnadirProducto()"
-                           placeholder="Auto Close Datepicker">
-                </div>
-            </div>
+            <h4 class="panel-title">Venta</h4>
         </div>
 
-        <div class=".row.row-space-2 .p-2 disabled" align="center">
+        <div class="panel-body">
+            <div class="col-md-12 " align="center">
+                <div class="form-group row m-b-15">
+                    <input id="idtienda" name="idtienda" hidden>
+                    <input id="idpersona" name="idpersona" hidden>
+                    <label class="col-form-label col-md-3">DNI :</label>
+                    <div class="col-md-9">
+                        <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="number"
+                               class="form-control m-b-5" placeholder="Ingresa Dni">
+                    </div>
+                </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Nombres y apellidos</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos"
+                               onkeyup="completarNombresApellidos()">
+                    </div>
+                </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Nombre tienda</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control m-b-5" id="nombretienda" name="nombretienda"
+                               onkeyup="completarTienda()">
+                    </div>
+                </div>
 
-            <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary disabled " onclick="resetearModal()"
-               data-toggle="modal"
-               id="anadirproducto">
-                <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle "></i>
-                Añadir producto
-            </a>
-
-        </div>
-        <div class="col-md-12" align="right">
-            <label class="col-form-label " >Total :  S/. <label class="col-form-label " id="totalproducto">0.00 </label>  </label>
-        </div>
-        <br>
-
-
-        <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="data-table-fixed-header"
-                           class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
-                           role="grid"
-                           aria-describedby="data-table-fixed-header_info" width="100%">
-                        <tbody>
-                        </tbody>
-                        <thead>
-                        <tr role="row">
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 187px;">
-                                Codigo
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 187px;">
-                                Nombre producto
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 187px;">
-                                Cant paquete
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 187px;">
-                                cant unidade
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 100%;; min-width: 242px;">
-                                Monto total
-                            </th>
-                            <th class="text-nowrap sorting align-items-center" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 100%;; min-width: 242px;">
-                                Opciones
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Direccion tienda</label>
+                    <div class="col-md-9">
+                        <select id="direcciones" class=" form-control" onclick="llenarDireccion()">
+                            <option>
+                                Seleccione
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3">Fecha de entrega</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="datepicker-autoClose"
+                               onmouseover="activarBotonAnadirProducto()"
+                               placeholder="Auto Close Datepicker">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12" align="center">
-            <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
-                <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
-                Cancelar</a>
-            <button href="javascript:;" class="btn btn-success disabled">
-                <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
-            </button>
-        </div>
-    </div>
-</div>
-<!---adicionar stock--->
-<div class="modal fade" id="modal-dialog">
-    <div class="modal-dialog ">
-        <div class="modal-content ">
-            <div class="modal-header">
-                <h4 class="modal-title">Añadir producto al carrito</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body">
 
-                <div class="row form-group row m-b-15">
-                    <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto"> <strong> Nombre producto
-                            :</strong></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input onkeypress="if(event.keyCode == 13) buscarProductoNombre()" id="nombre_producto"
-                               type="text" class="form-control m-b-12"
-                        />
-                    </div>
-                </div>
-                <div class="bg-orange-lighter">
-                    <div class="row form-group row m-b-15 ">
-                        <label class=" col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
-                                        producto </strong></u></h4>
-                        </label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="nompro">Nombre producto
-                            :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="nompro" name="nompro"> </label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippro">Tipo producto :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippro" name="tippro"></label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippa">Tipo paquete :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippa" name="tippa"></label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="capa">Cant unid x paq :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="capa" name="capa"></label>
-                    </div>
-                </div>
+            <div class=".row.row-space-2 .p-2 disabled" align="center">
 
-
-                <div class="bg-green-lighter">
-                    <div class="row form-group row m-b-15 ">
-                        <label class=" col-md-12 col-form-label text-center"><h4><u><strong> Stock del
-                                        producto </strong> </u></h4>
-                        </label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-3 col-sm-3 col-form-label text-right">Paquete :</label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadpa">Cantidad :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadpa"
-                               name="cantidadpa"> </label>
-                        <label class="col-md-3 col-sm-3 col-form-label text-left" for="preciopa">Precio c/u :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="preciopa"
-                               name="preciopa"> </label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-3 col-sm-3 col-form-label text-right">Unidad :</label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadun">Cantidad :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadun"
-                               name="cantidadun"> </label>
-                        <label class="col-md-3 col-sm-3 col-form-label text-left" for="precioun">Precio c/u :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="precioun"
-                               name="precioun"> </label>
-                    </div>
-                    <hr>
-                </div>
-                <div class="row form-group row m-b-15">
-                    <label class="col-md-5 col-sm-5 col-form-label" for="numero_paquetes"> <strong>Numero de
-                            packetes </strong></label>
-                    <div class="col-md-2 col-sm-2">
-                        <input id="numero_paquetes" type="number" class="form-control m-b-5"
-                               data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
-                    </div>
-
-                    <label class="col-md-2 col-sm-2 col-form-label text-right" for="totpaque">Total :</label>
-                    <label class="col-md-1 col-sm-1 col-form-label text-left" id="totpaque"></label>
-                </div>
-                <div class="row form-group row m-b-15">
-                    <label class="col-md-5 col-sm-5 col-form-label" for="numero_unidades"> <strong>Numero de
-                            unidades </strong></label>
-                    <div class="col-md-2 col-sm-2">
-                        <input id="numero_unidades" type="number" class="form-control m-b-5"
-                               data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
-                    </div>
-                    <label class="col-md-2 col-sm-2 col-form-label text-right" for="totunu">Total :</label>
-                    <label class="col-md-1 col-sm-1 col-form-label text-left" id="totunu"> </label>
-                </div>
-                <div class="row form-group row m-b-15">
-                    <label class="col-md-11 col-sm-11 col-form-label  text-right" for="total"> <strong>Total : </strong></label>
-                    <label class="col-md-1 col-sm-1 col-form-label" id="total"></label>
-                </div>
+                <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary disabled " onclick="resetearModal()"
+                   data-toggle="modal"
+                   id="anadirproducto">
+                    <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle "></i>
+                    Añadir producto
+                </a>
 
             </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
+            <div class="col-md-12" align="right">
+                <label class="col-form-label ">Compra total : S/. <label class="col-form-label "
+                                                                         id="totalproducto">0.00 </label> </label>
+            </div>
+            <br>
+
+
+            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="data-table-fixed-header"
+                               class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                               role="grid"
+                               aria-describedby="data-table-fixed-header_info" width="100%">
+                            <tbody>
+                            </tbody>
+                            <thead>
+                            <tr role="row">
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="min-width: 50px;">
+                                    Codigo
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 187px;">
+                                    Nombre producto
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 187px;">
+                                    Cant paquete
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 187px;">
+                                    cant unidad
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 242px;">
+                                    Precio
+                                </th>
+                                <th class="text-nowrap sorting align-items-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 80px; ">
+                                    Opciones
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" align="center">
+                <a href="/reportevendedor" class="btn btn-danger" data-toggle="ajax">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
-                <a href="javascript:;" class="btn btn-success disabled" id="enviar" onmouseover="activarBoton()" onclick="anadirProductoATabla()" data-dismiss="modal">
-                    <i class="fas fa-lg fa-fw m-r-10 fa-shopping-cart"> </i>Agregar carrito</a>
+                <button href="javascript:;" class="btn btn-success " onclick="enviarPedido()" id="enviarpedido">
+                    <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
+                </button>
+            </div>
+        </div>
+    </div>
+    <!---adicionar stock--->
+    <div class="modal fade" id="modal-dialog">
+        <div class="modal-dialog ">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h4 class="modal-title">Añadir producto al carrito</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto"> <strong> Nombre producto
+                                :</strong></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input onkeypress="if(event.keyCode == 13) buscarProductoNombre()" id="nombre_producto"
+                                   type="text" class="form-control m-b-12"
+                            />
+                        </div>
+                    </div>
+                    <div class="bg-orange-lighter">
+                        <div class="row form-group row m-b-15 ">
+                            <label class=" col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
+                                            producto </strong></u></h4>
+                            </label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="nompro">Nombre producto
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="nompro"
+                                   name="nompro"> </label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippro">Tipo producto
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippro" name="tippro"></label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippa">Tipo paquete
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippa" name="tippa"></label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="capa">Cant unid x paq
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="capa" name="capa"></label>
+                        </div>
+                    </div>
+
+
+                    <div class="bg-green-lighter">
+                        <div class="row form-group row m-b-15 ">
+                            <label class=" col-md-12 col-form-label text-center"><h4><u><strong> Stock del
+                                            producto </strong> </u></h4>
+                            </label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-3 col-sm-3 col-form-label text-right">Paquete :</label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadpa">Cantidad
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadpa"
+                                   name="cantidadpa"> </label>
+                            <label class="col-md-3 col-sm-3 col-form-label text-left" for="preciopa">Precio c/u
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="preciopa"
+                                   name="preciopa"> </label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-3 col-sm-3 col-form-label text-right">Unidad :</label>
+                        </div>
+                        <div class="row form-group row m-b-15">
+                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadun">Cantidad
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadun"
+                                   name="cantidadun"> </label>
+                            <label class="col-md-3 col-sm-3 col-form-label text-left" for="precioun">Precio c/u
+                                :</label>
+                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="precioun"
+                                   name="precioun"> </label>
+                        </div>
+                        <hr>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-5 col-sm-5 col-form-label" for="numero_paquetes"> <strong>Numero de
+                                packetes </strong></label>
+                        <div class="col-md-2 col-sm-2">
+                            <input id="numero_paquetes" type="number" class="form-control m-b-5"
+                                   data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
+                        </div>
+
+                        <label class="col-md-2 col-sm-2 col-form-label text-right" for="totpaque">Total :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="totpaque"></label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-5 col-sm-5 col-form-label" for="numero_unidades"> <strong>Numero de
+                                unidades </strong></label>
+                        <div class="col-md-2 col-sm-2">
+                            <input id="numero_unidades" type="number" class="form-control m-b-5"
+                                   data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
+                        </div>
+                        <label class="col-md-2 col-sm-2 col-form-label text-right" for="totunu">Total :</label>
+                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="totunu"> </label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class="col-md-11 col-sm-11 col-form-label  text-right" for="total"> <strong>Total
+                                : </strong></label>
+                        <label class="col-md-1 col-sm-1 col-form-label" id="total"></label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
+                        Cancelar</a>
+                    <a href="javascript:;" class="btn btn-success disabled" id="enviar" onmouseover="activarBoton()"
+                       onclick="anadirProductoATabla()" data-dismiss="modal">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-cart"> </i>Agregar carrito</a>
+                </div>
             </div>
         </div>
     </div>

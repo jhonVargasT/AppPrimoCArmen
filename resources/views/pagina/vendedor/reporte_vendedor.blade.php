@@ -68,7 +68,7 @@
 
         <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
 
-            <a  href="Pedido/nuevopedido"  data-toggle="ajax" class="btn btn-danger"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>
+            <a  href="Pedido/nuevopedido"  data-toggle="ajax" class="btn btn-success"><i class="fas fa-lg fa-fw m-r-10 fa-cart-plus"></i>
                 nuevo pedido
             </a>
         </div>
@@ -118,7 +118,7 @@
                             </a>
                         </div>
                         <div class=" col-sm-6 col-xs-6 col-md-6 " align="left">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>Buscar
+                            <button type="submit" class="btn btn-grey"><i class="fas fa-lg fa-fw m-r-10 fa-search-plus"></i>Buscar
                             </button>
                         </div>
             </div>

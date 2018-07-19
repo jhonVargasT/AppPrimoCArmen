@@ -2517,8 +2517,9 @@ HTML.prototype.testURL = function(test) {
  * @param {string} msg
  */
 function error(msg) {
-  document.body.appendChild(fragment('<div id="mocha-error">%s</div>', msg));
+  document.body.appendChild(fragment('<div id="mocha-error">msg</div>', msg));
 }
+
 
 /**
  * Return a DOM fragment from `html`.
@@ -12030,7 +12031,7 @@ var exec = require('child_process').exec
 function which(name) {
   var paths = process.env.PATH.split(':');
   var loc;
-  
+
   for (var i = 0, len = paths.length; i < len; ++i) {
     loc = path.join(paths[i], name);
     if (exists(loc)) return loc;

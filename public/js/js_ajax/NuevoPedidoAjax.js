@@ -21,11 +21,20 @@ function autoCompletar() {
                 $("#idtienda").val(data.idtienda);
                 $("#idpersona").val(data.idpersona);
             }
-            else
-                error();
+            else {
+                error('Usuario no esta registrado!');
+                limpiarDatos();
+            }
         }
 
     });
+}
+
+function limpiarDatos() {
+    $("#nombresapellidos").val('');
+    $("#nombretienda").val('');
+    $("#idtienda").val('');
+    $("#idpersona").val('');
 }
 
 function completarTienda() {
@@ -235,18 +244,18 @@ function anadirProductoATabla() {
 
     for (var i = 0; i < productos.length; i++) {
         if (productos[i]["id"] === producto["id"]) {
-            productos[i]["paquete"]=producto["paquete"];
-            productos[i]["unidades"]=producto["unidades"];
-            productos[i]["total"]=producto["total"];
-            res=true;
+            productos[i]["paquete"] = producto["paquete"];
+            productos[i]["unidades"] = producto["unidades"];
+            productos[i]["total"] = producto["total"];
+            res = true;
         }
     }
     if (res === false) {
         productos.push(producto);
     }
 
-        llenarTabla();
-     modificarTotal();
+    llenarTabla();
+    modificarTotal();
 }
 
 function modificarTotal() {
@@ -301,7 +310,6 @@ function eliminarProductoTabla(id) {
     }).then(function (result) {
         if (result.value) {
             var posicion;
-            console.log(id);
             for (var i = 0; i < productos.length; i++) {
                 if (productos[i]['id'].toString() === id.toString()) {
                     productos.splice(0, 1);
@@ -326,7 +334,7 @@ function dataDuplicada() {
     })
 }
 
-function editarProducto(event,id) {
+function editarProducto(event, id) {
     event.preventDefault();
     resetearModal();
     var res = false;
@@ -343,6 +351,58 @@ function editarProducto(event,id) {
         mostrarMonto();
     }
 }
+
+function enviarPedido() {
+    "use strict";
+    var idpersona = $('#idtienda').val();
+    var iddireccion = $('#direcciones').find('option:selected').attr('id');
+    var fechaentrega = new Date($('#datepicker-autoClose').val());
+    var costototal = $('#totalproducto').text();
+    var datosper = {
+        persona: idpersona,
+        tienda: iddireccion,
+        fechaentrega: fechaentrega,
+        total: costototal
+    };
+
+    var datos = {persona: datosper, productos: productos};
+    var arr = JSON.stringify(datos);
+
+    var url = "enviarpedidos/" + arr;
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.error === 1) {
+                redirect('reportevendedor');
+                ok();
+            }
+            else {
+                redirect('reportevendedor');
+                error(data.error);
+            }
+
+        }, beforeSend: function () {
+            $("#enviarpedido").prop('disabled', true);
+        }
+    });
+}
+
+function redirect(ruta) {
+    $.ajax({
+        type: "GET",
+        url: "/" + ruta,
+
+        dataType: "html",
+        success: function (data) {
+            $("#response").html(data);
+        }
+    });
+}
+
 
 
 

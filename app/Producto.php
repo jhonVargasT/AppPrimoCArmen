@@ -19,6 +19,11 @@ class Producto extends Model
             ->increment('cantidadUnidad', $unidad);
     }
 
+    public static function disminuirStock($id, $paquete, $unidad)
+    {
+        static::where('idProducto', $id)
+            ->update(['cantidadPaquete' => $paquete,'cantidadStockUnidad'=>$unidad]);
+    }
     public static function actualizarProducto($id, $estado){
         static::where('idProducto', $id)
             ->update(['estado' => $estado]);
@@ -42,4 +47,6 @@ class Producto extends Model
     {
         return $this->hasMany('App\Comision');
     }
+
+
 }
