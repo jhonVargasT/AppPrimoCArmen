@@ -79,6 +79,7 @@ Auth::routes();
         Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
+        Route::get('/listarPedidos','ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
     });
 
 
@@ -99,7 +100,8 @@ Auth::routes();
     Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
     Route::get('enviarpedidos/{array}','NuevoPedidoController@enviarPedidos');
 //añadir producto al carrito
-
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
+    //reporte vendedor
+
 
 //});

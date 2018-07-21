@@ -125,31 +125,7 @@
             <br>
         </form>
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="dataTables_length" id="data-table-fixed-header_length">
-                        <label>Show
-                            <select name="data-table-fixed-header_length" aria-controls="data-table-fixed-header"
-                                    class="form-control input-sm">
-                                <option value="20">20
-                                </option>
-                                <option value="40">40
-                                </option>
-                                <option value="60">60
-                                </option>
-                            </select> entries
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div id="data-table-fixed-header_filter" class="dataTables_filter">
-                        <label>Search:
-                            <input type="search" class="form-control input-sm" placeholder=""
-                                   aria-controls="data-table-fixed-header">
-                        </label>
-                    </div>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-sm-12">
                     <table id="data-table-fixed-header"
@@ -243,37 +219,6 @@
                     </table>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-5">
-                    <div class="dataTables_info" id="data-table-fixed-header_info" role="status" aria-live="polite">
-                        Showing 1 to 20 of 57 entries
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <div class="dataTables_paginate paging_simple_numbers" id="data-table-fixed-header_paginate">
-                        <ul class="pagination">
-                            <li class="paginate_button previous disabled" id="data-table-fixed-header_previous"><a
-                                        href="#" aria-controls="data-table-fixed-header" data-dt-idx="0" tabindex="0">Previous</a>
-                            </li>
-                            <li class="paginate_button active"><a href="#" aria-controls="data-table-fixed-header"
-                                                                  data-dt-idx="1" tabindex="0">1</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="data-table-fixed-header"
-                                                            data-dt-idx="2" tabindex="0">2</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="data-table-fixed-header"
-                                                            data-dt-idx="3" tabindex="0">3</a></li>
-                            <li class="paginate_button next" id="data-table-fixed-header_next"><a href="#"
-                                                                                                  aria-controls="data-table-fixed-header"
-                                                                                                  data-dt-idx="4"
-                                                                                                  tabindex="0">Next</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <br>
-            <br>
-
         </div>
     </div>
 </div>
