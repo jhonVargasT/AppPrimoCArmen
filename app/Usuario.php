@@ -49,4 +49,9 @@ class Usuario extends Authenticatable
         return static::where('idUsuario', $id)
             ->update(['estado' => $estado]);
     }
+
+    public function isAdmin()
+    {
+        return $this->tipoUsuario;
+    }
 }

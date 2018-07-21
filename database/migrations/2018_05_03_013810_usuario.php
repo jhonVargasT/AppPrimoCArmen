@@ -25,6 +25,7 @@ class Usuario extends Migration
             $table->integer('usuarioCreacion')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');
+            $table->rememberToken();
 
             $table->integer('id_Persona')->unsigned()->nullable();
         });

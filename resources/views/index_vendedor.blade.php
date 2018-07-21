@@ -69,7 +69,10 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:;" class="dropdown-item">Mi cuenta</a>
-                    <a href="javascript:;" class="dropdown-item">Salir</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        {{ csrf_field() }}
+                        <button class="dropdown-item">Salir</button>
+                    </form>
                 </div>
             </li>
         </ul>
