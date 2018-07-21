@@ -117,10 +117,10 @@ function actualizarStockModal(id) {
         url: url,
         data: '&id=' + id,
         success: function (data) {
-            $("#nombre").val(data[0]);
-            $("#stock").val(data[1]);
-            $("#idProducto").val(data[2]);
             $('#modal-dialog').modal('show');
+            $("#nombrespan").html(data[0]);
+            $("#stockspan").html(data[1]);
+            $("#idProducto").val(data[2]);
         }
     });
 }
