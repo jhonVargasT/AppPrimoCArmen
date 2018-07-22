@@ -16,7 +16,7 @@ class Producto extends Model
             ->increment('cantidadPaquete', $paquete);
 
         static::where('idProducto', $id)
-            ->increment('cantidadUnidad', $unidad);
+            ->increment('cantidadStockUnidad', $unidad);
     }
 
     public static function disminuirStock($id, $paquete, $unidad)

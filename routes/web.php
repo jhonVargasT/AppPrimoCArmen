@@ -46,19 +46,6 @@ Route::group(['middleware' => 'administrador'], function () {
         //Route::delete('/{id}', 'ProductoController@destroy');
     });
 
-//////////////////////////////////////CLIENTES///////////////////////////////////////////////
-
-    Route::get('/Clientes', 'PersonaController@index');
-    Route::get('/actualizarCliente', 'PersonaController@actualizarCliente');
-
-    Route::prefix('Cliente')->group(function () {
-        Route::get('/create', 'PersonaController@create');
-        Route::post('/store', 'PersonaController@store');
-        //Route::get('/{id}', 'PersonaController@show');
-        Route::get('/{id}/edit', 'PersonaController@edit');
-        Route::put('/{id}', 'PersonaController@update');
-        //Route::delete('/{id}', 'PersonaController@destroy');
-    });
 
 //////////////////////////////////////USUARIOS///////////////////////////////////////////////
 
@@ -73,14 +60,6 @@ Route::group(['middleware' => 'administrador'], function () {
         Route::put('/{id}', 'UsuarioController@update');
         //Route::delete('/{id}', 'UsuarioController@destroy');
     });
-});
-//////////////////////////////////////DATATABLES///////////////////////////////////////////////
-
-Route::prefix('datatables')->group(function () {
-    Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
-    Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
-    Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
-    Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
 });
 
 //////////// *********************** VENDEDOR ***************************/////////////////////////
@@ -102,11 +81,14 @@ Route::group(['middleware' => 'vendedor'], function () {
     Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
     Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
     Route::get('enviarpedidos/{array}', 'NuevoPedidoController@enviarPedidos');
-    //añadir producto al carrito
+//añadir producto al carrito
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
     //reporte vendedor
     Route::get('verproductos/{idproductos}','ReporteVendedorController@obtenerPrdocutosPedido');
 
+});
+
+Route::group(['can:administrador,vendedor'], function () {
     //////////////////////////////////////CLIENTES///////////////////////////////////////////////
 
     Route::get('/Clientes', 'PersonaController@index');
@@ -121,7 +103,15 @@ Route::group(['middleware' => 'vendedor'], function () {
         //Route::delete('/{id}', 'PersonaController@destroy');
     });
 
+    //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 
 
 
+    Route::prefix('datatables')->group(function () {
+        Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
+        Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
+        Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
+        Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
+    });
 });
+
