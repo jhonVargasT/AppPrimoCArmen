@@ -105,6 +105,7 @@ Route::group(['middleware' => 'vendedor'], function () {
     //añadir producto al carrito
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
     //reporte vendedor
+    Route::get('verproductos/{idproductos}','ReporteVendedorController@obtenerPrdocutosPedido');
 
     //////////////////////////////////////CLIENTES///////////////////////////////////////////////
 
@@ -119,6 +120,8 @@ Route::group(['middleware' => 'vendedor'], function () {
         Route::put('/{id}', 'PersonaController@update');
         //Route::delete('/{id}', 'PersonaController@destroy');
     });
+
+
 
 
 });

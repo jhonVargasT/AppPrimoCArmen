@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Pedido;
+use App\ProductoPedido;
+
 class ReporteVendedorController extends Controller
 {
     public function index(){
@@ -10,6 +12,11 @@ class ReporteVendedorController extends Controller
 
     public function obtenerPedido()
     {
-        $pedido = Pedido::reporteVendedor();
+        return  datatables()->of(Pedido::reporteVendedor())->toJson();
+    }
+    public function obtenerPrdocutosPedido($idpedido)
+
+    {
+        return datatables()->of(ProductoPedido::consultarProductosPedido($idpedido))->toJson();
     }
 }

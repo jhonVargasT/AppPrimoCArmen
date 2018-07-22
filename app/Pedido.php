@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
@@ -12,27 +13,21 @@ class Pedido extends Model
 
     public static function reporteVendedor()
     {
-        return static::select('CONCAT(pe.apellidos, \', \', pe.nombres) AS nombres',
-            ' pe.nroCelular',
-            ' CONCAT(t.nombreTienda,
-            \' - \',
-            d.distrito,
-            \' - \',
-            d.provincia,
-            \' - \',
-            d.nombreCalle) AS tienda','  p.fechaEntrega',
-            'p.totalPago','p.estado')
+        return static::select(
+            'p.idPedido',
+            DB::raw('pp.cantidadUnidades + pp.cantidadPaquetes as cantidad'),
+            DB::raw('CONCAT(pe.apellidos, \', \', pe.nombres) AS nombres'),
+            'pe.nroCelular',
+            DB::raw(' CONCAT(t.nombreTienda,\' - \', d.distrito, \' - \',d.provincia,\' - \',d.nombreCalle) AS tienda'),
+            'p.fechaEntrega',
+            'p.totalPago', 'p.estado')
             ->from('pedido as p')
-            ->join(' bd_app.productopedido pp', 'pp.id_Pedido', '=','p.idPedido')
-            ->join(' bd_app.direcciontienda d', 'd.idDireccionTienda', '=', 'p.id_DireccionTienda')
-            ->join('bd_app.tienda t', 't.idTienda', '=', 'd.id_Tienda')
-            ->join('bd_app.persona pe', 'pe.idPersona', '=', 't.id_Persona')
-            ->whereColumn([
-                ['p.fechaEntrega', '>=', 'NOW()'],
-                ['p.estado', '=', 1]
-            ])
-            ->groupBy('status')
-            ->orderBy('p.fechaEntrega','asc')
+            ->join('productopedido as pp', 'pp.id_Pedido', '=', 'p.idPedido')
+            ->join('direcciontienda as d', 'd.idDireccionTienda', '=', 'p.id_DireccionTienda')
+            ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
+            ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
+            ->where('p.fechaEntrega', '>=', util::fecha())
+            ->orderBy('p.idPedido', 'p.fechaEntrega','d.provincia','d.distrito','d.nombreCalle','t.nombreTienda', 'asc')
             ->get();
 
     }

@@ -22,19 +22,21 @@ class Producto extends Model
     public static function disminuirStock($id, $paquete, $unidad)
     {
         static::where('idProducto', $id)
-            ->update(['cantidadPaquete' => $paquete,'cantidadStockUnidad'=>$unidad]);
+            ->update(['cantidadPaquete' => $paquete, 'cantidadStockUnidad' => $unidad]);
     }
-    public static function actualizarProducto($id, $estado){
+
+    public static function actualizarProducto($id, $estado)
+    {
         static::where('idProducto', $id)
             ->update(['estado' => $estado]);
     }
 
     public static function consultarProducto($idproducto)
     {
-            return static::select('*')
-                ->from('producto as p')
-                ->where('p.idProducto', $idproducto)
-                ->get();
+        return static::select('*')
+            ->from('producto as p')
+            ->where('p.idProducto', $idproducto)
+            ->get();
 
     }
 
