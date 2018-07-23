@@ -105,13 +105,13 @@ Auth::routes();
     });
 
     //////////////////////////////////////DATATABLES///////////////////////////////////////////////
-    //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 
     Route::prefix('datatables')->group(function () {
         Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
         Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
+        Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos')->name('datatable.pedidoAdministrador');
     });
 //});
 

@@ -155,6 +155,7 @@
                 </div>
                 <div class="  col-sm-3 col-xs-3 col-md-3">
                     <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Entregado</dd>
+                    <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En Proceso</dd>
                     <dd><i style="color: darkorange;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En espera</dd>
                     <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Cancelado</dd>
                 </div>
@@ -268,10 +269,16 @@
                         }
                         else {
                             if (row.estado === '2') {
-                                return '<div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                return '<div><i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></div>';
                             }
                             else {
-                                return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                if (row.estado === '3') {
+                                    return '<div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                }
+                                else {
+
+                                    return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                }
                             }
                         }
                     }
@@ -281,6 +288,7 @@
                         return '<th">' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal"title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
+
                             '</th>';
 
                     }
