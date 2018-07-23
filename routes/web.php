@@ -17,7 +17,7 @@ Auth::routes();
 
 //////////////////////////////////INICIO//////////////////////////////////////////////////
 
-Route::group(['middleware' => 'administrador'], function () {
+//Route::group(['middleware' => 'administrador'], function () {
     //////////////////////////////////////ADMINISTRADOR///////////////////////////////////////////
 
     Route::get('/Administrador', 'AdministradorController@index');
@@ -60,11 +60,11 @@ Route::group(['middleware' => 'administrador'], function () {
         Route::put('/{id}', 'UsuarioController@update');
         //Route::delete('/{id}', 'UsuarioController@destroy');
     });
-});
+//});
 
 //////////// *********************** VENDEDOR ***************************/////////////////////////
 
-Route::group(['middleware' => 'vendedor'], function () {
+//Route::group(['middleware' => 'vendedor'], function () {
 
     Route::get('/Vendedor', 'VendedorController@index');
 
@@ -85,10 +85,11 @@ Route::group(['middleware' => 'vendedor'], function () {
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
     //reporte vendedor
     Route::get('verproductos/{idproductos}','ReporteVendedorController@obtenerPrdocutosPedido');
+    Route::get('obtenercomision','ReporteVendedorController@obtenerComision');
 
-});
+//});
 
-Route::group(['can:administrador,vendedor'], function () {
+//Route::group(['can:administrador,vendedor'], function () {
     //////////////////////////////////////CLIENTES///////////////////////////////////////////////
 
     Route::get('/Clientes', 'PersonaController@index');
@@ -106,13 +107,11 @@ Route::group(['can:administrador,vendedor'], function () {
     //////////////////////////////////////DATATABLES///////////////////////////////////////////////
     //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 
-
-
     Route::prefix('datatables')->group(function () {
         Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
         Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
     });
-});
+//});
 

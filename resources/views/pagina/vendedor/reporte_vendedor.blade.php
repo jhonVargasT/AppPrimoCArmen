@@ -40,7 +40,9 @@
         <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
         <div class="stats-info">
             <h4>Comision mensual</h4>
-            <p>S/. 790.00</p>
+            <p id="comision">
+                0.00
+            </p>
         </div>
 
     </div>
@@ -194,13 +196,13 @@
                                         rowspan="1" colspan="1"
                                         aria-label="Rendering engine: activate to sort column ascending"
                                         style="width: 100%;; min-width: 20px;">
-                                        Cant paquete
+                                        Cant unidad
                                     </th>
                                     <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                         rowspan="1" colspan="1"
                                         aria-label="Rendering engine: activate to sort column ascending"
                                         style="width: 100%;; min-width: 20px;">
-                                        Cant unidad
+                                        Cant paquete
                                     </th>
                                     <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                         rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
@@ -287,7 +289,7 @@
 
         });
     });
-    App.setPageTitle('Pedidos | ARPEMAR SAC');
+    /*App.setPageTitle('Pedidos | ARPEMAR SAC');
     App.restartGlobalFunction();
 
     $.when(
@@ -349,6 +351,6 @@
         })
     ).done(function () {
         Notification.init();
-    });
+    });*/
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

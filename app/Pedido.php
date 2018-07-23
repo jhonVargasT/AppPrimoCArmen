@@ -15,7 +15,7 @@ class Pedido extends Model
     {
         return static::select(
             'p.idPedido',
-            DB::raw('pp.cantidadUnidades + pp.cantidadPaquetes as cantidad'),
+            DB::raw('sum(pp.cantidadUnidades + pp.cantidadPaquetes) as cantidad'),
             DB::raw('CONCAT(pe.apellidos, \', \', pe.nombres) AS nombres'),
             'pe.nroCelular',
             DB::raw(' CONCAT(t.nombreTienda,\' - \', d.distrito, \' - \',d.provincia,\' - \',d.nombreCalle) AS tienda'),
@@ -27,6 +27,7 @@ class Pedido extends Model
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->where('p.fechaEntrega', '>=', util::fecha())
+            ->groupBy('p.idPedido')
             ->orderBy('p.idPedido', 'p.fechaEntrega','d.provincia','d.distrito','d.nombreCalle','t.nombreTienda', 'asc')
             ->get();
 
