@@ -253,7 +253,7 @@
             serverSide: true,
             select: true,
             rowId: 'idPedido',
-            ajax: '{!! route('datatable.pedidos') !!}',
+            ajax: '{!! route('datatable.pedidoAdministrador') !!}',
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombres', name: 'nombres'},
@@ -265,19 +265,24 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div><i style="color: orange" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                            return '<div style="vertical-align: middle;"><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></div>';
                         }
                         else {
                             if (row.estado === '2') {
-                                return '<div><i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                return '<div><a href="#"  title="Click para entregar producto"> <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
                             }
                             else {
                                 if (row.estado === '3') {
-                                    return '<div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                    return ' <div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
                                 }
                                 else {
+                                    if(row.estado === '4'){
+                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
+                                    }else{
 
-                                    return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                        return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                    }
+
                                 }
                             }
                         }
@@ -288,7 +293,6 @@
                         return '<th">' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal"title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
-
                             '</th>';
 
                     }

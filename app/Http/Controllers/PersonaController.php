@@ -188,7 +188,6 @@ class PersonaController extends Controller
 
             });
             return 'success';
-
         } catch (Exception $e) {
             return $e;
         }
