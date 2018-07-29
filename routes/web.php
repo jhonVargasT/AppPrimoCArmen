@@ -32,6 +32,7 @@ Route::get('/Reportes', 'ReporteController@index');
 Route::get('/Pedidos', 'PedidoController@index');
 Route::get('/cambiarEstadoProducto/{idproductopedido}/{estado}', 'PedidoAdministrador@cambiarEstadoProducto');
 Route::get('/cambiarEstadoPedido/{idpedido}', 'PedidoAdministrador@cambiarEstadoPedido');
+Route::get('/eliminarPedido/{idpedido}/{razon}', 'PedidoAdministrador@eliminarPedido');
 //////////////////////////////////////PRODUCTOS///////////////////////////////////////////////
 
 Route::get('/Productos', 'ProductoController@index');

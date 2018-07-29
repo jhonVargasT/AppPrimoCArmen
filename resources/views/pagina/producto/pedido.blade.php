@@ -144,7 +144,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Adicionar stock</h4>
+                    <h4 class="modal-title">Ver productos</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
@@ -274,7 +274,7 @@
                         return '<th">' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal"title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
-                            '<a href="#modal-dialog" class="btn btn-link " data-toggle="modal"title="Eliminar pedido" onclick="llenarVerProductos(' + row.idPedido + ')">' +
+                            '<a href="#" class="btn btn-link " title="Eliminar pedido"  onclick="eliminarPedido(' + row.idPedido + ')">' +
                             '<i  style="color: red" class="fas fa-lg fa-fw  fa-trash "></i></a>' +
                             '</th>';
 
