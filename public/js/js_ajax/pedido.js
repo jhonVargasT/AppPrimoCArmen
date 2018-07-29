@@ -240,6 +240,26 @@ function eliminarPedido(idpedido) {
             })
 
     }).catch(swal.noop)
+}
 
+function verDetalleEliminacion(idpedido) {
+    var url = '/verEliminacionPedido/' + idpedido ;
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.error===1) {
+                swal(
+                    'Detalle de eliminacion!',
+                    data.razon ,
+                    'info'
+                )
+            }
+            else {
 
+            }
+
+        }
+    });
 }

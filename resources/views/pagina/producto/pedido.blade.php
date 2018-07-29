@@ -258,10 +258,10 @@
                                 }
                                 else {
                                     if (row.estado === '4') {
-                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
+                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
                                     } else {
 
-                                        return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
                                     }
 
                                 }

@@ -393,11 +393,11 @@ function enviarPedido() {
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
             if (data.error === 1) {
-                redirect('reportevendedor');
+                redirect(data.url);
                 gogogo();
             }
             else {
-                redirect('reportevendedor');
+                redirect(data.url);
                 error(data.error);
             }
 

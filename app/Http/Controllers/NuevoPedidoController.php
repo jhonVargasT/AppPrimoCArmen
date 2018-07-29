@@ -164,7 +164,7 @@ class NuevoPedidoController extends Controller
                     Producto::disminuirStock($pr->id, $totalpaquetes, $totalunidades);
                 }
             });
-            return response()->json(array('error' => 1));
+            return response()->json(array('error' => 1,'url'=>'reportevendedor'));
         } catch (Exception $e) {
             return response()->json(array('error' => $e));
         }

@@ -32,6 +32,8 @@
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
+<script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <script language="JavaScript" type="text/javascript" src="../assets/pedido.js"></script>
 <script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
@@ -276,11 +278,11 @@
                                     return ' <div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
                                 }
                                 else {
-                                    if(row.estado === '4'){
-                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
-                                    }else{
+                                    if (row.estado === '4') {
+                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                    } else {
 
-                                        return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
                                     }
 
                                 }

@@ -63,7 +63,7 @@ class Usuario extends Authenticatable
             ->join('producto as p', 'pp.id_Producto', '=', 'p.idProducto')
             ->join('pedido as pe', 'pe.idPedido', '=', 'pp.id_Pedido')
             ->where('pp.idUsuario', $idusuario)
-            ->where('pe.estado',2)
+            ->where('pe.estadoPedido',3)
             ->get();
     }
 }

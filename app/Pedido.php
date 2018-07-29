@@ -64,7 +64,7 @@ class Pedido extends Model
     }
     public static function obtenerPedido($idPedido)
     {
-        return static::select('totalPago','estadoPedido')
+        return static::select('totalPago','estadoPedido','razonEliminar','usuarioEliminacion')
             ->where('idPedido',$idPedido)
             ->get();
     }
