@@ -84,7 +84,7 @@
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
                     <a href="/Reportes" data-toggle="ajax">
-                        <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-chart-pie"></i>
                         <span>Reporte</span>
                     </a>
                 </li>
@@ -104,7 +104,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li><a href="/Productos" data-toggle="ajax">
-                                <i class="fas fa-lg fa-fw m-r-10 fa-database"></i>
+                                <i class="fas fa-lg fa-fw m-r-10 fa-cubes"></i>
                                 Productos</a></li>
                         <li><a href="/Clientes" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-users"></i>Clientes</a></li>

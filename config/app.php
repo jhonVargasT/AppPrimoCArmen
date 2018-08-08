@@ -121,6 +121,8 @@ return [
 
     'providers' => [
 
+
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -160,7 +162,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-
+        //insert jasper service provider here
+        JasperPHP\JasperPHPServiceProvider::class
     ],
 
     /*

@@ -67,7 +67,7 @@
                 <div class="form-group row m-b-15">
                     <label class="col-form-label col-md-3">Direccion tienda</label>
                     <div class="col-md-9">
-                        <select id="direcciones" class=" form-control" onclick="llenarDireccion()">
+                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion()">
                             <option>
                                 Seleccione
                             </option>

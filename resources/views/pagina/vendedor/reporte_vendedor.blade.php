@@ -26,6 +26,7 @@
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet"/>
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet"/>
 <link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet"/>
+
 <script language="JavaScript" type="text/javascript" src="../assets/agregarcliente.js"></script>
 
 <!-- ================== END PAGE LEVEL STYLE ================== -->
@@ -78,6 +79,7 @@
                 nuevo pedido
             </a>
         </div>
+
         <br>
         <br>
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">

@@ -1,5 +1,5 @@
 <?php
-
+use JasperPHP\JasperPHP as JasperPHP;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +40,7 @@ Route::get('/Productos', 'ProductoController@index');
 Route::get('/actualizarStockModal', 'ProductoController@actualizarStockModal');
 Route::get('/actualizarStock', 'ProductoController@actualizarStock');
 Route::get('/actualizarProducto', 'ProductoController@actualizarProducto');
+Route::get('/enviarCorreo', 'PedidoAdministrador@enviarCorreo');
 
 Route::prefix('Producto')->group(function () {
     Route::get('/create', 'ProductoController@create');
@@ -119,3 +120,30 @@ Route::prefix('datatables')->group(function () {
 });
 //});
 
+Route::get('/compilar', function () {
+    // Crear el objeto JasperPHP
+    $jasper = new JasperPHP;
+
+    // Compilar el reporte para generar .jasper
+    $jasper->compile(base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
+
+ //   return view('/Administrador');
+});
+
+Route::get('/reporte', function () {
+    // Crear el objeto JasperPHP
+    $jasper = new JasperPHP;
+
+    // Generar el Reporte
+    $jasper->process(
+    // Ruta y nombre de archivo de entrada del reporte
+        base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jasper',
+        false, // Ruta y nombre de archivo de salida del reporte (sin extensión)
+        array('pdf', 'rtf'), // Formatos de salida del reporte
+        array('php_version' => phpversion()) // Parámetros del reporte
+    )->output();
+
+  //  return view('/Administrador');
+});
+
+Route::view('/pruebatype', 'pruebatype');

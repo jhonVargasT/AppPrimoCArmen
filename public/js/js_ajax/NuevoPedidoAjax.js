@@ -1,21 +1,4 @@
-//Crear Datos
 
-$(document).ready(function() {
-    $('#dni').click(function() {
-        $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: 'Report is Ready!',
-            // (string | mandatory) the text inside the notification
-            text: 'Your "Volume Trendline Chart" PDF is ready <a href="">here</a>',
-            // (string | optional) the image to display on the left
-            image: 'http://www.iceni.com/blog/wp-content/uploads/2012/09/adobe_reader_logo.png',
-            time: '5000',
-            // (string) specify font-face icon  class for close message
-            close_icon: 'l-arrows-remove s16',
-            class_name: 'info-notice'
-        });
-    });
-});
 var productos = [];
 
 /*$(document).ready(function () {

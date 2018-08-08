@@ -81,4 +81,18 @@ class BoletaController extends Controller
     {
         //
     }
+
+    public function boletasElectronicas()
+    {
+        $xml = new drmad\semeele\Document('html');
+        $xml->child('head')
+            ->add('title', 'An XHTML')
+            ->add('meta', ['charset' => 'utf-8'])
+            ->parent()
+            ->child('body')
+            ->add('h1', 'An XHTML')
+            ->add('p', 'This is a XML-valid HTML. Yay!')
+        ;
+        echo $xml->getXML();
+    }
 }
