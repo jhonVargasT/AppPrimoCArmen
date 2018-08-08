@@ -56,6 +56,11 @@ class Usuario extends Authenticatable
         return $this->tipoUsuario;
     }
 
+    public function estado()
+    {
+        return $this->estado;
+    }
+
     public static function obtenerComision($idusuario)
     {
         return static::select(DB::raw('sum(pp.cantidadPaquetes*p.comisionPaquete) as suma'))
@@ -63,7 +68,16 @@ class Usuario extends Authenticatable
             ->join('producto as p', 'pp.id_Producto', '=', 'p.idProducto')
             ->join('pedido as pe', 'pe.idPedido', '=', 'pp.id_Pedido')
             ->where('pp.idUsuario', $idusuario)
-            ->where('pe.estadoPedido',3)
+            ->where('pe.estadoPedido', 3)
+            ->get();
+    }
+
+    public static function findByCodigoOrDescription($term)
+    {
+        return static::select('codigo', 'id', 'descripcion', DB::raw('concat(codigo," | ",descripcion) as name'))
+            ->Where(DB::raw('concat(codigo," ",descripcion)'), 'LIKE', "%$term%")
+            ->Where('estado', '!=', 0)
+            ->limit(50)
             ->get();
     }
 }

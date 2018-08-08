@@ -1,5 +1,7 @@
 <?php
+
 use JasperPHP\JasperPHP as JasperPHP;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -118,6 +120,11 @@ Route::prefix('datatables')->group(function () {
     Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
     Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos')->name('datatable.pedidoAdministrador');
 });
+
+Route::prefix('autocomplete')->group(function () {
+    Route::get('/filtrarUsuario', 'AutocompleteController@BuscarUsuario');
+});
+
 //});
 
 Route::get('/compilar', function () {
@@ -127,7 +134,7 @@ Route::get('/compilar', function () {
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
 
- //   return view('/Administrador');
+    //   return view('/Administrador');
 });
 
 Route::get('/reporte', function () {
@@ -143,7 +150,7 @@ Route::get('/reporte', function () {
         array('php_version' => phpversion()) // Parámetros del reporte
     )->output();
 
-  //  return view('/Administrador');
+    //  return view('/Administrador');
 });
 
 Route::view('/pruebatype', 'pruebatype');

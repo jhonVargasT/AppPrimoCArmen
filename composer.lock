@@ -1,14 +1,14 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9cb8e2fcc8b8cb6b8307f88f84c6718",
+    "content-hash": "4bae5b0964cfc67ca4e1c8e70da5965e",
     "packages": [
         {
             "name": "cossou/jasperphp",
-            "version": "dev-master",
+            "version": "2.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cossou/JasperPHP.git",
@@ -4099,9 +4099,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "cossou/jasperphp": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
