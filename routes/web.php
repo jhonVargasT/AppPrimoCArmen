@@ -1,7 +1,5 @@
 <?php
-
 use JasperPHP\JasperPHP as JasperPHP;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,7 +17,7 @@ Auth::routes();
 
 //////////////////////////////////INICIO//////////////////////////////////////////////////
 
-//Route::group(['middleware' => 'administrador'], function () {
+Route::group(['middleware' => 'administrador'], function () {
 //////////////////////////////////////ADMINISTRADOR///////////////////////////////////////////
 
 Route::get('/Administrador', 'AdministradorController@index');
@@ -32,6 +30,7 @@ Route::get('/Reportes', 'ReporteController@index');
 ////////////////////////////////////REPORTE PEDIDOS///////////////////////////////////////////////////
 
 Route::get('/Pedidos', 'PedidoController@index');
+Route::get('/cambiarNumeroProducto/{idproductopedido}/{cantpaque}/{cantunidad}', 'PedidoAdministrador@cambiarCantProducto');
 Route::get('/cambiarEstadoProducto/{idproductopedido}/{estado}', 'PedidoAdministrador@cambiarEstadoProducto');
 Route::get('/cambiarEstadoPedido/{idpedido}', 'PedidoAdministrador@cambiarEstadoPedido');
 Route::get('/eliminarPedido/{idpedido}/{razon}', 'PedidoAdministrador@eliminarPedido');
@@ -67,37 +66,22 @@ Route::prefix('Usuario')->group(function () {
     Route::put('/{id}', 'UsuarioController@update');
     //Route::delete('/{id}', 'UsuarioController@destroy');
 });
-//});
+});
 
 //////////// *********************** VENDEDOR ***************************/////////////////////////
 
-//Route::group(['middleware' => 'vendedor'], function () {
+Route::group(['middleware' => 'vendedor'], function () {
 
 Route::get('/Vendedor', 'VendedorController@index');
 
 /////////// reporte vendedor ///////////////////
 Route::get('/reportevendedor', 'ReporteVendedorController@index');
 
-////// nuevo pedido //////////////
-Route::prefix('Pedido')->group(function () {
-    Route::get('/nuevopedido', 'NuevoPedidoController@index');
 });
 
-Route::get('autocompletarpedidodni/{dni}', 'NuevoPedidoController@autoCompletarDni');
-Route::get('autocompletarselectdirecciones/{idtienda}', 'NuevoPedidoController@obtenerDirecciones');
-Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
-Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
-Route::get('enviarpedidos/{array}', 'NuevoPedidoController@enviarPedidos');
-//añadir producto al carrito
-Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
-//reporte vendedor
-Route::get('verproductos/{idproductos}', 'ReporteVendedorController@obtenerPrdocutosPedido');
-Route::get('obtenercomision', 'ReporteVendedorController@obtenerComision');
-
-//});
-
-//Route::group(['can:administrador,vendedor'], function () {
+Route::group(['can:administrador,vendedor'], function () {
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
+Route::get('/session','IndexController@session');
 
 Route::get('/Clientes', 'PersonaController@index');
 Route::get('/actualizarCliente', 'PersonaController@actualizarCliente');
@@ -111,6 +95,22 @@ Route::prefix('Cliente')->group(function () {
     //Route::delete('/{id}', 'PersonaController@destroy');
 });
 
+////// nuevo pedido //////////////
+    Route::prefix('Pedido')->group(function () {
+        Route::get('/nuevopedido', 'NuevoPedidoController@index');
+    });
+
+    Route::get('autocompletarpedidodni/{dni}', 'NuevoPedidoController@autoCompletarDni');
+    Route::get('autocompletarselectdirecciones/{idtienda}', 'NuevoPedidoController@obtenerDirecciones');
+    Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
+    Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
+    Route::get('enviarpedidos/{array}', 'NuevoPedidoController@enviarPedidos');
+//añadir producto al carrito
+    Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
+//reporte vendedor
+    Route::get('verproductos/{idproductos}', 'ReporteVendedorController@obtenerPrdocutosPedido');
+    Route::get('obtenercomision', 'ReporteVendedorController@obtenerComision');
+
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 
 Route::prefix('datatables')->group(function () {
@@ -120,12 +120,7 @@ Route::prefix('datatables')->group(function () {
     Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
     Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos')->name('datatable.pedidoAdministrador');
 });
-
-Route::prefix('autocomplete')->group(function () {
-    Route::get('/filtrarUsuario', 'AutocompleteController@BuscarUsuario');
 });
-
-//});
 
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP
@@ -134,7 +129,7 @@ Route::get('/compilar', function () {
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
 
-    //   return view('/Administrador');
+ //   return view('/Administrador');
 });
 
 Route::get('/reporte', function () {
@@ -150,7 +145,7 @@ Route::get('/reporte', function () {
         array('php_version' => phpversion()) // Parámetros del reporte
     )->output();
 
-    //  return view('/Administrador');
+  //  return view('/Administrador');
 });
 
 Route::view('/pruebatype', 'pruebatype');

@@ -179,7 +179,9 @@
                                                        name="cantidadProductosPaquete" data-parsley-required="true"
                                                        data-parsley-type="number"
                                                        data-parsley-group="step-2"
-                                                       value="{{$producto->cantidadProductosPaquete}}">
+                                                       value="{{$producto->cantidadProductosPaquete}}"
+                                                       onchange="validarEnterosPositivos('cantidadProductosPaquete')"
+                                                       min="0">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -190,7 +192,8 @@
                                                        name="cantidadPaquete" data-parsley-required="true"
                                                        data-parsley-type="number"
                                                        data-parsley-group="step-2"
-                                                       value="{{$producto->cantidadPaquete}}">
+                                                       value="{{$producto->cantidadPaquete}}"
+                                                       onchange="validarEnterosPositivos('cantidadPaquete')" min="0">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -201,9 +204,10 @@
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="precioCompra"
+                                                <input type="text" class="form-control" name="precioCompra"
                                                        id="precioCompra" data-parsley-group="step-2"
-                                                       data-parsley-required="true" value="{{$producto->precioCompra}}">
+                                                       value="{{$producto->precioCompra}}"
+                                                       onchange="validardecimales('precioCompra',2)">
                                             </div>
 
                                         </div>
@@ -215,9 +219,10 @@
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="precioVenta"
+                                                <input type="text" class="form-control" name="precioVenta"
                                                        id="precioVenta" data-parsley-group="step-2"
-                                                       data-parsley-required="true" value="{{$producto->precioVenta}}">
+                                                       value="{{$producto->precioVenta}}"
+                                                       onchange="validardecimales('precioVenta',2);validarEnterosPositivos('precioVenta')">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -228,10 +233,10 @@
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="comisionVenta"
+                                                <input type="text" class="form-control" name="comisionVenta"
                                                        id="comisionVenta" data-parsley-group="step-2"
-                                                       data-parsley-required="true"
-                                                       value="{{$producto->comisionPaquete}}">
+                                                       value="{{$producto->comisionPaquete}}"
+                                                       onchange="validardecimales('comisionVenta',2);validarEnterosPositivos('comisionVenta')">
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -262,9 +267,9 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadStockUnidad"
                                                        name="cantidadStockUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true"
                                                        value="{{$producto->cantidadStockUnidad}}"
-                                                       data-parsley-type="number">
+                                                       onchange="validarEnterosPositivos('cantidadStockUnidad')"
+                                                       min="0">
                                             </div>
                                         </div>
                                         <div class="row form-group row m-b-15">
@@ -274,10 +279,10 @@
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" id="precioCompraUnidad"
+                                                <input type="text" class="form-control" id="precioCompraUnidad"
                                                        name="precioCompraUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true"
-                                                       value="{{$producto->precioCompraUnidad}}">
+                                                       value="{{$producto->precioCompraUnidad}}"
+                                                       onchange="validardecimales('precioCompraUnidad',2);validarEnterosPositivos('precioCompraUnidad')">
                                             </div>
                                         </div>
                                         <div class="row form-group row m-b-15">
@@ -287,10 +292,10 @@
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="precioVentaUnidad"
+                                                <input type="text" class="form-control" name="precioVentaUnidad"
                                                        id="precioVentaUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true"
-                                                       value="{{$producto->precioVentaUnidad}}">
+                                                       value="{{$producto->precioVentaUnidad}}"
+                                                       onchange="validardecimales('precioVentaUnidad',2);validarEnterosPositivos('precioVentaUnidad')">
                                             </div>
                                         </div>
                                     </div>

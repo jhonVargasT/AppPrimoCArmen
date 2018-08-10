@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DireccionTienda;
 use App\Persona;
 use App\Tienda;
+use App\util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
@@ -50,22 +51,23 @@ class PersonaController extends Controller
             $persona->ruc = $request->ruc;
             $persona->nombres = $request->nombres;
             $persona->apellidos = $request->apellidos;
-            $persona->fechaNacimiento = '1991-01-01';
+            $persona->fechaNacimiento = date('Y-m-d H:i:s', strtotime($persona->fechaNacimiento));
             $persona->direccion = $request->direccion;
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
-            $persona->fechaCreacion = '1991-01-01';
+            $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;
             $persona->departamento = $request->departamento;
             $persona->provincia = $request->provincia;
             $persona->nroCelular = $request->nroCelular;
             $persona->distrito = $request->distrito;
+            $persona->usuarioCreacion=Session('idusuario');
 
             $tienda = new Tienda;
             $tienda->nombreTienda = $request->tnombreTienda;
             $tienda->telefono = $request->ttelefono;
-            $tienda->fechaCreacion = '1991-01-01';
+            $tienda->fechaCreacion = util::fecha();
 
             $contdireccion = $request->val1;
 
@@ -82,7 +84,7 @@ class PersonaController extends Controller
                         $direccionTienda->distrito = $request->input('dtdistrito'.$i);
                         $direccionTienda->provincia = $request->input('dtprovincia'.$i);
                         $direccionTienda->nombreCalle = $request->input('dtnombreCalle'.$i);
-                        $direccionTienda->fechaCreacion = '1991-01-01';
+                        $direccionTienda->fechaCreacion = util::fecha();
 
                         $direccionTienda->id_Tienda = $tienda->idTienda;
                         $direccionTienda->save();
@@ -95,7 +97,7 @@ class PersonaController extends Controller
                 $direccionTienda->distrito = $request->dtdistrito1;
                 $direccionTienda->provincia = $request->dtprovincia1;
                 $direccionTienda->nombreCalle = $request->dtnombreCalle1;
-                $direccionTienda->fechaCreacion = '1991-01-01';
+                $direccionTienda->fechaCreacion = util::fecha();
 
                 DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
                     $persona->save();
@@ -154,12 +156,12 @@ class PersonaController extends Controller
             $persona->ruc = $request->ruc;
             $persona->nombres = $request->nombres;
             $persona->apellidos = $request->apellidos;
-            $persona->fechaNacimiento = '1991-01-01';
+            $persona->fechaNacimiento = date('Y-m-d H:i:s', strtotime($persona->fechaNacimiento));
             $persona->direccion = $request->direccion;
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
-            $persona->fechaCreacion = '1991-01-01';
+            $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;
             $persona->departamento = $request->departamento;
             $persona->provincia = $request->provincia;
@@ -169,13 +171,13 @@ class PersonaController extends Controller
             $tienda = Tienda::findOrFail($request->idTienda);
             $tienda->nombreTienda = $request->tnombreTienda;
             $tienda->telefono = $request->ttelefono;
-            $tienda->fechaCreacion = '1991-01-01';
+            $tienda->fechaCreacion = util::fecha();
 
             $direccionTienda = DireccionTienda::findOrFail($request->idDireccionTienda);
             $direccionTienda->distrito = $request->dtdistrito;
             $direccionTienda->provincia = $request->dtprovincia;
             $direccionTienda->nombreCalle = $request->dtnombreCalle;
-            $direccionTienda->fechaCreacion = '1991-01-01';
+            $direccionTienda->fechaCreacion = util::fecha();
 
             DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
                 $persona->save();

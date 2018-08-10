@@ -156,17 +156,17 @@
                     data: function (row) {
                         if (row.uestado === '1') {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarUsuario(' + row.idUsuario + ',' + row.idPersona + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
                                 '<a href="Usuario/' + row.idUsuario + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarUsuario(' + row.idUsuario + ',' + row.idPersona + ',0)">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
                                 '</div>';
                         } else {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: red" TITLE="Activar" onclick="actualizarUsuario(' + row.idUsuario + ',' + row.idPersona + ',1)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-plus"> </i></a>\n' +
                                 '<a href="Usuario/' + row.idUsuario + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarUsuario(' + row.idUsuario + ',' + row.idPersona + ',1)">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
                                 '</div>';
                         }
                     }

@@ -102,6 +102,18 @@
                     </div>
                 </div>
             </div>
+            <div class="  col-sm-12 col-xs-12 col-md-12">
+                <dl class=" row dl-horizontal">
+                    <div class="  col-sm-2 col-xs-2 col-md-2">
+                        <dt class="text-inverse">Leyenda para stock:</dt>
+                    </div>
+                    <div class="  col-sm-3 col-xs-3 col-md-3">
+                        <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Stock normal</dd>
+                        <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Stock medio</dd>
+                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Sin Stock</dd>
+                    </div>
+                </dl>
+            </div>
         </div>
     </div>
     <!-- end panel -->
@@ -199,18 +211,18 @@
                         if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 50)
                             return '<i style="color:green " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
                                 ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
-                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')"><i\n' +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
                                 'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
                         else if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) < 50 && ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 10) {
                             return '<i style="color:yellow " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
                                 ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
-                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')"><i\n' +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
                                 'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
                         }
                         else if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) < 10) {
                             return '<i style="color:red " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
                                 ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
-                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')"><i\n' +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
                                 'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
                         }
                     }
@@ -237,17 +249,17 @@
                     data: function (row) {
                         if (row.estado === '1') {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarProducto(' + row.idProducto + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
                                 '<a href="Producto/' + row.idProducto + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href="#" style="color: red" TITLE="Eliminar" onclick="actualizarProducto(' + row.idProducto + ',0)">\n' +
+                                '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
                                 '</div>';
                         } else {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: red" TITLE="Activar" onclick="actualizarProducto(' + row.idProducto + ',1)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-plus"> </i></a>\n' +
                                 '<a href="Producto/' + row.idProducto + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarProducto(' + row.idProducto + ',1)">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
                                 '</div>';
                         }
                     }

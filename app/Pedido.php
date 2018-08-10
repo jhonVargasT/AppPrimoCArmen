@@ -58,7 +58,7 @@ class Pedido extends Model
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->groupBy('p.idPedido')
-            ->orderBy('p.idPedido', 'ASC')
+            ->orderBy('p.idPedido', 'DESC')
             ->get();
 
     }

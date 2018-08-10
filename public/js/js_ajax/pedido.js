@@ -1,6 +1,8 @@
 function llenarVerProductos(idpedido) {
     'use strict';
+
     var url = 'verproductos/' + idpedido;
+     $('#numero_pedido').text(idpedido);
     $('#data-table-fixed-header2').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -11,11 +13,32 @@ function llenarVerProductos(idpedido) {
         select: true,
         rowId: 'idPedido',
         ajax: url,
-        columns: [{
-            data: 'nombre', name: 'nombre'
-        },
-            {data: 'cantidadUnidades', name: 'cantidadUnidades'},
-            {data: 'cantidadPaquetes', name: 'cantidadPaquetes'},
+        columns: [
+
+            {
+                data: 'nombre', name: 'nombre'
+            },
+
+            {
+                data: function (row) {
+                    if (row.estado === '1') {
+                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')" > <input type="number" min="0" class="form-control" value="' + row.cantidadPaquetes + '" id="cantpaque"> </a>';
+                    }
+                    else {
+                        return '<div>' + row.cantidadPaquetes + '</div>'
+                    }
+                }
+            },
+            {
+                data: function (row) {
+                    if (row.estado === '1') {
+                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')"> <input type="number"  min="0" class="form-control" value="' + row.cantidadUnidades + '" id="cantuni"> </a>';
+                    }
+                    else {
+                        return '<div>' + row.cantidadUnidades + '</div>'
+                    }
+                }
+            },
             {
                 data: function (row) {
                     if (row.estado === '1') {
@@ -69,6 +92,40 @@ function llenarVerProductos(idpedido) {
     });
 }
 
+function canmbiarNumeroProductos(idpedido, idproductopedido) {
+    validarEnterosPositivos('cantpaque');
+    validarEnterosPositivos('cantuni');
+    var cantpaque = $('#cantpaque').val();
+    var catuni = $('#cantuni').val();
+    console.log(cantpaque + ' ' + catuni);
+    "use strict";
+    var url = "cambiarNumeroProducto/" + idproductopedido + "/" + cantpaque + "/" + catuni;
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.error===1) {
+            ok('cantidad modificada')
+                llenarVerProductos(idpedido);
+            }
+            else {
+                error('Stock insuficiente, quedan '+data.cantpaque+' paquetes y '+data.cantuni+' unidades de '+data.nombre+ ' en stock, por favor actualice el stock!');
+                llenarVerProductos(idpedido);
+            }
+        }
+
+    });
+
+}
+
+function validarEnterosPositivos($id) {
+    var num = $('#'+$id).val();
+    if(num<0)
+        $('#'+$id).val(Math.abs(num));
+    else
+        $('#'+$id).val(num);
+}
 
 function cambiarEstadProducto(idpedido, idpropedi, estadoProd) {
     "use strict";
@@ -148,6 +205,19 @@ function error(mensaje) {
     })
 }
 
+function ok(mensaje) {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: mensaje
+    })
+}
+
 function cerrarModal() {
     redirect();
 }
@@ -184,75 +254,75 @@ function eliminarPedido(idpedido) {
     }).then(function (result) {
         var comentario = JSON.stringify(result);
         var array = JSON.parse(comentario);
-            const swalWithBootstrapButtons = swal.mixin({
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-            })
-            swalWithBootstrapButtons({
-                title: 'Estas seguro?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Si, eliminar!',
-                cancelButtonText: 'No, cancelar!',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.value) {
-                    var url = '/eliminarPedido/' + idpedido + '/'+array.value;
-                    $.ajax({
-                        type: "GET",
-                        url: url,
-                        data: '_token = <?php echo csrf_token() ?>',
-                        success: function (data) {
-                            if (data === 'success') {
+        const swalWithBootstrapButtons = swal.mixin({
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: false,
+        })
+        swalWithBootstrapButtons({
+            title: 'Estas seguro?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, eliminar!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                var url = '/eliminarPedido/' + idpedido + '/' + array.value;
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: '_token = <?php echo csrf_token() ?>',
+                    success: function (data) {
+                        if (data === 'success') {
 
+                            swalWithBootstrapButtons(
+                                'Eliminado!',
+                                'Este pedido fue eliminado',
+                                'success'
+                            )
+                            redirect();
+                        }
+                        else {
+                            if (data === 'error') {
                                 swalWithBootstrapButtons(
-                                    'Eliminado!',
-                                    'Este pedido fue eliminado',
-                                    'success'
+                                    'Error!',
+                                    'Algo salio mal',
+                                    'error'
                                 )
                                 redirect();
                             }
-                            else {
-                                if (data === 'error') {
-                                    swalWithBootstrapButtons(
-                                        'Error!',
-                                        'Algo salio mal',
-                                        'error'
-                                    )
-                                    redirect();
-                                }
-                            }
-
                         }
-                    });
+
+                    }
+                });
 
 
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    swalWithBootstrapButtons(
-                        'cancelado',
-                        'error'
-                    )
-                }
-            })
+            } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons(
+                    'cancelado',
+                    'error'
+                )
+            }
+        })
 
     }).catch(swal.noop)
 }
 
 function verDetalleEliminacion(idpedido) {
-    var url = '/verEliminacionPedido/' + idpedido ;
+    var url = '/verEliminacionPedido/' + idpedido;
     $.ajax({
         type: "GET",
         url: url,
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
-            if (data.error===1) {
+            if (data.error === 1) {
                 swal(
                     'Detalle de eliminacion!',
-                    data.razon ,
+                    data.razon,
                     'info'
                 )
             }
@@ -262,4 +332,8 @@ function verDetalleEliminacion(idpedido) {
 
         }
     });
+}
+
+function disminuirstock() {
+
 }

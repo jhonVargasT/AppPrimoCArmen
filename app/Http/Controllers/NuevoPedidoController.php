@@ -135,7 +135,7 @@ class NuevoPedidoController extends Controller
             $pedido->costoBruto = $persona->total;
             $pedido->descuento = 0;
             $pedido->totalPago = $persona->total;
-            $pedido->idUsuario = 1;//falta el usuario
+            $pedido->idUsuario =  Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->id_Boleta = null;
             $pedido->id_DireccionTienda = $persona->tienda;
@@ -150,7 +150,7 @@ class NuevoPedidoController extends Controller
                     $paquetes = $pr->paquete;
                     $productopedido->cantidadUnidades = $unidades;
                     $productopedido->cantidadPaquetes = $paquetes;
-                    $productopedido->idUsuario = 1;
+                    $productopedido->idUsuario = Session('idusuario');;
                     $productopedido->fechaCreacion = util::fecha();
                     $productopedido->id_Producto = $pr->id;
                     $productopedido->id_Pedido = $pedido->idPedido;
@@ -164,7 +164,13 @@ class NuevoPedidoController extends Controller
                     Producto::disminuirStock($pr->id, $totalpaquetes, $totalunidades);
                 }
             });
-            return response()->json(array('error' => 1,'url'=>'reportevendedor'));
+            $tipousu = Session('tipoUsuario');
+            if ($tipousu == 0) {
+                return response()->json(array('error' => 1, 'url' => 'reportevendedor'));
+            } elseif ($tipousu === 1) {
+                return response()->json(array('error' => 1, 'url' => 'Pedidos'));
+            }
+
         } catch (Exception $e) {
             return response()->json(array('error' => $e));
         }

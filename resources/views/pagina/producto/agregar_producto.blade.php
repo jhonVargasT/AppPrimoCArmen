@@ -176,7 +176,8 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadProductosPaquete"
                                                        name="cantidadProductosPaquete" data-parsley-required="true"
-                                                       data-parsley-type="number" data-parsley-group="step-2">
+                                                       data-parsley-type="number" data-parsley-group="step-2" min="0"
+                                                       onchange="validarEnterosPositivos('cantidadProductosPaquete')">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -185,47 +186,51 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadPaquete"
                                                        name="cantidadPaquete" data-parsley-required="true"
-                                                       data-parsley-type="number" data-parsley-group="step-2">
+                                                       data-parsley-type="number" data-parsley-group="step-2" min="0"
+                                                       onchange="validarEnterosPositivos('cantidadPaquete')">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Precio compra
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioCompra">Precio
+                                                compra
                                                 por
                                                 paquete:</label>
                                             <div class="input-group col-md-4 col-sm-4 mb-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="precioCompra"
+                                                <input type="text" class="form-control" name="precioCompra"
                                                        id="precioCompra" data-parsley-group="step-2"
-                                                       data-parsley-required="true">
+                                                       onchange="validardecimales('precioCompra',2)">
                                             </div>
 
                                         </div>
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Precio venta
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioVenta">Precio
+                                                venta
                                                 por
                                                 paquete:</label>
                                             <div class="input-group col-md-4 col-sm-4 mb-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="precioVenta"
+                                                <input type="text" class="form-control" name="precioVenta"
                                                        id="precioVenta" data-parsley-group="step-2"
-                                                       data-parsley-required="true">
+                                                       onchange="validardecimales('precioVenta',2);validarEnterosPositivos('precioVenta')">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Comision de
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="comisionVenta">Comision
+                                                de
                                                 venta
                                                 para vendedor</label>
                                             <div class="input-group col-md-4 col-sm-4 mb-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="comisionVenta"
+                                                <input type="text" class="form-control" name="comisionVenta"
                                                        id="comisionVenta" data-parsley-group="step-2"
-                                                       data-parsley-required="true">
+                                                       onchange="validardecimales('comisionVenta',2);validarEnterosPositivos('comisionVenta')">
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -256,32 +261,34 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadStockUnidad"
                                                        name="cantidadStockUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true"
-                                                       data-parsley-type="number">
+                                                       data-parsley-type="number"
+                                                       onchange="validarEnterosPositivos('cantidadStockUnidad')">
                                             </div>
                                         </div>
                                         <div class="row form-group row m-b-15">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Precio
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioCompraUnidad">Precio
                                                 compra:</label>
                                             <div class="input-group col-md-4 col-sm-4 m-b-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" id="precioCompraUnidad"
+                                                <input type="text" class="form-control" id="precioCompraUnidad"
                                                        name="precioCompraUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true">
+                                                       onchange="validardecimales('precioCompraUnidad',2);validarEnterosPositivos('precioCompraUnidad')""
+                                                >
                                             </div>
                                         </div>
                                         <div class="row form-group row m-b-15">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Precio
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioVentaUnidad">Precio
                                                 venta:</label>
                                             <div class="input-group col-md-4 col-sm-4 m-b-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
                                                 </div>
-                                                <input type="number" class="form-control" name="precioVentaUnidad"
+                                                <input type="text" class="form-control" name="precioVentaUnidad"
                                                        id="precioVentaUnidad" data-parsley-group="step-3"
-                                                       data-parsley-required="true">
+                                                       onchange="validardecimales('precioVentaUnidad',2);validarEnterosPositivos('precioVentaUnidad')"
+                                                >
                                             </div>
                                         </div>
                                     </div>
@@ -328,13 +335,6 @@
     $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
         $.when(
             $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
-            $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'),
-            $.getScript('../assets/plugins/masked-input/masked-input.min.js'),
-            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
-            $.getScript('../assets/plugins/password-indicator/js/password-indicator.js'),
-            $.getScript('../assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js'),
-            $.getScript('../assets/plugins/bootstrap-select/bootstrap-select.min.js'),
             $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
             $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
             $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),

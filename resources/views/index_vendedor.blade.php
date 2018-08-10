@@ -31,6 +31,8 @@
 
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="{{asset('assets/plugins/pace/pace.min.js')}}"></script>
+    <script src="{{ asset('js/js_ajax/sesiones.js') }}"></script>
+
     <!-- ================== END BASE JS ================== -->
 
     <meta http-equiv="Expires" content="0">
@@ -50,7 +52,7 @@
     <div id="header" class="header navbar-default">
         <!-- begin navbar-header -->
         <div class="navbar-header">
-            <a href="index.blade.php" class="navbar-brand"><span class="navbar-logo"></span> <b>ARPEMAR</b> SAC</a>
+            <a class="navbar-brand"><span class="navbar-logo"></span> <b>ARPEMAR</b> SAC</a>
             <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -62,10 +64,12 @@
         <!-- begin header-nav -->
         <ul class="navbar-nav navbar-right">
 
+
             <li class="dropdown navbar-user">
+
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                     <img src="{{asset('assets/img/user/user-13.jpg')}}" alt=""/>
-                    <span class="d-none d-md-inline">Administrador de prueba</span> <b class="caret"></b>
+                    <span class="d-none d-md-inline" id="usuario"></span> <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:;" class="dropdown-item">Mi cuenta</a>
@@ -89,7 +93,7 @@
             <ul class="nav">
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
-                    <a href="/reportevendedor"  data-toggle="ajax">
+                    <a href="/reportevendedor" data-toggle="ajax">
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
                         <span>Reporte</span>
                     </a>
@@ -151,15 +155,15 @@
 <!-- ================== END BASE JS ================== -->
 
 <script>
-    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function() {
+    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
         $.when(
             $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
             $.getScript('../assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js'),
             $.getScript('../assets/js/demo/table-manage-responsive.demo.min.js'),
-            $.Deferred(function( deferred ){
+            $.Deferred(function (deferred) {
                 $(deferred.resolve);
             })
-        ).done(function() {
+        ).done(function () {
             TableManageResponsive.init();
         });
     });
@@ -170,6 +174,7 @@
             ajaxType: 'GET',
             ajaxDataType: 'html'
         });
+        obtenerSession();
     });
 </script>
 </body>

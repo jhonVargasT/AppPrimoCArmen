@@ -144,8 +144,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ver productos</h4>
+                    <h4 class="modal-title">Detalle del pedido</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="form-inline">
+                    <h4><label class="col-md-12 col-sm-12 col-form-label" for="numero_pedido"> <strong>Numero de pedido :
+                            </strong></label></h4>
+                    <h5><label class="text-left " id="numero_pedido"> 0025
+                        </label></h5>
                 </div>
                 <div class="modal-body">
                     <div id="data-table-fixed-header_wrapper"
@@ -166,7 +172,15 @@
                                             rowspan="1" colspan="1"
                                             aria-label="Rendering engine: activate to sort column ascending"
                                             style="width: 100%;; min-width: 15px;">
-                                            Nombre
+                                            Nombre producto
+                                        </th>
+
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="width: 100%;; min-width: 20px;">
+                                            Cant paquete
                                         </th>
                                         <th class="text-nowrap sorting" tabindex="0"
                                             aria-controls="data-table-fixed-header"
@@ -175,13 +189,7 @@
                                             style="width: 100%;; min-width: 20px;">
                                             Cant unidad
                                         </th>
-                                        <th class="text-nowrap sorting" tabindex="0"
-                                            aria-controls="data-table-fixed-header"
-                                            rowspan="1" colspan="1"
-                                            aria-label="Rendering engine: activate to sort column ascending"
-                                            style="width: 100%;; min-width: 20px;">
-                                            Cant paquete
-                                        </th>
+
                                         <th class="text-nowrap sorting" tabindex="0"
                                             aria-controls="data-table-fixed-header"
                                             rowspan="1" colspan="1"
@@ -216,7 +224,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a  href="javascript:;" class="btn btn-success" data-dismiss="modal" >Aceptar</a>
+                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal">Aceptar</a>
                 </div>
             </div>
         </div>
@@ -258,7 +266,7 @@
                                 }
                                 else {
                                     if (row.estado === '4') {
-                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
                                     } else {
 
                                         return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
@@ -276,7 +284,7 @@
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
                             '<a href="#" class="btn btn-link " title="Eliminar pedido"  onclick="eliminarPedido(' + row.idPedido + ')">' +
                             '<i  style="color: red" class="fas fa-lg fa-fw  fa-trash "></i></a>' +
-                            '</th>';
+                            '</th> ';
 
                     }
                 }

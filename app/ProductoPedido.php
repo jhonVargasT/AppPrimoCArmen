@@ -12,15 +12,16 @@ class ProductoPedido extends Model
 
     public static function consultarProductosPedido($idPedido)
     {
-        return static::select('pp.idProductoPedido as idprod', 'p.nombre', 'pp.cantidadUnidades', 'pp.cantidadPaquetes', 'pp.estado','pp.id_Producto','pp.estado')
+        return static::select('pp.idProductoPedido as idprod', 'p.nombre', 'pp.cantidadUnidades', 'pp.cantidadPaquetes', 'pp.estado', 'pp.id_Producto', 'pp.estado')
             ->from('productopedido as pp')
             ->join('bd_app.producto as  p', 'p.idProducto', '=', 'pp.id_Producto')
             ->where('pp.id_Pedido', '=', $idPedido)
             ->get();
     }
+
     public static function consultarProductosPedidos($idProductopedido)
     {
-        return static::select('cantidadUnidades','cantidadPaquetes','id_Producto','id_Pedido')
+        return static::select('cantidadUnidades', 'cantidadPaquetes', 'id_Producto', 'id_Pedido')
             ->from('productopedido as pp')
             ->where('pp.idProductoPedido', '=', $idProductopedido)
             ->get();
@@ -30,6 +31,12 @@ class ProductoPedido extends Model
     {
         static::where('idProductoPedido', $id)
             ->update(['estado' => $estado]);
+    }
+
+    public static function actualizarCantidadProductoPedido($id, $cantpaque,$cantuni)
+    {
+        static::where('idProductoPedido', $id)
+            ->update(['cantidadPaquetes' => $cantpaque,'cantidadUnidades'=>$cantuni]);
     }
 
     public static function consultarProductoPedidoPorId($idproductopedido)

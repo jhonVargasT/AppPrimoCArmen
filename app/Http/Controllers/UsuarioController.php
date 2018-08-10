@@ -65,10 +65,13 @@ class UsuarioController extends Controller
             $persona->nroCelular = $request->nroCelular;
             $persona->distrito = $request->distrito;
 
+
             $usuario = new Usuario();
             $usuario->password = bcrypt($request->password);
             $usuario->usuario = $request->usuario;
             $usuario->fechaCreacion = $fecha;
+            $usuario->usuarioCreacion=Session('idusuario');
+            $util->fechaCreacion='1991-01-01';
 
             DB::transaction(function () use ($persona, $usuario) {
                 $persona->save();

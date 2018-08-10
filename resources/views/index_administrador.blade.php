@@ -31,6 +31,8 @@
 
     <!-- ================== BEGIN BASE JS ================== -->
     <script src="{{asset('assets/plugins/pace/pace.min.js')}}"></script>
+    <script src="{{ asset('js/js_ajax/sesiones.js') }}"></script>
+
     <!-- ================== END BASE JS ================== -->
 </head>
 <body>
@@ -58,8 +60,8 @@
 
             <li class="dropdown navbar-user">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="" alt=""/>
-                    <span class="d-none d-md-inline">Administrador de prueba</span> <b class="caret"></b>
+                    <img src="{{asset('assets/img/user/user-13.jpg')}}" alt=""/>
+                    <span class="d-none d-md-inline" id="usuario"></span> <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:;" class="dropdown-item">Mi cuenta</a>
@@ -176,7 +178,9 @@
             ajaxType: 'get',
             ajaxDataType: 'html'
         });
+        obtenerSession();
     });
+
 </script>
 </body>
 </html>

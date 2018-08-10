@@ -49,12 +49,44 @@
                             </tbody>
                             <thead>
                             <tr role="row">
+
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 159px;">
+                                    Nombre Tienda
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 159px;">
+                                    Direccion Personal
+                                </th>
+
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 159px;">
+                                    Direccion Tienda
+                                </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
                                     Nombres y apellidos
                                 </th>
+
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 242px;">
+                                    DNI
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 242px;">
+                                    RUC
+                                </th>
+
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
@@ -67,34 +99,7 @@
                                     style="width: 100%;; min-width: 187px;">
                                     Correo
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 242px;">
-                                    DNI
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 242px;">
-                                    RUC
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
-                                    Direccion Personal
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
-                                    Nombre Tienda
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
-                                    Direccion Tienda
-                                </th>
+
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
@@ -148,14 +153,14 @@
             rowId: 'id',
             ajax: '{!! route('datatable.clientes') !!}',
             columns: [
+                {data: 'tnombreTienda', name: 'tnombreTienda'},
+                {data: 'pdireccion', name: 'pdireccion'},
+                {data: 'dtnombreCalle', name: 'dtnombreCalle'},
                 {data: 'pnombres', name: 'pnombres'},
-                {data: 'pnroCelular', name: 'pnroCelular'},
-                {data: 'pcorreo', name: 'pcorreo'},
                 {data: 'pdni', name: 'pdni'},
                 {data: 'pruc', name: 'pruc'},
-                {data: 'pdireccion', name: 'pdireccion'},
-                {data: 'tnombreTienda', name: 'tnombreTienda'},
-                {data: 'dtnombreCalle', name: 'dtnombreCalle'},
+                {data: 'pnroCelular', name: 'pnroCelular'},
+                {data: 'pcorreo', name: 'pcorreo'},
                 {
                     data: function (row) {
                         if (row.pestado === '1') {
@@ -170,17 +175,18 @@
                     data: function (row) {
                         if (row.pestado === '1') {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                                '<a href="Cliente/' + row.idPersona +'-'+ row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                                '<a href="Cliente/' + row.idPersona + '-' + row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',0)">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
+
                                 '</div>';
                         } else {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',1)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-plus"> </i></a>\n' +
-                                '<a href="Cliente/' + row.idPersona +'-'+ row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                                '<a href="Cliente/' + row.idPersona + '-' + row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',1)">\n' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
                                 '</div>';
                         }
                     }

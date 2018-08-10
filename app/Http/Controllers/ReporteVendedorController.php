@@ -16,7 +16,7 @@ class ReporteVendedorController extends Controller
     {
 
 
-        return  datatables()->of(Pedido::reporteVendedor(1))->toJson();
+        return  datatables()->of(Pedido::reporteVendedor(Session('idusuario')))->toJson();
     }
     public function obtenerPrdocutosPedido($idpedido)
 
@@ -27,7 +27,8 @@ class ReporteVendedorController extends Controller
     public function obtenerComision()
     {
         try{
-            $comision= Usuario::obtenerComision(1);
+            $idusuario=Session('idUsuario');
+            $comision= Usuario::obtenerComision(Session('idusuario'));
             foreach ($comision as $com)
             {
                 $comision=$com->suma;

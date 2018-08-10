@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Producto;
+use App\util;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Http\Request;
@@ -80,8 +81,9 @@ class ProductoController extends Controller
             $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
+            $producto->idUsuario=Session('idusuario');
             $producto->descuento = 0;
-            $producto->fechaCreacion = '1991-01-01';
+            $producto->fechaCreacion = util::fecha();
 
             DB::transaction(function () use ($producto) {
                 $producto->save();
@@ -130,7 +132,7 @@ class ProductoController extends Controller
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
             $producto->descuento = 0;
-            $producto->fechaCreacion = '1991-01-01';
+            $producto->fechaCreacion = util::fecha();
 
             DB::transaction(function () use ($producto) {
                 $producto->save();

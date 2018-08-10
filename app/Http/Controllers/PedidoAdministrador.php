@@ -48,7 +48,7 @@ class PedidoAdministrador extends Controller
                 $estadopro = 1;
                 $totalmontopedido = abs($totalpedi + $totalProducto);
                 Pedido::cambiarMontoPedido($idpedido, $totalmontopedido);
-                Pedido::actualizarEmilinacion($idpedido, null, null, 2);
+                Pedido::actualizarEmilinacion($idpedido, null, Session('idusuario'), 2);
                 ProductoPedido::actualizarEstadoProductoPedido($idProductoPedido, $estadopro);
                 Pedido::cambiarEstado($idpedido, 2);
                 $rescantpaq = abs($cantPaqueProd + $cantpaqpedi);
@@ -79,7 +79,7 @@ class PedidoAdministrador extends Controller
                     }
                 }
                 if ($c === $contEstados) {
-                    Pedido::actualizarEmilinacion($idpedido, 'Se elimino por no tener productos para entregar '.util::fecha(), 1, 0);
+                    Pedido::actualizarEmilinacion($idpedido, 'Se elimino por no tener productos para entregar ' . util::fecha(), Session('idusuario'), 0);
                 }
                 break;
         }
@@ -129,14 +129,14 @@ class PedidoAdministrador extends Controller
         }
     }
 
-    public function eliminarPedido($idpedido,$razon)
+    public function eliminarPedido($idpedido, $razon)
     {
         try {
             $productospedido = ProductoPedido::consultarProductosPedido($idpedido);
             foreach ($productospedido as $pro) {
-                $this->cambiarEstadoProducto($pro->idprod,2);
+                $this->cambiarEstadoProducto($pro->idprod, 2);
             }
-            Pedido::actualizarEmilinacion($idpedido, $razon.' '.util::fecha(), 1, 0);
+            Pedido::actualizarEmilinacion($idpedido, $razon . ' ' . util::fecha(), Session('idusuario'), 0);
             return 'success';
         } catch (Exception $e) {
             return 'error';
@@ -144,20 +144,66 @@ class PedidoAdministrador extends Controller
 
     }
 
-    public function verRazonEliminacion($idpedido){
+    public function verRazonEliminacion($idpedido)
+    {
         try {
-            $pedido= Pedido::obtenerPedido($idpedido);
+            $pedido = Pedido::obtenerPedido($idpedido);
             foreach ($pedido as $ped) {
-                $razon=$ped->razonEliminar;
+                $razon = $ped->razonEliminar;
             }
-            return response()->json(array('error' => 1,'razon'=>$razon));
+            return response()->json(array('error' => 1, 'razon' => $razon));
         } catch (Exception $e) {
             return 'error';
         }
     }
 
-    public function enviarCorreo(){
-        $correo=new EnvioDeCorreos();
+    public function cambiarCantProducto($idproductopedido, $cantpaquete, $cantunidades)
+    {
+        try {
+            $productopedido = ProductoPedido::consultarProductosPedidos($idproductopedido);
+            foreach ($productopedido as $produc) {
+                $cantpaqueprodupedi = $produc->cantidadPaquetes;
+                $cantunidadeprodupedi = $produc->cantidadUnidades;
+                $idproducto = $produc->id_Producto;
+                $idpedido = $produc->id_Pedido;
+            }
+            $producto = Producto::consultarProducto($idproducto);
+            foreach ($producto as $product) {
+                $cantidaduniproducto = $product->cantidadStockUnidad;
+                $cantidadpaqueteproducto = $product->cantidadPaquete;
+                $preciounidadproducto = $product->precioVentaUnidad;
+                $preciopaqueteproducto = $product->precioVenta;
+                $nombreproducto=$product->nombre;
+            }
+                $resultuni = $cantunidades - $cantunidadeprodupedi  ;
+                $resulpaque = $cantpaquete - $cantpaqueprodupedi;
+
+            if ($resultuni <= $cantidaduniproducto && $resulpaque <= $cantidadpaqueteproducto) {
+                Producto::disminuirStock($idproducto, (abs($cantidadpaqueteproducto + $cantpaqueprodupedi)), abs($cantidaduniproducto + $cantunidadeprodupedi));
+                $producto = Producto::consultarProducto($idproducto);
+                foreach ($producto as $product) {
+                    $cantidaduniproducto = $product->cantidadStockUnidad;
+                    $cantidadpaqueteproducto = $product->cantidadPaquete;
+                    $preciounidadproducto = $product->precioVentaUnidad;
+                    $preciopaqueteproducto = $product->precioVenta;
+
+                }
+                Producto::disminuirStock($idproducto, (abs($cantidadpaqueteproducto - $cantpaquete)), abs($cantidaduniproducto - $cantunidades));
+                ProductoPedido::actualizarCantidadProductoPedido($idproductopedido, $cantpaquete, $cantunidades);
+                Pedido::cambiarMontoPedido($idpedido, (($preciounidadproducto * $cantunidades) + ($preciopaqueteproducto * $cantpaquete)));
+                return response()->json(array('error' => 1));
+            } else {
+                return response()->json(array('error' => 0, 'cantpaque' => $cantidadpaqueteproducto,'cantuni'=>$cantidaduniproducto,'nombre'=>$nombreproducto));
+            }
+
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    public function enviarCorreo()
+    {
+        $correo = new EnvioDeCorreos();
         $correo->enviarCorreo();
     }
 }
