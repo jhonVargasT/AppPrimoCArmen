@@ -202,6 +202,7 @@
             serverSide: true,
             select: true,
             rowId: 'id',
+            aaSorting: [[ 0, "desc" ]],
             ajax: '{!! route('datatable.productos') !!}',
             columns: [
                 {data: 'nombre', name: 'nombre'},

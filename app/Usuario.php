@@ -80,4 +80,9 @@ class Usuario extends Authenticatable
             ->limit(50)
             ->get();
     }
+    public static function cambiarContrasena($id,$password)
+    {
+        static::where('idUsuario', $id)
+            ->update(['password' => $password]);
+    }
 }

@@ -74,7 +74,7 @@
                             <a href="#step-3">
                                 <span class="number">3</span>
                                 <span class="info text-ellipsis">
-						Cuento de ingreso
+						Cuenta de ingreso
 					</span>
                             </a>
                         </li>
@@ -161,7 +161,7 @@
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Direccion<span
                                                         class="text-danger">*</span></label>
-                                            <div class="col-md-9">
+                                            <div class="col-md-6">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
                                                        data-parsley-group="step-1" data-parsley-required="true"/>
                                             </div>
@@ -228,6 +228,20 @@
                                             Selecciona tu ususario y contraseña
                                         </legend>
                                         <!-- begin form-group -->
+
+
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de usuario
+                                                :</label>
+                                            <div class="col-md-4 col-sm-4">
+                                                <select class="form-control" type="text" id="tipousuario"
+                                                        name="tipoPaquete"
+                                                        data-parsley-required="true" data-parsley-group="step-3">
+                                                    <option selected disabled>Escoja..</option>
+                                                    <option>Administrador</option>
+                                                    <option>Vendedor</option>
+                                                </select></div>
+                                        </div>
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Usuario<span
                                                         class="text-danger">*</span></label>

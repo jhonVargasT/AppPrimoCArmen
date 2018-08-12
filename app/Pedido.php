@@ -36,7 +36,6 @@ class Pedido extends Model
          //   ->where('p.fechaEntrega', '>=', util::fecha())
             ->where('p.idUsuario', '=', $idusuario)
             ->groupBy('p.idPedido')
-            ->orderBy('p.idPedido', 'p.fechaEntrega', 'd.provincia', 'd.distrito', 'd.nombreCalle', 't.nombreTienda', 'asc')
             ->get();
 
     }

@@ -165,7 +165,7 @@ class NuevoPedidoController extends Controller
                 }
             });
             $tipousu = Session('tipoUsuario');
-            if ($tipousu == 0) {
+            if ($tipousu === 0) {
                 return response()->json(array('error' => 1, 'url' => 'reportevendedor'));
             } elseif ($tipousu === 1) {
                 return response()->json(array('error' => 1, 'url' => 'Pedidos'));

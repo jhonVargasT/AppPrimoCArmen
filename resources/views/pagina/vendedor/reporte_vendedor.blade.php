@@ -79,6 +79,9 @@
                 nuevo pedido
             </a>
         </div>
+        <br>
+
+
 
         <br>
         <br>
@@ -250,6 +253,7 @@
 <script>
     $(function () {
         $('#data-table-fixed-header').DataTable({
+
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -257,7 +261,8 @@
             serverSide: true,
             select: true,
             rowId: 'idPedido',
-            ajax: '{!! route('datatable.pedidoAdministrador') !!}',
+            aaSorting: [[ 5, "desc" ],[0,"desc"],[1,"asc"],[8,"asc"]],
+            ajax: '{!! route('datatable.pedidos') !!}',
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombres', name: 'nombres'},
@@ -305,9 +310,9 @@
 
         });
     });
-    /*App.setPageTitle('Pedidos | ARPEMAR SAC');
+    App.setPageTitle('Pedidos | ARPEMAR SAC');
     App.restartGlobalFunction();
-
+/*
     $.when(
         $.getScript('../assets/plugins/highlight/highlight.common.js'),
         $.getScript('../assets/js/demo/render.highlight.js'),

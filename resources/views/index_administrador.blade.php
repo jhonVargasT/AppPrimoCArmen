@@ -64,7 +64,11 @@
                     <span class="d-none d-md-inline" id="usuario"></span> <b class="caret"></b>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a href="javascript:;" class="dropdown-item">Mi cuenta</a>
+                    <a href="#modal-dialog-contra" class="dropdown-item"
+                       data-toggle="modal"
+                       id="anadirproducto">
+                        Cambiar contraseña
+                    </a>
                     <form action="{{ route('logout') }}" method="POST">
                         {{ csrf_field() }}
                         <button class="dropdown-item">Salir</button>
@@ -140,7 +144,50 @@
     <!-- end scroll to top btn -->
 </div>
 <!-- end page container -->
+<div class="modal fade" id="modal-dialog-contra">
+    <div class="modal-dialog">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h4 class="modal-title">Cambiar contraseña</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
 
+
+                <!-- begin form-group -->
+                <div class="form-group row m-b-10">
+                    <label class="col-md-3 col-form-label text-md-right" >Nueva contraseña <span
+                                class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                        <input type="password" name="password" id="password"
+                               class="form-control"
+                        />
+                    </div>
+                </div>
+                <!-- end form-group -->
+                <!-- begin form-group -->
+                <div class="form-group row m-b-10">
+                    <label class="col-md-3 col-form-label text-md-right">Confirmar contraseña
+                        <span class="text-danger">*</span></label>
+                    <div class="col-md-6">
+                        <input type="password" name="password2" id="password2"
+                               class="form-control" onkeypress="compararContraseñas()" />
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer text-center">
+                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
+                    <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
+                    Cancelar</a>
+                <a href="javascript:;" class="btn btn-success " id="enviar"
+                   data-dismiss="modal" onclick="cambiarContraseña()" onmouseover="compararContraseñas()">
+                    <i class="fas fa-lg fa-fw m-r-10 fa-check-circle"> </i>Cambiar</a>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- ================== BEGIN BASE JS ================== -->
 <script src="{{asset('assets/plugins/jquery/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery/jquery-migrate-1.1.0.min.js')}}"></script>

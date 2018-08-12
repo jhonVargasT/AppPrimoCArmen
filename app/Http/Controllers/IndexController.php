@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Usuario;
+use Exception;
+use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -101,5 +103,19 @@ class IndexController extends Controller
 
         }
         return response()->json(array('nombape' => $apellidos . ', ' . $nombres, 'tipousu' => $tipousu));
+    }
+
+    public function cambiarcontra($contrasena)
+    {
+        try {
+            $idusuario = Session('idusuario');
+            $contrasena=bcrypt($contrasena);
+            Usuario::cambiarContrasena($idusuario,$contrasena);
+            return 'success';
+        } catch (Exception $e) {
+            return 'errpr';
+        }
+
+
     }
 }

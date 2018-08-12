@@ -67,6 +67,7 @@ Route::prefix('Usuario')->group(function () {
     //Route::delete('/{id}', 'UsuarioController@destroy');
 });
 });
+route::get('/cambiarcontra/{password}','IndexController@cambiarcontra');
 
 //////////// *********************** VENDEDOR ***************************/////////////////////////
 

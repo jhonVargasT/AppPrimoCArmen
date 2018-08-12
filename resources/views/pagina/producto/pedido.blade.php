@@ -224,7 +224,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal">Aceptar</a>
+                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal" onclick="redirect()">Aceptar</a>
                 </div>
             </div>
         </div>
@@ -242,6 +242,7 @@
             serverSide: true,
             select: true,
             rowId: 'idPedido',
+            aaSorting: [[ 5, "desc" ],[0,"desc"],[1,"asc"],[8,"asc"]],
             ajax: '{!! route('datatable.pedidoAdministrador') !!}',
             columns: [
                 {data: 'idPedido', name: 'idPedido'},

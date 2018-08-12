@@ -47,31 +47,32 @@ class UsuarioController extends Controller
     {
         try {
             $util = new util();
-            $fecha = $util->fecha_ingles();
 
             $persona = new Persona();
             $persona->dni = $request->dni;
             $persona->nombres = $request->nombres;
             $persona->apellidos = $request->apellidos;
-            $persona->fechaNacimiento = '1991-01-01';
+            $persona->fechaNacimiento = $request->fecha;
             $persona->direccion = $request->direccion;
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
-            $persona->fechaCreacion = $fecha;
+            $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;
             $persona->departamento = $request->departamento;
             $persona->provincia = $request->provincia;
             $persona->nroCelular = $request->nroCelular;
             $persona->distrito = $request->distrito;
-
-
+            $persona->usuarioCreacion = util::fecha();
             $usuario = new Usuario();
+            if($request->tipousuario==='Administrador')
+                $usuario->tipoUsuario=1;
+            elseif ($request->tipousuario==='Vendedor')
+                $usuario->tipoUsuario=0;
             $usuario->password = bcrypt($request->password);
             $usuario->usuario = $request->usuario;
-            $usuario->fechaCreacion = $fecha;
-            $usuario->usuarioCreacion=Session('idusuario');
-            $util->fechaCreacion='1991-01-01';
+            $usuario->fechaCreacion = util::fecha();
+            $usuario->usuarioCreacion = Session('idusuario');
 
             DB::transaction(function () use ($persona, $usuario) {
                 $persona->save();
