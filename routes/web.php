@@ -22,6 +22,7 @@ Route::group(['middleware' => 'administrador'], function () {
 
 Route::get('/Administrador', 'AdministradorController@index');
 
+Route::get('/creacionCorreo/{id}','CorreoController@correoCreacionUsuario');
 
 ////////////////////////////////////REPORTE///////////////////////////////////////////////////
 
@@ -30,7 +31,7 @@ Route::get('/Reportes', 'ReporteController@index');
 ////////////////////////////////////REPORTE PEDIDOS///////////////////////////////////////////////////
 
 Route::get('/Pedidos', 'PedidoController@index');
-Route::get('/cambiarNumeroProducto/{idproductopedido}/{cantpaque}/{cantunidad}', 'PedidoAdministrador@cambiarCantProducto');
+
 Route::get('/cambiarEstadoProducto/{idproductopedido}/{estado}', 'PedidoAdministrador@cambiarEstadoProducto');
 Route::get('/cambiarEstadoPedido/{idpedido}', 'PedidoAdministrador@cambiarEstadoPedido');
 Route::get('/eliminarPedido/{idpedido}/{razon}', 'PedidoAdministrador@eliminarPedido');
@@ -41,7 +42,8 @@ Route::get('/Productos', 'ProductoController@index');
 Route::get('/actualizarStockModal', 'ProductoController@actualizarStockModal');
 Route::get('/actualizarStock', 'ProductoController@actualizarStock');
 Route::get('/actualizarProducto', 'ProductoController@actualizarProducto');
-Route::get('/enviarCorreo', 'PedidoAdministrador@enviarCorreo');
+
+Route::get('/enviarCorreo', 'CorreoController@correoCreacionUsuario');
 
 Route::prefix('Producto')->group(function () {
     Route::get('/create', 'ProductoController@create');
@@ -51,6 +53,7 @@ Route::prefix('Producto')->group(function () {
     Route::put('/{id}', 'ProductoController@update');
     //Route::delete('/{id}', 'ProductoController@destroy');
 });
+
 
 
 //////////////////////////////////////USUARIOS///////////////////////////////////////////////
@@ -81,6 +84,7 @@ Route::get('/reportevendedor', 'ReporteVendedorController@index');
 });
 
 Route::group(['can:administrador,vendedor'], function () {
+    Route::get('/cambiarNumeroProducto/{idproductopedido}/{cantpaque}/{cantunidad}', 'PedidoAdministrador@cambiarCantProducto');
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
 Route::get('/session','IndexController@session');
 
@@ -149,4 +153,4 @@ Route::get('/reporte', function () {
   //  return view('/Administrador');
 });
 
-Route::view('/pruebatype', 'pruebatype');
+Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos');

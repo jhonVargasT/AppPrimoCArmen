@@ -65,9 +65,30 @@
                                     Codigo
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 200px;">
+                                    Tienda
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 200px;">
+                                    Direccion
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 40px;">
+                                    Distrito
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 40px;">
+                                    Provincia
+                                </th>
+
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 400px;">
+                                    style="width: 100%;; min-width: 200px;">
                                     Cliente
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
@@ -76,11 +97,7 @@
                                     style="width: 100%;; min-width: 50px;">
                                     Telefono
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 400px;">
-                                    Tienda y direccion
-                                </th>
+
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
@@ -98,6 +115,12 @@
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 20px;">
                                     Total
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 40px;">
+                                    Realizador por
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
@@ -148,9 +171,10 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="form-inline">
-                    <h4><label class="col-md-12 col-sm-12 col-form-label" for="numero_pedido"> <strong>Numero de pedido :
+                    <h4><label class="col-md-12 col-sm-12 col-form-label" for="numero_pedido"> <strong>Numero de pedido
+                                :
                             </strong></label></h4>
-                    <h5><label class="text-left " id="numero_pedido"> 0025
+                    <h5><label class="text-left " id="numero_pedido">
                         </label></h5>
                 </div>
                 <div class="modal-body">
@@ -171,7 +195,7 @@
                                             aria-controls="data-table-fixed-header"
                                             rowspan="1" colspan="1"
                                             aria-label="Rendering engine: activate to sort column ascending"
-                                            style="width: 100%;; min-width: 15px;">
+                                            style="width: 100%;; min-width: 100%;">
                                             Nombre producto
                                         </th>
 
@@ -242,16 +266,20 @@
             serverSide: true,
             select: true,
             rowId: 'idPedido',
-            aaSorting: [[ 5, "desc" ],[0,"desc"],[1,"asc"],[8,"asc"]],
+            aaSorting: [[10, "asc"],[8, "asc"], [0, "desc"], [1, "asc"] ],
             ajax: '{!! route('datatable.pedidoAdministrador') !!}',
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
+                {data: 'nombreTienda', name: 'nombreTienda'},
+                {data: 'nombreCalle', name: 'nombreCalle'},
+                {data: 'distrito', name: 'distrito'},
+                {data: 'provincia', name: 'provincia'},
                 {data: 'nombres', name: 'nombres'},
                 {data: 'nroCelular', name: 'nroCelular'},
-                {data: 'tienda', name: 'tienda'},
                 {data: 'cantidad', name: 'cantidad'},
                 {data: 'fechaEntrega', name: 'fechaEntrega'},
                 {data: 'totalPago', name: 'totalPago'},
+                {data: 'usuario', name: 'usuario'},
                 {
                     data: function (row) {
                         if (row.estado === '1') {

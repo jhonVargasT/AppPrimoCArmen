@@ -73,8 +73,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="#modal-dialog-contra" class="dropdown-item"
-                       data-toggle="modal"
-                       id="anadirproducto">
+                       data-toggle="modal">
                         Cambiar contraseña
                     </a>
                     <form action="{{ route('logout') }}" method="POST">
@@ -223,6 +222,8 @@
             ajaxDataType: 'html'
         });
         obtenerSession();
+
+
     });
 </script>
 </body>

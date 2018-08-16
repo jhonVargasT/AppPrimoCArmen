@@ -1,6 +1,5 @@
 function llenarVerProductos(idpedido) {
     'use strict';
-
     var url = 'verproductos/' + idpedido;
      $('#numero_pedido').text(idpedido);
     $('#data-table-fixed-header2').DataTable({

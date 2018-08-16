@@ -18,6 +18,7 @@ function registrarUsuario() {
                 redirect('Usuarios');
                 ok();
             } else {
+                redirect('Usuarios');
                 error();
             }
         },
@@ -131,6 +132,7 @@ function actualizarUsuario(idu, idp, estado) {
         }
     })
 }
+
 
 //ID DEL INPUT
 $('#txt_usuario').typeahead({

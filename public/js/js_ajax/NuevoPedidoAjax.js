@@ -402,5 +402,9 @@ function redirect(ruta) {
     });
 }
 
+//autocompletado
 
+$(document).on('ready',function () {
+
+});
 

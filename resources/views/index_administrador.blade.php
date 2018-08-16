@@ -65,8 +65,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="#modal-dialog-contra" class="dropdown-item"
-                       data-toggle="modal"
-                       id="anadirproducto">
+                       data-toggle="modal">
                         Cambiar contraseña
                     </a>
                     <form action="{{ route('logout') }}" method="POST">
@@ -156,7 +155,7 @@
 
                 <!-- begin form-group -->
                 <div class="form-group row m-b-10">
-                    <label class="col-md-3 col-form-label text-md-right" >Nueva contraseña <span
+                    <label class="col-md-3 col-form-label text-md-right">Nueva contraseña <span
                                 class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password" id="password"
@@ -171,14 +170,15 @@
                         <span class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password2" id="password2"
-                               class="form-control" onkeypress="compararContraseñas()" />
+                               class="form-control" onmouseover="compararContraseñas()" />
                     </div>
                 </div>
+                <div class="form-group row m-b-10" id="aviso">
 
-
+                </div>
             </div>
             <div class="modal-footer text-center">
-                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
+                <a href="javascript:;" class="btn btn-danger" data-dismiss="modal" onclick="resetearModal()">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
                 <a href="javascript:;" class="btn btn-success " id="enviar"

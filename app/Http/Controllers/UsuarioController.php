@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CorreoUsuarioCreado;
 use App\Persona;
 use App\Usuario;
 use App\util;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 class UsuarioController extends Controller
 {
@@ -46,8 +48,6 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         try {
-            $util = new util();
-
             $persona = new Persona();
             $persona->dni = $request->dni;
             $persona->nombres = $request->nombres;
@@ -74,18 +74,20 @@ class UsuarioController extends Controller
             $usuario->fechaCreacion = util::fecha();
             $usuario->usuarioCreacion = Session('idusuario');
 
-            DB::transaction(function () use ($persona, $usuario) {
+            DB::transaction(function () use ($persona, $usuario,$request) {
                 $persona->save();
 
                 $usuario->id_Persona = $persona->idPersona;
                 $usuario->save();
+                $usuario->password=$request->password;
+                $usuario->tipoUsuario=$request->tipousuario;
+                Mail::to($usuario->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
 
             });
 
             return 'success';
-
         } catch (Exception $e) {
-            return $e;
+            return $e->getMessage();
         }
     }
 

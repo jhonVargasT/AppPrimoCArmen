@@ -53,7 +53,7 @@
                     <label class="col-form-label col-md-3">Nombres y apellidos</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos"
-                               onkeyup="completarNombresApellidos()">
+                               >
                     </div>
                 </div>
                 <div class="form-group row m-b-15">

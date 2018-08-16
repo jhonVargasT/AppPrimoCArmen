@@ -3,11 +3,13 @@
 namespace App\Mail;
 
 use App\Persona;
+use App\Usuario;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+
 class EnvioDeCorreos extends Mailable
 {
     use Queueable, SerializesModels;
@@ -34,11 +36,10 @@ class EnvioDeCorreos extends Mailable
     }
 
     public  function enviarCorreo(){
-        $data = []; // Empty array
+        $usuario = Usuario::findOrFail(1);
+        $persona=Persona::findOrFail($usuario->id_Persona);
+        Mail::to('jhonvargast@gmail.com')->send(new  CorreoUsuarioCreado($usuario,$persona));
 
-        Mail::send('index', $data, function($message)
-        {
-            $message->to('jhonvargast@gmail.com', 'Jon Doe')->subject('Welcome');
-        });
+
     }
 }

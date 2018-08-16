@@ -4,7 +4,9 @@ $(document).ready(function () {
 
 function llenarVerProductos(idpedido) {
     'use strict';
+
     var url = 'verproductos/' + idpedido;
+    $('#numero_pedido').text(idpedido);
     $('#data-table-fixed-header2').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -15,22 +17,45 @@ function llenarVerProductos(idpedido) {
         select: true,
         rowId: 'idPedido',
         ajax: url,
-        columns: [{
-            data: 'nombre', name: 'nombre'
-        },
-            {data: 'cantidadUnidades', name: 'cantidadUnidades'},
-            {data: 'cantidadPaquetes', name: 'cantidadPaquetes'},
+        columns: [
+
+            {
+                data: 'nombre', name: 'nombre'
+            },
+
+            {
+                data: function (row) {
+                    if (row.estado === '1') {
+                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')" > <input type="number" min="0" class="form-control" value="' + row.cantidadPaquetes + '" id="cantpaque"> </a>';
+                    }
+                    else {
+                        return '<div>' + row.cantidadPaquetes + '</div>'
+                    }
+                }
+            },
+            {
+                data: function (row) {
+                    if (row.estado === '1') {
+                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')"> <input type="number"  min="0" class="form-control" value="' + row.cantidadUnidades + '" id="cantuni"> </a>';
+                    }
+                    else {
+                        return '<div>' + row.cantidadUnidades + '</div>'
+                    }
+                }
+            },
             {
                 data: function (row) {
                     if (row.estado === '1') {
                         return '<th">' +
-                            '<i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i>' +
+                            '<a href="#" class="btn btn-link" title="click para cambiar estado">' +
+                            '<i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i> \</a>' +
                             '</th>';
                     }
                     else {
                         if (row.estado === '2') {
                             return '<th">' +
-                                '<i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check"></i>' +
+                                '<a href="#" class="btn btn-link" title="click para cambiar estado"  >' +
+                                '<i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check"></i></a>' +
                                 '</th>';
                         }
                         else {
@@ -52,7 +77,8 @@ function llenarVerProductos(idpedido) {
                                             '</th>';
                                     } else {
                                         return '<th">' +
-                                            '<i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i>' +
+                                            '<a href="#" class="btn btn-link" title="click para cambiar estado" >' +
+                                            '<i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>' +
                                             '</th>';
                                     }
                                 }
@@ -63,10 +89,10 @@ function llenarVerProductos(idpedido) {
                         }
                     }
                 }
+
             }
 
         ]
-
     });
 }
 
@@ -118,4 +144,64 @@ function verDetalleEliminacion(idpedido) {
 
         }
     });
+}
+
+
+function canmbiarNumeroProductos(idpedido, idproductopedido) {
+    validarEnterosPositivos('cantpaque');
+    validarEnterosPositivos('cantuni');
+    var cantpaque = $('#cantpaque').val();
+    var catuni = $('#cantuni').val();
+    console.log(cantpaque + ' ' + catuni);
+    "use strict";
+    var url = "cambiarNumeroProducto/" + idproductopedido + "/" + cantpaque + "/" + catuni;
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.error===1) {
+                ok('cantidad modificada')
+                llenarVerProductos(idpedido);
+            }
+            else {
+                error('Stock insuficiente, quedan '+data.cantpaque+' paquetes y '+data.cantuni+' unidades de '+data.nombre+ ' en stock, por favor actualice el stock!');
+                llenarVerProductos(idpedido);
+            }
+        }
+
+    });
+
+}
+function validarEnterosPositivos($id) {
+    var num = $('#'+$id).val();
+    if(num<0)
+        $('#'+$id).val(Math.abs(num));
+    else
+        $('#'+$id).val(num);
+}
+function error(mensaje) {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'error',
+        title: mensaje
+    })
+}
+
+function ok(mensaje) {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: mensaje
+    })
 }

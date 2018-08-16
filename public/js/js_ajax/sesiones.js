@@ -31,12 +31,14 @@ function cambiarContraseña() {
                 else
                     error('No se actualizo la contraseña');
                 resetearModal();
+                $("#error").remove();
             }
 
         });
     }
     else {
         error('No se actualizo la contraseña');
+        $("#error").remove();
     }
 
 }

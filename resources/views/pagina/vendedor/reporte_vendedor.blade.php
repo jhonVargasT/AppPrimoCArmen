@@ -146,7 +146,7 @@
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1"
                                 aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 20px;">
+                                style="width: 100%;; min-width: 80px;" align="center">
                                 Opciones
                             </th>
                         </tr>
@@ -162,6 +162,10 @@
                 </div>
                 <div class="  col-sm-3 col-xs-3 col-md-3">
                     <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Entregado</dd>
+                    <dd><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red"
+                                                                                      class="fas fa-sm m-r-5 fa-exclamation"> </i>Entregado
+                        con observacion
+                    </dd>
                     <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En Proceso</dd>
                     <dd><i style="color: darkorange;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En espera</dd>
                     <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Cancelado</dd>
@@ -173,16 +177,23 @@
     </div>
 </div>
 <!-- end panel -->
-<!-- modal-->
-<div class="modal fade" id="modal-dialog">
+<!-- modal--> <div class="modal fade" id="modal-dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Adicionar stock</h4>
+                <h4 class="modal-title">Detalle del pedido</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
+            <div class="form-inline">
+                <h4><label class="col-md-12 col-sm-12 col-form-label" for="numero_pedido"> <strong>Numero de pedido
+                            :
+                        </strong></label></h4>
+                <h5><label class="text-left " id="numero_pedido">
+                    </label></h5>
+            </div>
             <div class="modal-body">
-                <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div id="data-table-fixed-header_wrapper"
+                     class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -194,26 +205,33 @@
                                 </tbody>
                                 <thead>
                                 <tr role="row">
-                                    <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan="1"
+                                    <th class="text-nowrap sorting" tabindex="0"
+                                        aria-controls="data-table-fixed-header"
+                                        rowspan="1" colspan=""
                                         aria-label="Rendering engine: activate to sort column ascending"
-                                        style="width: 100%;; min-width: 15px;">
-                                        Nombre
+                                        style="width: 100%;; min-width: 100%;">
+                                        Nombre producto
                                     </th>
-                                    <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Rendering engine: activate to sort column ascending"
-                                        style="width: 100%;; min-width: 20px;">
-                                        Cant unidad
-                                    </th>
-                                    <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+
+                                    <th class="text-nowrap sorting" tabindex="0"
+                                        aria-controls="data-table-fixed-header"
                                         rowspan="1" colspan="1"
                                         aria-label="Rendering engine: activate to sort column ascending"
                                         style="width: 100%;; min-width: 20px;">
                                         Cant paquete
                                     </th>
-                                    <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    <th class="text-nowrap sorting" tabindex="0"
+                                        aria-controls="data-table-fixed-header"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Rendering engine: activate to sort column ascending"
+                                        style="width: 100%;; min-width: 20px;">
+                                        Cant unidad
+                                    </th>
+
+                                    <th class="text-nowrap sorting" tabindex="0"
+                                        aria-controls="data-table-fixed-header"
+                                        rowspan="1" colspan="1"
+                                        aria-label="Browser: activate to sort column ascending"
                                         style="width: 100%;; min-width: 10px;">
                                         Estado
                                     </th>
@@ -251,9 +269,9 @@
 </div>
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
+
     $(function () {
         $('#data-table-fixed-header').DataTable({
-
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -278,7 +296,7 @@
                         }
                         else {
                             if (row.estado === '2') {
-                                return '<div><a href="#"  title="Click para entregar producto"> <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                return '<div><a href="#"  title="Click para entregar producto" > <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
                             }
                             else {
                                 if (row.estado === '3') {
@@ -286,10 +304,10 @@
                                 }
                                 else {
                                     if (row.estado === '4') {
-                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
                                     } else {
 
-                                        return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                        return '<div><a href="#"  title="Click para entregar producto" ><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
                                     }
 
                                 }
@@ -302,7 +320,7 @@
                         return '<th">' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal"title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
-                            '</th>';
+                            '</th> ';
 
                     }
                 }

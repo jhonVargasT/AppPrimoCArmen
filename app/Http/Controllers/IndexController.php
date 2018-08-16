@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CorreoUsuarioCreado;
+use App\Persona;
 use App\Usuario;
 use Exception;
+use Faker\Provider\ne_NP\Person;
 use Illuminate\Hashing\BcryptHasher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class IndexController extends Controller
 {
@@ -109,8 +113,12 @@ class IndexController extends Controller
     {
         try {
             $idusuario = Session('idusuario');
-            $contrasena=bcrypt($contrasena);
-            Usuario::cambiarContrasena($idusuario,$contrasena);
+            $contrasenna=bcrypt($contrasena);
+            Usuario::cambiarContrasena($idusuario,$contrasenna);
+            $usuario=Usuario::findOrFail($idusuario);
+            $usuario->password=$contrasena;
+            $persona=Persona::findOrFail($usuario->id_Persona);
+            Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
             return 'success';
         } catch (Exception $e) {
             return 'errpr';
