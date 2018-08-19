@@ -76,9 +76,9 @@ class Usuario extends Authenticatable
 
     public static function findByCodigoOrDescription($term)
     {
-        return static::select('codigo', 'id', 'descripcion', DB::raw('concat(codigo," | ",descripcion) as name'))
-            ->Where(DB::raw('concat(codigo," ",descripcion)'), 'LIKE', "%$term%")
-            ->Where('estado', '!=', 0)
+        return static::select('idUsuario', 'usuario', DB::raw('concat(idUsuario," | ",usuario) as name'))
+            ->Where(DB::raw('concat(idUsuario," ",usuario)'), 'LIKE', "%$term%")
+            ->Where('estado', '=', 1)
             ->limit(50)
             ->get();
     }

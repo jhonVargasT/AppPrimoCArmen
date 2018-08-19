@@ -38,6 +38,7 @@
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <script language="JavaScript" type="text/javascript" src="../assets/pedido.js"></script>
 <script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
+<script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
 <div class="col-lg-3 col-md-6">
     <div class="widget widget-stats bg-green">
         <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
@@ -54,6 +55,35 @@
     <small>Aqui puedo administrar pedidos</small>
 </h1>
 <!-- final cabecera -->
+
+<input type="text" class="typeahead form-control" placeholder="typeahead" id="txt_usuario"/>
+<script>
+    $('#txt_usuario').typeahead({
+        name: 'data',
+        displayKey: 'name',
+        source: function (query, process) {
+            $.ajax({
+                url: "/asd",
+                type: 'GET',
+                data: 'query=' + query,
+                dataType: 'JSON',
+                async: 'false',
+                success: function (data) {
+                    bondObjs = {};
+                    bondNames = [];
+                    $.each(data, function (i, item) {
+                        bondNames.push({id: item.idUsuario, name: item.usuario});
+                        bondObjs[item.id] = item.idUsuario;
+                        bondObjs[item.name] = item.usuario;
+                    });
+                    process(bondNames);
+                }
+            });
+        }
+    }).on('typeahead:selected', function (even, datum) {
+        $("#txt_usuario_id").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+    });
+</script>
 
 <!-- begin panel -->
 <div class="panel panel-inverse">
@@ -80,9 +110,6 @@
             </a>
         </div>
         <br>
-
-
-
         <br>
         <br>
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
@@ -177,7 +204,8 @@
     </div>
 </div>
 <!-- end panel -->
-<!-- modal--> <div class="modal fade" id="modal-dialog">
+<!-- modal-->
+<div class="modal fade" id="modal-dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -279,7 +307,7 @@
             serverSide: true,
             select: true,
             rowId: 'idPedido',
-            aaSorting: [[ 5, "desc" ],[0,"desc"],[1,"asc"],[8,"asc"]],
+            aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
             ajax: '{!! route('datatable.pedidos') !!}',
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
@@ -330,66 +358,66 @@
     });
     App.setPageTitle('Pedidos | ARPEMAR SAC');
     App.restartGlobalFunction();
-/*
-    $.when(
-        $.getScript('../assets/plugins/highlight/highlight.common.js'),
-        $.getScript('../assets/js/demo/render.highlight.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Highlight.init();
-    });
-    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
+    /*
         $.when(
-            $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
-            $.getScript('../assets/plugins/DataTables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js'),
-            $.getScript('../assets/js/demo/table-manage-fixed-columns.demo.min.js'),
+            $.getScript('../assets/plugins/highlight/highlight.common.js'),
+            $.getScript('../assets/js/demo/render.highlight.js'),
             $.Deferred(function (deferred) {
                 $(deferred.resolve);
             })
         ).done(function () {
-            TableManageFixedColumns.init();
+            Highlight.init();
         });
-    });
-    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
-            $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'),
-            $.getScript('../assets/plugins/masked-input/masked-input.min.js'),
-            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
-            $.getScript('../assets/plugins/password-indicator/js/password-indicator.js'),
-            $.getScript('../assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js'),
-            $.getScript('../assets/plugins/bootstrap-select/bootstrap-select.min.js'),
-            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js'),
-            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js'),
-            $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
-            $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
-            $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),
-            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
-            $.getScript('../assets/plugins/bootstrap-show-password/bootstrap-show-password.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js'),
-            $.getScript('../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'),
-            $.getScript('../assets/plugins/clipboard/clipboard.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
-                FormPlugins.init();
+        $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
+            $.when(
+                $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
+                $.getScript('../assets/plugins/DataTables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js'),
+                $.getScript('../assets/js/demo/table-manage-fixed-columns.demo.min.js'),
+                $.Deferred(function (deferred) {
+                    $(deferred.resolve);
+                })
+            ).done(function () {
+                TableManageFixedColumns.init();
             });
         });
-    });
-    $.when(
-        $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
-        $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
-        $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Notification.init();
-    });*/
+        $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
+            $.when(
+                $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
+                $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
+                $.getScript('../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'),
+                $.getScript('../assets/plugins/masked-input/masked-input.min.js'),
+                $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
+                $.getScript('../assets/plugins/password-indicator/js/password-indicator.js'),
+                $.getScript('../assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js'),
+                $.getScript('../assets/plugins/bootstrap-select/bootstrap-select.min.js'),
+                $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js'),
+                $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js'),
+                $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
+                $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
+                $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),
+                $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
+                $.getScript('../assets/plugins/bootstrap-show-password/bootstrap-show-password.js'),
+                $.getScript('../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js'),
+                $.getScript('../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'),
+                $.getScript('../assets/plugins/clipboard/clipboard.min.js'),
+                $.Deferred(function (deferred) {
+                    $(deferred.resolve);
+                })
+            ).done(function () {
+                $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
+                    FormPlugins.init();
+                });
+            });
+        });
+        $.when(
+            $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
+            $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
+            $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
+            $.Deferred(function (deferred) {
+                $(deferred.resolve);
+            })
+        ).done(function () {
+            Notification.init();
+        });*/
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

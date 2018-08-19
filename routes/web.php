@@ -115,7 +115,10 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::prefix('Pedido')->group(function () {
         Route::get('/nuevopedido', 'NuevoPedidoController@index');
     });
-
+    /////CHINO ACA ESTA EL TYPEAHEAD/////////////
+    /// MIRA EL REPORTE_VENDEDOR, ALLI ESTA EL JAVASCRIPT(CODIGO) Y TIENES QUE IMPORTAR EL SCRIPT QUE DESCARGUE...
+    Route::get('/asd', 'AutocompleteController@BuscarUsuario');
+    //////////////////////////////////////////////////////////////
     Route::get('autocompletarpedidodni/{dni}', 'NuevoPedidoController@autoCompletarDni');
     Route::get('autocompletarselectdirecciones/{idtienda}', 'NuevoPedidoController@obtenerDirecciones');
     Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
