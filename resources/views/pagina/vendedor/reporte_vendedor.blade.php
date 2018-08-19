@@ -296,7 +296,7 @@
                         }
                         else {
                             if (row.estado === '2') {
-                                return '<div><a href="#"  title="Click para entregar producto" > <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                return '<div><i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></div>';
                             }
                             else {
                                 if (row.estado === '3') {
@@ -307,7 +307,7 @@
                                         return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
                                     } else {
 
-                                        return '<div><a href="#"  title="Click para entregar producto" ><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                        return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
                                     }
 
                                 }

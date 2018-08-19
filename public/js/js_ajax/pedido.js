@@ -225,7 +225,6 @@ function redirect() {
     $.ajax({
         type: "GET",
         url: "/Pedidos",
-
         dataType: "html",
         success: function (data) {
             $("#response").html(data);

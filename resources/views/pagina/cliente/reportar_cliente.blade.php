@@ -50,66 +50,66 @@
                             <thead>
                             <tr role="row">
 
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 159px;">
                                     Nombre Tienda
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 159px;">
+                                    Direccion Tienda
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 187px;">
+                                    Nombres y apellidos
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 159px;">
                                     Direccion Personal
                                 </th>
 
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
-                                    Direccion Tienda
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
-                                    Nombres y apellidos
-                                </th>
-
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 242px;">
+                                    style="width: 100%;; min-width: 60px;">
                                     DNI
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 242px;">
+                                    style="width: 100%;; min-width: 80px;">
                                     RUC
                                 </th>
 
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
+                                    style="width: 100%;; min-width: 70px;">
                                     Telefono
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
                                     Correo
                                 </th>
 
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
+                                    style="width: 100%;; min-width: 40px;">
                                     Estado
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
+                                    style="width: 100%;; min-width: 60px;">
                                     Opciones
                                 </th>
                             </tr>
@@ -142,6 +142,8 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>
+    App.setPageTitle('Clientes | ARPEMAR SAC');
+    App.restartGlobalFunction();
     $(function () {
         $('#data-table-fixed-header').DataTable({
             language: {
@@ -154,9 +156,9 @@
             ajax: '{!! route('datatable.clientes') !!}',
             columns: [
                 {data: 'tnombreTienda', name: 'tnombreTienda'},
-                {data: 'pdireccion', name: 'pdireccion'},
                 {data: 'dtnombreCalle', name: 'dtnombreCalle'},
                 {data: 'pnombres', name: 'pnombres'},
+                {data: 'pdireccion', name: 'pdireccion'},
                 {data: 'pdni', name: 'pdni'},
                 {data: 'pruc', name: 'pruc'},
                 {data: 'pnroCelular', name: 'pnroCelular'},

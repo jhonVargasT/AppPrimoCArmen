@@ -13,7 +13,7 @@ class Persona extends Model
 
     public static function listado()
     {
-        return static::select('persona.nombres as pnombres', 'persona.apellidos as papellidos', 'persona.nroCelular as pnroCelular', 'dt.idDireccionTienda as dtidDireccionTienda',
+        return static::select(DB::raw('Concat(persona.nombres,", ",persona.apellidos) as pnombres'), 'persona.nroCelular as pnroCelular', 'dt.idDireccionTienda as dtidDireccionTienda',
             'persona.correo as pcorreo', 'persona.dni as pdni', 'persona.ruc as pruc', 'persona.direccion  as pdireccion', 't.idTienda as tidTienda',
             'persona.estado as pestado', 't.nombreTienda as tnombreTienda', 'dt.nombreCalle as dtnombreCalle', 'persona.idPersona as idPersona')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')

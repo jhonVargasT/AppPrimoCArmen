@@ -119,7 +119,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="apellidos" id="apellidos"
                                                        data-parsley-group="step-1" data-parsley-required="true"
-                                                       class="form-control"/>
+                                                       class="form-control" />
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -231,12 +231,12 @@
 
 
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de usuario
+                                            <label class="col-md-3 col-sm-3 col-form-label text-md-right" for="email">Tipo de usuario
                                                 :</label>
-                                            <div class="col-md-4 col-sm-4">
+                                            <div class="col-md-6 col-sm-6">
                                                 <select class="form-control" type="text" id="tipousuario"
                                                         name="tipoPaquete"
-                                                        data-parsley-required="true" data-parsley-group="step-3">
+                                                        data-parsley-required="true" data-parsley-group="step-3"  >
                                                     <option selected disabled>Escoja..</option>
                                                     <option>Administrador</option>
                                                     <option>Vendedor</option>
@@ -248,7 +248,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="usuario" id="usuario" class="form-control"
                                                        data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="alphanum"/>
+                                                       data-parsley-type="alphanum" onmouseover="generarUsuario()"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -258,17 +258,6 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="password" name="password" id="password"
-                                                       class="form-control" data-parsley-group="step-3"
-                                                       data-parsley-required="true"/>
-                                            </div>
-                                        </div>
-                                        <!-- end form-group -->
-                                        <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">confirmar contraseña
-                                                <span class="text-danger">*</span></label>
-                                            <div class="col-md-6">
-                                                <input type="password" name="password2" id="password2"
                                                        class="form-control" data-parsley-group="step-3"
                                                        data-parsley-required="true"/>
                                             </div>
@@ -306,7 +295,7 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
-    App.setPageTitle('Agregar cliente | ARPEMAR SAC');
+    App.setPageTitle('Agregar usuarios | ARPEMAR SAC');
     App.restartGlobalFunction();
 
     $.when(

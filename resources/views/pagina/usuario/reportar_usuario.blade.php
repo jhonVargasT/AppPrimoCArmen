@@ -125,6 +125,8 @@
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>
+    App.setPageTitle('Usuarios | ARPEMAR SAC');
+    App.restartGlobalFunction();
     $(function () {
         $('#data-table-fixed-header').DataTable({
             language: {

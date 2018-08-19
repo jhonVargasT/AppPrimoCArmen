@@ -363,7 +363,7 @@
 </div>
 <!-- end panel -->
 <script>
-    App.setPageTitle('Agregar cliente | ARPEMAR SAC');
+    App.setPageTitle('Editar cliente | ARPEMAR SAC');
     App.restartGlobalFunction();
 
     $.when(

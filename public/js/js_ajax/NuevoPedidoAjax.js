@@ -377,7 +377,6 @@ function enviarPedido() {
         success: function (data) {
             if (data.error === 1) {
                 redirect(data.url);
-                gogogo();
             }
             else {
                 redirect(data.url);

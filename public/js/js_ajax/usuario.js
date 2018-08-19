@@ -133,6 +133,14 @@ function actualizarUsuario(idu, idp, estado) {
     })
 }
 
+function generarUsuario() {
+    var Nombre = $("#nombres").val();
+    var Apellido = $("#apellidos").val();
+    var arrnombre=Nombre.split(' ');
+    var arrapelli=Apellido.split(' ');
+    $("#usuario").val(arrnombre[0].charAt(0)+arrapelli[0]);
+}
+
 
 //ID DEL INPUT
 $('#txt_usuario').typeahead({

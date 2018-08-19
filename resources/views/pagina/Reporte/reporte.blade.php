@@ -292,7 +292,7 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
-    App.setPageTitle('Reporte | ARPEMAR SAC');
+    App.setPageTitle('Reporte administrador | ARPEMAR SAC');
     App.restartGlobalFunction();
     $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
         $.when(

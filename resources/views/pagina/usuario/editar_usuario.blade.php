@@ -302,7 +302,7 @@
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
-    App.setPageTitle('Agregar cliente | ARPEMAR SAC');
+    App.setPageTitle('Editar usuarios | ARPEMAR SAC');
     App.restartGlobalFunction();
 
     $.when(

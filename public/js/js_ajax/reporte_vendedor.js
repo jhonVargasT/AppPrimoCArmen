@@ -47,15 +47,13 @@ function llenarVerProductos(idpedido) {
                 data: function (row) {
                     if (row.estado === '1') {
                         return '<th">' +
-                            '<a href="#" class="btn btn-link" title="click para cambiar estado">' +
-                            '<i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i> \</a>' +
+                            '<i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i> ' +
                             '</th>';
                     }
                     else {
                         if (row.estado === '2') {
                             return '<th">' +
-                                '<a href="#" class="btn btn-link" title="click para cambiar estado"  >' +
-                                '<i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check"></i></a>' +
+                                '<i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check"></i>' +
                                 '</th>';
                         }
                         else {
@@ -77,8 +75,7 @@ function llenarVerProductos(idpedido) {
                                             '</th>';
                                     } else {
                                         return '<th">' +
-                                            '<a href="#" class="btn btn-link" title="click para cambiar estado" >' +
-                                            '<i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>' +
+                                            '<i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i>' +
                                             '</th>';
                                     }
                                 }

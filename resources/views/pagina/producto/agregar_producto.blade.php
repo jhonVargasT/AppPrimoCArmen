@@ -177,7 +177,7 @@
                                                 <input class="form-control" type="number" id="cantidadProductosPaquete"
                                                        name="cantidadProductosPaquete" data-parsley-required="true"
                                                        data-parsley-type="number" data-parsley-group="step-2" min="0"
-                                                       onchange="validarEnterosPositivos('cantidadProductosPaquete')">
+                                                       onchange="validarEnterosPositivos('cantidadProductosPaquete')" style="text-transform:uppercase">
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">

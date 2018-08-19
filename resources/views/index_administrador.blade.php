@@ -108,9 +108,22 @@
                         <span>Administrar datos</span>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="/Productos" data-toggle="ajax">
-                                <i class="fas fa-lg fa-fw m-r-10 fa-cubes"></i>
-                                Productos</a></li>
+                        <li class="has-sub">
+                            <a href="javascript:;">
+                                <b class="caret"></b>
+                                Menu producto
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="/Productos" data-toggle="ajax">
+                                        <i class="fas fa-lg fa-fw m-r-10 fa-cubes"></i>
+                                        Productos</a>
+                                </li>
+                                <li><a href="/datosadicionales" data-toggle="ajax">
+                                        <i class="fas fa-lg fa-fw m-r-10 fa-print"></i>Datos adicionales</a></li>
+
+                            </ul>
+                        </li>
                         <li><a href="/Clientes" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-users"></i>Clientes</a></li>
                         <li><a href="/Usuarios" data-toggle="ajax">
@@ -170,7 +183,7 @@
                         <span class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password2" id="password2"
-                               class="form-control" onmouseover="compararContraseñas()" />
+                               class="form-control" onmouseover="compararContraseñas()"/>
                     </div>
                 </div>
                 <div class="form-group row m-b-10" id="aviso">

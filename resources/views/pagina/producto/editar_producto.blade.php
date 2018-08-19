@@ -327,7 +327,7 @@
 </div>
 <!-- end panel -->
 <script>
-    App.setPageTitle('Agregar productos | ARPEMAR SAC');
+    App.setPageTitle('Editar productos | ARPEMAR SAC');
     App.restartGlobalFunction();
     $.when(
         $.getScript('../assets/plugins/parsley/dist/parsley.js'),

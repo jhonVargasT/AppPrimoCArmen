@@ -50,19 +50,16 @@ class UsuarioController extends Controller
         try {
             $persona = new Persona();
             $persona->dni = $request->dni;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombres = strtoupper($request->nombres);
+            $persona->apellidos = strtoupper($request->apellidos);
             $persona->fechaNacimiento = $request->fecha;
-            $persona->direccion = $request->direccion;
-            $persona->nroCelular = $request->nroCelular;
+            $persona->direccion = strtoupper($request->direccion);
             $persona->correo = $request->correo;
-            $persona->nroCelular = $request->nroCelular;
             $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;
-            $persona->departamento = $request->departamento;
-            $persona->provincia = $request->provincia;
-            $persona->nroCelular = $request->nroCelular;
-            $persona->distrito = $request->distrito;
+            $persona->departamento = strtoupper($request->departamento);
+            $persona->provincia = strtoupper($request->provincia);
+            $persona->distrito = strtoupper($request->distrito);
             $persona->usuarioCreacion = util::fecha();
             $usuario = new Usuario();
             if($request->tipousuario==='Administrador')
@@ -81,7 +78,7 @@ class UsuarioController extends Controller
                 $usuario->save();
                 $usuario->password=$request->password;
                 $usuario->tipoUsuario=$request->tipousuario;
-                Mail::to($usuario->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
+                Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
 
             });
 
@@ -129,32 +126,31 @@ class UsuarioController extends Controller
 
             $persona = Persona::findOrFail($request->idPersona);
             $persona->dni = $request->dni;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombres = strtoupper($request->nombres);
+            $persona->apellidos = strtoupper($request->apellidos);
             $persona->fechaNacimiento = $util->fecha_a_ingles($request->fechaNacimiento);
-            $persona->direccion = $request->direccion;
+            $persona->direccion = strtoupper($request->direccion);
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
-            $persona->nroCelular = $request->nroCelular;
             $persona->fechaActualizacion = $fecha;
-            $persona->nroCelular = $request->nroCelular;
-            $persona->departamento = $request->departamento;
-            $persona->provincia = $request->provincia;
-            $persona->nroCelular = $request->nroCelular;
-            $persona->distrito = $request->distrito;
+            $persona->departamento = strtoupper($request->departamento);
+            $persona->provincia = strtoupper($request->provincia);
+            $persona->distrito = strtoupper($request->distrito);
 
             $usuario = Usuario::findOrFail($id);
-            $usuario->password = $request->password;
+            $usuario->password = bcrypt($request->password);
             $usuario->usuario = $request->usuario;
             $usuario->passwordAntigua = '';
             $usuario->fechaCambioPassword = $fecha;
 
-            DB::transaction(function () use ($persona, $usuario) {
+            DB::transaction(function () use ($persona, $usuario,$request) {
                 $persona->save();
 
                 $usuario->id_Persona = $persona->idPersona;
                 $usuario->save();
-
+                $usuario->password=$request->password;
+                $usuario->tipoUsuario=$request->tipousuario;
+                Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
             });
 
             return 'success';

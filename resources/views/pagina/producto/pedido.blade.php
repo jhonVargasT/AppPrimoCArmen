@@ -256,7 +256,8 @@
     <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 </div>
 <script>
-
+    App.setPageTitle('Pedidos | ARPEMAR SAC');
+    App.restartGlobalFunction();
     $(function () {
         $('#data-table-fixed-header').DataTable({
             language: {

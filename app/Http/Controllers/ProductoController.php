@@ -70,7 +70,7 @@ class ProductoController extends Controller
     {
         try {
             $producto = new Producto();
-            $producto->nombre = $request->nombre;
+            $producto->nombre = strtoupper($request->nombre);
             $producto->tipoProducto = $request->tipoProducto;
             $producto->tipoPaquete = $request->tipoPaquete;
             $producto->cantidadPaquete = $request->cantidadPaquete;
@@ -120,7 +120,7 @@ class ProductoController extends Controller
     {
         try {
             $producto = Producto::findOrFail($id);
-            $producto->nombre = $request->nombre;
+            $producto->nombre = strtoupper($request->nombre);
             $producto->tipoProducto = $request->tipoProducto;
             $producto->tipoPaquete = $request->tipoPaquete;
             $producto->cantidadPaquete = $request->cantidadPaquete;

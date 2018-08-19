@@ -48,52 +48,94 @@
                             </tbody>
                             <thead>
                             <tr role="row">
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                          rowspan="1" colspan="1"
+                                          aria-label="Rendering engine: activate to sort column ascending"
+                                          style="width: 100%;; min-width: 187px;">
+                                    Nombre producto
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 100px;">
+                                    Stock unidades
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 40px;">
+                                    Tipo producto
+                                </th>
+                                <th class="text-nowrap sorting text-center"  tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 40px;">
+                                    Tipo paquete
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 40px;">
+                                    Cant paquete
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Prod/paquete
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 50px;">
+                                    Precio compra paquete
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 50px;">
+                                    precio venta paquete
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
-                                    Nombre
+                                    Comision vendedor/paquete
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 60px;">
-                                    Tipo
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                    style="width: 100%;; min-width: 100px;">
-                                    Stock
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
-                                    Unidad
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Cant unidades
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 117px;">
-                                    Precio Compra
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 117px;">
-                                    Precio unidad
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 117px;">
-                                    Fecha Ingreso
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
-                                    aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 159px;">
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Precio compra uni
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Precio venta uni
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 120px;">
+                                    Fecha ingreso
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
                                     Estado
                                 </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 100px;">
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
                                     Opciones
                                 </th>
                             </tr>
@@ -193,6 +235,8 @@
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 <script>
+    App.setPageTitle('Productos | ARPEMAR SAC');
+    App.restartGlobalFunction();
     $(function () {
         $('#data-table-fixed-header').DataTable({
             language: {
@@ -206,7 +250,6 @@
             ajax: '{!! route('datatable.productos') !!}',
             columns: [
                 {data: 'nombre', name: 'nombre'},
-                {data: 'tipoProducto', name: 'tipoProducto'},
                 {
                     data: function (row) {
                         if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 50)
@@ -228,13 +271,16 @@
                         }
                     }
                 },
-                {
-                    data: function (row) {
-                        return row.tipoPaquete;
-                    }
-                },
+                {data: 'tipoProducto', name: 'tipoProducto'},
+                {data:'tipoPaquete',name:'tipoPaquete'},
+                {data:'cantidadPaquete',name:'cantidadPaquete'},
+                {data:'cantidadProductosPaquete',name:'cantidadProductosPaquete'},
                 {data: 'precioCompra', name: 'precioCompra'},
+                {data: 'precioVenta', name: 'precioVenta'},
+                {data: 'comisionPaquete', name: 'comisionPaquete'},
+                {data: 'cantidadStockUnidad', name: 'cantidadStockUnidad'},
                 {data: 'precioCompraUnidad', name: 'precioCompraUnidad'},
+                {data: 'precioVentaUnidad', name: 'precioVentaUnidad'},
                 {data: 'fechaCreacion', name: 'fechaCreacion'},
                 {
                     data: function (row) {

@@ -49,24 +49,24 @@ class PersonaController extends Controller
             $persona = new Persona;
             $persona->dni = $request->dni;
             $persona->ruc = $request->ruc;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombres = strtoupper($request->nombres);
+            $persona->apellidos = strtoupper($request->apellidos);
             $persona->fechaNacimiento = date('Y-m-d H:i:s', strtotime($persona->fechaNacimiento));
-            $persona->direccion = $request->direccion;
+            $persona->direccion = strtoupper($request->direccion);
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
             $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;
-            $persona->departamento = $request->departamento;
-            $persona->provincia = $request->provincia;
+            $persona->departamento =strtoupper($request->departamento);
+            $persona->provincia = strtoupper($request->provincia);
             $persona->nroCelular = $request->nroCelular;
-            $persona->distrito = $request->distrito;
+            $persona->distrito = strtoupper($request->distrito);
             $persona->usuarioCreacion=Session('idusuario');
 
             $tienda = new Tienda;
-            $tienda->nombreTienda = $request->tnombreTienda;
-            $tienda->telefono = $request->ttelefono;
+            $tienda->nombreTienda = strtoupper($request->tnombreTienda);
+            $tienda->telefono = strtoupper($request->ttelefono);
             $tienda->fechaCreacion = util::fecha();
 
             $contdireccion = $request->val1;
@@ -81,9 +81,9 @@ class PersonaController extends Controller
 
                     for ($i = 1; $i <= $contdireccion; $i++) {
                         $direccionTienda = new DireccionTienda;
-                        $direccionTienda->distrito = $request->input('dtdistrito'.$i);
-                        $direccionTienda->provincia = $request->input('dtprovincia'.$i);
-                        $direccionTienda->nombreCalle = $request->input('dtnombreCalle'.$i);
+                        $direccionTienda->distrito = strtoupper($request->input('dtdistrito'.$i));
+                        $direccionTienda->provincia = strtoupper($request->input('dtprovincia'.$i));
+                        $direccionTienda->nombreCalle = strtoupper($request->input('dtnombreCalle'.$i));
                         $direccionTienda->fechaCreacion = util::fecha();
 
                         $direccionTienda->id_Tienda = $tienda->idTienda;
@@ -94,9 +94,9 @@ class PersonaController extends Controller
 
             } else {
                 $direccionTienda = new DireccionTienda;
-                $direccionTienda->distrito = $request->dtdistrito1;
-                $direccionTienda->provincia = $request->dtprovincia1;
-                $direccionTienda->nombreCalle = $request->dtnombreCalle1;
+                $direccionTienda->distrito = strtoupper($request->dtdistrito1);
+                $direccionTienda->provincia = strtoupper($request->dtprovincia1);
+                $direccionTienda->nombreCalle = strtoupper($request->dtnombreCalle1);
                 $direccionTienda->fechaCreacion = util::fecha();
 
                 DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
@@ -154,29 +154,29 @@ class PersonaController extends Controller
 
             $persona->dni = $request->dni;
             $persona->ruc = $request->ruc;
-            $persona->nombres = $request->nombres;
-            $persona->apellidos = $request->apellidos;
+            $persona->nombres = strtoupper($request->nombres);
+            $persona->apellidos = strtoupper($request->apellidos);
             $persona->fechaNacimiento = date('Y-m-d H:i:s', strtotime($persona->fechaNacimiento));
-            $persona->direccion = $request->direccion;
+            $persona->direccion = strtoupper($request->direccion);
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
             $persona->nroCelular = $request->nroCelular;
             $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;
-            $persona->departamento = $request->departamento;
-            $persona->provincia = $request->provincia;
+            $persona->departamento = strtoupper($request->departamento);
+            $persona->provincia = strtoupper($request->provincia);
             $persona->nroCelular = $request->nroCelular;
-            $persona->distrito = $request->distrito;
+            $persona->distrito = strtoupper($request->distrito);
 
             $tienda = Tienda::findOrFail($request->idTienda);
-            $tienda->nombreTienda = $request->tnombreTienda;
+            $tienda->nombreTienda = strtoupper($request->tnombreTienda);
             $tienda->telefono = $request->ttelefono;
             $tienda->fechaCreacion = util::fecha();
 
             $direccionTienda = DireccionTienda::findOrFail($request->idDireccionTienda);
-            $direccionTienda->distrito = $request->dtdistrito;
-            $direccionTienda->provincia = $request->dtprovincia;
-            $direccionTienda->nombreCalle = $request->dtnombreCalle;
+            $direccionTienda->distrito = strtoupper($request->dtdistrito);
+            $direccionTienda->provincia = strtoupper($request->dtprovincia);
+            $direccionTienda->nombreCalle = strtoupper($request->dtnombreCalle);
             $direccionTienda->fechaCreacion = util::fecha();
 
             DB::transaction(function () use ($persona, $tienda, $direccionTienda) {
