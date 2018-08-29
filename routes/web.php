@@ -46,7 +46,7 @@ Route::group(['middleware' => 'administrador'], function () {
     Route::get('/actualizarProducto', 'ProductoController@actualizarProducto');
 
     Route::get('/enviarCorreo', 'CorreoController@correoCreacionUsuario');
-
+    Route::get('/llenartipos', 'DatosAdiconalesController@llenarTipos');
     Route::prefix('Producto')->group(function () {
         Route::get('/create', 'ProductoController@create');
         Route::post('/store', 'ProductoController@store');
@@ -62,8 +62,7 @@ Route::group(['middleware' => 'administrador'], function () {
     Route::get('/cambiarestadotipoproducto/{id}', 'DatosAdiconalesController@cambiarEstadoTipoProducto');
     Route::get('/cambiarestadotipopaquete/{id}', 'DatosAdiconalesController@cambiarEstadoTipoPaquete');
     ///////Editar///////////////////
-    Route::get('/editartipoproducto/{id}/{nombre}', 'DatosAdiconalesController@editarEstadoTipoProducto');
-    Route::get('/editartipoproducto/{id}/{nombre}', 'DatosAdiconalesController@editarEstadoTipoPaquete');
+    Route::get('/editartipos/{id}/{nombre}/{tipo]', 'DatosAdiconalesController@editarNombreTipo');
 //////////////////////////////////////USUARIOS///////////////////////////////////////////////
   
     Route::get('Usuarios', 'UsuarioController@index');
@@ -170,3 +169,5 @@ Route::get('/reporte', function () {
 });
 
 Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos');
+
+Route::get('/PRUEBA', 'DatosAdiconalesController@llenarTipos');

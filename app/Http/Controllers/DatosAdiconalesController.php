@@ -71,7 +71,7 @@ class DatosAdiconalesController extends Controller
             TipoProducto::cambiarEstado($id, $estado);
             return 'success';
         } catch (Excepion $e) {
-           return 'Error';
+            return 'Error';
         }
     }
 
@@ -90,22 +90,32 @@ class DatosAdiconalesController extends Controller
             return 'Error';
         }
     }
-    public function editarEstadoTipoProducto($id,$nombre)
+
+    public function editarNombreTipo($id, $nombre, $tipo)
     {
         try {
-            TipoProducto::editar($id, $nombre);
+            if ($tipo === 0) {
+                TipoProducto::editar($id, $nombre);
+            } elseif ($tipo === 1) {
+                TipoPaquete::editar($id, $nombre);
+            }
             return 'success';
         } catch (Excepion $e) {
             return 'Error';
         }
     }
-    public function editarEstadoTipoPaquete($id,$nombre)
+
+    public function llenarTipos()
     {
-        try {
-            TipoPaquete::editar($id, $nombre);
-            return 'success';
-        } catch (Excepion $e) {
-            return 'Error';
+        try{
+            $tipopro=TipoProducto::listarTipoProducto();
+            $tipopaque=TipoPaquete::listarTipoPaquete();
+            return response()->json(array('tipoproducto' => $tipopro, 'tipopaquete' => $tipopaque));
+        }catch (Exception $e)
+        {
+            return 'error';
         }
     }
+
+
 }

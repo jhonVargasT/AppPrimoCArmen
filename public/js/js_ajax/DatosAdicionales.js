@@ -18,11 +18,13 @@ function agregarTipoPaquete() {
                 data: '_token = <?php echo csrf_token() ?>',
                 success: function (data) {
                     if (data === 'success') {
-
+                        ok();
+                        redirect('datosadicionales');
                     }
                     else {
                         if (data === 'error') {
-
+                            error();
+                            redirect('datosadicionales');
                         }
                     }
 
@@ -52,11 +54,13 @@ function agregarTipoProducto() {
                 data: '_token = <?php echo csrf_token() ?>',
                 success: function (data) {
                     if (data === 'success') {
-
+                        ok();
+                        redirect('datosadicionales');
                     }
                     else {
                         if (data === 'error') {
-
+                            error();
+                            redirect('datosadicionales');
                         }
                     }
 
@@ -98,11 +102,13 @@ function cambEstadoTipoProd(idtipoprodu) {
                 data: '_token = <?php echo csrf_token() ?>',
                 success: function (data) {
                     if (data === 'success') {
-
+                        actualizado();
+                        redirect('datosadicionales');
                     }
                     else {
                         if (data === 'error') {
-
+                            error();
+                            redirect('datosadicionales');
                         }
                     }
 
@@ -135,11 +141,13 @@ function cambEstadoTipoPaque(idtipopaque) {
                 data: '_token = <?php echo csrf_token() ?>',
                 success: function (data) {
                     if (data === 'success') {
-
+                        actualizado();
+                        redirect('datosadicionales');
                     }
                     else {
                         if (data === 'error') {
-
+                            error();
+                            redirect('datosadicionales');
                         }
                     }
 
@@ -152,6 +160,89 @@ function cambEstadoTipoPaque(idtipopaque) {
 
 }
 
-function redirect() {
+function cambiarNombre(id, nombre, tip) {
+    "use strict";
+    swal({
+        title: 'ALERTA',
+        text: "Desea camvbiar de estado?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, cambiar!"
+    }).then(function (result) {
+        if (result.value) {
+            var url = '/editartipos/' + id + '/' + nombre + '/' + tip;
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: '_token = <?php echo csrf_token() ?>',
+                success: function (data) {
+                    if (data === 'success') {
+                        ok();
+                        redirect('datosadicionales');
+                    }
+                    else {
+                        if (data === 'error') {
+                            error();
+                            redirect('datosadicionales');
+                        }
+                    }
 
+                }
+            });
+
+        }
+    })
+}
+
+function redirect(ruta) {
+    $.ajax({
+        type: "GET",
+        url: "/" + ruta,
+
+        dataType: "html",
+        success: function (data) {
+            $("#response").html(data);
+        }
+    });
+}
+
+function ok() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: 'Datos registrados'
+    })
+}
+
+function actualizado() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: 'Datos actualizados'
+    })
+}
+
+function error() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'error',
+        title: 'Error'
+    })
 }

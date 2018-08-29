@@ -403,7 +403,36 @@ function redirect(ruta) {
 
 //autocompletado
 
-$(document).on('ready',function () {
-
+//ID DEL INPUT
+$('#txt_usuario').typeahead({
+        hint: true,
+        highlight: true,
+        minLength: 1
+    },
+    {
+        name: 'data',
+        displayKey: 'name',
+        source: function (query, process) {
+            $.ajax({
+                url: "/autocomplete/filtrarUsuario",//RUTA
+                type: 'GET',
+                data: 'query=' + query,
+                dataType: 'JSON',
+                async: 'false',
+                success: function (data) {
+                    bondObjs = {};
+                    bondNames = [];
+                    $.each(data, function (i, item) {
+                        bondNames.push({id: item.id, name: item.name, codigo: item.codigo});
+                        bondObjs[item.id] = item.id;
+                        bondObjs[item.name] = item.name;
+                        bondObjs[item.codigo] = item.codigo;
+                    });
+                    process(bondNames);
+                }
+            });
+        }
+    }).on('typeahead:selected', function (even, datum) {
+    $("#txt_usuario_id").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
 });
 

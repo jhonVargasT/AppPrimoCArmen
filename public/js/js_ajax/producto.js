@@ -226,4 +226,55 @@ function validarEnterosPositivos($id) {
 }
 
 
+function cargarSelectTipoProducto()
+{
+    "use strict";
+    var url = "/llenartipos";
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            var select = $('#tipoProducto');
+            select.find('option').remove();
+          for (var i = 0; i < data.tipoproducto.length; i++) {
+                select.append('<option id="' + data.tipoproducto[i].nombre+ '">' + data.tipoproducto[i].nombre+ '</option>');
+            }
+
+
+        }
+
+    });
+
+}
+
+
+function cargarSelectTipoPaquete()
+{
+    "use strict";
+    var url = "/llenartipos";
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            var select = $('#tipoPaquete');
+            select.find('option').remove();
+            for (var i = 0; i < data.tipopaquete.length; i++) {
+                select.append('<option id="' + data.tipopaquete[i].nombre+ '">' + data.tipopaquete[i].nombre+ '</option>');
+            }
+
+
+        }
+
+    });
+
+
+}
+
+
 

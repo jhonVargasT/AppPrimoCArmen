@@ -124,13 +124,10 @@
                                             <label class="col-md-2 col-sm-2 col-form-label">Tipo de producto
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
-                                                <select class="form-control" type="text" id="tipoProducto"
-                                                        name="tipoProducto" data-parsley-group="step-1"
-                                                        data-parsley-required="true">
-                                                    <option selected disabled>Escoja..</option>
-                                                    <option>Caramelos</option>
-                                                    <option>Galleta</option>
-                                                    <option>Gaseosa</option>
+                                                <select id="tipoProducto" class=" form-control" onclick="cargarSelectTipoProducto()">
+                                                    <option>
+                                                        Seleccione
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
@@ -160,15 +157,12 @@
                                             <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de paquete
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
-                                                <select class="form-control" type="text" id="tipoPaquete"
-                                                        name="tipoPaquete"
-                                                        data-parsley-required="true" data-parsley-group="step-2">
-                                                    <option selected disabled>Escoja..</option>
-                                                    <option>Caja</option>
-                                                    <option>Paquete</option>
-                                                    <option>Tira</option>
-                                                    <option>Bolsas</option>
-                                                </select></div>
+                                                    <select id="tipoPaquete" class=" form-control" onclick="cargarSelectTipoPaquete()">
+                                                        <option>
+                                                            Seleccione
+                                                        </option>
+                                                    </select>
+                                            </div>
                                         </div>
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-2 col-sm-2 col-form-label">Cantidad de
@@ -332,6 +326,7 @@
     ).done(function () {
         FormWizardValidation.init();
     });
+
     $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
         $.when(
             $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
