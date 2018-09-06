@@ -56,34 +56,6 @@
 </h1>
 <!-- final cabecera -->
 
-<input type="text" class="typeahead form-control" placeholder="typeahead" id="txt_usuario"/>
-<script>
-    $('#txt_usuario').typeahead({
-        name: 'data',
-        displayKey: 'name',
-        source: function (query, process) {
-            $.ajax({
-                url: "/asd",
-                type: 'GET',
-                data: 'query=' + query,
-                dataType: 'JSON',
-                async: 'false',
-                success: function (data) {
-                    bondObjs = {};
-                    bondNames = [];
-                    $.each(data, function (i, item) {
-                        bondNames.push({id: item.idUsuario, name: item.usuario});
-                        bondObjs[item.id] = item.idUsuario;
-                        bondObjs[item.name] = item.usuario;
-                    });
-                    process(bondNames);
-                }
-            });
-        }
-    }).on('typeahead:selected', function (even, datum) {
-        $("#txt_usuario_id").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
-    });
-</script>
 
 <!-- begin panel -->
 <div class="panel panel-inverse">

@@ -47,12 +47,30 @@ class NuevoPedidoController extends Controller
     public function autocompletarNombresApellidos($nombresApellidos)
     {
         try {
-            $arreglo = array();
-            $nombresApellido = Persona::obtenerDatosNombresApellidos($nombresApellidos);
-            foreach ($nombresApellido as $na) {
-                array_push($arreglo, array('nombresapellidos' => $na->apellidos . ', ' . $na->nombres, 'dni' => $na->dni));
+
+            $mitad = explode(", ", $nombresApellidos);
+            $apenbusc = $mitad[0];
+            $nombrebusc = $mitad[1];
+
+            $dni=null;
+            $nombres = null;
+            $tienda = null;
+            $idtienda = null;
+            $idpersona = null;
+            $result = Persona::obtenerDatosNombresApellidos($apenbusc, $nombrebusc);
+
+            foreach ($result as $p) {
+                $nombres = $p->apellidos . ', ' . $p->nombres;
+                $tienda = $p->tienda;
+                $dni=$p->dni;
+                $idtienda = $p->idTienda;
+                $idpersona = $p->idPersona;
+
             }
-            return json_encode($arreglo);
+            if ($nombres != null)
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona,'dni'=>$dni), 200);
+            else
+                return response()->json(array('error' => 1));
         } catch (Exception $e) {
             echo $e;
         }
@@ -61,16 +79,28 @@ class NuevoPedidoController extends Controller
     public function autoCompletarNombreTiendaTienda($nombreTienda)
     {
         try {
-            $arreglo = array();
-            $nombreTienda = Persona::obtenerDatosNombreTienda($nombreTienda);
-            foreach ($nombreTienda as $nt) {
-                array_push($arreglo, array('nombretienda' => $nt->tienda, 'dni' => $nt->dni));
+
+            $dni=null;
+            $nombres = null;
+            $tienda = null;
+            $idtienda = null;
+            $idpersona = null;
+            $result = Persona::obtenerDatosNombreTienda($nombreTienda);
+
+            foreach ($result as $p) {
+                $nombres = $p->apellidos . ', ' . $p->nombres;
+                $tienda = $p->tienda;
+                $dni=$p->dni;
+                $idtienda = $p->idTienda;
+                $idpersona = $p->idPersona;
+
             }
-
-            return json_encode($arreglo);
-
+            if ($nombres != null)
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona,'dni'=>$dni), 200);
+            else
+                return response()->json(array('error' => 1));
         } catch (Exception $e) {
-            return $e;
+            echo $e;
         }
     }
 
@@ -93,7 +123,7 @@ class NuevoPedidoController extends Controller
     {
         $nombre = null;
         try {
-            $producto = Producto::consultarProducto($idproducto);
+            $producto = Producto::consultarProductoNombre($idproducto);
             foreach ($producto as $p) {
                 $idProducto = $p->idProducto;
                 $nombre = $p->nombre;
@@ -135,7 +165,7 @@ class NuevoPedidoController extends Controller
             $pedido->costoBruto = $persona->total;
             $pedido->descuento = 0;
             $pedido->totalPago = $persona->total;
-            $pedido->idUsuario =  Session('idusuario');
+            $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->id_Boleta = null;
             $pedido->id_DireccionTienda = $persona->tienda;
@@ -145,7 +175,7 @@ class NuevoPedidoController extends Controller
                 $pedido->save();
                 foreach ($productos as $pr) {
                     $stockproducto = Producto::consultarProducto($pr->id);
-                    $productopedido = new ProductoPedido;
+                    $productopedido = new ProductoPedido();
                     $unidades = $pr->unidades;
                     $paquetes = $pr->paquete;
                     $productopedido->cantidadUnidades = $unidades;

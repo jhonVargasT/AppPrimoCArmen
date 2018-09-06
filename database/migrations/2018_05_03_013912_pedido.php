@@ -24,6 +24,7 @@ class Pedido extends Migration
             $table->string('usuarioEliminacion')->nullable();
             $table->string('razonEliminar')->nullable();
             $table->double('costoBruto')->nullable();
+            $table->double('impuesto')->nullable();
             $table->double('descuento')->nullable();
             $table->double('totalPago')->nullable();
             $table->integer('idUsuario')->nullable();

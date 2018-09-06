@@ -15,10 +15,18 @@ class Boleta extends Migration
     {
         Schema::create('boleta', function (Blueprint $table) {
             $table->collate = 'latin1_spanish_ci';
-
             $table->increments('idBoleta')->unique();
             $table->integer('idUsuario')->nullable();
+            $table->integer('idcliente')->nullable();
+            $table->string('nroboleta')->nullable();
+            $table->string('montototal')->nullable();
+            $table->string('montoletras')->nullable();
+            $table->integer('tipocomprobante')->nullable();
+            $table->integer('nroimpresiones')->nullable();
+            $table->dateTime('fechaEntrega')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
+            $table->integer('entregado')->default('0');
+            $table->integer('estado')->default('1');
         });
     }
 

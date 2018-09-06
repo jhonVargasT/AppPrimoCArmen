@@ -2,6 +2,7 @@
 
 namespace App;
 
+use http\Exception;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -59,30 +60,33 @@ class Persona extends Model
 
     }
 
-    public static function obtenerDatosNombresApellidos($nombresApellidos)
+    public static function obtenerDatosNombresApellidos( $apellidos,$nombres)
     {
-        try {
-
-            return static::select('persona.apellidos', 'persona.nombres', 'persona.dni')
-                ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
-                ->where('persona.apellidos','like','%'.$nombresApellidos.'%' )
-                /* ->where('persona.estado',1)
-                 ->where('t.estado',1)*/
-                ->get();
-
-        }catch (Exception $e )
-        {
-            return $e;
-        }
+        return static::select('persona.apellidos', 'persona.nombres','persona.dni', 't.nombreTienda as tienda', 't.idTienda' , 'persona.idPersona')
+            ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
+            ->where('persona.apellidos', $apellidos)
+            ->where('persona.nombres', $nombres)
+            /* ->where('persona.estado',1)
+             ->where('t.estado',1)*/
+            ->get();
     }
 
     public static function obtenerDatosNombreTienda($nombreTienda)
     {
-        return static::select('t.nombreTienda as tienda', 'persona.dni')
+        return static::select('persona.apellidos', 'persona.nombres','persona.dni', 't.nombreTienda as tienda', 't.idTienda' , 'persona.idPersona')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
-            ->where('t.nombreTienda', 'like', '%'.$nombreTienda.'%')
+            ->where('t.nombreTienda', $nombreTienda)
             /* ->where('persona.estado',1)
              ->where('t.estado',1)*/
+            ->get();
+    }
+
+    public static function findByCodigoOrDescription($term)
+    {
+        return static::select('idPersona', DB::raw('concat(apellidos,", ",nombres) as nombres'), DB::raw('concat(idPersona," | ",apellidos) as name'))
+            ->Where(DB::raw('concat(idPersona," ",concat(nombres,", ",apellidos))'), 'LIKE', "%$term%")
+            ->Where('estado', '=', 1)
+            ->limit(50)
             ->get();
     }
 }

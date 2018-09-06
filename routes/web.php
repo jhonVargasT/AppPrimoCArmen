@@ -116,13 +116,21 @@ Route::group(['can:administrador,vendedor'], function () {
     });
     /////CHINO ACA ESTA EL TYPEAHEAD/////////////
     /// MIRA EL REPORTE_VENDEDOR, ALLI ESTA EL JAVASCRIPT(CODIGO) Y TIENES QUE IMPORTAR EL SCRIPT QUE DESCARGUE...
-    Route::get('/asd', 'AutocompleteController@BuscarUsuario');
+    Route::get('/buscarporcliente', 'AutocompleteController@buscarPorCliente');
+    Route::get('/buscarportienda', 'AutocompleteController@buscarPorTienda');
+    Route::get('/buscarnombre','AutocompleteController@buscarNombreProducto');
+
     //////////////////////////////////////////////////////////////
+    ///
     Route::get('autocompletarpedidodni/{dni}', 'NuevoPedidoController@autoCompletarDni');
     Route::get('autocompletarselectdirecciones/{idtienda}', 'NuevoPedidoController@obtenerDirecciones');
     Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
     Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
     Route::get('enviarpedidos/{array}', 'NuevoPedidoController@enviarPedidos');
+
+
+
+
 //añadir producto al carrito
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
 //reporte vendedor

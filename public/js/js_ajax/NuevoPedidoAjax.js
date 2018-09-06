@@ -48,8 +48,19 @@ function completarTienda() {
             dataType: 'json',
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
-
+                if (data.error === 0) {
+                    $("#dni").val(data.dni);
+                    $("#nombresapellidos").val(data.nombre);
+                    $("#nombretienda").val(data.tienda);
+                    $("#idtienda").val(data.idtienda);
+                    $("#idpersona").val(data.idpersona);
+                }
+                else {
+                    error('Usuario no esta registrado!');
+                    limpiarDatos();
+                }
             }
+
         }
     );
 }
@@ -67,13 +78,17 @@ function completarNombresApellidos() {
             dataType: 'json',
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
-                $('#nombresapellidos').typeahead({
-                    source: function (data, process) {
-                        return $.get('/typeahead', {query: query}, function (data) {
-                            return process(data.options);
-                        });
-                    }
-                });
+                if (data.error === 0) {
+                    $("#dni").val(data.dni);
+                    $("#nombresapellidos").val(data.nombre);
+                    $("#nombretienda").val(data.tienda);
+                    $("#idtienda").val(data.idtienda);
+                    $("#idpersona").val(data.idpersona);
+                }
+                else {
+                    error('Usuario no esta registrado!');
+                    limpiarDatos();
+                }
             }
 
         }
@@ -119,6 +134,7 @@ function buscarProductoNombre() {
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
             if (data.error === 1) {
+                $("#id_producto").val(data.idproducto);
                 $("#nompro").html(data.nombre);
                 $("#tippro").html(data.tipoproducto);
                 $("#tippa").html(data.tipopaquete);
@@ -227,7 +243,7 @@ function activarBotonAnadirProducto() {
 
 function anadirProductoATabla() {
     var res = false;
-    var idproducto = $("#nombre_producto").val();
+    var idproducto = $("#id_producto").val();
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
     var numerounidades = $("#numero_unidades").val();

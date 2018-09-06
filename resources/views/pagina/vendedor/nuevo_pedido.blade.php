@@ -16,6 +16,9 @@
 
 
 <!-- ================== END PAGE LEVEL STYLE ================== -->
+
+
+<!---------->
 <div id="response">
     <h1 class="page-header">Nuevo pedido
         <small>Aqui puedo vender los productos</small>
@@ -52,15 +55,72 @@
                 <div class="form-group row m-b-15">
                     <label class="col-form-label col-md-3">Nombres y apellidos</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control m-b-5" id="nombresapellidos" name="nombresapellidos"
-                               >
+                        <input type="text" class="form-control m-b-5 typeahead" id="nombresapellidos"
+                               name="nombresapellidos" onkeypress="if(event.keyCode == 13) completarNombresApellidos()"
+                        >
+                        <script>
+                            $('#nombresapellidos').typeahead({
+                                name: 'data',
+                                displayKey: 'name',
+                                source: function (query, process) {
+                                    $.ajax({
+                                        url: "/buscarporcliente",
+                                        type: 'GET',
+                                        data: 'query=' + query,
+                                        dataType: 'JSON',
+                                        async: 'false',
+                                        success: function (data) {
+                                            bondObjs = {};
+                                            bondNames = [];
+                                            $.each(data, function (i, item) {
+                                                bondNames.push({id: item.idPersona, name: item.nombres});
+                                                bondObjs[item.id] = item.idPersona;
+                                                bondObjs[item.name] = item.nombres;
+                                            });
+                                            process(bondNames);
+                                        }
+                                    });
+                                }
+                            }).on('typeahead:selected', function (even, datum) {
+                                $("#nombresapellidos").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+                            });
+                        </script>
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
                     <label class="col-form-label col-md-3">Nombre tienda</label>
                     <div class="col-md-9">
-                        <input type="text" class="form-control m-b-5" id="nombretienda" name="nombretienda"
-                               onkeyup="completarTienda()">
+
+                        <input type="text" class="form-control m-b-5 typeahead" id="nombretienda" name="nombretienda"
+                               onkeypress="if(event.keyCode == 13) completarTienda()"
+                        >
+                        <script>
+                            $('#nombretienda').typeahead({
+                                name: 'data',
+                                displayKey: 'name',
+                                source: function (query, process) {
+                                    $.ajax({
+                                        url: "/buscarportienda",
+                                        type: 'GET',
+                                        data: 'query=' + query,
+                                        dataType: 'JSON',
+                                        async: 'false',
+                                        success: function (data) {
+                                            bondObjs = {};
+                                            bondNames = [];
+                                            $.each(data, function (i, item) {
+                                                bondNames.push({id: item.idPersona, name: item.nombreTienda});
+                                                bondObjs[item.id] = item.idPersona;
+                                                bondObjs[item.name] = item.nombreTienda;
+                                            });
+                                            process(bondNames);
+                                        }
+                                    });
+                                }
+                            }).on('typeahead:selected', function (even, datum) {
+                                $("#nombretienda").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+                            });
+                        </script>
                     </div>
                 </div>
 
@@ -177,100 +237,133 @@
                         <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto"> <strong> Nombre producto
                                 :</strong></label>
                         <div class="col-md-6 col-sm-6">
-                            <input onkeypress="if(event.keyCode == 13) buscarProductoNombre()" id="nombre_producto"
-                                   type="text" class="form-control m-b-12"
-                            />
+                            <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
+                                   name="id_producto" hidden
+                            >
+                            <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
+                                   onkeypress="if(event.keyCode == 13) buscarProductoNombre()"
+                                   name="nombre_producto"
+                            >
+                            <script>
+                                $('#nombre_producto').typeahead({
+                                    name: 'data',
+                                    displayKey: 'name',
+                                    source: function (query, process) {
+                                        $.ajax({
+                                            url: "/buscarnombre",
+                                            type: 'GET',
+                                            data: 'query=' + query,
+                                            dataType: 'JSON',
+                                            async: 'false',
+                                            success: function (data) {
+                                                bondObjs = {};
+                                                bondNames = [];
+                                                $.each(data, function (i, item) {
+                                                    bondNames.push({id: item.idProducto, name: item.nombre});
+                                                    bondObjs[item.id] = item.idProducto;
+                                                    bondObjs[item.name] = item.nombre;
+                                                });
+                                                process(bondNames);
+                                            }
+                                        });
+                                    }
+                                }).on('typeahead:selected', function (even, datum) {
+                                    $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+                                });
+                            </script>
+
                         </div>
                     </div>
                     <div class="bg-orange-lighter">
                         <div class="row form-group row m-b-15 ">
-                            <label class=" col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
+                            <label class="col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
                                             producto </strong></u></h4>
                             </label>
                         </div>
+
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="nompro">Nombre producto
+                            <label class="col-form-label text-right" for="nompro">&nbsp;&nbsp;&nbsp;Nombre producto
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="nompro"
+                            <label class="col-form-label text-left" id="nompro"
                                    name="nompro"> </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippro">Tipo producto
+                            <label class="col-form-label text-right" for="tippro">&nbsp;&nbsp;&nbsp;Tipo producto
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippro" name="tippro"></label>
+                            <label class="col-form-label text-left" id="tippro" name="tippro"></label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="tippa">Tipo paquete
+                            <label class="col-form-label text-right" for="tippa">&nbsp;&nbsp;&nbsp;Tipo paquete
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="tippa" name="tippa"></label>
+                            <label class="col-form-label text-left" id="tippa" name="tippa"></label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="capa">Cant unid x paq
+                            <label class="col-form-label text-right" for="capa">&nbsp;&nbsp;&nbsp;Cant unid x paq
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="capa" name="capa"></label>
+                            <label class=" col-form-label text-left" id="capa" name="capa"></label>
                         </div>
                     </div>
 
 
                     <div class="bg-green-lighter">
                         <div class="row form-group row m-b-15 ">
-                            <label class=" col-md-12 col-form-label text-center"><h4><u><strong> Stock del
+                            <label class="col-md-12 col-form-label text-center"><h4><u><strong> Stock del
                                             producto </strong> </u></h4>
                             </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-3 col-sm-3 col-form-label text-right">Paquete :</label>
+                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;Paquete :</label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadpa">Cantidad
+                            <label class="col-form-label text-right" for="cantidadpa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadpa"
+                            <label class="col-form-label text-left" id="cantidadpa"
                                    name="cantidadpa"> </label>
-                            <label class="col-md-3 col-sm-3 col-form-label text-left" for="preciopa">Precio c/u
+                            <label class="col-form-label text-left" for="preciopa">Precio c/u
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="preciopa"
+                            <label class=" col-form-label text-left" id="preciopa"
                                    name="preciopa"> </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-3 col-sm-3 col-form-label text-right">Unidad :</label>
+                            <label class="col-form-label text-right">&nbsp;&nbsp;&nbsp;Unidad :</label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-md-4 col-sm-4 col-form-label text-right" for="cantidadun">Cantidad
+                            <label class="col-form-label text-right" for="cantidadun">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="cantidadun"
+                            <label class="col-form-label text-left" id="cantidadun"
                                    name="cantidadun"> </label>
-                            <label class="col-md-3 col-sm-3 col-form-label text-left" for="precioun">Precio c/u
+                            <label class="col-form-label text-left" for="precioun">Precio c/u
                                 :</label>
-                            <label class="col-md-1 col-sm-1 col-form-label text-left" id="precioun"
+                            <label class="col-form-label text-left" id="precioun"
                                    name="precioun"> </label>
                         </div>
                         <hr>
                     </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-5 col-sm-5 col-form-label" for="numero_paquetes"> <strong>Numero de
+                    <div class="row form-group m-b-15 ">
+                        <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
                                 packetes </strong></label>
                         <div class="col-md-2 col-sm-2">
-                            <input id="numero_paquetes" type="number" class="form-control m-b-5"
+                            <input id="numero_paquetes" type="number" class="form-control m-b-1 "
                                    data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
                         </div>
-
-                        <label class="col-md-2 col-sm-2 col-form-label text-right" for="totpaque">Total :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="totpaque"></label>
+                        <label class="col-form-label text-left" for="totpaque">Total :</label>
+                        <label class="col-form-label text-left" id="totpaque"></label>
                     </div>
-                    <div class="row form-group row m-b-15">
-                        <label class="col-md-5 col-sm-5 col-form-label" for="numero_unidades"> <strong>Numero de
+                    <div class="row form-group  m-b-15">
+                        <label class="col-form-label" for="numero_unidades"> <strong>Numero de
                                 unidades </strong></label>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_unidades" type="number" class="form-control m-b-5"
                                    data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
                         </div>
-                        <label class="col-md-2 col-sm-2 col-form-label text-right" for="totunu">Total :</label>
-                        <label class="col-md-1 col-sm-1 col-form-label text-left" id="totunu"> </label>
+                        <label class=" col-form-label text-left" for="totunu">Total :</label>
+                        <label class=" col-form-label text-left" id="totunu"> </label>
                     </div>
                     <div class="row form-group row m-b-15">
-                        <label class="col-md-11 col-sm-11 col-form-label  text-right" for="total"> <strong>Total
+                        <label class=" col-form-label text-right" for="total"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum
+                                totales
                                 : </strong></label>
-                        <label class="col-md-1 col-sm-1 col-form-label" id="total"></label>
+                        <label class="col-form-label text-right" id="total"></label>
                     </div>
 
                 </div>

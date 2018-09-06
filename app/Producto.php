@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Producto extends Model
 {
@@ -31,6 +32,15 @@ class Producto extends Model
             ->update(['estado' => $estado]);
     }
 
+    public static function consultarProductoNombre($nombre)
+    {
+        return static::select('*')
+            ->from('producto as p')
+            ->where('p.nombre', $nombre)
+            ->get();
+
+    }
+
     public static function consultarProducto($idproducto)
     {
         return static::select('*')
@@ -48,6 +58,14 @@ class Producto extends Model
     public function comisiones()
     {
         return $this->hasMany('App\Comision');
+    }
+
+    public static function findByCodigoOrDescription($term)
+    {
+        return static::select('idProducto', 'nombre', DB::raw('concat(idProducto," | ",nombre) as name'))
+            ->Where('nombre', 'LIKE', "%$term%")
+            ->limit(50)
+            ->get();
     }
 
 

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Tienda extends Model
 {
@@ -18,5 +19,13 @@ class Tienda extends Model
     public function personas()
     {
         return $this->belongsTo('App\Persona');
+    }
+    public static function findByCodigoOrDescription($term)
+    {
+        return static::select('idTienda', 'nombreTienda', DB::raw('concat(idTienda," | ",nombreTienda) as name'))
+            ->Where('nombreTienda', 'LIKE', "%$term%")
+            ->Where('estado', '=', 1)
+            ->limit(50)
+            ->get();
     }
 }
