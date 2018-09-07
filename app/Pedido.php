@@ -58,6 +58,7 @@ class Pedido extends Model
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->join('usuario as us', 'us.idUsuario', '=', 'p.idUsuario')
             ->where(DB::raw('DATE(p.fechaEntrega)'), '>=', DB::raw('DATE(NOW())'))
+
             ->groupBy('p.idPedido')
             ->orderBy('p.idPedido', 'DESC')
             ->get();

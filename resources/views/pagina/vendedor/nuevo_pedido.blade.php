@@ -11,6 +11,7 @@
 <link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet"/>
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+<script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
 <script src="{{ asset('js/js_ajax/producto.js') }}"></script>
 <script src="{{ asset('js/js_ajax/NuevoPedidoAjax.js') }}"></script>
 

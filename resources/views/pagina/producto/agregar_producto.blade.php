@@ -124,10 +124,8 @@
                                             <label class="col-md-2 col-sm-2 col-form-label">Tipo de producto
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
-                                                <select id="tipoProducto" class=" form-control" onclick="cargarSelectTipoProducto()">
-                                                    <option>
-                                                        Seleccione
-                                                    </option>
+                                                <select id="tipoProducto"  name="tipoProducto" class=" form-control" onmouseover="cargarSelectTipoProducto()">
+                                                            <option>Seleccionar</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -157,7 +155,7 @@
                                             <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de paquete
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
-                                                    <select id="tipoPaquete" class=" form-control" onclick="cargarSelectTipoPaquete()">
+                                                    <select id="tipoPaquete" name="tipoPaquete" class=" form-control" onmouseover="cargarSelectTipoPaquete()">
                                                         <option>
                                                             Seleccione
                                                         </option>

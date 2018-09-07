@@ -392,7 +392,7 @@ function enviarPedido() {
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
             if (data.error === 1) {
-                redirect(data.url);
+               // redirect(data.url);
             }
             else {
                 redirect(data.url);

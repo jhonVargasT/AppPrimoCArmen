@@ -71,7 +71,7 @@ class ProductoController extends Controller
         try {
             $producto = new Producto();
             $producto->nombre = strtoupper($request->nombre);
-            $producto->tipoProducto = $request->tipoProducto;
+            $producto->tipoProducto = $request->get('tipoProducto');
             $producto->tipoPaquete = $request->tipoPaquete;
             $producto->cantidadPaquete = $request->cantidadPaquete;
             $producto->cantidadProductosPaquete = $request->cantidadProductosPaquete;

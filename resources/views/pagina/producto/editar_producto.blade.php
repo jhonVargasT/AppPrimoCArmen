@@ -127,11 +127,8 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <select class="form-control" type="text" id="tipoProducto"
                                                         name="tipoProducto" data-parsley-group="step-1"
-                                                        data-parsley-required="true">
-                                                    <option selected readonly>{{$producto->tipoProducto}}</option>
-                                                    <option>Caramelos</option>
-                                                    <option>Galleta</option>
-                                                    <option>Gaseosa</option>
+                                                        data-parsley-required="true" onmouseover="cargarSelectTipoProducto()">
+                                                    <option selected>{{$producto->tipoProducto}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -163,12 +160,8 @@
                                             <div class="col-md-4 col-sm-4">
                                                 <select class="form-control" type="text" id="tipoPaquete"
                                                         name="tipoPaquete"
-                                                        data-parsley-required="true" data-parsley-group="step-2">
-                                                    <option selected readonly>{{$producto->tipoPaquete}}</option>
-                                                    <option>Caja</option>
-                                                    <option>Paquete</option>
-                                                    <option>Tira</option>
-                                                    <option>Bolsas</option>
+                                                        data-parsley-required="true" data-parsley-group="step-2" onmouseover="cargarSelectTipoPaquete()">
+                                                    <option selected >{{$producto->tipoPaquete}}</option>
                                                 </select></div>
                                         </div>
                                         <div class="form-group row m-b-10">
