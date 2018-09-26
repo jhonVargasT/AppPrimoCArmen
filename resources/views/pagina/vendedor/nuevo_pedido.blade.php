@@ -155,12 +155,8 @@
                 </a>
 
             </div>
-            <div class="col-md-12" align="right">
-                <label class="col-form-label ">Compra total : S/. <label class="col-form-label "
-                                                                         id="totalproducto">0.00 </label> </label>
-            </div>
-            <br>
 
+            <br>
 
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
@@ -213,6 +209,18 @@
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12" align="right">
+                <label class="col-form-label ">Op gravadas: S/. <label class="col-form-label "
+                                                                       id="totalproducto">0.00 </label> </label>
+            </div>
+            <div class="col-md-12" align="right">
+                <label class="col-form-label ">I.G.V : S/. <label class="col-form-label "
+                                                                  id="igv">0.00 </label> </label>
+            </div>
+            <div class="col-md-12" align="right">
+                <label class="col-form-label "> total : S/. <label class="col-form-label "
+                                                                   id="total">0.00 </label> </label>
             </div>
             <div class="col-md-12" align="center">
                 <a href="/reportevendedor" class="btn btn-danger" data-toggle="ajax">

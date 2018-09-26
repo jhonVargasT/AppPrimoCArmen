@@ -39,235 +39,237 @@
 <script language="JavaScript" type="text/javascript" src="../assets/pedido.js"></script>
 <script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
 <script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
-<div class="col-lg-3 col-md-6">
-    <div class="widget widget-stats bg-green">
-        <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
-        <div class="stats-info">
-            <h4>Comision mensual</h4>
-            <p id="comision">
-                0.00
-            </p>
-        </div>
+<div  id="response">
+    <div class="col-lg-3 col-md-6">
+        <div class="widget widget-stats bg-green">
+            <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
+            <div class="stats-info">
+                <h4>Comision mensual</h4>
+                <p id="comision">
+                    0.00
+                </p>
+            </div>
 
+        </div>
     </div>
-</div>
-<h1 class="page-header">Pedidos
-    <small>Aqui puedo administrar pedidos</small>
-</h1>
-<!-- final cabecera -->
+    <h1 class="page-header">Pedidos
+        <small>Aqui puedo administrar pedidos</small>
+    </h1>
+    <!-- final cabecera -->
 
 
-<!-- begin panel -->
-<div class="panel panel-inverse">
-    <div class="panel-heading">
-        <div class="panel-heading-btn">
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
-                        class="fa fa-expand"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
-                        class="fa fa-redo"></i></a>
-            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
-                        class="fa fa-minus"></i></a>
+    <!-- begin panel -->
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
+                            class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i
+                            class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
+                            class="fa fa-minus"></i></a>
 
+            </div>
+            <h4 class="panel-title">Pedidos</h4>
         </div>
-        <h4 class="panel-title">Pedidos</h4>
-    </div>
 
-    <div class="panel-body">
+        <div class="panel-body">
 
-        <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
+            <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
 
-            <a href="Pedido/nuevopedido" data-toggle="ajax" class="btn btn-success"><i
-                        class="fas fa-lg fa-fw m-r-10 fa-cart-plus"></i>
-                nuevo pedido
-            </a>
-        </div>
-        <br>
-        <br>
-        <br>
-        <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="data-table-fixed-header"
-                           class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
-                           role="grid"
-                           aria-describedby="data-table-fixed-header_info" width="100%">
-                        <tbody>
-                        </tbody>
-                        <thead>
-                        <tr role="row">
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 15px;">
-                                Codigo
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 400px;">
-                                Cliente
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 100%;; min-width: 50px;">
-                                Telefono
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                style="width: 100%;; min-width: 400px;">
-                                Tienda y direccion
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 30px;">
-                                Nr produc
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 100px;">
-                                Fecha de entrega
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 20px;">
-                                Total
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 20px;">
-                                Estado
-                            </th>
-                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 80px;" align="center">
-                                Opciones
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
+                <a href="Pedido/nuevopedido" data-toggle="ajax" class="btn btn-success"><i
+                            class="fas fa-lg fa-fw m-r-10 fa-cart-plus"></i>
+                    nuevo pedido
+                </a>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="data-table-fixed-header"
+                               class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                               role="grid"
+                               aria-describedby="data-table-fixed-header_info" width="100%">
+                            <tbody>
+                            </tbody>
+                            <thead>
+                            <tr role="row">
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 15px;">
+                                    Codigo
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 400px;">
+                                    Cliente
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 50px;">
+                                    Telefono
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 400px;">
+                                    Tienda y direccion
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Nr produc
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 100px;">
+                                    Fecha de entrega
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 20px;">
+                                    Total
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 20px;">
+                                    Estado
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 80px;" align="center">
+                                    Opciones
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <div class="  col-sm-12 col-xs-12 col-md-12">
+                <dl class=" row dl-horizontal">
+                    <div class="  col-sm-2 col-xs-2 col-md-2">
+                        <dt class="text-inverse">Leyenda para estado:</dt>
+                    </div>
+                    <div class="  col-sm-3 col-xs-3 col-md-3">
+                        <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Entregado</dd>
+                        <dd><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red"
+                                                                                          class="fas fa-sm m-r-5 fa-exclamation"> </i>Entregado
+                            con observacion
+                        </dd>
+                        <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En Proceso</dd>
+                        <dd><i style="color: darkorange;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En espera</dd>
+                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Cancelado</dd>
+                    </div>
+                </dl>
+            </div>
+            <br>
+            <br>
         </div>
-        <div class="  col-sm-12 col-xs-12 col-md-12">
-            <dl class=" row dl-horizontal">
-                <div class="  col-sm-2 col-xs-2 col-md-2">
-                    <dt class="text-inverse">Leyenda para estado:</dt>
-                </div>
-                <div class="  col-sm-3 col-xs-3 col-md-3">
-                    <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Entregado</dd>
-                    <dd><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red"
-                                                                                      class="fas fa-sm m-r-5 fa-exclamation"> </i>Entregado
-                        con observacion
-                    </dd>
-                    <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En Proceso</dd>
-                    <dd><i style="color: darkorange;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>En espera</dd>
-                    <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Cancelado</dd>
-                </div>
-            </dl>
-        </div>
-        <br>
-        <br>
     </div>
-</div>
-<!-- end panel -->
-<!-- modal-->
-<div class="modal fade" id="modal-dialog">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Detalle del pedido</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="form-inline">
-                <h4><label class="col-md-12 col-sm-12 col-form-label" for="numero_pedido"> <strong>Numero de pedido
-                            :
-                        </strong></label></h4>
-                <h5><label class="text-left " id="numero_pedido">
-                    </label></h5>
-            </div>
-            <div class="modal-body">
-                <div id="data-table-fixed-header_wrapper"
-                     class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+    <!-- end panel -->
+    <!-- modal-->
+    <div class="modal fade" id="modal-dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Detalle del pedido</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="form-inline">
+                    <h4><label class="col-md-12 col-sm-12 col-form-label" for="numero_pedido"> <strong>Numero de pedido
+                                :
+                            </strong></label></h4>
+                    <h5><label class="text-left " id="numero_pedido">
+                        </label></h5>
+                </div>
+                <div class="modal-body">
+                    <div id="data-table-fixed-header_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="data-table-fixed-header2"
-                                   class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
-                                   role="grid"
-                                   aria-describedby="data-table-fixed-header_info" width="100%">
-                                <tbody>
-                                </tbody>
-                                <thead>
-                                <tr role="row">
-                                    <th class="text-nowrap sorting" tabindex="0"
-                                        aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan=""
-                                        aria-label="Rendering engine: activate to sort column ascending"
-                                        style="width: 100%;; min-width: 100%;">
-                                        Nombre producto
-                                    </th>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="data-table-fixed-header2"
+                                       class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                                       role="grid"
+                                       aria-describedby="data-table-fixed-header_info" width="100%">
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan=""
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="width: 100%;; min-width: 100%;">
+                                            Nombre producto
+                                        </th>
 
-                                    <th class="text-nowrap sorting" tabindex="0"
-                                        aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Rendering engine: activate to sort column ascending"
-                                        style="width: 100%;; min-width: 20px;">
-                                        Cant paquete
-                                    </th>
-                                    <th class="text-nowrap sorting" tabindex="0"
-                                        aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Rendering engine: activate to sort column ascending"
-                                        style="width: 100%;; min-width: 20px;">
-                                        Cant unidad
-                                    </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="width: 100%;; min-width: 20px;">
+                                            Cant paquete
+                                        </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="width: 100%;; min-width: 20px;">
+                                            Cant unidad
+                                        </th>
 
-                                    <th class="text-nowrap sorting" tabindex="0"
-                                        aria-controls="data-table-fixed-header"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Browser: activate to sort column ascending"
-                                        style="width: 100%;; min-width: 10px;">
-                                        Estado
-                                    </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Browser: activate to sort column ascending"
+                                            style="width: 100%;; min-width: 10px;">
+                                            Estado
+                                        </th>
 
-                                </tr>
-                                </thead>
-                            </table>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                    <div class="  col-sm-12 col-xs-12 col-md-12">
-                        <dl class=" row dl-horizontal">
-                            <div class="  col-sm-6 col-xs-6 col-md-6">
-                                <dt class="text-inverse">Leyenda :</dt>
-                            </div>
-                            <div class="  col-sm-5 col-xs-5 col-md-5">
-                                <dd><i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i>
-                                    </i>En espera
-                                </dd>
-                                <dd><i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check">
-                                    </i>Listo
-                                </dd>
-                                <dd><i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i>Cancelado
-                                </dd>
-                            </div>
-                        </dl>
-                    </div>
+                        <div class="  col-sm-12 col-xs-12 col-md-12">
+                            <dl class=" row dl-horizontal">
+                                <div class="  col-sm-6 col-xs-6 col-md-6">
+                                    <dt class="text-inverse">Leyenda :</dt>
+                                </div>
+                                <div class="  col-sm-5 col-xs-5 col-md-5">
+                                    <dd><i style="color:darkorange;" class="fas fa-lg fa-fw m-r-10 fa-stopwatch"></i>
+                                        </i>En espera
+                                    </dd>
+                                    <dd><i style="color: darkgreen" class="fas fa-lg fa-fw m-r-10 fa-check">
+                                        </i>Listo
+                                    </dd>
+                                    <dd><i style="color: red" class="fas fa-lg fa-fw m-r-10 fa-times"> </i>Cancelado
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
 
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-success" data-dismiss="modal">Aceptar</a>
+                <div class="modal-footer">
+                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal">Aceptar</a>
+                </div>
             </div>
         </div>
     </div>
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 </div>
-<!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
 
     $(function () {

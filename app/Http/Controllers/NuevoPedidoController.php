@@ -11,6 +11,7 @@ use App\util;
 use Exception;
 use http\Env\Request;
 use Illuminate\Support\Facades\DB;
+use JasperPHP\JasperPHP as JasperPHP;
 
 class NuevoPedidoController extends Controller
 {
@@ -52,7 +53,7 @@ class NuevoPedidoController extends Controller
             $apenbusc = $mitad[0];
             $nombrebusc = $mitad[1];
 
-            $dni=null;
+            $dni = null;
             $nombres = null;
             $tienda = null;
             $idtienda = null;
@@ -62,13 +63,13 @@ class NuevoPedidoController extends Controller
             foreach ($result as $p) {
                 $nombres = $p->apellidos . ', ' . $p->nombres;
                 $tienda = $p->tienda;
-                $dni=$p->dni;
+                $dni = $p->dni;
                 $idtienda = $p->idTienda;
                 $idpersona = $p->idPersona;
 
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona,'dni'=>$dni), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -78,9 +79,9 @@ class NuevoPedidoController extends Controller
 
     public function autoCompletarNombreTiendaTienda($nombreTienda)
     {
-        try {
+        try {   return view('pagina/vendedor/nuevo_pedido');
 
-            $dni=null;
+            $dni = null;
             $nombres = null;
             $tienda = null;
             $idtienda = null;
@@ -90,13 +91,13 @@ class NuevoPedidoController extends Controller
             foreach ($result as $p) {
                 $nombres = $p->apellidos . ', ' . $p->nombres;
                 $tienda = $p->tienda;
-                $dni=$p->dni;
+                $dni = $p->dni;
                 $idtienda = $p->idTienda;
                 $idpersona = $p->idPersona;
 
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona,'dni'=>$dni), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -156,18 +157,18 @@ class NuevoPedidoController extends Controller
 
 
             $pedido = new Pedido;
-            $pedido->fechaEntrega = date('Y-m-d H:i:s', strtotime($persona->fechaentrega));
-            $pedido->fechaPedido = util::fecha();
+            $pedido->fechaEntrega = null;
+            $pedido->fechaPedido = date('Y-m-d H:i:s', strtotime($persona->fechaentrega));;
             $pedido->estadoPedido = 1;
             $pedido->idPersona = $persona->persona;
             $pedido->usuarioEliminacion = null;
             $pedido->razonEliminar = null;
             $pedido->costoBruto = $persona->total;
+            $pedido->impuesto=($persona->total*0.18);
             $pedido->descuento = 0;
-            $pedido->totalPago = $persona->total;
+            $pedido->totalPago = ($persona->total*0.18)+$persona->total;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
-            $pedido->id_Boleta = null;
             $pedido->id_DireccionTienda = $persona->tienda;
             $productos = $data->productos;
 
@@ -195,15 +196,27 @@ class NuevoPedidoController extends Controller
                 }
             });
             $tipousu = Session('tipoUsuario');
-           /* if ($tipousu === '0') {
-                return response()->json(array('error' => 1, 'url' => 'reportevendedor'));
-            } elseif ($tipousu === '1') {*/
-                return response()->json(array('error' => 1, 'url' => 'Pedidos'));
-           // }
+
+            echo $tipousu;
+            if ($tipousu === 0) {
+                return view('pagina/vendedor/nuevo_pedido');
+            } elseif ($tipousu === 1) {
+                return view('pagina/vendedor/nuevo_pedido');
+            }
 
         } catch (Exception $e) {
             return response()->json(array('error' => $e));
         }
 
     }
+
+
+    public function compilarReporte()
+    {
+      return  $tipousu = Session('tipoUsuario');
+
+    }
+
+
+
 }

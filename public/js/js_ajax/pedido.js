@@ -1,7 +1,7 @@
 function llenarVerProductos(idpedido) {
     'use strict';
     var url = 'verproductos/' + idpedido;
-     $('#numero_pedido').text(idpedido);
+    $('#numero_pedido').text(idpedido);
     $('#data-table-fixed-header2').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -104,12 +104,12 @@ function canmbiarNumeroProductos(idpedido, idproductopedido) {
         url: url,
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
-            if (data.error===1) {
-            ok('cantidad modificada')
+            if (data.error === 1) {
+                ok('cantidad modificada')
                 llenarVerProductos(idpedido);
             }
             else {
-                error('Stock insuficiente, quedan '+data.cantpaque+' paquetes y '+data.cantuni+' unidades de '+data.nombre+ ' en stock, por favor actualice el stock!');
+                error('Stock insuficiente, quedan ' + data.cantpaque + ' paquetes y ' + data.cantuni + ' unidades de ' + data.nombre + ' en stock, por favor actualice el stock!');
                 llenarVerProductos(idpedido);
             }
         }
@@ -119,11 +119,11 @@ function canmbiarNumeroProductos(idpedido, idproductopedido) {
 }
 
 function validarEnterosPositivos($id) {
-    var num = $('#'+$id).val();
-    if(num<0)
-        $('#'+$id).val(Math.abs(num));
+    var num = $('#' + $id).val();
+    if (num < 0)
+        $('#' + $id).val(Math.abs(num));
     else
-        $('#'+$id).val(num);
+        $('#' + $id).val(num);
 }
 
 function cambiarEstadProducto(idpedido, idpropedi, estadoProd) {
@@ -332,6 +332,72 @@ function verDetalleEliminacion(idpedido) {
     });
 }
 
-function disminuirstock() {
+function cambiarTabla() {
+    var val =  $('#estado').val();;
+    $('#data-table-fixed-header').DataTable({
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+        processing: true,
+        serverSide: true,
+        select: true,
+        destroy: true,
+        rowId: 'idPedido',
+        aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],
+        ajax: '/listarPedidosAdmin/' + val,
+        columns: [
+            {data: 'idPedido', name: 'idPedido'},
+            {data: 'nombreTienda', name: 'nombreTienda'},
+            {data: 'nombreCalle', name: 'nombreCalle'},
+            {data: 'distrito', name: 'distrito'},
+            {data: 'provincia', name: 'provincia'},
+            {data: 'nombres', name: 'nombres'},
+            {data: 'dni', name: 'dni'},
+            {data: 'nroCelular', name: 'nroCelular'},
+            {data: 'cantidad', name: 'cantidad'},
+            {data: 'fechaEntrega', name: 'fechaEntrega'},
+            {data: 'totalPago', name: 'totalPago'},
+            {data: 'usuario', name: 'usuario'},
+            {
+                data: function (row) {
+                    if (row.estado === '1') {
+                        return '<div style="vertical-align: middle;"><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></div>';
+                    }
+                    else {
+                        if (row.estado === '2') {
+                            return '<div><a href="#"  title="Click para entregar producto" onclick="cambiarEstadoPedido(' + row.idPedido + ')"> <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                        }
+                        else {
+                            if (row.estado === '3') {
+                                return ' <div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                            }
+                            else {
+                                if (row.estado === '4') {
+                                    return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
+                                } else {
 
+                                    return '<div><a href="#"  title="Click para entregar producto" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                }
+
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                data: function (row) {
+                    return '<th">' +
+                        '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Imprimir nota de venta" onclick="">' +
+                        '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
+                        '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
+                        '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
+                        '<a href="#" class="btn btn-link " title="Eliminar pedido"  onclick="eliminarPedido(' + row.idPedido + ')">' +
+                        '<i  style="color: red" class="fas fa-lg fa-fw  fa-trash "></i></a>' +
+                        '</th> ';
+
+                }
+            }
+        ]
+
+    });
 }

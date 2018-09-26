@@ -1,6 +1,6 @@
 <?php
-
 use JasperPHP\JasperPHP as JasperPHP;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ Route::group(['middleware' => 'administrador'], function () {
 
 ////////////////////////////////////REPORTE PEDIDOS///////////////////////////////////////////////////
 
-    Route::get('/Pedidos', 'PedidoController@index');
+
 
     Route::get('/cambiarEstadoProducto/{idproductopedido}/{estado}', 'PedidoAdministrador@cambiarEstadoProducto');
     Route::get('/cambiarEstadoPedido/{idpedido}', 'PedidoAdministrador@cambiarEstadoPedido');
@@ -89,11 +89,18 @@ Route::group(['middleware' => 'vendedor'], function () {
     Route::get('/Vendedor', 'VendedorController@index');
 
 /////////// reporte vendedor ///////////////////
-    Route::get('/reportevendedor', 'ReporteVendedorController@index');
+
 
 });
 
 Route::group(['can:administrador,vendedor'], function () {
+    Route::get('/obetenerReporteAdministrador/{idcliente}/{fechaini}/{fechafin}','ReporteController@reportarBoletas');
+    Route::get('/obetnerProductoMasVendido','ReporteController@obtenerProductoMasvendido');
+    Route::get('/obtenerClientes','ReporteController@obtenerNumeroClientes');
+    Route::get('/totalProductosVendidos','ReporteController@totalProductosVendidos');
+    Route::get('/cajaMensual','ReporteController@ventasMensuales');
+    Route::get('/cajaDiaria','ReporteController@ventasDiarias');
+
     Route::get('/cambiarNumeroProducto/{idproductopedido}/{cantpaque}/{cantunidad}', 'PedidoAdministrador@cambiarCantProducto');
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
     Route::get('/session', 'IndexController@session');
@@ -128,8 +135,8 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
     Route::get('enviarpedidos/{array}', 'NuevoPedidoController@enviarPedidos');
 
-
-
+    Route::get('/Pedidos', 'PedidoController@index');
+    Route::get('/reportevendedor', 'ReporteVendedorController@index');
 
 //añadir producto al carrito
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
@@ -144,12 +151,16 @@ Route::group(['can:administrador,vendedor'], function () {
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
         Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
-        Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos')->name('datatable.pedidoAdministrador');
+
         Route::get('/listarTipoPquete', 'DatosAdiconalesController@listarTipoPquete')->name('datatable.listarTipoPquete');
         Route::get('/listarTipoProducto', 'DatosAdiconalesController@listarTipoProducto')->name('datatable.listarTipoProducto');
     });
+
+    Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
 });
 
+Route::get('/compilarticket', 'NuevoPedidoController@compilarReporte');
+/*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
@@ -157,7 +168,7 @@ Route::get('/compilar', function () {
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
 
-    //   return view('/Administrador');
+  //  return view('welcome');
 });
 
 Route::get('/reporte', function () {
@@ -171,11 +182,11 @@ Route::get('/reporte', function () {
         false, // Ruta y nombre de archivo de salida del reporte (sin extensión)
         array('pdf', 'rtf'), // Formatos de salida del reporte
         array('php_version' => phpversion()) // Parámetros del reporte
-    )->output();
+    )->execute();
 
-    //  return view('/Administrador');
-});
+   // return view('welcome');
+});*/
 
-Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos');
+//Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos');
 
-Route::get('/PRUEBA', 'DatosAdiconalesController@llenarTipos');
+//Route::get('/PRUEBA', 'DatosAdiconalesController@llenarTipos');

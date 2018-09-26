@@ -275,10 +275,16 @@ function anadirProductoATabla() {
 
 function modificarTotal() {
     var sum = 0;
+    var igv=0;
+    var tot=0;
     for (var i = 0; i < productos.length; i++) {
-        sum = sum + parseInt(productos[i]["total"]);
+        sum = sum + parseFloat(productos[i]["total"]);
     }
     $("#totalproducto").html(sum);
+    igv=(sum*0.18);
+    $("#igv").html(igv);
+    tot=sum+igv;
+    $("#total").html(tot);
 }
 
 function llenarTabla() {
@@ -367,9 +373,10 @@ function editarProducto(event, id) {
     }
 }
 
+//reparar esta mierda
 function enviarPedido() {
     "use strict";
-    var idpersona = $('#idtienda').val();
+    var idpersona = $('#idpersona').val();
     var iddireccion = $('#direcciones').find('option:selected').attr('id');
     var fechaentrega = new Date($('#datepicker-autoClose').val());
     var costototal = $('#totalproducto').text();
@@ -392,10 +399,17 @@ function enviarPedido() {
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
             if (data.error === 1) {
-               // redirect(data.url);
+                if(data.url===1){
+                    redirect();
+                    error(data.error);
+                }
+                else {
+                    redirect();
+                    error(data.error);
+                }
             }
             else {
-                redirect(data.url);
+                redirect();
                 error(data.error);
             }
 
@@ -404,19 +418,16 @@ function enviarPedido() {
         }
     });
 }
-
-function redirect(ruta) {
+function redirect() {
     $.ajax({
         type: "GET",
-        url: "/" + ruta,
-
+        url: "/Pedidos",
         dataType: "html",
         success: function (data) {
             $("#response").html(data);
         }
     });
 }
-
 //autocompletado
 
 //ID DEL INPUT

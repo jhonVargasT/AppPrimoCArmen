@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\boleta;
 use App\Pedido;
 use App\Producto;
+
 use http\Exception;
 use Illuminate\Http\Request;
 use App\ProductoPedido;
@@ -14,12 +16,18 @@ use Illuminate\Support\Facades\DB;
 
 class PedidoAdministrador extends Controller
 {
-    public function obtenerPedidos()
+    public function obtenerPedidos($val)
     {
-        return datatables()->of(Pedido::reporteAdministrador())->toJson();
+        if ($val != 5) {
+            return datatables()->of(Pedido::reporteAdministradorPar($val))->toJson();
+        } else {
+            return datatables()->of(Pedido::reporteAdministrador())->toJson();
+        }
+
     }
 
-    public function cambiarEstadoProducto($idProductoPedido, $estado)
+    public
+    function cambiarEstadoProducto($idProductoPedido, $estado)
     {
         $productoPedido = ProductoPedido::consultarProductosPedidos($idProductoPedido);
         foreach ($productoPedido as $pro) {
@@ -40,7 +48,7 @@ class PedidoAdministrador extends Controller
         $totalProducto = $cantuni + $cantpaq;
         $pedidores = Pedido::obtenerPedido($idpedido);
         foreach ($pedidores as $ped) {
-            $totalpedi = $ped->totalPago;
+            $totalpedi = $ped->costoBruto;
         }
 
         switch ($estado) {
@@ -86,12 +94,15 @@ class PedidoAdministrador extends Controller
 
     }
 
-    public function cambiarEstadoPedido($idpedido)
+    public
+    function cambiarEstadoPedido($idpedido)
     {
         try {
             $pedido = Pedido::obtenerPedido($idpedido);
             foreach ($pedido as $pe) {
                 $estado = $pe->estadoPedido;
+                $idPersona= $pe->idPersona;
+                $montoletra=$pe->totalPago;
             }
             $contador = ProductoPedido::consultarProductosPedido($idpedido);
             $contEstados = count($contador);
@@ -103,6 +114,18 @@ class PedidoAdministrador extends Controller
             }
             if ($c >= 1) {
                 if ($c === $contEstados) {
+                    $boleta=new Boleta();
+                    $boleta->id_Pedido=$idpedido;
+                    $boleta->estado=1;
+                    $boleta->entregado=0;
+                    $boleta->fechaCreacion=util::fecha();
+                    $boleta->nroimpresiones=0;
+                    $boleta->tipocomprobante=null;
+                    $boleta->montoletras=util::convertirSeisCifras($montoletra);
+                    $boleta->nroboleta=null;
+                    $boleta->idcliente=$idPersona;
+                    $boleta->idUsuario=Session('idusuario');
+                    $boleta->save();
                     Pedido::cambiarEstado($idpedido, 3);
                     foreach ($contador as $cont) {
                         ProductoPedido::actualizarEstadoProductoPedido($cont->idprod, 4);
@@ -129,7 +152,22 @@ class PedidoAdministrador extends Controller
         }
     }
 
-    public function eliminarPedido($idpedido, $razon)
+    public function agregarBoleta($idPedido)
+    {
+        try{
+            $boleta=new Boleta();
+            DB::transaction(function () use ($idPedido,$boleta) {
+
+
+
+            });
+        }catch (Exception $e){
+            return $e;
+        }
+    }
+
+    public
+    function eliminarPedido($idpedido, $razon)
     {
         try {
             $productospedido = ProductoPedido::consultarProductosPedido($idpedido);
@@ -144,7 +182,8 @@ class PedidoAdministrador extends Controller
 
     }
 
-    public function verRazonEliminacion($idpedido)
+    public
+    function verRazonEliminacion($idpedido)
     {
         try {
             $pedido = Pedido::obtenerPedido($idpedido);
@@ -157,7 +196,8 @@ class PedidoAdministrador extends Controller
         }
     }
 
-    public function cambiarCantProducto($idproductopedido, $cantpaquete, $cantunidades)
+    public
+    function cambiarCantProducto($idproductopedido, $cantpaquete, $cantunidades)
     {
         try {
             $productopedido = ProductoPedido::consultarProductosPedidos($idproductopedido);
@@ -173,10 +213,10 @@ class PedidoAdministrador extends Controller
                 $cantidadpaqueteproducto = $product->cantidadPaquete;
                 $preciounidadproducto = $product->precioVentaUnidad;
                 $preciopaqueteproducto = $product->precioVenta;
-                $nombreproducto=$product->nombre;
+                $nombreproducto = $product->nombre;
             }
-                $resultuni = $cantunidades - $cantunidadeprodupedi  ;
-                $resulpaque = $cantpaquete - $cantpaqueprodupedi;
+            $resultuni = $cantunidades - $cantunidadeprodupedi;
+            $resulpaque = $cantpaquete - $cantpaqueprodupedi;
 
             if ($resultuni <= $cantidaduniproducto && $resulpaque <= $cantidadpaqueteproducto) {
                 Producto::disminuirStock($idproducto, (abs($cantidadpaqueteproducto + $cantpaqueprodupedi)), abs($cantidaduniproducto + $cantunidadeprodupedi));
@@ -193,7 +233,7 @@ class PedidoAdministrador extends Controller
                 Pedido::cambiarMontoPedido($idpedido, (($preciounidadproducto * $cantunidades) + ($preciopaqueteproducto * $cantpaquete)));
                 return response()->json(array('error' => 1));
             } else {
-                return response()->json(array('error' => 0, 'cantpaque' => $cantidadpaqueteproducto,'cantuni'=>$cantidaduniproducto,'nombre'=>$nombreproducto));
+                return response()->json(array('error' => 0, 'cantpaque' => $cantidadpaqueteproducto, 'cantuni' => $cantidaduniproducto, 'nombre' => $nombreproducto));
             }
 
         } catch (Exception $e) {
@@ -201,7 +241,8 @@ class PedidoAdministrador extends Controller
         }
     }
 
-    public function enviarCorreo()
+    public
+    function enviarCorreo()
     {
         $correo = new EnvioDeCorreos();
         $correo->enviarCorreo();

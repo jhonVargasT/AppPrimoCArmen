@@ -15,7 +15,6 @@ class Pedido extends Migration
     {
         Schema::create('pedido', function (Blueprint $table) {
             $table->collate = 'latin1_spanish_ci';
-
             $table->increments('idPedido')->unique();
             $table->dateTime('fechaEntrega')->nullable();
             $table->dateTime('fechaPedido')->nullable();
@@ -30,13 +29,11 @@ class Pedido extends Migration
             $table->integer('idUsuario')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');
-
-            $table->integer('id_Boleta')->unsigned()->nullable();
             $table->integer('id_DireccionTienda')->unsigned()->nullable();
+
         });
 
         Schema::table('pedido', function( $table) {
-            $table->foreign('id_Boleta')->references('idBoleta')->on('boleta');
             $table->foreign('id_DireccionTienda')->references('idDireccionTienda')->on('direcciontienda');
         });
     }

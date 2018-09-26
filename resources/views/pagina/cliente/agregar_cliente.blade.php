@@ -113,7 +113,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="nombres" id="nombres"
                                                        data-parsley-group="step-1"
-                                                       data-parsley-required="true" class="form-control"/>
+                                                      class="form-control"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -124,7 +124,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="apellidos" id="apellidos"
                                                        data-parsley-group="step-1"
-                                                       data-parsley-required="true" class="form-control"/>
+                                                       class="form-control"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -144,7 +144,25 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="dni" class="form-control" id="dni"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">R.U.C<span
+                                                        class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="text" name="ruc" class="form-control" id="ruc"
+                                                       data-parsley-group="step-3"
+                                                       data-parsley-type="number"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">Razon social<span
+                                                        class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="text" name="ruc" class="form-control" id="razonsocial"
+                                                       data-parsley-group="step-3"
+                                                     />
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -153,7 +171,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="departamento" class="form-control"
                                                        id="departamento"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" />
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -161,7 +179,7 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="provincia" class="form-control" id="provincia"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" />
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -169,7 +187,7 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="distrito" class="form-control" id="distrito"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" />
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -177,7 +195,7 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
-                                                       data-parsley-group="step-1" data-parsley-required="true"/>
+                                                       data-parsley-group="step-1" />
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -206,7 +224,7 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="number" name="nroCelular" data-parsley-group="step-2"
-                                                       data-parsley-required="true" data-parsley-type="number"
+                                                      data-parsley-type="number"
                                                        class="form-control" id="nroCelular"/>
                                             </div>
                                         </div>
@@ -217,7 +235,7 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="email" name="correo" class="form-control" id="correo"
-                                                       data-parsley-group="step-2" data-parsley-required="true"
+                                                       data-parsley-group="step-2"
                                                        data-parsley-type="email"/>
                                             </div>
                                         </div>
@@ -249,28 +267,20 @@
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="tnombreTienda" class="form-control"
-                                                       data-parsley-group="step-3" data-parsley-required="true"
+                                                       data-parsley-group="step-3"
                                                        id="nombreTienda"/>
                                             </div>
                                         </div>
                                         <!-- end form-group -->
                                         <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">R.U.C<span
-                                                        class="text-danger">*</span></label>
-                                            <div class="col-md-6">
-                                                <input type="text" name="ruc" class="form-control" id="ruc"
-                                                       data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="number"/>
-                                            </div>
-                                        </div>
+
 
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Numero de telefono<span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="number" name="ttelefono" class="form-control"
-                                                       data-parsley-group="step-3" data-parsley-required="true"
+                                                       data-parsley-group="step-3"
                                                        data-parsley-type="number"/>
                                             </div>
                                         </div>
@@ -283,7 +293,7 @@
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtdistrito1" class="form-control"
                                                            name="dtdistrito1"
-                                                           data-parsley-group="step-3" data-parsley-required="true"/>
+                                                           data-parsley-group="step-3" />
                                                 </div>
                                             </div>
                                             <div class="form-group row m-b-10">
@@ -292,7 +302,7 @@
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtprovincia1" class="form-control"
                                                            name="dtprovincia1"
-                                                           data-parsley-group="step-3" data-parsley-required="true"/>
+                                                           data-parsley-group="step-3"/>
                                                 </div>
                                             </div>
                                             <div class="form-group row m-b-10">
@@ -302,7 +312,7 @@
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtnombreCalle1" class="form-control"
                                                            name="dtnombreCalle1"
-                                                           data-parsley-group="step-3" data-parsley-required="true"/>
+                                                           data-parsley-group="step-3" />
                                                 </div>
                                                 <input type="hidden" id="val1" name="val1" value="1"/>
                                             </div>

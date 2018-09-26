@@ -68,5 +68,23 @@ class Producto extends Model
             ->get();
     }
 
+    public static function obetnerProductoMasVendido()
+    {
+        return $res =
+            DB::select(' select  max(cant) as cant,producto.nombre
+            from (SELECT count(id_Producto) as cant, id_Producto FROM productopedido
+          where MONTH(now())=MONTH(fechaCreacion)
+          group by id_Producto )i inner join producto on producto.idProducto = i.id_Producto
+        ');
+    }
 
+    public static function obetnerNumerosProductosVendidos()
+    {
+        return $res =
+            DB::select('SELECT sum((producto.cantidadProductosPaquete*productopedido.cantidadPaquetes)+cantidadUnidades)  as cant FROM productopedido
+                            INNER JOIN producto on producto.idProducto=productopedido.id_Producto
+                             where MONTH(NOW())=month(productopedido.fechaCreacion)
+                             AND YEAR(NOW())=year(productopedido.fechaCreacion)  and productopedido.estado=4
+                      ');
+    }
 }

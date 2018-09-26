@@ -15,7 +15,7 @@ class Persona extends Model
     public static function listado()
     {
         return static::select(DB::raw('Concat(persona.nombres,", ",persona.apellidos) as pnombres'), 'persona.nroCelular as pnroCelular', 'dt.idDireccionTienda as dtidDireccionTienda',
-            'persona.correo as pcorreo', 'persona.dni as pdni', 'persona.ruc as pruc', 'persona.direccion  as pdireccion', 't.idTienda as tidTienda',
+            'persona.correo as pcorreo', 'persona.dni as pdni', 'persona.ruc as pruc','persona.direccion  as pdireccion', 't.idTienda as tidTienda',
             'persona.estado as pestado', 't.nombreTienda as tnombreTienda', 'dt.nombreCalle as dtnombreCalle', 'persona.idPersona as idPersona')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
             ->join('direcciontienda as dt', 'dt.id_Tienda', '=', 't.idTienda')
@@ -60,9 +60,9 @@ class Persona extends Model
 
     }
 
-    public static function obtenerDatosNombresApellidos( $apellidos,$nombres)
+    public static function obtenerDatosNombresApellidos($apellidos, $nombres)
     {
-        return static::select('persona.apellidos', 'persona.nombres','persona.dni', 't.nombreTienda as tienda', 't.idTienda' , 'persona.idPersona')
+        return static::select('persona.apellidos', 'persona.nombres', 'persona.dni', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
             ->where('persona.apellidos', $apellidos)
             ->where('persona.nombres', $nombres)
@@ -73,7 +73,7 @@ class Persona extends Model
 
     public static function obtenerDatosNombreTienda($nombreTienda)
     {
-        return static::select('persona.apellidos', 'persona.nombres','persona.dni', 't.nombreTienda as tienda', 't.idTienda' , 'persona.idPersona')
+        return static::select('persona.apellidos', 'persona.nombres', 'persona.dni', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
             ->where('t.nombreTienda', $nombreTienda)
             /* ->where('persona.estado',1)
@@ -87,6 +87,16 @@ class Persona extends Model
             ->Where(DB::raw('concat(idPersona," ",concat(nombres,", ",apellidos))'), 'LIKE', "%$term%")
             ->Where('estado', '=', 1)
             ->limit(50)
+            ->get();
+    }
+
+    public static function cantidadClientes()
+    {
+        return static::select(DB::raw('count(idPersona) as cant'))
+            ->from('tienda')
+            ->join('persona','persona.idPersona','=','tienda.id_Persona')
+            ->Where('persona.estado', '=', 1)
+            ->Where('tienda.estado', '=', 1)
             ->get();
     }
 }
