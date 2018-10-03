@@ -197,11 +197,11 @@ class NuevoPedidoController extends Controller
             });
             $tipousu = Session('tipoUsuario');
 
-            echo $tipousu;
+
             if ($tipousu === 0) {
-                return view('pagina/vendedor/nuevo_pedido');
+                return response()->json(array('error' => 0,'url'=>0));
             } elseif ($tipousu === 1) {
-                return view('pagina/vendedor/nuevo_pedido');
+                return response()->json(array('error' => 0,'url'=>1));
             }
 
         } catch (Exception $e) {

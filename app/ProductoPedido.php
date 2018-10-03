@@ -21,7 +21,7 @@ class ProductoPedido extends Model
 
     public static function consultarProductosPedidos($idProductopedido)
     {
-        return static::select('cantidadUnidades', 'cantidadPaquetes', 'id_Producto', 'id_Pedido')
+        return static::select('*')
             ->from('productopedido as pp')
             ->where('pp.idProductoPedido', '=', $idProductopedido)
             ->get();

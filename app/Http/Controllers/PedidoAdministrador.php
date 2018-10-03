@@ -201,12 +201,15 @@ class PedidoAdministrador extends Controller
     {
         try {
             $productopedido = ProductoPedido::consultarProductosPedidos($idproductopedido);
+
             foreach ($productopedido as $produc) {
                 $cantpaqueprodupedi = $produc->cantidadPaquetes;
                 $cantunidadeprodupedi = $produc->cantidadUnidades;
                 $idproducto = $produc->id_Producto;
                 $idpedido = $produc->id_Pedido;
             }
+
+
             $producto = Producto::consultarProducto($idproducto);
             foreach ($producto as $product) {
                 $cantidaduniproducto = $product->cantidadStockUnidad;
@@ -215,6 +218,9 @@ class PedidoAdministrador extends Controller
                 $preciopaqueteproducto = $product->precioVenta;
                 $nombreproducto = $product->nombre;
             }
+
+
+
             $resultuni = $cantunidades - $cantunidadeprodupedi;
             $resulpaque = $cantpaquete - $cantpaqueprodupedi;
 
@@ -230,7 +236,16 @@ class PedidoAdministrador extends Controller
                 }
                 Producto::disminuirStock($idproducto, (abs($cantidadpaqueteproducto - $cantpaquete)), abs($cantidaduniproducto - $cantunidades));
                 ProductoPedido::actualizarCantidadProductoPedido($idproductopedido, $cantpaquete, $cantunidades);
-                Pedido::cambiarMontoPedido($idpedido, (($preciounidadproducto * $cantunidades) + ($preciopaqueteproducto * $cantpaquete)));
+                //obtener el precio del pedido anterior
+                $precioAnterior=($preciounidadproducto*$cantunidadeprodupedi)+($cantpaqueprodupedi*$preciopaqueteproducto);
+                $pedidoAnte=Pedido::obtenerPedido($idpedido);
+                foreach ($pedidoAnte as $pedia)
+                {
+                    $costobruto=$pedia->costoBruto;
+                }
+                $rescotobruto=ABS($costobruto-$precioAnterior);
+                Pedido::cambiarMontoPedido($idpedido, (($preciounidadproducto * $cantunidades) + ($preciopaqueteproducto * $cantpaquete))+$rescotobruto);
+
                 return response()->json(array('error' => 1));
             } else {
                 return response()->json(array('error' => 0, 'cantpaque' => $cantidadpaqueteproducto, 'cantuni' => $cantidaduniproducto, 'nombre' => $nombreproducto));

@@ -398,14 +398,12 @@ function enviarPedido() {
         dataType: 'json',
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
-            if (data.error === 1) {
-                if(data.url===1){
-                    redirect();
-                    error(data.error);
+            if (data.error === 0) {
+                if(data.url===0){
+                    redirecpedidot();
                 }
                 else {
-                    redirect();
-                    error(data.error);
+                   // redirect();
                 }
             }
             else {
@@ -418,10 +416,10 @@ function enviarPedido() {
         }
     });
 }
-function redirect() {
+function redirecpedidot() {
     $.ajax({
         type: "GET",
-        url: "/Pedidos",
+        url: "/reportevendedor",
         dataType: "html",
         success: function (data) {
             $("#response").html(data);

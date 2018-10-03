@@ -94,7 +94,7 @@ class Pedido extends Model
 
     public static function obtenerPedido($idPedido)
     {
-        return static::select('totalPago', 'estadoPedido', 'razonEliminar', 'usuarioEliminacion','idPersona','totalPago')
+        return static::select('*')
             ->where('idPedido', $idPedido)
             ->get();
     }
@@ -137,5 +137,24 @@ class Pedido extends Model
                                     inner join persona on persona.idPersona=pedido.idPersona
                                     left join boleta on pedido.idPedido =boleta.id_Pedido
                                     where pedido.estadoPedido between 3 and 4 ');
+    }
+
+    public static function obetenerCabezaTicket($idpedido)
+    {
+        return DB::select('SELECT DATE(now()) fechaimpre,concat(pers.apellidos,\', \',pers.nombres)  usu, LPAD(pe.idPedido, 6, \'0\')  id,
+                                  CONCAT(per.direccion ,\' - \',per.distrito,\' - \',per.provincia,\' - \',per.departamento) as direccion,ifnull(per.razonsocial,concat(per.apellidos,\', \',per.nombres))  clie, ifnull(per.ruc,per.dni) dni
+                                    FROM pedido pe
+                                    inner join usuario usu on usu.idUsuario=pe.idUsuario
+                                    inner join persona pers on pers.idPersona=usu.id_Persona
+                                    inner join persona per on per.idPersona=pe.idPersona
+                                    inner join direcciontienda dr on pe.id_DireccionTienda=dr.idDireccionTienda
+                                    inner join tienda ti on ti.idTienda=dr.id_Tienda
+                                    where pe.estado=1  AND pe.idPedido=' . $idpedido);
+
+    }
+    public static function obetenerCuerpoTicket($idpedido)
+    {
+        return DB::select('SELECT round(costoBruto,2) as opgrav,round(costoBruto*0.18,2) as igv,round(sum(costoBruto+(costoBruto*0.18)),2) as tot FROM pedido where idPedido='.$idpedido);
+
     }
 }

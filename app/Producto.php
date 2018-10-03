@@ -87,4 +87,15 @@ class Producto extends Model
                              AND YEAR(NOW())=year(productopedido.fechaCreacion)  and productopedido.estado=4
                       ');
     }
+
+    public static function obtenerProductosTicket($idPedido)
+    {
+        return $res =
+            DB::select('SELECT LPAD(pp.idProductoPedido, 6, \'0\') as id ,pr.nombre,pr.precioVentaUnidad,pp.cantidadUnidades,pr.precioVenta,pp.cantidadPaquetes,sum((pr.precioVentaUnidad*pp.cantidadUnidades)+(pr.precioVenta*pp.cantidadPaquetes))as suma
+            FROM productopedido pp
+            inner JOIN producto pr on pp.id_Producto=pr.idProducto
+          where pp.id_Pedido='.$idPedido.'
+        group by pp.idProductoPedido
+                      ');
+    }
 }

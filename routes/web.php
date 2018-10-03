@@ -159,7 +159,8 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
 });
 
-Route::get('/compilarticket', 'NuevoPedidoController@compilarReporte');
+Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');
+Route::get('/ticket', 'ImpresionesController@ticketeraDirecta');
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP

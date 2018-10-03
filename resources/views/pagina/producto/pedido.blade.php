@@ -1,10 +1,7 @@
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet"/>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet"/>
-<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet"/>
 <script language="JavaScript" type="text/javascript" src="../assets/agregarcliente.js"></script>
-
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
@@ -337,7 +334,7 @@
                 {
                     data: function (row) {
                         return '<th">' +
-                            '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Imprimir nota de venta" onclick="">' +
+                            '<a href="/compilarticket/'+row.idPedido+'" class="btn btn-link"  title="Imprimir nota de venta" >' +
                             '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +

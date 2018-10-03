@@ -21,7 +21,7 @@ function llenarVerProductos(idpedido) {
             {
                 data: function (row) {
                     if (row.estado === '1') {
-                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')" > <input type="number" min="0" class="form-control" value="' + row.cantidadPaquetes + '" id="cantpaque"> </a>';
+                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')" > <input type="number" min="0" class="form-control" value="' + row.cantidadPaquetes + '" id="cantpaque'+ row.idprod +'"> </a>';
                     }
                     else {
                         return '<div>' + row.cantidadPaquetes + '</div>'
@@ -31,7 +31,7 @@ function llenarVerProductos(idpedido) {
             {
                 data: function (row) {
                     if (row.estado === '1') {
-                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')"> <input type="number"  min="0" class="form-control" value="' + row.cantidadUnidades + '" id="cantuni"> </a>';
+                        return '  <a href="#" class="btn btn-link" onchange="canmbiarNumeroProductos(' + idpedido + ',' + row.idprod + ')"> <input type="number"  min="0" class="form-control" value="' + row.cantidadUnidades + '" id="cantuni'+ row.idprod +'"> </a>';
                     }
                     else {
                         return '<div>' + row.cantidadUnidades + '</div>'
@@ -94,8 +94,8 @@ function llenarVerProductos(idpedido) {
 function canmbiarNumeroProductos(idpedido, idproductopedido) {
     validarEnterosPositivos('cantpaque');
     validarEnterosPositivos('cantuni');
-    var cantpaque = $('#cantpaque').val();
-    var catuni = $('#cantuni').val();
+    var cantpaque = $('#cantpaque'+idproductopedido).val();
+    var catuni = $('#cantuni'+idproductopedido).val();
     console.log(cantpaque + ' ' + catuni);
     "use strict";
     var url = "cambiarNumeroProducto/" + idproductopedido + "/" + cantpaque + "/" + catuni;
@@ -399,5 +399,16 @@ function cambiarTabla() {
             }
         ]
 
+    });
+
+}
+function imprimirTicket(idpedido) {
+    var url = '/compilarticket/' + idpedido;
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+        }
     });
 }

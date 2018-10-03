@@ -4,26 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e299f4713c7f30b44c024afd883a308",
+    "content-hash": "77ab14edf8d8eb3772632b54f5bb5bc1",
     "packages": [
         {
-            "name": "cossou/jasperphp",
-            "version": "2.7.0",
+            "name": "barryvdh/laravel-dompdf",
+            "version": "v0.8.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/cossou/JasperPHP.git",
-                "reference": "afda44a9a6a8602966e982709db80408f36e0b6d"
+                "url": "https://github.com/barryvdh/laravel-dompdf.git",
+                "reference": "46781d0304277845a19c09c169bc595fd182cce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cossou/JasperPHP/zipball/afda44a9a6a8602966e982709db80408f36e0b6d",
-                "reference": "afda44a9a6a8602966e982709db80408f36e0b6d",
+                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/46781d0304277845a19c09c169bc595fd182cce4",
+                "reference": "46781d0304277845a19c09c169bc595fd182cce4",
                 "shasum": ""
             },
+            "require": {
+                "dompdf/dompdf": "^0.8",
+                "illuminate/support": "5.5.x|5.6.x|5.7.x",
+                "php": ">=7"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.8-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Barryvdh\\DomPDF\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "PDF": "Barryvdh\\DomPDF\\Facade"
+                    }
+                }
+            },
             "autoload": {
-                "psr-0": {
-                    "JasperPHP": "src/"
+                "psr-4": {
+                    "Barryvdh\\DomPDF\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -32,20 +50,17 @@
             ],
             "authors": [
                 {
-                    "name": "Hélder Duarte",
-                    "email": "cossou@gmail.com"
+                    "name": "Barry vd. Heuvel",
+                    "email": "barryvdh@gmail.com"
                 }
             ],
-            "description": "Create Reports in PHP with JasperReports",
-            "homepage": "https://github.com/cossou/JasperPHP",
+            "description": "A DOMPDF Wrapper for Laravel",
             "keywords": [
-                "jasper",
-                "jasperreports",
-                "java",
-                "pdf",
-                "reports"
+                "dompdf",
+                "laravel",
+                "pdf"
             ],
-            "time": "2018-06-14T10:32:13+00:00"
+            "time": "2018-08-31T13:25:44+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -200,6 +215,68 @@
                 "parser"
             ],
             "time": "2014-09-09T13:34:57+00:00"
+        },
+        {
+            "name": "dompdf/dompdf",
+            "version": "v0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/5113accd9ae5d466077cce5208dcf3fb871bf8f6",
+                "reference": "5113accd9ae5d466077cce5208dcf3fb871bf8f6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-gd": "*",
+                "ext-mbstring": "*",
+                "phenx/php-font-lib": "0.5.*",
+                "phenx/php-svg-lib": "0.3.*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.8.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "0.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Dompdf\\": "src/"
+                },
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                },
+                {
+                    "name": "Brian Sweeney",
+                    "email": "eclecticgeek@gmail.com"
+                },
+                {
+                    "name": "Gabriel Bull",
+                    "email": "me@gabrielbull.com"
+                }
+            ],
+            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
+            "homepage": "https://github.com/dompdf/dompdf",
+            "time": "2017-11-26T14:49:08+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -406,52 +483,6 @@
                 "trusted proxy"
             ],
             "time": "2018-02-07T20:20:57+00:00"
-        },
-        {
-            "name": "geekcom/phpjasper",
-            "version": "v2.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PHPJasper/phpjasper.git",
-                "reference": "6cee996b18f9063e05160f736c8eb4233eb08357"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PHPJasper/phpjasper/zipball/6cee996b18f9063e05160f736c8eb4233eb08357",
-                "reference": "6cee996b18f9063e05160f736c8eb4233eb08357",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.1",
-                "squizlabs/php_codesniffer": "^3.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "PHPJasper\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Rodrigues Lima",
-                    "email": "danielrodrigues-ti@hotmail.com",
-                    "role": "lead"
-                }
-            ],
-            "description": "A PHP report generator",
-            "keywords": [
-                "pdf",
-                "php-reports",
-                "reports"
-            ],
-            "time": "2018-04-25T19:50:29+00:00"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -827,6 +858,61 @@
             "time": "2018-08-22T07:45:22+00:00"
         },
         {
+            "name": "mike42/escpos-php",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mike42/escpos-php.git",
+                "reference": "416e340f9cb90fa40611484f1b3c68df06205a84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mike42/escpos-php/zipball/416e340f9cb90fa40611484f1b3c68df06205a84",
+                "reference": "416e340f9cb90fa40611484f1b3c68df06205a84",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^5.3",
+                "phpunit/phpunit": "^4.8",
+                "squizlabs/php_codesniffer": "^3.2"
+            },
+            "suggest": {
+                "ext-gd": "Used for image printing if present.",
+                "ext-imagick": "Will be used for image printing if present. Required for PDF printing or use of custom fonts.",
+                "guzzlehttp/guzzle": "Allows the use of the ApiConnector to send print jobs over HTTP."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mike42\\": "src/Mike42"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Billington",
+                    "email": "michael.billington@gmail.com"
+                }
+            ],
+            "description": "PHP receipt printer library for use with ESC/POS-compatible thermal and impact printers",
+            "homepage": "https://github.com/mike42/escpos-php",
+            "keywords": [
+                "ESC-POS",
+                "driver",
+                "escpos",
+                "print",
+                "receipt"
+            ],
+            "time": "2018-06-30T03:06:21+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "1.23.0",
             "source": {
@@ -1052,6 +1138,83 @@
                 "random"
             ],
             "time": "2018-07-02T15:55:56+00:00"
+        },
+        {
+            "name": "phenx/php-font-lib",
+            "version": "0.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PhenX/php-font-lib.git",
+                "reference": "760148820110a1ae0936e5cc35851e25a938bc97"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/760148820110a1ae0936e5cc35851e25a938bc97",
+                "reference": "760148820110a1ae0936e5cc35851e25a938bc97",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FontLib\\": "src/FontLib"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse, export and make subsets of different types of font files.",
+            "homepage": "https://github.com/PhenX/php-font-lib",
+            "time": "2017-09-13T16:14:37+00:00"
+        },
+        {
+            "name": "phenx/php-svg-lib",
+            "version": "v0.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PhenX/php-svg-lib.git",
+                "reference": "ccc46ef6340d4b8a4a68047e68d8501ea961442c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PhenX/php-svg-lib/zipball/ccc46ef6340d4b8a4a68047e68d8501ea961442c",
+                "reference": "ccc46ef6340d4b8a4a68047e68d8501ea961442c",
+                "shasum": ""
+            },
+            "require": {
+                "sabberworm/php-css-parser": "8.1.*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Svg\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Ménager",
+                    "email": "fabien.menager@gmail.com"
+                }
+            ],
+            "description": "A library to read, parse and export to PDF SVG files.",
+            "homepage": "https://github.com/PhenX/php-svg-lib",
+            "time": "2018-06-03T10:10:03+00:00"
         },
         {
             "name": "psr/container",
@@ -1352,6 +1515,50 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "sabberworm/php-css-parser",
+            "version": "8.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sabberworm/PHP-CSS-Parser.git",
+                "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sabberworm/PHP-CSS-Parser/zipball/850cbbcbe7fbb155387a151ea562897a67e242ef",
+                "reference": "850cbbcbe7fbb155387a151ea562897a67e242ef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Sabberworm\\CSS": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raphael Schweikert"
+                }
+            ],
+            "description": "Parser for CSS Files written in PHP",
+            "homepage": "http://www.sabberworm.com/blog/2010/6/10/php-css-parser",
+            "keywords": [
+                "css",
+                "parser",
+                "stylesheet"
+            ],
+            "time": "2016-07-19T19:14:21+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2455,6 +2662,47 @@
     ],
     "packages-dev": [
         {
+            "name": "cossou/jasperphp",
+            "version": "2.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cossou/JasperPHP.git",
+                "reference": "afda44a9a6a8602966e982709db80408f36e0b6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cossou/JasperPHP/zipball/afda44a9a6a8602966e982709db80408f36e0b6d",
+                "reference": "afda44a9a6a8602966e982709db80408f36e0b6d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JasperPHP": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hélder Duarte",
+                    "email": "cossou@gmail.com"
+                }
+            ],
+            "description": "Create Reports in PHP with JasperReports",
+            "homepage": "https://github.com/cossou/JasperPHP",
+            "keywords": [
+                "jasper",
+                "jasperreports",
+                "java",
+                "pdf",
+                "reports"
+            ],
+            "time": "2018-06-14T10:32:13+00:00"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.1.0",
             "source": {
@@ -2618,6 +2866,52 @@
                 "fixtures"
             ],
             "time": "2018-07-12T10:23:15+00:00"
+        },
+        {
+            "name": "geekcom/phpjasper",
+            "version": "v2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPJasper/phpjasper.git",
+                "reference": "6cee996b18f9063e05160f736c8eb4233eb08357"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHPJasper/phpjasper/zipball/6cee996b18f9063e05160f736c8eb4233eb08357",
+                "reference": "6cee996b18f9063e05160f736c8eb4233eb08357",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.1",
+                "squizlabs/php_codesniffer": "^3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPJasper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Rodrigues Lima",
+                    "email": "danielrodrigues-ti@hotmail.com",
+                    "role": "lead"
+                }
+            ],
+            "description": "A PHP report generator",
+            "keywords": [
+                "pdf",
+                "php-reports",
+                "reports"
+            ],
+            "time": "2018-04-25T19:50:29+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
