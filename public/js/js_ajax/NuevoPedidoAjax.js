@@ -400,10 +400,10 @@ function enviarPedido() {
         success: function (data) {
             if (data.error === 0) {
                 if(data.url===0){
-                    redirecpedidot();
+                    redirectvendedor();
                 }
                 else {
-                   // redirect();
+                   redirectadministrador();
                 }
             }
             else {
@@ -416,10 +416,20 @@ function enviarPedido() {
         }
     });
 }
-function redirecpedidot() {
+function redirectvendedor() {
     $.ajax({
         type: "GET",
         url: "/reportevendedor",
+        dataType: "html",
+        success: function (data) {
+            $("#response").html(data);
+        }
+    });
+}
+function redirectadministrador() {
+    $.ajax({
+        type: "GET",
+        url: "/Pedidos",
         dataType: "html",
         success: function (data) {
             $("#response").html(data);
