@@ -48,91 +48,99 @@
                             </tbody>
                             <thead>
                             <tr role="row">
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
-                                          rowspan="1" colspan="1"
-                                          aria-label="Rendering engine: activate to sort column ascending"
-                                          style="width: 100%;; min-width: 187px;">
-                                    Nombre producto
-                                </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 100px;">
-                                    Stock unidades
+                                    style="width: 100%;; min-width: 187px;">
+                                    Nombre producto
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 40px;">
                                     Tipo producto
                                 </th>
-                                <th class="text-nowrap sorting text-center"  tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 40px;">
                                     Tipo paquete
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 40px;">
+                                    style="width: 100px; min-width: 150px;">
                                     Cant paquete
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 30px;">
                                     Unid/paquete
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 50px;">
                                     Precio compra paquete
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 50px;">
                                     precio venta paquete
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
-                                    Comision vendedor/paquete
+                                    style="width: 100%;; min-width: 100px;">
+                                    Comision vende
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 30px;">
+                                    style="width: 100%;; min-width: 150px;">
                                     Cant unidades
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 30px;">
                                     Precio compra uni
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 30px;">
                                     Precio venta uni
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 120px;">
                                     Fecha ingreso
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 30px;">
                                     Estado
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 30px;">
@@ -152,7 +160,7 @@
                     <div class="  col-sm-3 col-xs-3 col-md-3">
                         <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Stock normal</dd>
                         <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Stock medio</dd>
-                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Sin Stock</dd>
+                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Sin bajo</dd>
                     </div>
                 </dl>
             </div>
@@ -170,26 +178,15 @@
                 <div class="modal-body">
                     <div class="row form-group row m-b-15">
                         <input type="hidden" id="idProducto">
-                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nombre producto:</label>
-                        <div class="col-md-4 col-sm-4">
-                            <br>
-                            <span id="nombrespan">
-                        </span>
-                        </div>
-                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock actual:</label>
-                        <div class="col-md-4 col-sm-4">
-                            <br>
-                            <span id="stockspan">
-                        </span>
-                        </div>
                     </div>
+
                     <div class="row form-group row m-b-15">
-                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock paquete adicional :</label>
+                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nro paquete adicional :</label>
                         <div class="col-md-4 col-sm-4">
                             <br>
                             <input type="number" data-parsley-type="number" placeholder="0" id="paquete"/>
                         </div>
-                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Stock unidad adicional :</label>
+                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nro unidad adicional :</label>
                         <div class="col-md-4 col-sm-4">
                             <br>
                             <input type="number" data-parsley-type="number" placeholder="0" id="unidad"/>
@@ -246,39 +243,69 @@
             serverSide: true,
             select: true,
             rowId: 'id',
-            aaSorting: [[ 0, "desc" ]],
+            aaSorting: [[0, "desc"]],
             ajax: '{!! route('datatable.productos') !!}',
             columns: [
                 {data: 'nombre', name: 'nombre'},
+                {data: 'tipoProducto', name: 'tipoProducto'},
+                {data: 'tipoPaquete', name: 'tipoPaquete'},
                 {
                     data: function (row) {
-                        if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 50)
+                        if (row.cantidadPaquete > 50)
                             return '<i style="color:green " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
-                                ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
-                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
-                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
-                        else if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) < 50 && ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) > 10) {
-                            return '<i style="color:yellow " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
-                                ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
-                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
-                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
+                                row.cantidadPaquete +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para adicionar"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>' +
+                                '<button class="btn btn-link" onclick="dividirPaquete(' + row.idProducto + ')" title="Click para partir paquete en unidades">' +
+                                '<i style="color: orangered" class="fas fa-lg fa-fw m-r-10 fa-cut"></i></button>';
+                        else if (row.cantidadPaquete <= 50 && row.cantidadPaquete > 20) {
+                            return '<i style="color:yellow " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' + row.cantidadPaquete +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para adicionar"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>' +
+                                '<button class="btn btn-link" onclick="dividirPaquete(' + row.idProducto + ')" title="Click para partir paquete en unidades">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-cut"></i></button>';
                         }
-                        else if (((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) < 10) {
+                        else if (row.cantidadPaquete <= 20) {
                             return '<i style="color:red " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
-                                ((row.cantidadPaquete * row.cantidadProductosPaquete) + parseInt(row.cantidadStockUnidad)) +
-                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
-                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>';
+                                row.cantidadPaquete +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para adicionar"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>' +
+                                '<button class="btn btn-link" onclick="dividirPaquete(' + row.idProducto + ')" title="Click para partir paquete en unidades">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-cut"></i></button>'
                         }
                     }
                 },
-                {data: 'tipoProducto', name: 'tipoProducto'},
-                {data:'tipoPaquete',name:'tipoPaquete'},
-                {data:'cantidadPaquete',name:'cantidadPaquete'},
-                {data:'cantidadProductosPaquete',name:'cantidadProductosPaquete'},
+                {data: 'cantidadProductosPaquete', name: 'cantidadProductosPaquete'},
                 {data: 'precioCompra', name: 'precioCompra'},
                 {data: 'precioVenta', name: 'precioVenta'},
                 {data: 'comisionPaquete', name: 'comisionPaquete'},
-                {data: 'cantidadStockUnidad', name: 'cantidadStockUnidad'},
+                {
+                    data: function (row) {
+                        if (row.cantidadStockUnidad >= 50) {
+                            return '<i style="color:green " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' + row.cantidadStockUnidad +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>' +
+                                '<button class="btn btn-link" onclick="unirunidadespaquete(' + row.idProducto + ')" title="Click para poner unidades en paquete">' +
+                                '<i style="color: #8E24AA"  class="fab fa-lg fa-fw m-r-10 fa-dropbox"></i></button>';
+                        }
+                        else if (row.cantidadStockUnidad >= 20 && row.cantidadStockUnidad < 50) {
+                            return '<i style="color:yellow " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
+                                row.cantidadStockUnidad +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>' +
+                                '<button class="btn btn-link" onclick="unirunidadespaquete(' + row.idProducto + ')" title="Click para poner unidades en paquete">' +
+                                '<i style="color: #8E24AA"  class="fab fa-lg fa-fw m-r-10 fa-dropbox"></i></button>';
+                        }
+                        else if (row.cantidadStockUnidad <= 20) {
+                            return '<i style="color:red " class="fas fa-lg fa-fw m-r-10 fa-circle"></i>' +
+                                row.cantidadStockUnidad +
+                                '<button class="btn btn-link" onclick="actualizarStockModal(' + row.idProducto + ')" title="Click para actualizar"><i\n' +
+                                'class="fas fa-lg fa-fw m-r-10 fa-plus "></i></button>' +
+                                '<button class="btn btn-link" onclick="unirunidadespaquete(' + row.idProducto + ')" title="Click para poner unidades en paquete">' +
+                                '<i style="color: #8E24AA" class="fab fa-lg fa-fw m-r-10 fa-dropbox"></i></button>';
+                        }
+                    }
+                },
                 {data: 'precioCompraUnidad', name: 'precioCompraUnidad'},
                 {data: 'precioVentaUnidad', name: 'precioVentaUnidad'},
                 {data: 'fechaCreacion', name: 'fechaCreacion'},

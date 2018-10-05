@@ -98,4 +98,6 @@ class Producto extends Model
         group by pp.idProductoPedido
                       ');
     }
+
+
 }

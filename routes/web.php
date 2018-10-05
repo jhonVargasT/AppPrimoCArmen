@@ -42,6 +42,8 @@ Route::group(['middleware' => 'administrador'], function () {
 
     Route::get('/Productos', 'ProductoController@index');
     Route::get('/actualizarStockModal', 'ProductoController@actualizarStockModal');
+    Route::get('/partirpaquete/{idpro}', 'ProductoController@partirPaquete');
+    Route::get('/unirunidadespaquete/{idpro}', 'ProductoController@unirAPaquete');
     Route::get('/actualizarStock', 'ProductoController@actualizarStock');
     Route::get('/actualizarProducto', 'ProductoController@actualizarProducto');
 

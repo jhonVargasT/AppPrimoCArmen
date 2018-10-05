@@ -181,8 +181,8 @@ function actualizarProducto(id, estado) {
 
 function validardecimales(id, posiciones = 0) {
     var x1 = $('#' + id).val();
-    var arreglo= x1.split(',');
-    if(arreglo.length>1) {
+    var arreglo = x1.split(',');
+    if (arreglo.length > 1) {
         var x = arreglo[0] + '.' + arreglo[1];
         console.log(x);
         var s = x1.toString()
@@ -210,7 +210,7 @@ function validardecimales(id, posiciones = 0) {
             ((decimalFormated / Math.pow(10, posiciones)) * (isNeg ? -1 : 1));
         $('#' + id).val(finalNum);
     }
-    else{
+    else {
         $('#' + id).val(x1);
     }
 
@@ -226,8 +226,7 @@ function validarEnterosPositivos($id) {
 }
 
 
-function cargarSelectTipoProducto()
-{
+function cargarSelectTipoProducto() {
     "use strict";
     var url = "/llenartipos";
     $.ajax({
@@ -239,8 +238,8 @@ function cargarSelectTipoProducto()
         success: function (data) {
             var select = $('#tipoProducto');
             select.find('option').remove();
-          for (var i = 0; i < data.tipoproducto.length; i++) {
-                select.append('<option id="' + data.tipoproducto[i].nombre+ '">' + data.tipoproducto[i].nombre+ '</option>');
+            for (var i = 0; i < data.tipoproducto.length; i++) {
+                select.append('<option id="' + data.tipoproducto[i].nombre + '">' + data.tipoproducto[i].nombre + '</option>');
             }
 
 
@@ -251,8 +250,7 @@ function cargarSelectTipoProducto()
 }
 
 
-function cargarSelectTipoPaquete()
-{
+function cargarSelectTipoPaquete() {
     "use strict";
     var url = "/llenartipos";
     $.ajax({
@@ -265,7 +263,7 @@ function cargarSelectTipoPaquete()
             var select = $('#tipoPaquete');
             select.find('option').remove();
             for (var i = 0; i < data.tipopaquete.length; i++) {
-                select.append('<option id="' + data.tipopaquete[i].nombre+ '">' + data.tipopaquete[i].nombre+ '</option>');
+                select.append('<option id="' + data.tipopaquete[i].nombre + '">' + data.tipopaquete[i].nombre + '</option>');
             }
 
 
@@ -277,4 +275,70 @@ function cargarSelectTipoPaquete()
 }
 
 
+function dividirPaquete(id) {
+    swal({
+        title: 'Esta seguro?',
+        text: "Desea partir  1 paquete en unidades?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, partir!"
+    }).then(function (result) {
+        if (result.value) {
+            var url = "/partirpaquete/" + id;
+            $.ajax({
+                type: "GET",
+                url: url,
+                cache: false,
+                dataType: 'json',
+                data: '_token = <?php echo csrf_token() ?>',
+                success: function (data) {
+                    if (data.error === 0) {
+                        redirect('Productos');
+                        actualizado();
+                    } else {
+                        redirect('Productos');
+                        error();
+                    }
+                }
+            });
+        }
+    })
 
+
+}
+
+function unirunidadespaquete(id) {
+    swal({
+        title: 'Esta seguro?',
+        text: "Desea juntar undades en un paquete?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, juntar!"
+    }).then(function (result) {
+        if (result.value) {
+            var url = "/unirunidadespaquete/" + id;
+            $.ajax({
+                type: "GET",
+                url: url,
+                cache: false,
+                dataType: 'json',
+                data: '_token = <?php echo csrf_token() ?>',
+                success: function (data) {
+                    if (data.error === 0) {
+                        redirect('Productos');
+                        actualizado();
+                    } else {
+                        redirect('Productos');
+                        error();
+                    }
+                }
+            });
+        }
+    })
+
+
+}

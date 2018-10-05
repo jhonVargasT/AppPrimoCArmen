@@ -81,7 +81,7 @@ class ProductoController extends Controller
             $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
-            $producto->idUsuario=Session('idusuario');
+            $producto->idUsuario = Session('idusuario');
             $producto->descuento = 0;
             $producto->fechaCreacion = util::fecha();
 
@@ -151,6 +151,51 @@ class ProductoController extends Controller
                 Producto::actualizarProducto($request->id, $request->estado);
             });
             return 'success';
+
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    public function partirPaquete($idproducto)
+    {
+        try {
+            $produto = Producto::consultarProducto($idproducto);
+            foreach ($produto as $pro) {
+                $paquetes = $pro->cantidadPaquete;
+                $cantProPaque = $pro->cantidadProductosPaquete;
+                $unidades = $pro->cantidadStockUnidad;
+            }
+            if ($paquetes > 0) {
+                $paquetes = $paquetes - 1;
+                $unidades = $unidades + ($cantProPaque);
+                Producto::disminuirStock($idproducto, $paquetes, $unidades);
+                return response()->json(array('error' => 0));
+            } else {
+                return response()->json(array('error' => 1));
+            }
+
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+    public function unirAPaquete($idproducto)
+    {
+        try {
+            $produto = Producto::consultarProducto($idproducto);
+            foreach ($produto as $pro) {
+                $paquetes = $pro->cantidadPaquete;
+                $cantProPaque = $pro->cantidadProductosPaquete;
+                $unidades = $pro->cantidadStockUnidad;
+            }
+            if ($unidades >= $cantProPaque) {
+                $paquetesres = $paquetes +1 ;
+                $unidadesres = ($unidades - $cantProPaque);
+                Producto::disminuirStock($idproducto, $paquetesres, $unidadesres);
+                return response()->json(array('error' => 0));
+            } else {
+                return response()->json(array('error' => 1));
+            }
 
         } catch (Exception $e) {
             return $e;

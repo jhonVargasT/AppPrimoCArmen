@@ -1,6 +1,7 @@
 <script language="JavaScript" type="text/javascript" src="../assets/reporte.js"></script>
 <script src="{{ asset('js/js_ajax/reporte.js') }}"></script>
 <div class="row">
+
     <div class="col-lg-3 col-md-6">
         <div class="widget widget-stats bg-red">
             <div class="stats-icon"><i class="fa fa-desktop"></i></div>
