@@ -32,7 +32,7 @@ class ReporteVendedorController extends Controller
     {
         try {
             $idusuario = Session('idusuario');
-            $comision = Usuario::obtenerComision(Session('idusuario'));
+            $comision = Usuario::obtenerComision($idusuario);
             foreach ($comision as $com) {
                 $comision = $com->suma;
             }

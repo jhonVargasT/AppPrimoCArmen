@@ -138,7 +138,12 @@ class UsuarioController extends Controller
             $persona->distrito = strtoupper($request->distrito);
 
             $usuario = Usuario::findOrFail($id);
-            $usuario->password = bcrypt($request->password);
+            if($usuario->password===$request->password){
+                $usuario->password = $request->password;
+            }
+            else{
+                $usuario->password =  bcrypt($request->password);
+            }
             $usuario->usuario = $request->usuario;
             $usuario->passwordAntigua = '';
             $usuario->fechaCambioPassword = $fecha;

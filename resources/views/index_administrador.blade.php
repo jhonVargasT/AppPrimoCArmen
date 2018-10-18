@@ -22,7 +22,7 @@
     <link href="{{asset('assets/css/default/style-responsive.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/default/theme/default.css')}}" rel="stylesheet" id="theme"/>
     <!-- ================== END BASE CSS STYLE ================== -->
-
+    <link rel="shortcut icon" href="../assets/img/logo/icono-arper.jpg">
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{{asset('assets/plugins/jquery-jvectormap/jquery-jvectormap.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
@@ -51,7 +51,7 @@
     <div id="header" class="header navbar-default">
         <!-- begin navbar-header -->
         <div class="navbar-header">
-            <a href="index.blade.php" class="navbar-brand"><span class="navbar-logo"></span> <b>ARPEMAR</b> SAC</a>
+            <a class="navbar-brand"><img  src="../assets/img/logo/icono-arper.jpg" width="40px" height="40px"> <b>ARPEMAR</b> SAC </a>
             <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -65,6 +65,7 @@
 
             <li class="dropdown navbar-user">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                   ADMINISTRADOR :
                     <img src="{{asset('assets/img/user/user-13.jpg')}}" alt=""/>
                     <span class="d-none d-md-inline" id="usuario"></span> <b class="caret"></b>
                 </a>

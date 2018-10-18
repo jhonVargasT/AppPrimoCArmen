@@ -152,6 +152,20 @@ class Pedido extends Model
                                     where pe.estado=1  AND pe.idPedido=' . $idpedido);
 
     }
+    public static function obtenerCabezaFactura($idpedido)
+    {
+        return DB::select('SELECT DATE(now()) fechaimpre,concat(pers.apellidos,\',\',pers.nombres)  usu,bol.nroboleta  id,
+                                  CONCAT(per.direccion ,\' - \',per.distrito,\' - \',per.provincia,\' - \',per.departamento) as direccion,ifnull(per.razonsocial,concat(per.apellidos,\', \',per.nombres))  clie, ifnull(per.ruc,per.dni) dni
+                                    FROM pedido pe
+                                    inner join boleta bol on bol.id_Pedido=pe.idPedido
+                                    inner join usuario usu on usu.idUsuario=pe.idUsuario
+                                    inner join persona pers on pers.idPersona=usu.id_Persona
+                                    inner join persona per on per.idPersona=pe.idPersona
+                                    inner join direcciontienda dr on pe.id_DireccionTienda=dr.idDireccionTienda
+                                    inner join tienda ti on ti.idTienda=dr.id_Tienda
+                                    where pe.estado=1  AND pe.idPedido=' . $idpedido);
+
+    }
     public static function obetenerCuerpoTicket($idpedido)
     {
         return DB::select('SELECT round(costoBruto,2) as opgrav,round(costoBruto*0.18,2) as igv,round(sum(costoBruto+(costoBruto*0.18)),2) as tot FROM pedido where idPedido='.$idpedido);

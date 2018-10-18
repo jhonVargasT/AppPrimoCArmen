@@ -235,7 +235,7 @@
                                                 :</label>
                                             <div class="col-md-6 col-sm-6">
                                                 <select class="form-control" type="text" id="tipousuario"
-                                                        name="tipoPaquete"
+                                                        name="tipousuario"
                                                         data-parsley-required="true" data-parsley-group="step-3"  >
                                                     <option selected disabled>Escoja..</option>
                                                     <option>Administrador</option>

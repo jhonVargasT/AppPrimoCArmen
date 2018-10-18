@@ -40,7 +40,7 @@
             <div class="news-caption">
                 <h4 class="caption-title"><b>ARPEMAR</b> SAC</h4>
                 <p>
-                    © Copyright Ñuxtusoft - Todos los Derechos Reservados .
+                    © Copyright Ñuxtusoft - Todoss los Derechos Reservados .
                 </p>
             </div>
         </div>

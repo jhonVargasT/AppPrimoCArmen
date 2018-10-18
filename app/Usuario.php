@@ -68,7 +68,7 @@ class Usuario extends Authenticatable
             ->join('producto as p', 'pp.id_Producto', '=', 'p.idProducto')
             ->join('pedido as pe', 'pe.idPedido', '=', 'pp.id_Pedido')
             ->where('pp.idUsuario', $idusuario)
-            ->where(DB::raw('MONTH(pe.fechaEntrega)'),8)
+            ->where(DB::raw('MONTH(pe.fechaEntrega)'),DB::raw('MONTH(NOW())'))
             ->where(['pe.estadoPedido'=>3])
         //    ->where('pe.estadoPedido', 4)
             ->get();

@@ -50,7 +50,20 @@ class ImpresionesController extends Controller
         $pdf = new PDF();
         $pdf = PDF::loadView('pdf.ticket', ['pedido' => $pedido, 'productos' => $productos, 'impuestos' => $impuestos]);
         $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
-        return $pdf->stream('archivo.pdf');
+        return $pdf->download('archivo.pdf');
+    }
+    public function facturaEletronica($id)
+    {
+
+        $data = array();
+        $pedido = Pedido::obtenerCabezaFactura($id);
+
+        $productos = Producto::obtenerProductosTicket($id);
+        $impuestos = Pedido::obetenerCuerpoTicket($id);
+        $pdf = new PDF();
+        $pdf = PDF::loadView('pdf.factura', ['pedido' => $pedido, 'productos' => $productos, 'impuestos' => $impuestos]);
+        $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
+        return $pdf->download('factura.pdf');
     }
 
     public function ticketeraDirecta()
