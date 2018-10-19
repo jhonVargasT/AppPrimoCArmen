@@ -369,10 +369,10 @@
                         <label class=" col-form-label text-left" id="totunu"> </label>
                     </div>
                     <div class="row form-group row m-b-15">
-                        <label class=" col-form-label text-right" for="total"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum
+                        <label class=" col-form-label text-right" for="sumtotales"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum
                                 totales
                                 : </strong></label>
-                        <label class="col-form-label text-right" id="total"></label>
+                        <label class="col-form-label text-right" id="sumtotales"></label>
                     </div>
 
                 </div>

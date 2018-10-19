@@ -152,6 +152,7 @@ class NuevoPedidoController extends Controller
     public function enviarPedidos($array)
     {
         try {
+            $idpedidoreporte=null;
             $data = json_decode($array);
             $persona = $data->persona;
 
@@ -174,6 +175,7 @@ class NuevoPedidoController extends Controller
 
             DB::transaction(function () use ($pedido, $productos) {
                 $pedido->save();
+
                 foreach ($productos as $pr) {
                     $stockproducto = Producto::consultarProducto($pr->id);
                     $productopedido = new ProductoPedido();
@@ -196,12 +198,12 @@ class NuevoPedidoController extends Controller
                 }
             });
             $tipousu = Session('tipoUsuario');
-
+            $idpedidoreporte=$pedido->idPedido;
 
             if ($tipousu === 0) {
-                return response()->json(array('error' => 0,'url'=>0));
+                return response()->json(array('error' => 0,'url'=>0,'id'=>$idpedidoreporte));
             } elseif ($tipousu === 1) {
-                return response()->json(array('error' => 0,'url'=>1));
+                return response()->json(array('error' => 0,'url'=>1,'id'=>$idpedidoreporte));
             }
 
         } catch (Exception $e) {

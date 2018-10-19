@@ -178,8 +178,8 @@ function mostrarMonto() {
                 var totpaque = cantpaque * preciopaquetes;
                 var totunidad = cantunidad * preciounidades;
                 $("#totpaque").html(totpaque);
-                $("#totunu").html(totunidad);
-                $("#total").html(totunidad + totpaque);
+               $("#totunu").html(totunidad);
+                $("#sumtotales").html(totunidad + totpaque);
 
             }
             else {
@@ -247,7 +247,7 @@ function anadirProductoATabla() {
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
     var numerounidades = $("#numero_unidades").val();
-    var totalpro = $("#total").text();
+    var totalpro = $("#sumtotales").text();
 
     var producto = {
         id: idproducto,
@@ -342,7 +342,7 @@ function eliminarProductoTabla(id) {
 
 }
 
-function dataDuplicada() {
+function correcto(data) {
     const toast = swal.mixin({
         toast: true,
         position: 'top-end',
@@ -350,8 +350,8 @@ function dataDuplicada() {
         timer: 3000
     });
     toast({
-        type: 'error',
-        title: 'No puede elegir el mismo producto dos veces'
+        type: 'success',
+        title: 'Registro correcto, pedido numero '+data
     })
 }
 
@@ -400,9 +400,11 @@ function enviarPedido() {
         success: function (data) {
             if (data.error === 0) {
                 if(data.url===0){
+                    correcto(data.id);
                     redirectvendedor();
                 }
                 else {
+                    correcto(data.id);
                    redirectadministrador();
                 }
             }
