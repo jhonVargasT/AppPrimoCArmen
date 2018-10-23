@@ -1,5 +1,7 @@
 <script language="JavaScript" type="text/javascript" src="../assets/reporte.js"></script>
 <script src="{{ asset('js/js_ajax/reporte.js') }}"></script>
+<script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
+
 <div class="row">
 
     <div class="col-lg-3 col-md-6">

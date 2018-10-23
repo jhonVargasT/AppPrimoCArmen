@@ -3,7 +3,18 @@ $(document).ready(function () {
 });
 
 function llenarVerProductos(idpedido) {
-    'use strict';
+    var url = 'verproductos/' + idpedido;
+    $.ajax(
+        {
+            type: "GET",
+            url: url,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+            }
+        }
+    );
+    /*'use strict';
 
     var url = 'verproductos/' + idpedido;
     $('#numero_pedido').text(idpedido);
@@ -90,7 +101,7 @@ function llenarVerProductos(idpedido) {
             }
 
         ]
-    });
+    });*/
 }
 
 function comision() {
@@ -122,16 +133,16 @@ function comision() {
 
 
 function verDetalleEliminacion(idpedido) {
-    var url = '/verEliminacionPedido/' + idpedido ;
+    var url = '/verEliminacionPedido/' + idpedido;
     $.ajax({
         type: "GET",
         url: url,
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
-            if (data.error===1) {
+            if (data.error === 1) {
                 swal(
                     'Detalle de eliminacion!',
-                    data.razon ,
+                    data.razon,
                     'info'
                 )
             }
@@ -157,12 +168,12 @@ function canmbiarNumeroProductos(idpedido, idproductopedido) {
         url: url,
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
-            if (data.error===1) {
+            if (data.error === 1) {
                 ok('cantidad modificada')
                 llenarVerProductos(idpedido);
             }
             else {
-                error('Stock insuficiente, quedan '+data.cantpaque+' paquetes y '+data.cantuni+' unidades de '+data.nombre+ ' en stock, por favor actualice el stock!');
+                error('Stock insuficiente, quedan ' + data.cantpaque + ' paquetes y ' + data.cantuni + ' unidades de ' + data.nombre + ' en stock, por favor actualice el stock!');
                 llenarVerProductos(idpedido);
             }
         }
@@ -170,13 +181,15 @@ function canmbiarNumeroProductos(idpedido, idproductopedido) {
     });
 
 }
+
 function validarEnterosPositivos($id) {
-    var num = $('#'+$id).val();
-    if(num<0)
-        $('#'+$id).val(Math.abs(num));
+    var num = $('#' + $id).val();
+    if (num < 0)
+        $('#' + $id).val(Math.abs(num));
     else
-        $('#'+$id).val(num);
+        $('#' + $id).val(num);
 }
+
 function error(mensaje) {
     const toast = swal.mixin({
         toast: true,
