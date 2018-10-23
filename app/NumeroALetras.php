@@ -6,7 +6,7 @@
  * Time: 12:23 PM
  */
 
-namespace App\Http\Controllers;
+namespace App;
 
 class NumeroALetras
 {

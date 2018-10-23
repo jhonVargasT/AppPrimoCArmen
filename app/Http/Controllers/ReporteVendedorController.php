@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\boleta;
+use App\NumeroALetras;
 use App\Pedido;
 use App\Producto;
 use App\Usuario;
@@ -116,7 +117,7 @@ class ReporteVendedorController extends Controller
                             <sac:AdditionalInformation>
                                <sac:AdditionalMonetaryTotal>
                                   <cbc:ID>1001</cbc:ID>
-                                  <cbc:PayableAmount currencyID="PEN">' . $impuestos->opgrav . '</cbc:PayableAmount>
+                                  <cbc:PayableAmount currencyID="PEN">' . $impuestos[0]->opgrav . '</cbc:PayableAmount>
                                </sac:AdditionalMonetaryTotal>
                                <sac:AdditionalMonetaryTotal>
                                   <cbc:ID>1002</cbc:ID>
@@ -132,7 +133,7 @@ class ReporteVendedorController extends Controller
                                </sac:AdditionalMonetaryTotal>
                                <sac:AdditionalProperty>
                                   <cbc:ID>1000</cbc:ID>
-                                  <cbc:Value>' . NumeroALetras::convertir($impuestos->tot) . '</cbc:Value>
+                                  <cbc:Value>' . NumeroALetras::convertir($impuestos[0]->tot) . '</cbc:Value>
                                </sac:AdditionalProperty>
                             </sac:AdditionalInformation>
                          </ext:ExtensionContent>
@@ -184,21 +185,21 @@ class ReporteVendedorController extends Controller
                       </cac:Party>
                    </cac:AccountingSupplierParty>
                    <cac:AccountingCustomerParty>
-                      <cbc:CustomerAssignedAccountID>' . $pedido->dni. '</cbc:CustomerAssignedAccountID>
+                      <cbc:CustomerAssignedAccountID>' . $pedido[0]->dni. '</cbc:CustomerAssignedAccountID>
                       <cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
                       <cac:Party>
                          <cac:PartyLegalEntity>
-                            <cbc:RegistrationName>' . $pedido->clie. '</cbc:RegistrationName>
+                            <cbc:RegistrationName>' . $pedido[0]->clie. '</cbc:RegistrationName>
                             <cac:RegistrationAddress>
-                                <cbc:StreetName>' . $pedido->direccion. '</cbc:StreetName>
+                                <cbc:StreetName>' . $pedido[0]->direccion. '</cbc:StreetName>
                             </cac:RegistrationAddress>
                          </cac:PartyLegalEntity>
                       </cac:Party>
                    </cac:AccountingCustomerParty>
                    <cac:TaxTotal>
-                      <cbc:TaxAmount currencyID="PEN">' . number_format((float)($impuestos->igv), 2, '.', '') . '</cbc:TaxAmount>
+                      <cbc:TaxAmount currencyID="PEN">' . number_format((float)($impuestos[0]->igv), 2, '.', '') . '</cbc:TaxAmount>
                       <cac:TaxSubtotal>
-                         <cbc:TaxAmount currencyID="PEN">' . number_format((float)($impuestos->igv), 2, '.', '') . '</cbc:TaxAmount>
+                         <cbc:TaxAmount currencyID="PEN">' . number_format((float)($impuestos[0]->igv), 2, '.', '') . '</cbc:TaxAmount>
                          <cac:TaxCategory>
                             <cac:TaxScheme>
                                <cbc:ID>1000</cbc:ID>
@@ -209,7 +210,7 @@ class ReporteVendedorController extends Controller
                       </cac:TaxSubtotal>
                    </cac:TaxTotal>
                    <cac:LegalMonetaryTotal>
-                      <cbc:PayableAmount currencyID="PEN">' . number_format((float)$impuestos->tot, 2, '.', '') . '</cbc:PayableAmount>
+                      <cbc:PayableAmount currencyID="PEN">' . number_format((float)$impuestos[0]->tot, 2, '.', '') . '</cbc:PayableAmount>
                    </cac:LegalMonetaryTotal>';
         for ($i = 1; $i <= count($invoice_line); $i++) {
             $xml .= $invoice_line[$i];
@@ -217,13 +218,13 @@ class ReporteVendedorController extends Controller
 
         $xml .= '</Invoice>';
 
-        $filename = '20510480679-01-F001-' . $boleta->nroboleta;
+        $filename = '20510480679-F001-' . $boleta->nroboleta. '.xml';
 
-        $exists = Storage::disk('xml')->exists($filename . '.xml');
+        $exists = Storage::disk('xml')->exists($filename);
 
         if ($exists == false) {
 
-            File::put(public_path('xml/' . $filename . '.xml'), $xml);
+            File::put(public_path('xml/' . $filename), $xml);
 
             $this->firmar_documento($filename);
 
@@ -236,7 +237,7 @@ class ReporteVendedorController extends Controller
     public function firmar_documento($filename)
     {
         $doc = new DOMDocument();
-        $doc->load('../public/xml/' . $filename . '.xml');
+        $doc->load('../public/xml/' . $filename);
         // Crear un nuevo objeto de seguridad
         $objDSig = new XMLSecurityDSig();
         // Utilizar la canonización exclusiva de c14n
