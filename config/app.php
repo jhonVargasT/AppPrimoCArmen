@@ -163,7 +163,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         //insert jasper service provider here
-        JasperPHP\JasperPHPServiceProvider::class
+        //JasperPHP\JasperPHPServiceProvider::class
     ],
 
     /*

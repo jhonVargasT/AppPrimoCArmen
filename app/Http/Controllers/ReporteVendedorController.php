@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\boleta;
+use App\feedSoap;
 use App\NumeroALetras;
 use App\Pedido;
 use App\Producto;
@@ -12,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use DOMDocument;
-use sprinter\feedSoap;
 use ZanySoft\Zip\Zip;
 use Illuminate\Support\Facades\File;
 
@@ -139,7 +139,7 @@ class ReporteVendedorController extends Controller
                          </ext:ExtensionContent>
                       </ext:UBLExtension>
                       <ext:UBLExtension>
-                      <ext:ExtensionContent>ARTURO SUYO & ASOCIADOS CONTADORES PUBLICOS SOCIEDAD CIVIL</ext:ExtensionContent>
+                      <ext:ExtensionContent></ext:ExtensionContent>
                    </ext:UBLExtension>
                    </ext:UBLExtensions>
                    <cbc:UBLVersionID>2.0</cbc:UBLVersionID>
@@ -152,10 +152,10 @@ class ReporteVendedorController extends Controller
                       <cbc:ID>F001-' . $boleta->nroboleta . '</cbc:ID>
                       <cac:SignatoryParty>
                          <cac:PartyIdentification>
-                            <cbc:ID>20510480679</cbc:ID>
+                            <cbc:ID>20602872182</cbc:ID>
                          </cac:PartyIdentification>
                          <cac:PartyName>
-                            <cbc:Name></cbc:Name>
+                            <cbc:Name>ARPEMAR S.A.C.</cbc:Name>
                          </cac:PartyName>
                       </cac:SignatoryParty>
                       <cac:DigitalSignatureAttachment>
@@ -165,22 +165,22 @@ class ReporteVendedorController extends Controller
                       </cac:DigitalSignatureAttachment>
                    </cac:Signature>
                    <cac:AccountingSupplierParty>
-                      <cbc:CustomerAssignedAccountID>20510480679</cbc:CustomerAssignedAccountID>
+                      <cbc:CustomerAssignedAccountID>20602872182</cbc:CustomerAssignedAccountID>
                       <cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
                       <cac:Party>
                           <cac:PostalAddress>
-                              <cbc:ID>150101</cbc:ID>
-                              <cbc:StreetName>JR. CAMANA 381 URB. LIMA CERCADO</cbc:StreetName>
-                              <cbc:CitySubdivisionName></cbc:CitySubdivisionName>
+                              <cbc:ID>150106</cbc:ID>
+                              <cbc:StreetName>PARCELA 32B ASC. FUNDO SANTO TOMAS</cbc:StreetName>
+                              <cbc:CitySubdivisionName>San Juan de Lurigancho</cbc:CitySubdivisionName>
                               <cbc:CityName>LIMA</cbc:CityName>
                               <cbc:CountrySubentity></cbc:CountrySubentity>
-                              <cbc:District>Punta Negra</cbc:District>
+                              <cbc:District>Carabayllo</cbc:District>
                               <cac:Country>
                                 <cbc:IdentificationCode>PE</cbc:IdentificationCode>
                               </cac:Country>
                           </cac:PostalAddress>
                           <cac:PartyLegalEntity>
-                          <cbc:RegistrationName>ARTURO SUYO & ASOCIADOS CONTADORES PUBLICOS SOCIEDAD CIVIL</cbc:RegistrationName>
+                          <cbc:RegistrationName>ARPEMAR S.A.C.</cbc:RegistrationName>
                           </cac:PartyLegalEntity>
                       </cac:Party>
                    </cac:AccountingSupplierParty>
@@ -218,13 +218,14 @@ class ReporteVendedorController extends Controller
 
         $xml .= '</Invoice>';
 
-        $filename = '20510480679-F001-' . $boleta->nroboleta. '.xml';
+        $filename = '20510480679-F001-' . $boleta->nroboleta;
 
-        $exists = Storage::disk('xml')->exists($filename);
+
+        $exists = Storage::disk('xml')->exists($filename . '.xml');
 
         if ($exists == false) {
 
-            File::put(public_path('xml/' . $filename), $xml);
+            File::put(public_path('xml/' . $filename . '.xml'), $xml);
 
             $this->firmar_documento($filename);
 
@@ -237,7 +238,7 @@ class ReporteVendedorController extends Controller
     public function firmar_documento($filename)
     {
         $doc = new DOMDocument();
-        $doc->load('../public/xml/' . $filename);
+        $doc->load('../public/xml/' . $filename . '.xml');
         // Crear un nuevo objeto de seguridad
         $objDSig = new XMLSecurityDSig();
         // Utilizar la canonización exclusiva de c14n
@@ -290,7 +291,7 @@ class ReporteVendedorController extends Controller
         <soapenv:Header>
         <wsse:Security>
         <wsse:UsernameToken>
-        <wsse:Username>20510480679MODDATOS</wsse:Username>
+        <wsse:Username>20602872182MODDATOS</wsse:Username>
         <wsse:Password>moddatos</wsse:Password>
         </wsse:UsernameToken>
         </wsse:Security>

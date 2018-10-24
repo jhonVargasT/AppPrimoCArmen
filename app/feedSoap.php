@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: anikamagroup
- * Date: 11/08/18
- * Time: 09:52 AM
- */
 
-namespace sprinter;
+namespace App;
 use DOMDocument;
 use DOMException;
 use SoapClient;

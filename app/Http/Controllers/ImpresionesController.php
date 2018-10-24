@@ -8,9 +8,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-use PHPJasper\PHPJasper;
 
-use JasperPHP\Facades\JasperPHP;
 
 //require_once 'E:\Aplicaciones\AppPrimoCArmenNuevo\vendor\vendor\autoload.php';
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
@@ -19,7 +17,7 @@ use Mike42\Escpos\Printer;
 class ImpresionesController extends Controller
 {
 
-    public function generateReport()
+ /*   public function generateReport()
     {
         JasperPHP::compile(__DIR__ . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
 
@@ -37,7 +35,7 @@ class ImpresionesController extends Controller
             array("driver" => "json", "json_query" => "data", "data_file" => $datafile)
         )->execute();
 
-    }
+    }*/
 
     public function notaVenta($id)
     {
