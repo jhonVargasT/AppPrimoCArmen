@@ -75,6 +75,32 @@ class ReporteVendedorController extends Controller
                                       <cbc:ID>' . $count . '</cbc:ID>
                                       <cbc:InvoicedQuantity unitCode="NIU">' . number_format((float)$cantidad, 2, '.', '') . '</cbc:InvoicedQuantity>
                                       <cbc:LineExtensionAmount currencyID="PEN">' . number_format((float)$precio, 2, '.', '') . '</cbc:LineExtensionAmount>
+                                      <cac:PricingReference>
+                                            <cac:AlternativeConditionPrice>
+                                                 <cbc:PriceAmount currencyID="PEN">0.00</cbc:PriceAmount>
+                                                <cbc:PriceTypeCode>01</cbc:PriceTypeCode>
+                                            </cac:AlternativeConditionPrice>
+                                      </cac:PricingReference>
+                                       <cac:AllowanceCharge>
+                                          <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                                          <cbc:Amount currencyID="PEN">0.00</cbc:Amount>
+                                      </cac:AllowanceCharge>
+                                      <cac:TaxTotal>
+                                         <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                         <cac:TaxSubtotal>
+                                            <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                            <cbc:Percent>18.0</cbc:Percent>
+                                            <cac:TaxCategory>
+                                               <cbc:TaxExemptionReasonCode>10</cbc:TaxExemptionReasonCode>
+                                               <cbc:TierRange>00</cbc:TierRange>
+                                               <cac:TaxScheme>
+                                                  <cbc:ID>1000</cbc:ID>
+                                                  <cbc:Name>IGV</cbc:Name>
+                                                  <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+                                               </cac:TaxScheme>
+                                            </cac:TaxCategory>
+                                         </cac:TaxSubtotal>
+                                      </cac:TaxTotal>
                                       <cac:Item>
                                          <cbc:Description>' . $producto->nombre . '</cbc:Description>
                                          <cac:SellersItemIdentification>
@@ -95,6 +121,32 @@ class ReporteVendedorController extends Controller
                                       <cbc:ID>' . $count . '</cbc:ID>
                                       <cbc:InvoicedQuantity unitCode="NIU">' . number_format((float)$cantidad, 2, '.', '') . '</cbc:InvoicedQuantity>
                                       <cbc:LineExtensionAmount currencyID="PEN">' . number_format((float)$precio, 2, '.', '') . '</cbc:LineExtensionAmount>
+                                      <cac:PricingReference>
+                                            <cac:AlternativeConditionPrice>
+                                                 <cbc:PriceAmount currencyID="PEN">0.00</cbc:PriceAmount>
+                                                <cbc:PriceTypeCode>01</cbc:PriceTypeCode>
+                                            </cac:AlternativeConditionPrice>
+                                      </cac:PricingReference>
+                                      <cac:AllowanceCharge>
+                                          <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                                          <cbc:Amount currencyID="PEN">0.00</cbc:Amount>
+                                      </cac:AllowanceCharge>
+                                      <cac:TaxTotal>
+                                         <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                         <cac:TaxSubtotal>
+                                            <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                            <cbc:Percent>18.0</cbc:Percent>
+                                            <cac:TaxCategory>
+                                               <cbc:TaxExemptionReasonCode>10</cbc:TaxExemptionReasonCode>
+                                               <cbc:TierRange>00</cbc:TierRange>
+                                               <cac:TaxScheme>
+                                                  <cbc:ID>1000</cbc:ID>
+                                                  <cbc:Name>IGV</cbc:Name>
+                                                  <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+                                               </cac:TaxScheme>
+                                            </cac:TaxCategory>
+                                         </cac:TaxSubtotal>
+                                      </cac:TaxTotal>
                                       <cac:Item>
                                          <cbc:Description>' . $producto->nombre . '</cbc:Description>
                                          <cac:SellersItemIdentification>
@@ -145,7 +197,7 @@ class ReporteVendedorController extends Controller
                    <cbc:UBLVersionID>2.0</cbc:UBLVersionID>
                    <cbc:CustomizationID>1.0</cbc:CustomizationID>
                    <cbc:ID>F001-' . $boleta->nroboleta . '</cbc:ID>
-                   <cbc:IssueDate>' . date("d/m/Y") . '</cbc:IssueDate>
+                   <cbc:IssueDate>' . date("Y-m-d") . '</cbc:IssueDate>
                    <cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode>
                    <cbc:DocumentCurrencyCode>PEN</cbc:DocumentCurrencyCode>
                    <cac:Signature>
@@ -185,13 +237,13 @@ class ReporteVendedorController extends Controller
                       </cac:Party>
                    </cac:AccountingSupplierParty>
                    <cac:AccountingCustomerParty>
-                      <cbc:CustomerAssignedAccountID>' . $pedido[0]->dni. '</cbc:CustomerAssignedAccountID>
+                      <cbc:CustomerAssignedAccountID>' . $pedido[0]->dni . '</cbc:CustomerAssignedAccountID>
                       <cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
                       <cac:Party>
                          <cac:PartyLegalEntity>
-                            <cbc:RegistrationName>' . $pedido[0]->clie. '</cbc:RegistrationName>
+                            <cbc:RegistrationName>' . $pedido[0]->clie . '</cbc:RegistrationName>
                             <cac:RegistrationAddress>
-                                <cbc:StreetName>' . $pedido[0]->direccion. '</cbc:StreetName>
+                                <cbc:StreetName>' . $pedido[0]->direccion . '</cbc:StreetName>
                             </cac:RegistrationAddress>
                          </cac:PartyLegalEntity>
                       </cac:Party>
@@ -218,7 +270,7 @@ class ReporteVendedorController extends Controller
 
         $xml .= '</Invoice>';
 
-        $filename = '20510480679-F001-' . $boleta->nroboleta;
+        $filename = '20602872182-01-F001-' . $boleta->nroboleta;
 
 
         $exists = Storage::disk('xml')->exists($filename . '.xml');
