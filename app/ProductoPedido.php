@@ -14,7 +14,7 @@ class ProductoPedido extends Model
     {
         return static::select('pp.idProductoPedido as idprod', 'p.nombre', 'pp.cantidadUnidades', 'pp.cantidadPaquetes', 'pp.estado', 'pp.id_Producto', 'pp.estado')
             ->from('productopedido as pp')
-            ->join('chino.producto as  p', 'p.idProducto', '=', 'pp.id_Producto')
+            ->join('producto as  p', 'p.idProducto', '=', 'pp.id_Producto')
             ->where('pp.id_Pedido', '=', $idPedido)
             ->get();
     }

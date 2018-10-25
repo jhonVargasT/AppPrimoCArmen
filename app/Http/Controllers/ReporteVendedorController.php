@@ -7,6 +7,7 @@ use App\feedSoap;
 use App\NumeroALetras;
 use App\Pedido;
 use App\Producto;
+use App\ProductoPedido;
 use App\Usuario;
 use http\Exception;
 use Illuminate\Support\Facades\Storage;
@@ -28,8 +29,13 @@ class ReporteVendedorController extends Controller
         return datatables()->of(Pedido::reporteVendedor(Session('idusuario')))->toJson();
     }
 
-
     public function obtenerPrdocutosPedido($idpedido)
+
+    {
+        return datatables()->of(ProductoPedido::consultarProductosPedido($idpedido))->toJson();
+    }
+
+    public function enviarfactura($idpedido)
 
     {
         //return datatables()->of(ProductoPedido::consultarProductosPedido($idpedido))->toJson();

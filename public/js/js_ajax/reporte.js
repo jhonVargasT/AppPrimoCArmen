@@ -7,6 +7,23 @@ $(document).ready(function () {
 });
 
 
+function enviarfactura(id) {
+    "use strict";
+    var url = "enviarfactura/"+id;
+    $.ajax(
+        {
+            type: "GET",
+            url: url,
+            cache: false,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+
+            }
+        }
+    );
+}
+
 function productoMasVendido() {
     "use strict";
     var url = "/obetnerProductoMasVendido";

@@ -16,7 +16,7 @@ use JasperPHP\JasperPHP as JasperPHP;
 /*index */
 
 Auth::routes();
-
+Route::get('/', 'IndexController@index');
 //////////////////////////////////INICIO//////////////////////////////////////////////////
 
 Route::group(['middleware' => 'administrador'], function () {
@@ -144,6 +144,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
 //reporte vendedor
     Route::get('verproductos/{idproductos}', 'ReporteVendedorController@obtenerPrdocutosPedido');
+    Route::get('enviarfactura/{idpedido}', 'ReporteVendedorController@enviarfactura');
     Route::get('obtenercomision', 'ReporteVendedorController@obtenerComision');
 
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////

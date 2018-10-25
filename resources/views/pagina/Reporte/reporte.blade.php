@@ -150,7 +150,7 @@
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                style="width: 100%; min-width: 150px;text-align: center">
+                                style="width: 100%; min-width: 40px;text-align: center">
                                 Opciones
                             </th>
                         </tr>
@@ -203,14 +203,12 @@
                         if (row.entregado === '1') {
                             return '<th">' +
                                 '<a href="/factura/' + row.idPedido + '" class="btn btn-link"  title="Imprimir factura electronica" >' +
-                                '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
-                                '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Enviar factura" onclick="llenarVerProductos(' + row.idPedido + ')">' +
-                                '<i class="fas fa-lg fa-fw  fa-paper-plane"></i></a>' +
+                                '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>'
                                 '</th> ';
                         }
                         else {
                             return '<th>' +
-                                '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Enviar factura" onclick="llenarVerProductos(' + row.idPedido + ')">' +
+                                '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Enviar factura" onclick="enviarfactura(' + row.idPedido + ')">' +
                                 '<i class="fas fa-lg fa-fw  fa-paper-plane"></i></a>' +
                                 '</th> ';
                         }
