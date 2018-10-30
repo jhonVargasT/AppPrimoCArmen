@@ -85,7 +85,8 @@
         <br>PARCELA NRO. 32B FUNDO SANTO TOMAS(ALTURA POSTA SAN PEDRO DE CARABAYLLO) LIMA-LIMA.
         <br>RUC : 20602872182
         ********************************************************
-        <br><label class="nota">FACTURA NRO: </label>{{$pedido[0]->id}}
+        <br><label class="nota">FACTURA NRO: </label>
+        <br>{{$pedido[0]->id}}
         ********************************************************
     </p>
     <p class="izquerda">

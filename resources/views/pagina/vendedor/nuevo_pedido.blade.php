@@ -283,6 +283,32 @@
 
                         </div>
                     </div>
+                    <div class="row form-group m-b-15 ">
+                        <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
+                                packetes </strong></label>
+                        <div class="col-md-2 col-sm-2">
+                            <input id="numero_paquetes" type="number" class="form-control m-b-1 "
+                                   data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
+                        </div>
+                        <label class="col-form-label text-left" for="totpaque">Total :</label>
+                        <label class="col-form-label text-left" id="totpaque"></label>
+                    </div>
+                    <div class="row form-group  m-b-15">
+                        <label class="col-form-label" for="numero_unidades"> <strong>Numero de
+                                unidades </strong></label>
+                        <div class="col-md-2 col-sm-2">
+                            <input id="numero_unidades" type="number" class="form-control m-b-5"
+                                   data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
+                        </div>
+                        <label class=" col-form-label text-left" for="totunu">Total :</label>
+                        <label class=" col-form-label text-left" id="totunu"> </label>
+                    </div>
+                    <div class="row form-group row m-b-15">
+                        <label class=" col-form-label text-right" for="sumtotales"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum
+                                totales
+                                : </strong></label>
+                        <label class="col-form-label text-right" id="sumtotales"></label>
+                    </div>
                     <div class="bg-orange-lighter">
                         <div class="row form-group row m-b-15 ">
                             <label class="col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
@@ -348,32 +374,7 @@
                         </div>
                         <hr>
                     </div>
-                    <div class="row form-group m-b-15 ">
-                        <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
-                                packetes </strong></label>
-                        <div class="col-md-2 col-sm-2">
-                            <input id="numero_paquetes" type="number" class="form-control m-b-1 "
-                                   data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
-                        </div>
-                        <label class="col-form-label text-left" for="totpaque">Total :</label>
-                        <label class="col-form-label text-left" id="totpaque"></label>
-                    </div>
-                    <div class="row form-group  m-b-15">
-                        <label class="col-form-label" for="numero_unidades"> <strong>Numero de
-                                unidades </strong></label>
-                        <div class="col-md-2 col-sm-2">
-                            <input id="numero_unidades" type="number" class="form-control m-b-5"
-                                   data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
-                        </div>
-                        <label class=" col-form-label text-left" for="totunu">Total :</label>
-                        <label class=" col-form-label text-left" id="totunu"> </label>
-                    </div>
-                    <div class="row form-group row m-b-15">
-                        <label class=" col-form-label text-right" for="sumtotales"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum
-                                totales
-                                : </strong></label>
-                        <label class="col-form-label text-right" id="sumtotales"></label>
-                    </div>
+
 
                 </div>
                 <div class="modal-footer">

@@ -9,6 +9,7 @@ use App\Pedido;
 use App\Producto;
 use App\ProductoPedido;
 use App\Usuario;
+use App\util;
 use http\Exception;
 use Illuminate\Support\Facades\Storage;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
@@ -68,8 +69,9 @@ class ReporteVendedorController extends Controller
     {
         $invoice_line = null;
         $count = 1;
+         $nroboleta=Boleta::obtenerUltimaBoleta();
+        //$boleta = Boleta::where('id_Pedido', '=', $idpedido)->get()->first();
 
-        $boleta = Boleta::where('id_Pedido', '=', $idpedido)->get()->first();
 
         foreach ($productos as $producto) {
 
@@ -290,6 +292,8 @@ class ReporteVendedorController extends Controller
             $this->comprimir_factura($filename);
 
             $this->consumo_soap($filename);
+            Boleta::cambiarNumeroBoleta($idpedido,$filename,util::fecha());
+
         }
     }
 

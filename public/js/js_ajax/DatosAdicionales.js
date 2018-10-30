@@ -20,6 +20,7 @@ function agregarTipoPaquete() {
                     if (data === 'success') {
                         ok();
                         redirect('datosadicionales');
+
                     }
                     else {
                         if (data === 'error') {
