@@ -106,6 +106,13 @@
                         <span>Pedidos</span>
                     </a>
                 </li>
+                <li class="has-sub">
+                    <a href="/devolucion" data-toggle="ajax">
+
+                        <i class="fas fa-lg fa-fw m-r-10 fa-history"></i>
+                        <span>Devolucion</span>
+                    </a>
+                </li>
 
                 <li class="has-sub">
                     <a href="javascript:;">

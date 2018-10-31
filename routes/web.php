@@ -1,4 +1,5 @@
 <?php
+
 use JasperPHP\JasperPHP as JasperPHP;
 
 
@@ -33,7 +34,6 @@ Route::group(['middleware' => 'administrador'], function () {
 ////////////////////////////////////REPORTE PEDIDOS///////////////////////////////////////////////////
 
 
-
     Route::get('/cambiarEstadoProducto/{idproductopedido}/{estado}', 'PedidoAdministrador@cambiarEstadoProducto');
     Route::get('/cambiarEstadoPedido/{idpedido}', 'PedidoAdministrador@cambiarEstadoPedido');
     Route::get('/eliminarPedido/{idpedido}/{razon}', 'PedidoAdministrador@eliminarPedido');
@@ -66,7 +66,7 @@ Route::group(['middleware' => 'administrador'], function () {
     ///////Editar///////////////////
     Route::get('/editartipos/{id}/{nombre}/{tipo]', 'DatosAdiconalesController@editarNombreTipo');
 //////////////////////////////////////USUARIOS///////////////////////////////////////////////
-  
+
     Route::get('Usuarios', 'UsuarioController@index');
     Route::get('/actualizarUsuario', 'UsuarioController@actualizarUsuario');
 
@@ -96,12 +96,12 @@ Route::group(['middleware' => 'vendedor'], function () {
 });
 
 Route::group(['can:administrador,vendedor'], function () {
-    Route::get('/obetenerReporteAdministrador/{idcliente}/{fechaini}/{fechafin}','ReporteController@reportarBoletas');
-    Route::get('/obetnerProductoMasVendido','ReporteController@obtenerProductoMasvendido');
-    Route::get('/obtenerClientes','ReporteController@obtenerNumeroClientes');
-    Route::get('/totalProductosVendidos','ReporteController@totalProductosVendidos');
-    Route::get('/cajaMensual','ReporteController@ventasMensuales');
-    Route::get('/cajaDiaria','ReporteController@ventasDiarias');
+    Route::get('/obetenerReporteAdministrador/{idcliente}/{fechaini}/{fechafin}', 'ReporteController@reportarBoletas');
+    Route::get('/obetnerProductoMasVendido', 'ReporteController@obtenerProductoMasvendido');
+    Route::get('/obtenerClientes', 'ReporteController@obtenerNumeroClientes');
+    Route::get('/totalProductosVendidos', 'ReporteController@totalProductosVendidos');
+    Route::get('/cajaMensual', 'ReporteController@ventasMensuales');
+    Route::get('/cajaDiaria', 'ReporteController@ventasDiarias');
 
     Route::get('/cambiarNumeroProducto/{idproductopedido}/{cantpaque}/{cantunidad}', 'PedidoAdministrador@cambiarCantProducto');
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
@@ -127,7 +127,7 @@ Route::group(['can:administrador,vendedor'], function () {
     /// MIRA EL REPORTE_VENDEDOR, ALLI ESTA EL JAVASCRIPT(CODIGO) Y TIENES QUE IMPORTAR EL SCRIPT QUE DESCARGUE...
     Route::get('/buscarporcliente', 'AutocompleteController@buscarPorCliente');
     Route::get('/buscarportienda', 'AutocompleteController@buscarPorTienda');
-    Route::get('/buscarnombre','AutocompleteController@buscarNombreProducto');
+    Route::get('/buscarnombre', 'AutocompleteController@buscarNombreProducto');
 
     //////////////////////////////////////////////////////////////
     ///
@@ -154,9 +154,9 @@ Route::group(['can:administrador,vendedor'], function () {
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
         Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
-
         Route::get('/listarTipoPquete', 'DatosAdiconalesController@listarTipoPquete')->name('datatable.listarTipoPquete');
         Route::get('/listarTipoProducto', 'DatosAdiconalesController@listarTipoProducto')->name('datatable.listarTipoProducto');
+        Route::get('/listarDevoluciones', 'DevolucionController@listarDevoluciones')->name('datatable.listarDevoluciones');
     });
 
     Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
@@ -165,6 +165,12 @@ Route::group(['can:administrador,vendedor'], function () {
 Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');
 Route::get('/ticket', 'ImpresionesController@ticketeraDirecta');
 Route::get('/factura/{id}', 'ImpresionesController@facturaEletronica');
+
+Route::get('/devolucion', 'DevolucionController@index');
+Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@guardarDevolucion');
+Route::get('/eliminardevolucion/{iddevolucion}', 'DevolucionController@eliminarDevolucion');
+Route::get('/devolver/{iddevolucion}', 'DevolucionController@entregarDevolucion');
+
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP
