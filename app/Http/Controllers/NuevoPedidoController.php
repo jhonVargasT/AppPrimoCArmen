@@ -151,6 +151,7 @@ class NuevoPedidoController extends Controller
 
     public function enviarPedidos($array)
     {
+        // return response()->json(array('error' => 0,'url'=>0,'id'=>1));
         try {
             $idpedidoreporte=null;
             $data = json_decode($array);
@@ -200,22 +201,21 @@ class NuevoPedidoController extends Controller
             $tipousu = Session('tipoUsuario');
             $idpedidoreporte=$pedido->idPedido;
 
-            if ($tipousu === 0) {
-                return response()->json(array('error' => 0,'url'=>0,'id'=>$idpedidoreporte));
-            } elseif ($tipousu === 1) {
+            if ($tipousu === '0') {
                 return response()->json(array('error' => 0,'url'=>1,'id'=>$idpedidoreporte));
+            } elseif ($tipousu === '1') {
+                return response()->json(array('error' => 0,'url'=>0,'id'=>$idpedidoreporte));
             }
 
         } catch (Exception $e) {
             return response()->json(array('error' => $e));
         }
-
     }
 
 
     public function compilarReporte()
     {
-      return  $tipousu = Session('tipoUsuario');
+        return  $tipousu = Session('tipoUsuario');
 
     }
 
