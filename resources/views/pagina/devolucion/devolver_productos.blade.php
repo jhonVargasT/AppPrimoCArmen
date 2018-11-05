@@ -138,7 +138,7 @@
                                             aria-controls="data-table-fixed-header"
                                             rowspan="1" colspan="1"
                                             aria-label="Engine version: activate to sort column ascending"
-                                            style="width: 100%;; min-width: 40px;">
+                                            style="width: 100%;; min-width: 140px;">
                                             Opciones
                                         </th>
                                     </tr>
@@ -193,12 +193,25 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div align="center">\n' +
-                                '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
-                                '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
-                                '</div>';
+                            if (row.devuelto === '1') {
+                                return '<div align="center">\n' +
+                                    '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
+                                    '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
+                                    '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
+                                    '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
+                                    '<a href="/devolucionespd/' + row.iddevolucion + '" class="btn btn-link"  title="Imprimir nota devolucion" >' +
+                                    '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
+                                    '</div>';
+                            }
+                            else {
+                                return '<div align="center">\n' +
+                                    '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
+                                    '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
+                                    '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
+                                    '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
+                                    '</div>';
+                            }
+
                         } else {
                             return '<div align="center">\n' +
                                 '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +

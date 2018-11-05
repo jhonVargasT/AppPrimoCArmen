@@ -100,6 +100,13 @@
                     </a>
                 </li>
                 <li class="has-sub">
+                    <a href="/tienda" data-toggle="ajax">
+
+                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>
+                        <span>Tienda</span>
+                    </a>
+                </li>
+                <li class="has-sub">
                     <a href="/Pedidos" data-toggle="ajax">
 
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>

@@ -201,9 +201,9 @@ class NuevoPedidoController extends Controller
             $tipousu = Session('tipoUsuario');
             $idpedidoreporte=$pedido->idPedido;
 
-            if ($tipousu === '0') {
+            if ($tipousu === 0) {
                 return response()->json(array('error' => 0,'url'=>1,'id'=>$idpedidoreporte));
-            } elseif ($tipousu === '1') {
+            } elseif ($tipousu === 1) {
                 return response()->json(array('error' => 0,'url'=>0,'id'=>$idpedidoreporte));
             }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Devolucion;
 use App\Pedido;
 use App\Producto;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -42,7 +43,6 @@ class ImpresionesController extends Controller
 
         $data = array();
         $pedido = Pedido::obetenerCabezaTicket($id);
-
         $productos = Producto::obtenerProductosTicket($id);
         $impuestos = Pedido::obetenerCuerpoTicket($id);
         $pdf = new PDF();
@@ -61,9 +61,17 @@ class ImpresionesController extends Controller
         $pdf = new PDF();
         $pdf = PDF::loadView('pdf.factura', ['pedido' => $pedido, 'productos' => $productos, 'impuestos' => $impuestos]);
         $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
-        return $pdf->download('factura.pdf');
+        return $pdf->print('factura.pdf');
     }
+    public function devoluciones($id)
+    {
+        $devolucion=Devolucion::obtenerImpresion($id);
+        $pdf = new PDF();
+        $pdf = PDF::loadView('pdf.devolucion',['devolucion' => $devolucion]);
+        $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
+        return $pdf->download('devolucion.pdf');
 
+    }
     public function ticketeraDirecta()
     {
         $connector = new NetworkPrintConnector("192.168.8.100", 9100);

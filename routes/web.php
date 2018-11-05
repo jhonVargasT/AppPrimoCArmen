@@ -136,7 +136,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('autocompletarnombresapellidos/{nombresapellidos}', 'NuevoPedidoController@autocompletarNombresApellidos');
     Route::get('autocompletarnombretienda/{nombretienda}', 'NuevoPedidoController@autoCompletarNombreTiendaTienda');
     Route::get('enviarpedidos/{array}', 'NuevoPedidoController@enviarPedidos');
-
+    Route::get('enviarpedidosTienda/{array}', 'TiendaController@enviarPedidos');
     Route::get('/Pedidos', 'PedidoController@index');
     Route::get('/reportevendedor', 'ReporteVendedorController@index');
 
@@ -165,11 +165,14 @@ Route::group(['can:administrador,vendedor'], function () {
 Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');
 Route::get('/ticket', 'ImpresionesController@ticketeraDirecta');
 Route::get('/factura/{id}', 'ImpresionesController@facturaEletronica');
+Route::get('/tienda','TiendaController@index');
 
 Route::get('/devolucion', 'DevolucionController@index');
 Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@guardarDevolucion');
 Route::get('/eliminardevolucion/{iddevolucion}', 'DevolucionController@eliminarDevolucion');
 Route::get('/devolver/{iddevolucion}', 'DevolucionController@entregarDevolucion');
+
+Route::get('/devolucionespd/{id}', 'ImpresionesController@devoluciones');
 
 /*
 Route::get('/compilar', function () {
