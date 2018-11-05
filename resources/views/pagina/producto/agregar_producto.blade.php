@@ -74,7 +74,7 @@
                             <a href="#step-2">
                                 <span class="number">2</span>
                                 <span class="info text-ellipsis">
-						Informacion por paquete
+						Informacion por caja
 					</span>
                             </a>
                         </li>
@@ -148,11 +148,11 @@
                                     <div class="col-md-8 offset-md-2">
                                         <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
                                             Informacion
-                                            de paquete
+                                            de caja
                                         </legend>
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de paquete
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de caja
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
                                                     <select id="tipoPaquete" name="tipoPaquete" class=" form-control" onmouseover="cargarSelectTipoPaquete()">
@@ -164,7 +164,7 @@
                                         </div>
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-2 col-sm-2 col-form-label">Cantidad de
-                                                unidades por paquete:</label>
+                                                unidades por caja:</label>
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadProductosPaquete"
                                                        name="cantidadProductosPaquete" data-parsley-required="true"
@@ -174,7 +174,7 @@
                                         </div>
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-2 col-sm-2 col-form-label">Cantidad de
-                                                paquetes:</label>
+                                                cajas:</label>
                                             <div class="col-md-4 col-sm-4">
                                                 <input class="form-control" type="number" id="cantidadPaquete"
                                                        name="cantidadPaquete" data-parsley-required="true"
@@ -186,7 +186,7 @@
                                             <label class="col-md-2 col-sm-2 col-form-label" for="precioCompra">Precio
                                                 compra
                                                 por
-                                                paquete:</label>
+                                                caja:</label>
                                             <div class="input-group col-md-4 col-sm-4 mb-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>
@@ -201,7 +201,7 @@
                                             <label class="col-md-2 col-sm-2 col-form-label" for="precioVenta">Precio
                                                 venta
                                                 por
-                                                paquete:</label>
+                                                caja:</label>
                                             <div class="input-group col-md-4 col-sm-4 mb-4">
                                                 <div class="input-group-prepend"><span
                                                             class="input-group-text">S/.</span>

@@ -126,9 +126,6 @@
         <br> <label><label class="nota">NOTA : </label>ESTA ES UNA NOTA DE CAMBIO DE PRODUCTOS
         </label>
     </p>
-    <p class="derecha">
-        <label class="nota">ATENDIDO POR :</label>
-    </p>
 </div>
 </body>
 

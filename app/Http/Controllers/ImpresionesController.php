@@ -68,7 +68,7 @@ class ImpresionesController extends Controller
         $devolucion=Devolucion::obtenerImpresion($id);
         $pdf = new PDF();
         $pdf = PDF::loadView('pdf.devolucion',['devolucion' => $devolucion]);
-        $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
+        $pdf->setPaper(array(0, 0, 500, 155), 'landscape');
         return $pdf->download('devolucion.pdf');
 
     }

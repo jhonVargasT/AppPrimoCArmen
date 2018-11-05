@@ -185,7 +185,7 @@
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
-                                    Cant paquete
+                                    Cant caja
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
@@ -284,30 +284,36 @@
                         </div>
                     </div>
                     <div class="row form-group m-b-15 ">
-                        <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
-                                packetes </strong></label>
+                        <div class="col-md-5 col-sm-5 col-form-label">
+                            <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
+                                    cajas </strong></label>
+                        </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_paquetes" type="number" class="form-control m-b-1 "
                                    data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
                         </div>
                         <label class="col-form-label text-left" for="totpaque">Total :</label>
-                        <label class="col-form-label text-left" id="totpaque"></label>
+                        <label class="col-form-label text-left" id="totpaque"></label><label class="col-form-label text-left">S./</label>
                     </div>
                     <div class="row form-group  m-b-15">
-                        <label class="col-form-label" for="numero_unidades"> <strong>Numero de
-                                unidades </strong></label>
+                        <div class="col-md-5 col-sm-5 col-form-label">
+                            <label class="col-form-label" for="numero_unidades"> <strong>Numero de
+                                    unidades </strong></label>
+                        </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_unidades" type="number" class="form-control m-b-5"
                                    data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
                         </div>
-                        <label class=" col-form-label text-left" for="totunu">Total :</label>
-                        <label class=" col-form-label text-left" id="totunu"> </label>
+                        <label class="col-form-label text-left" for="totunu">Total :</label>
+                        <label class="col-form-label text-left" id="totunu"> </label><label class="col-form-label text-left">S./</label>
                     </div>
                     <div class="row form-group row m-b-15">
-                        <label class=" col-form-label text-right" for="sumtotales"> <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sum
+                        <div class="col-md-5 col-sm-5 col-form-label">
+                        <label class=" col-form-label text-left" for="sumtotales"> <strong>Sum
                                 totales
                                 : </strong></label>
-                        <label class="col-form-label text-right" id="sumtotales"></label>
+                        </div>
+                        <label class="col-form-label text-right" id="sumtotales"></label><label class="col-form-label text-left">S./</label>
                     </div>
                     <div class="bg-orange-lighter">
                         <div class="row form-group row m-b-15 ">
@@ -328,7 +334,7 @@
                             <label class="col-form-label text-left" id="tippro" name="tippro"></label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-right" for="tippa">&nbsp;&nbsp;&nbsp;Tipo paquete
+                            <label class="col-form-label text-right" for="tippa">&nbsp;&nbsp;&nbsp;Tipo caja
                                 :</label>
                             <label class="col-form-label text-left" id="tippa" name="tippa"></label>
                         </div>
@@ -347,7 +353,7 @@
                             </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;Paquete :</label>
+                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;caja :</label>
                         </div>
                         <div class="row form-group row m-b-15">
                             <label class="col-form-label text-right" for="cantidadpa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad

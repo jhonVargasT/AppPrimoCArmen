@@ -67,35 +67,35 @@
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 40px;">
-                                    Tipo paquete
+                                    Tipo caja
                                 </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100px; min-width: 150px;">
-                                    Cant paquete
+                                    Cant caja
                                 </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 30px;">
-                                    Unid/paquete
+                                    Unid/caja
                                 </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 50px;">
-                                    Precio compra paquete
+                                    Precio compra caja
                                 </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 50px;">
-                                    precio venta paquete
+                                    precio venta caja
                                 </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
