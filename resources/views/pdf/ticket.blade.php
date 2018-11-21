@@ -69,6 +69,7 @@
             max-width: inherit;
             width: inherit;
         }
+
         body {
             font-family: 'DejaVu Sans Mono';
         }
@@ -109,13 +110,15 @@
         <tbody>
 
         @foreach($productos as $producto)
-            <tr>
-                <td align="center">{{$producto->id}}</td>
-                <td>{{$producto->nombre}} X PAQUETE</td>
-                <td align="center">{{$producto->cantidadPaquetes}}</td>
-                <td align="center">{{$producto->precioVenta}}</td>
-                <td align="center">{{$producto->cantidadPaquetes*$producto->precioVenta}}</td>
-            </tr>
+            @if($producto->cantidadPaquetes!=0)
+                <tr>
+                    <td align="center">{{$producto->id}}</td>
+                    <td>{{$producto->nombre}} X PAQUETE</td>
+                    <td align="center">{{$producto->cantidadPaquetes}}</td>
+                    <td align="center">{{$producto->precioVenta}}</td>
+                    <td align="center">{{$producto->cantidadPaquetes*$producto->precioVenta}}</td>
+                </tr>
+            @endif
             @if($producto->cantidadUnidades!=0)
                 <tr>
                     <td align="center">{{$producto->id}}</td>

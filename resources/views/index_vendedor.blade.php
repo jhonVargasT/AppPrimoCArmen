@@ -97,11 +97,19 @@
             <ul class="nav">
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
+                    <a href="/tienda" data-toggle="ajax">
+
+                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>
+                        <span>Tienda</span>
+                    </a>
+                </li>
+                <li class="has-sub">
                     <a href="/reportevendedor" data-toggle="ajax">
                         <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
                         <span>Pedido</span>
                     </a>
                 </li>
+
                 <li class="has-sub">
                     <a href="/devolucion" data-toggle="ajax">
 

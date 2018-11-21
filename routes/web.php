@@ -157,6 +157,7 @@ Route::group(['can:administrador,vendedor'], function () {
         Route::get('/listarTipoPquete', 'DatosAdiconalesController@listarTipoPquete')->name('datatable.listarTipoPquete');
         Route::get('/listarTipoProducto', 'DatosAdiconalesController@listarTipoProducto')->name('datatable.listarTipoProducto');
         Route::get('/listarDevoluciones', 'DevolucionController@listarDevoluciones')->name('datatable.listarDevoluciones');
+        Route::get('/listarPromociones', 'Promocioncontroller@listar')->name('datatable.promociones');
     });
 
     Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
@@ -171,9 +172,22 @@ Route::get('/devolucion', 'DevolucionController@index');
 Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@guardarDevolucion');
 Route::get('/eliminardevolucion/{iddevolucion}', 'DevolucionController@eliminarDevolucion');
 Route::get('/devolver/{iddevolucion}', 'DevolucionController@entregarDevolucion');
+Route::get('/promocion','Promocioncontroller@index');
 
 Route::get('/devolucionespd/{id}', 'ImpresionesController@devoluciones');
 
+Route::prefix('promocion')->group(function () {
+    Route::get('/create', 'Promocioncontroller@create');
+    Route::post('/store', 'Promocioncontroller@store');
+    //Route::get('/{id}', 'PersonaController@show');
+    Route::get('/{id}/edit', 'Promocioncontroller@edit');
+    Route::put('/{id}', 'Promocioncontroller@update');
+  //  Route::delete('/{id}', 'Promocioncontroller@actualizarPromocion');
+});
+Route::get('/eliminarpromocion/{id}', 'Promocioncontroller@actualizarPromocion');
+Route::get('/verpromocionproducto/{id}', 'Promocioncontroller@verPromocionProducto');
+Route::get('/listarproductopromocion/{val}', 'Promocioncontroller@listarProductoPromocion');
+Route::get('/verpromocionproducto/{id}/{estado}/{tipo}/{prod}/{prom}','Promocioncontroller@activarDesactivar');
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP

@@ -95,7 +95,14 @@
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 50px;">
-                                    precio venta caja
+                                    precio venta caja mayorista
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 50px;">
+                                    precio venta caja minorista
                                 </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
@@ -160,7 +167,7 @@
                     <div class="  col-sm-3 col-xs-3 col-md-3">
                         <dd><i style="color: green" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Stock normal</dd>
                         <dd><i style="color: yellow;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Stock medio</dd>
-                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Sin bajo</dd>
+                        <dd><i style="color: red;" class="fas fa-lg fa-fw m-r-10 fa-circle"> </i>Sotck bajo</dd>
                     </div>
                 </dl>
             </div>
@@ -277,7 +284,8 @@
                 },
                 {data: 'cantidadProductosPaquete', name: 'cantidadProductosPaquete'},
                 {data: 'precioCompra', name: 'precioCompra'},
-                {data: 'precioVenta', name: 'precioVenta'},
+                {data: 'precioVentaMayo', name: 'precioVentaMayo'},
+                {data: 'precioVentaMino', name: 'precioVentaMino'},
                 {data: 'comisionPaquete', name: 'comisionPaquete'},
                 {
                     data: function (row) {

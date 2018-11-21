@@ -124,8 +124,9 @@
                                             <label class="col-md-2 col-sm-2 col-form-label">Tipo de producto
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
-                                                <select id="tipoProducto"  name="tipoProducto" class=" form-control" onmouseover="cargarSelectTipoProducto()">
-                                                            <option>Seleccionar</option>
+                                                <select id="tipoProducto" name="tipoProducto" class=" form-control"
+                                                        onmouseover="cargarSelectTipoProducto()">
+                                                    <option>Seleccionar</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -155,21 +156,12 @@
                                             <label class="col-md-2 col-sm-2 col-form-label" for="email">Tipo de caja
                                                 :</label>
                                             <div class="col-md-4 col-sm-4">
-                                                    <select id="tipoPaquete" name="tipoPaquete" class=" form-control" onmouseover="cargarSelectTipoPaquete()">
-                                                        <option>
-                                                            Seleccione
-                                                        </option>
-                                                    </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label">Cantidad de
-                                                unidades por caja:</label>
-                                            <div class="col-md-4 col-sm-4">
-                                                <input class="form-control" type="number" id="cantidadProductosPaquete"
-                                                       name="cantidadProductosPaquete" data-parsley-required="true"
-                                                       data-parsley-type="number" data-parsley-group="step-2" min="0"
-                                                       onchange="validarEnterosPositivos('cantidadProductosPaquete')" style="text-transform:uppercase">
+                                                <select id="tipoPaquete" name="tipoPaquete" class=" form-control"
+                                                        onmouseover="cargarSelectTipoPaquete()">
+                                                    <option>
+                                                        Seleccione
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
@@ -183,46 +175,81 @@
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
+                                            <label class="col-md-2 col-sm-2 col-form-label">Cantidad de
+                                                unidades por caja:</label>
+                                            <div class="col-md-4 col-sm-4">
+                                                <input class="form-control" type="number" id="cantidadProductosPaquete"
+                                                       name="cantidadProductosPaquete" data-parsley-required="true"
+                                                       data-parsley-type="number" data-parsley-group="step-2" min="0"
+                                                       onchange="validarEnterosPositivos('cantidadProductosPaquete')"
+                                                       style="text-transform:uppercase">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row m-b-10">
                                             <label class="col-md-2 col-sm-2 col-form-label" for="precioCompra">Precio
                                                 compra
                                                 por
                                                 caja:</label>
-                                            <div class="input-group col-md-4 col-sm-4 mb-4">
-                                                <div class="input-group-prepend"><span
-                                                            class="input-group-text">S/.</span>
+                                            <div class="col-md-4 col-sm-4 mb-4">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend"><span
+                                                                class="input-group-text">S/.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="precioCompra"
+                                                           id="precioCompra" data-parsley-group="step-2"
+                                                           onchange="validardecimales('precioCompra',2)">
                                                 </div>
-                                                <input type="text" class="form-control" name="precioCompra"
-                                                       id="precioCompra" data-parsley-group="step-2"
-                                                       onchange="validardecimales('precioCompra',2)">
                                             </div>
 
                                         </div>
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioVenta">Precio
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioVentaMay">Precio
                                                 venta
                                                 por
-                                                caja:</label>
-                                            <div class="input-group col-md-4 col-sm-4 mb-4">
-                                                <div class="input-group-prepend"><span
-                                                            class="input-group-text">S/.</span>
+                                                caja mayorista:</label>
+                                            <div class="col-md-4 col-sm-4 mb-4">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend"><span
+                                                                class="input-group-text">S/.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="precioVentaMay"
+                                                           id="precioVentaMay" data-parsley-group="step-2"
+                                                           onchange="validardecimales('precioVenta',2);validarEnterosPositivos('precioVenta')">
                                                 </div>
-                                                <input type="text" class="form-control" name="precioVenta"
-                                                       id="precioVenta" data-parsley-group="step-2"
-                                                       onchange="validardecimales('precioVenta',2);validarEnterosPositivos('precioVenta')">
                                             </div>
                                         </div>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-2 col-sm-2 col-form-label" for="precioVentaMino">Precio
+                                                venta
+                                                por
+                                                caja minorista:</label>
+                                            <div class="col-md-4 col-sm-4 mb-4">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend"><span
+                                                                class="input-group-text">S/.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="precioVentaMino"
+                                                           id="precioVentaMino" data-parsley-group="step-2"
+                                                           onchange="validardecimales('precioVenta',2);validarEnterosPositivos('precioVenta')">
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-2 col-sm-2 col-form-label" for="comisionVenta">Comision
                                                 de
                                                 venta
                                                 para vendedor</label>
-                                            <div class="input-group col-md-4 col-sm-4 mb-4">
-                                                <div class="input-group-prepend"><span
-                                                            class="input-group-text">S/.</span>
+                                            <div class="col-md-4 col-sm-4 mb-4">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend"><span
+                                                                class="input-group-text">S/.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="comisionVenta"
+                                                           id="comisionVenta" data-parsley-group="step-2"
+                                                           onchange="validardecimales('comisionVenta',2);validarEnterosPositivos('comisionVenta')">
                                                 </div>
-                                                <input type="text" class="form-control" name="comisionVenta"
-                                                       id="comisionVenta" data-parsley-group="step-2"
-                                                       onchange="validardecimales('comisionVenta',2);validarEnterosPositivos('comisionVenta')">
                                             </div>
                                         </div>
                                         <!-- end form-group -->
@@ -260,27 +287,30 @@
                                         <div class="row form-group row m-b-15">
                                             <label class="col-md-2 col-sm-2 col-form-label" for="precioCompraUnidad">Precio
                                                 compra:</label>
-                                            <div class="input-group col-md-4 col-sm-4 m-b-4">
-                                                <div class="input-group-prepend"><span
-                                                            class="input-group-text">S/.</span>
+                                            <div class="col-md-4 col-sm-4 mb-4">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend"><span
+                                                                class="input-group-text">S/.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="precioCompraUnidad"
+                                                           name="precioCompraUnidad" data-parsley-group="step-3"
+                                                           onchange="validardecimales('precioCompraUnidad',2);validarEnterosPositivos('precioCompraUnidad')">
                                                 </div>
-                                                <input type="text" class="form-control" id="precioCompraUnidad"
-                                                       name="precioCompraUnidad" data-parsley-group="step-3"
-                                                       onchange="validardecimales('precioCompraUnidad',2);validarEnterosPositivos('precioCompraUnidad')""
-                                                >
                                             </div>
                                         </div>
                                         <div class="row form-group row m-b-15">
                                             <label class="col-md-2 col-sm-2 col-form-label" for="precioVentaUnidad">Precio
                                                 venta:</label>
-                                            <div class="input-group col-md-4 col-sm-4 m-b-4">
-                                                <div class="input-group-prepend"><span
-                                                            class="input-group-text">S/.</span>
+                                            <div class="col-md-4 col-sm-4 mb-4">
+                                                <div class="input-group ">
+                                                    <div class="input-group-prepend"><span
+                                                                class="input-group-text">S/.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control" name="precioVentaUnidad"
+                                                           id="precioVentaUnidad" data-parsley-group="step-3"
+                                                           onchange="validardecimales('precioVentaUnidad',2);validarEnterosPositivos('precioVentaUnidad')"
+                                                    >
                                                 </div>
-                                                <input type="text" class="form-control" name="precioVentaUnidad"
-                                                       id="precioVentaUnidad" data-parsley-group="step-3"
-                                                       onchange="validardecimales('precioVentaUnidad',2);validarEnterosPositivos('precioVentaUnidad')"
-                                                >
                                             </div>
                                         </div>
                                     </div>

@@ -49,6 +49,7 @@ class PersonaController extends Controller
             $persona = new Persona;
             $persona->dni = $request->dni;
             $persona->ruc = $request->ruc;
+            $persona->razonsocial = $request->razonsocial;
             $persona->nombres = strtoupper($request->nombres);
             $persona->apellidos = strtoupper($request->apellidos);
             $persona->fechaNacimiento = date('Y-m-d H:i:s', strtotime($persona->fechaNacimiento));
@@ -63,7 +64,7 @@ class PersonaController extends Controller
             $persona->nroCelular = $request->nroCelular;
             $persona->distrito = strtoupper($request->distrito);
             $persona->usuarioCreacion=Session('idusuario');
-
+            $persona->tipoCliente=$request->tipocliente;
             $tienda = new Tienda;
             $tienda->nombreTienda = strtoupper($request->tnombreTienda);
             $tienda->telefono = strtoupper($request->ttelefono);
@@ -160,6 +161,7 @@ class PersonaController extends Controller
             $persona->direccion = strtoupper($request->direccion);
             $persona->nroCelular = $request->nroCelular;
             $persona->correo = $request->correo;
+            $persona->tipoCliente=$request->tipocliente;
             $persona->nroCelular = $request->nroCelular;
             $persona->fechaCreacion = util::fecha();
             $persona->nroCelular = $request->nroCelular;

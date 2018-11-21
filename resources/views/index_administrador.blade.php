@@ -139,6 +139,11 @@
                                         <i class="fas fa-lg fa-fw m-r-10 fa-cubes"></i>
                                         Productos</a>
                                 </li>
+                                <li>
+                                    <a href="/promocion" data-toggle="ajax">
+                                        <i class="fas fa-lg fa-fw m-r-10 fa-money-bill-alt"></i>
+                                        Promociones </a>
+                                </li>
                                 <li><a href="/datosadicionales" data-toggle="ajax">
                                         <i class="fas fa-lg fa-fw m-r-10 fa-print"></i>Datos adicionales</a></li>
 

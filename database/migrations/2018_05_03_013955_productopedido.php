@@ -19,6 +19,7 @@ class Productopedido extends Migration
             $table->increments('idProductoPedido')->unique();
             $table->string('cantidadUnidades')->nullable();
             $table->string('cantidadPaquetes')->nullable();
+            $table->double('Descuento')->nullable();
             $table->integer('idUsuario')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');

@@ -27,6 +27,7 @@ class Persona extends Migration
             $table->string('nroCelular')->nullable();
             $table->string('correo')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
+            $table->integer('tipoCliente')->nullable();
             $table->integer('estado')->default('1');
             $table->string('fechaActualizacion')->nullable();
             $table->integer('usuarioCreacion')->nullable();

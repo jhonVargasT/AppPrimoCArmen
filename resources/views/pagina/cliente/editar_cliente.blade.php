@@ -191,6 +191,23 @@
                                                        value="{{$persona[0]->pdireccion}}"/>
                                             </div>
                                         </div>
+                                        <div class="form-group row m-b-10">
+
+                                            <label class="col-md-3 col-form-label text-md-right"> Tipo cliente
+                                                :</label>
+                                            <div class="col-md-6">
+                                                <select id="tipocliente" name="tipocliente" class=" form-control"
+                                                >
+                                                    @if($persona[0]->tipoCliente === 1)
+                                                        <option selected value="1">MINORISTA</option>
+                                                        <option value="2">MAYORISTA</option>
+                                                    @else
+                                                        <option  value="1">MINORISTA</option>
+                                                        <option value="2" selected>MAYORISTA</option>
+                                                    @endif
+                                                </select>
+                                            </div>
+                                        </div>
                                         <!-- end form-group -->
                                     </div>
                                     <!-- end col-8 -->

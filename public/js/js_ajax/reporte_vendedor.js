@@ -4,17 +4,8 @@ $(document).ready(function () {
 
 function llenarVerProductos(idpedido) {
     var url = 'verproductos/' + idpedido;
-    $.ajax(
-        {
-            type: "GET",
-            url: url,
-            dataType: 'json',
-            data: '_token = <?php echo csrf_token() ?>',
-            success: function (data) {
-            }
-        }
-    );
-    /*'use strict';
+
+    'use strict';
 
     var url = 'verproductos/' + idpedido;
     $('#numero_pedido').text(idpedido);
@@ -101,7 +92,7 @@ function llenarVerProductos(idpedido) {
             }
 
         ]
-    });*/
+    });
 }
 
 function comision() {

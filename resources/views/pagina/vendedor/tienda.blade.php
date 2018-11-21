@@ -128,21 +128,14 @@
                 <div class="form-group row m-b-15">
                     <label class="col-form-label col-md-3">Direccion tienda</label>
                     <div class="col-md-9">
-                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion()">
+                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion();activarBotonAnadirProducto()">
                             <option>
                                 Seleccione
                             </option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Fecha de entrega</label>
-                    <div class="col-md-9">
-                        <input type="text" class="form-control" id="datepicker-autoClose"
-                               onmouseover="activarBotonAnadirProducto()"
-                               placeholder="Auto Close Datepicker">
-                    </div>
-                </div>
+
             </div>
 
             <div class=".row.row-space-2 .p-2 disabled" align="center">

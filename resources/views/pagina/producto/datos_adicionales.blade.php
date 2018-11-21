@@ -109,7 +109,7 @@
                         <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
                            data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     </div>
-                    <h4 class="panel-title">Tipo paquete
+                    <h4 class="panel-title">Tipo caja
                         <small>Son los tipos de paquete que apareceran al agregar un producto</small>
                     </h4>
                 </div>
@@ -117,7 +117,7 @@
                 <!-- begin panel-body -->
                 <div class="panel-body p-t-10">
                     <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3">Nombre tipo paquete</label>
+                        <label class="col-form-label col-md-3">Nombre tipo caja</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control m-b-5" placeholder="Escriba nuevo tipo paquete"
                                    id="tipopaquete">

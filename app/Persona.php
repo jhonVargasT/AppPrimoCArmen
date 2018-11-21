@@ -14,7 +14,7 @@ class Persona extends Model
 
     public static function listado()
     {
-        return static::select(DB::raw('Concat(persona.nombres,", ",persona.apellidos) as pnombres'), 'persona.nroCelular as pnroCelular', 'dt.idDireccionTienda as dtidDireccionTienda',
+        return static::select(DB::raw('Concat(persona.nombres,", ",persona.apellidos) as pnombres'), 'persona.nroCelular as pnroCelular', 'persona.tipoCliente as tipoCliente', 'dt.idDireccionTienda as dtidDireccionTienda',
             'persona.correo as pcorreo', 'persona.dni as pdni', 'persona.ruc as pruc','persona.direccion  as pdireccion', 't.idTienda as tidTienda',
             'persona.estado as pestado', 't.nombreTienda as tnombreTienda', 'dt.nombreCalle as dtnombreCalle', 'persona.idPersona as idPersona')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
@@ -24,7 +24,7 @@ class Persona extends Model
 
     public static function datos($id, $idt)
     {
-        return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.nroCelular as pnroCelular', 'p.correo as pcorreo', 'p.dni as pdni',
+        return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.tipoCliente as tipoCliente','p.nroCelular as pnroCelular', 'p.correo as pcorreo', 'p.dni as pdni',
         'p.ruc as pruc', 'p.direccion as pdireccion', 'p.idPersona as idPersona', 't.nombreTienda as tnombreTienda', 't.telefono as ttelefono',
         'dt.nombreCalle as dtnombreCalle', 'dt.provincia as dtprovincia', 'dt.distrito as dtdistrito', 'p.fechaNacimiento as pfechaNacimiento',
         'p.departamento as pdepartamento', 'p.provincia as pprovincia', 'p.distrito as pdistrito', 'p.nroCelular as pnroCelular',

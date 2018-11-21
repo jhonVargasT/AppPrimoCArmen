@@ -29,7 +29,7 @@ class DatosAdiconalesController extends Controller
     {
         try {
             $tippaque = new TipoPaquete();
-            $tippaque->nombre = $nombre;
+            $tippaque->nombre = strtoupper( $nombre);
 
             DB::transaction(function () use ($tippaque) {
                 $tippaque->save();
@@ -46,7 +46,7 @@ class DatosAdiconalesController extends Controller
 
         try {
             $tipprodu = new TipoProducto();
-            $tipprodu->nombre = $nombre;
+            $tipprodu->nombre =strtoupper( $nombre);
             DB::transaction(function () use ($tipprodu) {
                 $tipprodu->save();
             });

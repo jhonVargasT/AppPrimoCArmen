@@ -101,7 +101,7 @@ class TiendaController extends Controller
 
             $pedido = new Pedido;
             $pedido->fechaEntrega = null;
-            $pedido->fechaPedido = date('Y-m-d H:i:s', strtotime($persona->fechaentrega));;
+            $pedido->fechaPedido = util::fecha();
             $pedido->estadoPedido = 1;
             $pedido->idPersona = $persona->persona;
             $pedido->usuarioEliminacion = null;
@@ -112,6 +112,7 @@ class TiendaController extends Controller
             $pedido->totalPago = ($persona->total * 0.18) + $persona->total;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
+            $pedido->fechaEntrega = util::fecha();
             $pedido->id_DireccionTienda = $persona->tienda;
             $pedido->estadoPedido = 3;
             $productos = $data->productos;

@@ -23,18 +23,21 @@ class devolucion extends Migration
             $table->integer('estado')->default('1');
             $table->integer('id_Producto')->unsigned()->nullable();
         });
-        Schema::table('producto', function( $table) {
+
+        Schema::table('devolucion', function( $table) {
             $table->foreign('id_Producto')->references('idProducto')->on('producto');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
-    }
+
+/**
+ * Reverse the migrations.
+ *
+ * @return void
+ */
+public
+function down()
+{
+    //
+}
 }

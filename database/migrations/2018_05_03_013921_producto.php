@@ -23,7 +23,8 @@ class Producto extends Migration
             $table->integer('cantidadPaquete')->nullable();
             $table->integer('cantidadProductosPaquete')->nullable();
             $table->double('precioCompra')->nullable();
-            $table->double('precioVenta')->nullable();
+            $table->double('precioVentaMayo')->nullable();
+            $table->double('precioVentaMino')->nullable();
             $table->double('comisionPaquete')->nullable();
             $table->integer('cantidadStockUnidad')->nullable();
             $table->double('precioCompraUnidad')->nullable();

@@ -160,7 +160,7 @@
                                             <label class="col-md-3 col-form-label text-md-right">Razon social<span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
-                                                <input type="text" name="ruc" class="form-control" id="razonsocial"
+                                                <input type="text" name="razonsocial" class="form-control" id="razonsocial"
                                                        data-parsley-group="step-3"
                                                      />
                                             </div>
@@ -191,11 +191,23 @@
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">Direccion <span
+                                            <label class="col-md-3 col-form-label text-md-right">Direccion :<span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
                                                        data-parsley-group="step-1" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
+
+                                            <label class="col-md-3 col-form-label text-md-right"> Tipo cliente
+                                                :</label>
+                                            <div class="col-md-6">
+                                                <select id="tipocliente" name="tipocliente" class=" form-control"
+                                                        >
+                                                    <option value="1">MINORISTA</option>
+                                                    <option value="2">MAYORISTA</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <!-- end form-group -->

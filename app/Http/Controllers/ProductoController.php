@@ -76,7 +76,8 @@ class ProductoController extends Controller
             $producto->cantidadPaquete = $request->cantidadPaquete;
             $producto->cantidadProductosPaquete = $request->cantidadProductosPaquete;
             $producto->precioCompra = $request->precioCompra;
-            $producto->precioVenta = $request->precioVenta;
+            $producto->precioVentaMayo = $request->precioVentaMay;
+            $producto->precioVentaMino = $request->precioVentaMino;
             $producto->comisionPaquete = $request->comisionVenta;
             $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
@@ -126,7 +127,8 @@ class ProductoController extends Controller
             $producto->cantidadPaquete = $request->cantidadPaquete;
             $producto->cantidadProductosPaquete = $request->cantidadProductosPaquete;
             $producto->precioCompra = $request->precioCompra;
-            $producto->precioVenta = $request->precioVenta;
+            $producto->precioVentaMayo = $request->precioVentaMay;
+            $producto->precioVentaMino = $request->precioVentaMino;
             $producto->comisionPaquete = $request->comisionVenta;
             $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
             $producto->precioCompraUnidad = $request->precioCompraUnidad;

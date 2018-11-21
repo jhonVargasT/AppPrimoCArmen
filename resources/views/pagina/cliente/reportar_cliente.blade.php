@@ -100,7 +100,12 @@
                                     style="width: 100%;; min-width: 187px;">
                                     Correo
                                 </th>
-
+                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 60px;">
+                                    Cliente
+                                </th>
                                 <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
@@ -164,6 +169,16 @@
                 {data: 'pruc', name: 'pruc'},
                 {data: 'pnroCelular', name: 'pnroCelular'},
                 {data: 'pcorreo', name: 'pcorreo'},
+                {
+                    data: function (row) {
+                        if (row.tipoCliente === '1') {
+                            return '<label class="text-success">MINORISTA</label>';
+                        }
+                        else {
+                            return '<label class="text-purple">MAYORISTA</label>';
+                        }
+                    }
+                },
                 {
                     data: function (row) {
                         if (row.pestado === '1') {
