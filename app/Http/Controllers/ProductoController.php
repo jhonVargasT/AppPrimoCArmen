@@ -78,12 +78,10 @@ class ProductoController extends Controller
             $producto->precioCompra = $request->precioCompra;
             $producto->precioVentaMayo = $request->precioVentaMay;
             $producto->precioVentaMino = $request->precioVentaMino;
-            $producto->comisionPaquete = $request->comisionVenta;
             $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
             $producto->idUsuario = Session('idusuario');
-            $producto->descuento = 0;
             $producto->fechaCreacion = util::fecha();
 
             DB::transaction(function () use ($producto) {
@@ -129,11 +127,9 @@ class ProductoController extends Controller
             $producto->precioCompra = $request->precioCompra;
             $producto->precioVentaMayo = $request->precioVentaMay;
             $producto->precioVentaMino = $request->precioVentaMino;
-            $producto->comisionPaquete = $request->comisionVenta;
             $producto->cantidadStockUnidad = $request->cantidadStockUnidad;
             $producto->precioCompraUnidad = $request->precioCompraUnidad;
             $producto->precioVentaUnidad = $request->precioVentaUnidad;
-            $producto->descuento = 0;
             $producto->fechaCreacion = util::fecha();
 
             DB::transaction(function () use ($producto) {

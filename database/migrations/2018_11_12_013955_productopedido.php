@@ -18,17 +18,21 @@ class Productopedido extends Migration
 
             $table->increments('idProductoPedido')->unique();
             $table->string('cantidadUnidades')->nullable();
+            $table->double('montoUnidades')->nullable();
+            $table->double('DescuentoUnidades')->nullable();
             $table->string('cantidadPaquetes')->nullable();
-            $table->double('Descuento')->nullable();
+            $table->double('montoPaquetes')->nullable();
+            $table->double('DescuentoPaquetes')->nullable();
             $table->integer('idUsuario')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');
-
             $table->integer('id_Producto')->unsigned()->nullable();
             $table->integer('id_Pedido')->unsigned()->nullable();
+            $table->integer('id_Promocion')->unsigned()->nullable();
         });
 
         Schema::table('productopedido', function( $table) {
+            $table->foreign('id_Promocion')->references('idPromocion')->on('promocion');
             $table->foreign('id_Producto')->references('idProducto')->on('producto');
             $table->foreign('id_Pedido')->references('idPedido')->on('pedido');
         });

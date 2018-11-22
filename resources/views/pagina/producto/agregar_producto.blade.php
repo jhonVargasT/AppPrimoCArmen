@@ -236,22 +236,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-2 col-sm-2 col-form-label" for="comisionVenta">Comision
-                                                de
-                                                venta
-                                                para vendedor</label>
-                                            <div class="col-md-4 col-sm-4 mb-4">
-                                                <div class="input-group ">
-                                                    <div class="input-group-prepend"><span
-                                                                class="input-group-text">S/.</span>
-                                                    </div>
-                                                    <input type="text" class="form-control" name="comisionVenta"
-                                                           id="comisionVenta" data-parsley-group="step-2"
-                                                           onchange="validardecimales('comisionVenta',2);validarEnterosPositivos('comisionVenta')">
-                                                </div>
-                                            </div>
-                                        </div>
                                         <!-- end form-group -->
                                     </div>
                                     <!-- end col-8 -->

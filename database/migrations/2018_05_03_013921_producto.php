@@ -25,11 +25,9 @@ class Producto extends Migration
             $table->double('precioCompra')->nullable();
             $table->double('precioVentaMayo')->nullable();
             $table->double('precioVentaMino')->nullable();
-            $table->double('comisionPaquete')->nullable();
             $table->integer('cantidadStockUnidad')->nullable();
             $table->double('precioCompraUnidad')->nullable();
             $table->double('precioVentaUnidad')->nullable();
-            $table->double('descuento')->nullable();
             $table->integer('idUsuario')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');
