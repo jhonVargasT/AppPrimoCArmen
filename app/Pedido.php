@@ -17,6 +17,11 @@ class Pedido extends Model
         return static::where('idPedido', $idpedido)
             ->update(['costoBruto' => $monto, 'impuesto' => ($monto * 0.18), 'totalPago' => $monto + ($monto * 0.18)]);
     }
+    public static function cambiarDescuento($idpedido, $monto)
+    {
+        return static::where('idPedido', $idpedido)
+            ->update(['descuento' =>$monto]);
+    }
 
     public static function reporteVendedor($idusuario)
 
@@ -141,7 +146,7 @@ class Pedido extends Model
 
     public static function obetenerCabezaTicket($idpedido)
     {
-        return DB::select('SELECT DATE(now()) fechaimpre,concat(pers.apellidos,\', \',pers.nombres)  usu, LPAD(pe.idPedido, 6, \'0\')  id,
+        return DB::select('SELECT DATE(now()) fechaimpre,concat(pers.apellidos,\', \',pers.nombres)  usu,per.tipoCliente,per.idPersona, LPAD(pe.idPedido, 6, \'0\')  id,
                                   CONCAT(per.direccion ,\' - \',per.distrito,\' - \',per.provincia,\' - \',per.departamento) as direccion,ifnull(per.razonsocial,concat(per.apellidos,\', \',per.nombres))  clie, ifnull(per.ruc,per.dni) dni
                                     FROM pedido pe
                                     inner join usuario usu on usu.idUsuario=pe.idUsuario
@@ -168,7 +173,7 @@ class Pedido extends Model
     }
     public static function obetenerCuerpoTicket($idpedido)
     {
-        return DB::select('SELECT round(costoBruto,2) as opgrav,round(costoBruto*0.18,2) as igv,round(sum(costoBruto+(costoBruto*0.18)),2) as tot FROM pedido where idPedido='.$idpedido);
+        return DB::select('SELECT costoBruto,impuesto,descuento,totalPago FROM pedido where idPedido='.$idpedido);
 
     }
 }

@@ -18,6 +18,15 @@ function autoCompletar() {
                 $("#nombretienda").val(data.tienda);
                 $("#idtienda").val(data.idtienda);
                 $("#idpersona").val(data.idpersona);
+                $("#tipousuario").val(data.tipusu);
+                if (data.tipusu === 2) {
+                    $("#tipousu").removeClass('text-purple');
+                    $("#tipousu").text('MAYORISTA').addClass('text-success');
+                }
+                else {
+                    $("#tipousu").removeClass('text-success');
+                    $("#tipousu").text('MINORISTA').addClass('text-purple');
+                }
             }
             else {
                 error('Usuario no esta registrado!');
@@ -53,6 +62,15 @@ function completarTienda() {
                     $("#nombretienda").val(data.tienda);
                     $("#idtienda").val(data.idtienda);
                     $("#idpersona").val(data.idpersona);
+                    $("#tipousuario").val(data.tipusu);
+                    if (data.tipusu === 2) {
+                        $("#tipousu").removeClass('text-purple');
+                        $("#tipousu").text('MAYORISTA').addClass('text-success');
+                    }
+                    else {
+                        $("#tipousu").removeClass('text-success');
+                        $("#tipousu").text('MINORISTA').addClass('text-purple');
+                    }
                 }
                 else {
                     error('Usuario no esta registrado!');
@@ -83,6 +101,15 @@ function completarNombresApellidos() {
                     $("#nombretienda").val(data.tienda);
                     $("#idtienda").val(data.idtienda);
                     $("#idpersona").val(data.idpersona);
+                    $("#tipousuario").val(data.tipusu);
+                    if (data.tipusu === 2) {
+                        $("#tipousu").removeClass('text-purple');
+                        $("#tipousu").text('MAYORISTA').addClass('text-success');
+                    }
+                    else {
+                        $("#tipousu").removeClass('text-success');
+                        $("#tipousu").text('MINORISTA').addClass('text-purple');
+                    }
                 }
                 else {
                     error('Usuario no esta registrado!');
@@ -125,7 +152,7 @@ function buscarProductoNombre() {
     "use strict";
     var idproducto = $("#nombre_producto").val();
     var dni = $("#dni").val();
-    var url = "autocompletarproducto/" + idproducto+"/"+dni;
+    var url = "autocompletarproducto/" + idproducto + "/" + dni;
     $.ajax({
         type: "GET",
         url: url,
@@ -162,38 +189,62 @@ function autocompletarProductoPromocion() {
     "use strict";
     var idproducto = $("#nombre_producto").val();
     var dni = $("#dni").val();
-    var idpromo = $("#Promocion option:selected").attr("id")
-   // var idpromo = $("#Promocion").val();
-    var url = "autocompletarproductopromocion/" + idproducto+"/"+dni+"/"+idpromo;
-    $.ajax({
-        type: "GET",
-        url: url,
-        cache: false,
-        dataType: 'json',
-        data: '_token = <?php echo csrf_token() ?>',
-        success: function (data) {
-            if (data.error === 1) {
-                $("#id_producto").val(data.idproducto);
-                $("#nompro").html(data.nombre);
-                $("#tippro").html(data.tipoproducto);
-                $("#tippa").html(data.tipopaquete);
-                $("#capa").html(data.cantpaquuni);
+    var idpromo = $("#Promocion option:selected").attr("id");
+    // var idpromo = $("#Promocion").val();
+    var url = "autocompletarproductopromocion/" + idproducto + "/" + dni + "/" + idpromo;
+    if (idpromo !== '0') {
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                if (data.error === 1) {
 
-                $("#cantidadpa").html(data.cantidadpaq);
-                $("#preciopa").html(data.precioventapaq);
-                $("#cantidadun").html(data.cantidaduni);
-                $("#precioun").html(data.precioventauni);
-                $("#numero_paquetes").attr('max', data.cantidadpaq);
-                $("#numero_unidades").attr('max', data.cantidaduni);
-                $("#numero_paquetes").removeAttr('readOnly');
-                $("#numero_unidades").removeAttr('readOnly');
-               // buscarPromocion(data.idproducto);
-            } else {
-                $('#hijos').remove()
-                error();
+                    $("#totpaque").html('');
+                    $("#totunu").html('');
+                    $("#total").html('');
+                    $("#numero_paquetes").val(0);
+                    $("#numero_unidades").val(0);
+                    $("#sumtotales").html('');
+                    $("#enviar").addClass('disabled');
+
+                    $("#id_producto").val(data.idproducto);
+                    $("#nompro").html(data.nombre);
+                    $("#tippro").html(data.tipoproducto);
+                    $("#tippa").html(data.tipopaquete);
+                    $("#capa").html(data.cantpaquuni);
+
+                    $("#cantidadpa").html(data.cantidadpaq);
+                    $("#preciopa").html(data.precioventapaq);
+                    $("#cantidadun").html(data.cantidaduni);
+                    $("#precioun").html(data.precioventauni);
+                    $("#numero_paquetes").attr('max', data.cantidadpaq);
+                    $("#numero_unidades").attr('max', data.cantidaduni);
+                    $("#numero_paquetes").removeAttr('readOnly');
+                    $("#numero_unidades").removeAttr('readOnly');
+                    // buscarPromocion(data.idproducto);
+                } else {
+
+
+                    $('#hijos').remove()
+                    error();
+                }
             }
-        }
-    });
+        });
+    }
+    else {
+        $("#totpaque").html('');
+        $("#totunu").html('');
+        $("#total").html('');
+        $("#numero_paquetes").val(0);
+        $("#numero_unidades").val(0);
+        $("#sumtotales").html('');
+        $("#enviar").addClass('disabled');
+        buscarProductoNombre();
+    }
+
 }
 
 
@@ -290,20 +341,31 @@ function anadirProductoATabla() {
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
     var numerounidades = $("#numero_unidades").val();
+    var totalpaque = $("#totpaque").text();
+    var totaluni = $("#totunu").text();
     var totalpro = $("#sumtotales").text();
-
+    var idpromo = $("#Promocion option:selected").attr("id");
+    if (!$("#Promocion").length) {
+        idpromo = 0;
+    }
     var producto = {
         id: idproducto,
         nombre: nombreproducto,
         paquete: numeropaquete,
+        montopaquete: totalpaque,
         unidades: numerounidades,
+        montounidades: totaluni,
+        idpromo: idpromo,
         total: totalpro
     };
 
     for (var i = 0; i < productos.length; i++) {
         if (productos[i]["id"] === producto["id"]) {
             productos[i]["paquete"] = producto["paquete"];
+            productos[i]["montopaquete"] = producto["montopaquete"];
             productos[i]["unidades"] = producto["unidades"];
+            productos[i]["montounidades"] = producto["montounidades"];
+            productos[i]["idpromo"] = producto["idpromo"];
             productos[i]["total"] = producto["total"];
             res = true;
         }
@@ -323,11 +385,10 @@ function modificarTotal() {
     for (var i = 0; i < productos.length; i++) {
         sum = sum + parseFloat(productos[i]["total"]);
     }
-    $("#totalproducto").html(sum);
     igv = (sum * 0.18);
+    $("#totalproducto").html(sum - igv);
     $("#igv").html(igv);
-    tot = sum + igv;
-    $("#total").html(tot);
+    $("#total").html(sum);
 }
 
 function llenarTabla() {
@@ -344,13 +405,15 @@ function llenarTabla() {
             {title: "Codigo", data: ['id']},
             {title: "Nombre producto", data: ['nombre']},
             {title: "Cant paquete", data: ['paquete']},
-            {title: "cant unidade", data: ['unidades']},
+            {title: "Monto paquete", data: ['montopaquete']},
+            {title: "Cant unidades", data: ['unidades']},
+            {title: "Monto unidades", data: ['montounidades']},
             {title: "Monto total", data: ['total']},
             {
                 data: function (row) {
                     return '<div align="center">\n' +
-                        '<a href="#modal-dialog" style="color: green" TITLE="Editar"   data-toggle="modal" onclick="editarProducto(event,' + row.id + ')">\n' +
-                        '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                        /*'<a href="#modal-dialog" style="color: green" TITLE="Editar"   data-toggle="modal" onclick="editarProducto(event,' + row.nombre + ')">\n' +
+                        '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +*/
                         '<a href="#" style="color: red" TITLE="Anular" onclick="eliminarProductoTabla(' + row.id + ')" >\n' +
                         '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
                         '</div>';
@@ -376,7 +439,7 @@ function eliminarProductoTabla(id) {
             var posicion;
             for (var i = 0; i < productos.length; i++) {
                 if (productos[i]['id'].toString() === id.toString()) {
-                    productos.splice(0, 1);
+                    productos.splice(i, 1);
                 }
             }
             llenarTabla();
@@ -403,8 +466,8 @@ function editarProducto(event, id) {
     resetearModal();
     var res = false;
     for (var i = 0; i < productos.length; i++) {
-        if (productos[i]['id'].toString() === id.toString()) {
-            $('#nombre_producto').val(productos[i]['id']);
+        if (productos[i]['nombre'].toString() === id.toString()) {
+            $('#nombre_producto').val(productos[i]['nombre']);
             $('#numero_paquetes').val(productos[i]['paquete']);
             $('#numero_unidades').val(productos[i]['unidades']);
             res = true;
@@ -422,11 +485,14 @@ function enviarPedido() {
     var idpersona = $('#idpersona').val();
     var iddireccion = $('#direcciones').find('option:selected').attr('id');
     var fechaentrega = new Date($('#datepicker-autoClose').val());
-    var costototal = $('#totalproducto').text();
+    var costototal = $('#total').text();
+    var tipousuario = $("#tipousuario").val();
+
     var datosper = {
         persona: idpersona,
         tienda: iddireccion,
         fechaentrega: fechaentrega,
+        tipousuario: tipousuario,
         total: costototal
     };
 
@@ -532,7 +598,7 @@ function buscarPromocion(id) {
                 $select.find('option').remove();
                 $select.append('<option id="0">Seleccione </option>');
                 for (var i = 0; i < data.length; i++) {
-                        $select.append('<option id=' + data[i].id + ' >' + data[i].value + '</option>');
+                    $select.append('<option id=' + data[i].id + ' >' + data[i].value + '</option>');
                 }
             }
         }

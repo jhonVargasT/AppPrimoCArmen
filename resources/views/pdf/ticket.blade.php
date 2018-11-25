@@ -4,40 +4,11 @@
 <head>
     <style>
         html {
-            margin: 0;
+            margin: 1px;
         }
 
         * {
             font-size: 7pt;
-        }
-
-        td,
-        th,
-        tr,
-        table {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        .centrado {
-            text-align: center;
-            align-content: center;
-        }
-
-        .izquerda {
-            text-align: left;
-            align-content: left;
-        }
-
-        .centro {
-            text-align: center;
-            align-content: center;
-        }
-
-        .derecha {
-            text-align: right;
-            align-content: right;
         }
 
         .Titulo {
@@ -47,18 +18,6 @@
             font-weight: bold;
             border-bottom: 1px solid black;
 
-        }
-
-        .nota {
-            text-align: center;
-            align-content: center;
-            font-weight: bold;
-        }
-
-        .fecha {
-            text-align: right;
-            align-content: right;
-            font-weight: bold;
         }
 
         .rayaarr {
@@ -73,37 +32,75 @@
         body {
             font-family: 'DejaVu Sans Mono';
         }
+
+        .tabla {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .lineaarriba {
+            border-top: 1px solid black;
+        }
     </style>
 
 </head>
 
 <body>
-<div class="ticket">
-    <img src="..\public\assets\img\logo\logo-arp.jpg" width="200" height="200" align="middle" vspace="30">
-    <p class="centrado">
-        <label class="Titulo">ARPEMAR S.A.C</label>
-        <br>
-        <br>PARCELA NRO. 32B FUNDO SANTO TOMAS(ALTURA POSTA SAN PEDRO DE CARABAYLLO) LIMA-LIMA.
-        <br>RUC : 20602872182
-        <br><label class="nota">NOTA DE VENTA NRO: </label>{{$pedido[0]->id}}
-    </p>
-    <p class="izquerda">
-        <label class="raya"><label class="fecha">FECHA IMPRESION : </label><label>{{$pedido[0]->fechaimpre}}
-            </label>
+<div>
 
-        </label>
-        <br> <label class="nota">CLIENTE :</label>{{$pedido[0]->clie}}
-        <br><label class="nota">DIRECCION : </label>{{$pedido[0]->direccion}}&nbsp;
-        <br><label class="nota">RUC O DNI : </label>{{$pedido[0]->dni}}&nbsp;
-    </p>
     <table>
         <thead>
+
+        </thead>
+        <tbody>
         <tr>
-            <th align="center">COD</th>
-            <th align="center">DESCRIPCION</th>
-            <th align="center">CANT</th>
-            <th align="center">PRE</th>
-            <th align="center">TOT</th>
+            <th colspan="8" class="Titulo" align="center"><img src="..\public\assets\img\logo\logo-arp.jpg" width="100"
+                                                               height="100" align="middle" vspace="30"></th>
+        </tr>
+        <tr>
+            <th colspan="8" class="Titulo" align="center"> ARPEMAR S.A.C</th>
+        </tr>
+        <tr>
+            <th colspan="8" align="center"> PARCELA NRO. 32B FUNDO SANTO TOMAS(ALTURA POSTA SAN PEDRO DE
+                CARABAYLLO) LIMA-LIMA.
+            </th>
+        </tr>
+        <tr>
+            <th colspan="8" align="center"> RUC Nro 20602872182</th>
+        </tr>
+        <tr>
+            <th colspan="2" align="left" valign="top">FECHA</th>
+            <th colspan="1" align="left" valign="top">:</th>
+            <th colspan="5" align="left" valign="top"> {{$pedido[0]->fechaimpre}}</th>
+        </tr>
+        <tr>
+            <th colspan="2" align="left" valign="top">CLIENTE</th>
+            <th colspan="1" align="left" valign="top">:</th>
+            <th colspan="5" align="left" valign="top"> {{$pedido[0]->clie}}</th>
+        </tr>
+        <tr>
+            <th colspan="2" align="left" valign="top">RUC O DNI</th>
+            <th colspan="1" align="left" valign="top">:</th>
+            <th colspan="5" align="left" valign="top"> {{$pedido[0]->dni}}&nbsp;</th>
+        </tr>
+        <tr>
+            <th colspan="2" align="left" valign="top">DIRECCION</th>
+            <th colspan="1" align="left" valign="top">:</th>
+            <th colspan="5" align="left" valign="top"> {{$pedido[0]->direccion}}&nbsp;</th>
+        </tr>
+
+        </tbody>
+    </table>
+    <br><br>
+    <table>
+        <thead class="tabla">
+        <tr>
+            <th align="center">CODIGO</th>
+            <th align="center">DESCRIPCIO</th>
+            <th align="center">CANTIDAD</th>
+            <th align="center">PRECIO</th>
+            <th align="center">TOTAL</th>
 
         </tr>
         </thead>
@@ -113,39 +110,94 @@
             @if($producto->cantidadPaquetes!=0)
                 <tr>
                     <td align="center">{{$producto->id}}</td>
-                    <td>{{$producto->nombre}} X PAQUETE</td>
+                    <td colspan="4" align="left">{{$producto->nombre}} X {{$producto->tipoPaquete}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
                     <td align="center">{{$producto->cantidadPaquetes}}</td>
-                    <td align="center">{{$producto->precioVenta}}</td>
-                    <td align="center">{{$producto->cantidadPaquetes*$producto->precioVenta}}</td>
+                    <td align="center">{{$producto->precioVentapaque}}</td>
+                    <td align="center">{{$producto->totpaque}}</td>
+                </tr>
+            @endif
+            @if($producto->id_Promocion!=null && $producto->DescuentoPaquetes!=0)
+                <tr>
+                    <td colspan="3" align="right">{{$producto->descpro}}</td>
+                    <td align="right">DESC</td>
+                    <td align="center">-{{$producto->DescuentoPaquetes}}</td>
                 </tr>
             @endif
             @if($producto->cantidadUnidades!=0)
                 <tr>
                     <td align="center">{{$producto->id}}</td>
-                    <td>{{$producto->nombre}} X UNIDAD</td>
+                    <td colspan="4" align="left">{{$producto->nombre}} X UNIDAD</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
                     <td align="center">{{$producto->cantidadUnidades}}</td>
                     <td align="center">{{$producto->precioVentaUnidad}}</td>
-                    <td align="center">{{$producto->cantidadUnidades*$producto->precioVentaUnidad}}</td>
+                    <td align="center">{{$producto->totuni}}</td>
+                </tr>
+            @endif
+            @if($producto->id_Promocion!=null && $producto->DescuentoUnidades!=0)
+                <tr>
+                    <td colspan="3" align="right">{{$producto->descpro}}</td>
+                    <td align="right">DESC</td>
+                    <td align="center">-{{$producto->DescuentoUnidades}}</td>
                 </tr>
             @endif
         @endforeach
+        <tr>
+
+            <td class="lineaarriba" colspan="3" align="right">OP.GRAVADA</td>
+            <td class="lineaarriba" align="center">:</td>
+            <td class="lineaarriba" align="center">{{$impuestos[0]->costoBruto}}</td>
+        </tr>
+        <tr>
+
+            <td colspan="3" align="right">I.G.V</td>
+            <td align="center">:</td>
+            <td align="center">{{$impuestos[0]->impuesto}}</td>
+        </tr>
+        <tr>
+
+            <td colspan="3" align="right">DESCUENTO</td>
+            <td align="center">:</td>
+            <td align="center">-{{$impuestos[0]->descuento}}</td>
+        </tr>
+        <tr>
+
+            <td colspan="3" align="right">TOTAL</td>
+            <td align="center">:</td>
+            <td align="center">{{$impuestos[0]->totalPago}}</td>
+        </tr>
         </tbody>
     </table>
-    <p class="derecha">
-        <label class="nota">OP.GRAVADA : </label>{{$impuestos[0]->opgrav}}
-        <br><label class="nota">I.G.V : </label>{{$impuestos[0]->igv}}
-        <br><label class="nota">TOTAL : </label>{{$impuestos[0]->tot}}
-    </p>
-    <p class="centrado">
-        <label>ARPEMAR S.A.C AGRADECE SU PREFERENCIA</label>
-        <br> <label><label class="nota">NOTA:</label>ESTA ES UNA NOTA DE VENTA QUE PUEDE SER CANJEADA POR UNA FACTURA O
-            BOLETA
-        </label>
-        <br><label>INGRESANDO A </label><label class="nota">WWW.ARPEMARSAC.COM</label>
-    </p>
-    <p class="derecha">
-        <label class="nota">ATENDIDO POR :</label>{{$pedido[0]->usu}}
-    </p>
+    <br><br>
+    <table>
+        <thead></thead>
+        <tbody>
+        <tr>
+            <th colspan="8" align="center">ARPEMAR S.A.C AGRADECE SU PREFERENCIA
+            </th>
+        </tr>
+        <tr>
+            <th colspan="1" align="left" valign="top">NOTA:
+            </th>
+            <th colspan="7" align="left"  valign="top">ESTA ES UNA NOTA DE VENTA QUE PUEDE SER CANJEADA POR UNA FACTURA O
+                BOLETA
+            </th>
+        </tr>
+        <tr>
+            <th colspan="3" align="right">ATENDIDO POR :
+            </th>
+            <th colspan="5" align="left">{{$pedido[0]->usu}}
+            </th>
+        </tr>
+        </tbody>
+    </table>
+
 </div>
 </body>
 

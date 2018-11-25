@@ -29,6 +29,7 @@ class NuevoPedidoController extends Controller
             $tienda = null;
             $idtienda = null;
             $idpersona = null;
+            $tipousuario = null;
             $persona = Persona::obtenerDatosDni($dni);
             //    echo $persona;
             foreach ($persona as $p) {
@@ -36,10 +37,10 @@ class NuevoPedidoController extends Controller
                 $tienda = $p->tienda;
                 $idtienda = $p->idTienda;
                 $idpersona = $p->idPersona;
-
+                $tipousuario=$p->tipoCliente;
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona,'tipusu'=>$tipousuario), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -60,6 +61,7 @@ class NuevoPedidoController extends Controller
             $tienda = null;
             $idtienda = null;
             $idpersona = null;
+            $tipousuario = null;
             $result = Persona::obtenerDatosNombresApellidos($apenbusc, $nombrebusc);
 
             foreach ($result as $p) {
@@ -68,10 +70,11 @@ class NuevoPedidoController extends Controller
                 $dni = $p->dni;
                 $idtienda = $p->idTienda;
                 $idpersona = $p->idPersona;
+                $tipousuario=$p->tipoCliente;
 
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni,'tipusu'=>$tipousuario), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -82,13 +85,14 @@ class NuevoPedidoController extends Controller
     public function autoCompletarNombreTiendaTienda($nombreTienda)
     {
         try {
-            return view('pagina/vendedor/nuevo_pedido');
+          //  return view('pagina/vendedor/nuevo_pedido');
 
             $dni = null;
             $nombres = null;
             $tienda = null;
             $idtienda = null;
             $idpersona = null;
+            $tipousuario = null;
             $result = Persona::obtenerDatosNombreTienda($nombreTienda);
 
             foreach ($result as $p) {
@@ -100,7 +104,7 @@ class NuevoPedidoController extends Controller
 
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni,'tipusu'=>$tipousuario), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {

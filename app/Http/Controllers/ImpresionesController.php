@@ -18,38 +18,42 @@ use Mike42\Escpos\Printer;
 class ImpresionesController extends Controller
 {
 
- /*   public function generateReport()
-    {
-        JasperPHP::compile(__DIR__ . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
+    /*   public function generateReport()
+       {
+           JasperPHP::compile(__DIR__ . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
 
-    }
+       }
 
-    public function report()
-    {
-        $datafile = base_path('/storage/jasper/data.json');
-        $output = base_path('/storage/jasper/data'); //indicate the name of the output PDF
-        JasperPHP::process(
-            base_path('/resources/reports/taxinvoice80.jrxml'),
-            $output,
-            array("pdf"),
-            array("msg" => "Tax Invoice"),
-            array("driver" => "json", "json_query" => "data", "data_file" => $datafile)
-        )->execute();
+       public function report()
+       {
+           $datafile = base_path('/storage/jasper/data.json');
+           $output = base_path('/storage/jasper/data'); //indicate the name of the output PDF
+           JasperPHP::process(
+               base_path('/resources/reports/taxinvoice80.jrxml'),
+               $output,
+               array("pdf"),
+               array("msg" => "Tax Invoice"),
+               array("driver" => "json", "json_query" => "data", "data_file" => $datafile)
+           )->execute();
 
-    }*/
+       }*/
 
     public function notaVenta($id)
     {
 
         $data = array();
         $pedido = Pedido::obetenerCabezaTicket($id);
-        $productos = Producto::obtenerProductosTicket($id);
+        foreach ($pedido as $ped) {
+            $idpers = $ped->idPersona;
+        }
+        $productos = Producto::obtenerProductosTicket($id, $idpers);
         $impuestos = Pedido::obetenerCuerpoTicket($id);
         $pdf = new PDF();
         $pdf = PDF::loadView('pdf.ticket', ['pedido' => $pedido, 'productos' => $productos, 'impuestos' => $impuestos]);
-        $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
+        $pdf->setPaper(array(0, 0, 800, 165), 'landscape');
         return $pdf->download('archivo.pdf');
     }
+
     public function facturaEletronica($id)
     {
 
@@ -63,15 +67,17 @@ class ImpresionesController extends Controller
         $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
         return $pdf->print('factura.pdf');
     }
+
     public function devoluciones($id)
     {
-        $devolucion=Devolucion::obtenerImpresion($id);
+        $devolucion = Devolucion::obtenerImpresion($id);
         $pdf = new PDF();
-        $pdf = PDF::loadView('pdf.devolucion',['devolucion' => $devolucion]);
+        $pdf = PDF::loadView('pdf.devolucion', ['devolucion' => $devolucion]);
         $pdf->setPaper(array(0, 0, 500, 155), 'landscape');
         return $pdf->download('devolucion.pdf');
 
     }
+
     public function ticketeraDirecta()
     {
         $connector = new NetworkPrintConnector("192.168.8.100", 9100);
@@ -79,7 +85,7 @@ class ImpresionesController extends Controller
         try {
             // ... Print stuff
         } finally {
-            $printer -> close();
+            $printer->close();
         }
     }
 }

@@ -106,25 +106,46 @@ class TiendaController extends Controller
             $pedido->idPersona = $persona->persona;
             $pedido->usuarioEliminacion = null;
             $pedido->razonEliminar = null;
-            $pedido->costoBruto = $persona->total;
             $pedido->impuesto = ($persona->total * 0.18);
+            $pedido->costoBruto = abs(($persona->total * 0.18) - $persona->total);
+            $pedido->totalPago =$persona->total  ;
             $pedido->descuento = 0;
-            $pedido->totalPago = ($persona->total * 0.18) + $persona->total;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->fechaEntrega = util::fecha();
             $pedido->id_DireccionTienda = $persona->tienda;
             $pedido->estadoPedido = 3;
             $productos = $data->productos;
-            DB::transaction(function () use ($pedido, $productos) {
+            DB::transaction(function () use ($pedido, $productos,$persona) {
                 $pedido->save();
                 $idpedidoreporte = $pedido->idPedido;
+                $totaldescuento=0;
                 foreach ($productos as $pr) {
                     $stockproducto = Producto::consultarProducto($pr->id);
+                    foreach ($stockproducto as $stock) {
+                        $stockunidad = $stock->cantidadStockUnidad;
+                        $stockpaquete = $stock->cantidadPaquete;
+                        if($persona->tipousuario===2){
+                            $montopaque=$stock->precioVentaMayo;
+                        }
+                        else{
+                            $montopaque= $stock->precioVentaMino;
+                        }
+                        $montounida=$stock->precioVentaUnidad;
+                    }
                     $productopedido = new ProductoPedido();
                     $unidades = $pr->unidades;
                     $paquetes = $pr->paquete;
+                    $productopedido->montoUnidades=$pr->montounidades;
+                    $productopedido->DescuentoUnidades=abs($pr->montounidades-($montounida*$unidades));
+                    $productopedido->montoPaquetes=$pr->montopaquete;
+                    $productopedido->DescuentoPaquetes=abs($pr->montopaquete-($montopaque*$paquetes));
                     $productopedido->cantidadUnidades = $unidades;
+                    if($pr->idpromo!=0)
+                    $productopedido->id_Promocion=$pr->idpromo;
+                    else{
+                        $productopedido->id_Promocion=null;
+                    }
                     $productopedido->estado = 4;
                     $productopedido->cantidadPaquetes = $paquetes;
                     $productopedido->idUsuario = Session('idusuario');;
@@ -132,14 +153,14 @@ class TiendaController extends Controller
                     $productopedido->id_Producto = $pr->id;
                     $productopedido->id_Pedido = $pedido->idPedido;
                     $productopedido->save();
-                    foreach ($stockproducto as $stock) {
-                        $stockunidad = $stock->cantidadStockUnidad;
-                        $stockpaquete = $stock->cantidadPaquete;
-                    }
                     $totalunidades = ($stockunidad - $unidades);
                     $totalpaquetes = ($stockpaquete - $paquetes);
                     Producto::disminuirStock($pr->id, $totalpaquetes, $totalunidades);
+
+                    $totaldescuento=+ $productopedido->DescuentoUnidades+ $productopedido->DescuentoPaquetes;
                 }
+                Pedido::cambiarDescuento($idpedidoreporte,$totaldescuento);
+
                 $boleta = new Boleta();
                 $boleta->id_Pedido = $idpedidoreporte;
                 $boleta->estado = 1;

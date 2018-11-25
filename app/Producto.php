@@ -149,14 +149,37 @@ class Producto extends Model
                       ');
     }
 
-    public static function obtenerProductosTicket($idPedido)
+    public static function obtenerProductosTicket($idPedido,$idpersona)
     {
         return $res =
-            DB::select('SELECT LPAD(pp.idProductoPedido, 6, \'0\') as id ,pr.nombre,pr.precioVentaUnidad,pp.cantidadUnidades,pr.precioVenta,pp.cantidadPaquetes,sum((pr.precioVentaUnidad*pp.cantidadUnidades)+(pr.precioVenta*pp.cantidadPaquetes))as suma
-            FROM productopedido pp
-            inner JOIN producto pr on pp.id_Producto=pr.idProducto
-          where pp.id_Pedido='.$idPedido.'
-        group by pp.idProductoPedido
+            DB::select('SELECT LPAD(pp.idProductoPedido, 6, \'0\') as id ,pr.nombre,
+pr.tipoPaquete,
+                    CASE
+                        WHEN
+                            (SELECT 
+                                    tipoCliente
+                                FROM
+                                    persona
+                                WHERE
+                                    persona.idPersona = '.$idpersona.') = 1
+                        THEN
+                            pr.precioVentaMino
+                        ELSE pr.precioVentaMayo
+                    END precioVentapaque
+                        ,pp.cantidadPaquetes,
+                        pp.montoPaquetes+pp.DescuentoPaquetes totpaque,
+                        pr.precioVentaUnidad,
+                        pp.cantidadUnidades,
+                        pp.montoUnidades+pp.DescuentoUnidades totuni,
+                        pp.id_Promocion,
+                        pro.nombre descpro,
+                        pp.DescuentoUnidades,
+                        pp.DescuentoPaquetes
+                        FROM productopedido pp
+                        inner JOIN producto pr on pp.id_Producto=pr.idProducto
+                        left join promocion pro on pp.id_Promocion=pro.idPromocion
+                          where pp.id_Pedido='.$idPedido.'
+                        group by pp.idProductoPedido
                       ');
     }
 

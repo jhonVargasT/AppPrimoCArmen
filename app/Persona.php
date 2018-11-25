@@ -50,7 +50,7 @@ class Persona extends Model
 
     public static function obtenerDatosDni($dni)
     {
-        return static::select('persona.apellidos', 'persona.nombres', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona')
+        return static::select('persona.apellidos', 'persona.nombres', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona','persona.tipoCliente')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
             ->where('persona.dni', $dni)
             /* ->where('persona.estado',1)
@@ -62,7 +62,7 @@ class Persona extends Model
 
     public static function obtenerDatosNombresApellidos($apellidos, $nombres)
     {
-        return static::select('persona.apellidos', 'persona.nombres', 'persona.dni', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona')
+        return static::select('persona.apellidos', 'persona.nombres', 'persona.dni', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona','persona.tipoCliente')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
             ->where('persona.apellidos', $apellidos)
             ->where('persona.nombres', $nombres)
@@ -73,7 +73,7 @@ class Persona extends Model
 
     public static function obtenerDatosNombreTienda($nombreTienda)
     {
-        return static::select('persona.apellidos', 'persona.nombres', 'persona.dni', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona')
+        return static::select('persona.apellidos', 'persona.nombres', 'persona.dni', 't.nombreTienda as tienda', 't.idTienda', 'persona.idPersona','persona.tipoCliente')
             ->join('tienda as t', 't.id_Persona', '=', 'persona.idPersona')
             ->where('t.nombreTienda', $nombreTienda)
             /* ->where('persona.estado',1)

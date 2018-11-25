@@ -47,14 +47,15 @@
                 <div class="form-group row m-b-15">
                     <input id="idtienda" name="idtienda" hidden>
                     <input id="idpersona" name="idpersona" hidden>
-                    <label class="col-form-label col-md-3">DNI :</label>
+                    <input id="tipousuario" name="tipousuario" hidden>
+                    <label class="col-form-label col-md-3 text-left">DNI :</label>
                     <div class="col-md-9">
                         <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="number"
                                class="form-control m-b-5" placeholder="Ingresa Dni">
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Nombres y apellidos</label>
+                    <label class="col-form-label col-md-3 text-left">Nombres y apellidos</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control m-b-5 typeahead" id="nombresapellidos"
                                name="nombresapellidos" onkeypress="if(event.keyCode == 13) completarNombresApellidos()"
@@ -89,7 +90,7 @@
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Nombre tienda</label>
+                    <label class="col-form-label col-md-3 text-left">Nombre tienda</label>
                     <div class="col-md-9">
 
                         <input type="text" class="form-control m-b-5 typeahead" id="nombretienda" name="nombretienda"
@@ -126,13 +127,19 @@
                 </div>
 
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Direccion tienda</label>
+                    <label class="col-form-label col-md-3 text-left">Direccion tienda</label>
                     <div class="col-md-9">
                         <select id="direcciones" class=" form-control" onmouseover="llenarDireccion();activarBotonAnadirProducto()">
                             <option>
                                 Seleccione
                             </option>
                         </select>
+                    </div>
+                </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3 text-left">Tipo usuario</label>
+                    <div class="col-md-9 text-left">
+                        <label class="col-form-label " id="tipousu"></label>
                     </div>
                 </div>
 
@@ -165,7 +172,7 @@
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="min-width: 50px;">
+                                    style="min-width: 30px;">
                                     Codigo
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
@@ -177,19 +184,31 @@
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
+                                    style="width: 100%;; min-width: 30px;">
                                     Cant caja
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
+                                    style="width: 100%;; min-width: 30px;">
+                                    Total paquete
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
                                     cant unidad
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Total unidades
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 242px;">
-                                    Precio
+                                    style="width: 100%;; min-width: 30px;">
+                                    Monto total
                                 </th>
                                 <th class="text-nowrap sorting align-items-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
