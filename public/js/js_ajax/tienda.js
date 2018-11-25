@@ -124,7 +124,47 @@ function llenarDireccion() {
 function buscarProductoNombre() {
     "use strict";
     var idproducto = $("#nombre_producto").val();
-    var url = "autocompletarproducto/" + idproducto;
+    var dni = $("#dni").val();
+    var url = "autocompletarproducto/" + idproducto+"/"+dni;
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.error === 1) {
+                $('#hijos').remove()
+                $("#id_producto").val(data.idproducto);
+                $("#nompro").html(data.nombre);
+                $("#tippro").html(data.tipoproducto);
+                $("#tippa").html(data.tipopaquete);
+                $("#capa").html(data.cantpaquuni);
+
+                $("#cantidadpa").html(data.cantidadpaq);
+                $("#preciopa").html(data.precioventapaq);
+                $("#cantidadun").html(data.cantidaduni);
+                $("#precioun").html(data.precioventauni);
+                $("#numero_paquetes").attr('max', data.cantidadpaq);
+                $("#numero_unidades").attr('max', data.cantidaduni);
+                $("#numero_paquetes").removeAttr('readOnly');
+                $("#numero_unidades").removeAttr('readOnly');
+                buscarPromocion(data.idproducto);
+            } else {
+                $('#hijos').remove()
+                error();
+            }
+        }
+    });
+}
+
+function autocompletarProductoPromocion() {
+    "use strict";
+    var idproducto = $("#nombre_producto").val();
+    var dni = $("#dni").val();
+    var idpromo = $("#Promocion option:selected").attr("id")
+   // var idpromo = $("#Promocion").val();
+    var url = "autocompletarproductopromocion/" + idproducto+"/"+dni+"/"+idpromo;
     $.ajax({
         type: "GET",
         url: url,
@@ -147,12 +187,15 @@ function buscarProductoNombre() {
                 $("#numero_unidades").attr('max', data.cantidaduni);
                 $("#numero_paquetes").removeAttr('readOnly');
                 $("#numero_unidades").removeAttr('readOnly');
+               // buscarPromocion(data.idproducto);
             } else {
+                $('#hijos').remove()
                 error();
             }
         }
     });
 }
+
 
 function mostrarMonto() {
     "use strict";
@@ -221,6 +264,7 @@ function resetearModal() {
     $("#numero_unidades").val(0);
     $("#nombre_producto").val('');
     $("#enviar").addClass('disabled');
+    $('#hijos').remove()
 
 }
 
@@ -417,7 +461,8 @@ function agreimpirmir(id) {
     'use strict';
 
     $('#opc').remove();
-    var html = '  <a href="/compilarticket/'+id+'" class="btn btn-primary"  title="Imprimir nota de venta" onclick="redirectvendedor()">' +
+
+    var html = '  <a href="/compilarticket/' + id + '" class="btn btn-primary"  title="Imprimir nota de venta" onclick="redirectvendedor()">' +
         '<i  class=" fas fa-lg fa-fw  fa-print"></i> Imprimir nota</a>';
     $('#impirmir').html(html);
 }
@@ -453,6 +498,51 @@ function redirectadministrador() {
             $("#response").html(data);
         }
     });
+}
+
+function buscarPromocion(id) {
+    $.ajax({
+        type: "GET",
+        url: "/listarPromocionProducto/" + id,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+
+            if (data.length > 0) {
+                $("#direcciones").attr('disabled', false);
+
+                //alert(response); // show [object, Object]
+
+                var html = ' <div class="form-group row " id="hijos"> <div class="col-md-4 col-sm-4 col-form-label" >\n' +
+                    '                            <label class=" col-form-label text-left" for="Promocion"> <strong>Promocion\n' +
+                    '                                     </strong></label>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="col-md-7 col-sm-7">\n' +
+                    '                            <select id="Promocion" class="form-control" onchange="autocompletarProductoPromocion()" >\n' +
+                    '                                <option>\n' +
+                    '                                    Seleccione\n' +
+                    '                                </option>\n' +
+                    '                            </select>\n' +
+                    '                        </div></div>';
+                $('#promociones').html(html);
+
+                var $select = $('#Promocion');
+                //  console.log( data["value"]);
+                $select.find('option').remove();
+                $select.append('<option id="0">Seleccione </option>');
+                for (var i = 0; i < data.length; i++) {
+                        $select.append('<option id=' + data[i].id + ' >' + data[i].value + '</option>');
+                }
+            }
+        }
+    });
+}
+
+function agregarPromocion(promocion) {
+    console.log(promocion);
+
+
 }
 
 //autocompletado

@@ -7,11 +7,13 @@ use App\Pedido;
 use App\Persona;
 use App\Producto;
 use App\ProductoPedido;
+use App\Promocion;
 use App\util;
 use Exception;
 use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 use JasperPHP\JasperPHP as JasperPHP;
+use Symfony\Component\HttpKernel\Client;
 
 class NuevoPedidoController extends Controller
 {
@@ -79,7 +81,8 @@ class NuevoPedidoController extends Controller
 
     public function autoCompletarNombreTiendaTienda($nombreTienda)
     {
-        try {   return view('pagina/vendedor/nuevo_pedido');
+        try {
+            return view('pagina/vendedor/nuevo_pedido');
 
             $dni = null;
             $nombres = null;
@@ -120,11 +123,16 @@ class NuevoPedidoController extends Controller
         }
     }
 
-    public function autocompletarproducto($idproducto)
+    public function autocompletarproducto($idproducto,$dni)
     {
         $nombre = null;
         try {
-            $producto = Producto::consultarProductoNombre($idproducto);
+            $cliente=Persona::obtenerDatosDni($dni);
+
+            foreach ($cliente as $cl){
+                $idpersona=$cl->idPersona;
+            }
+            $producto = Producto::consultarProductoNombre($idproducto,$idpersona);
             foreach ($producto as $p) {
                 $idProducto = $p->idProducto;
                 $nombre = $p->nombre;
@@ -149,11 +157,49 @@ class NuevoPedidoController extends Controller
         }
     }
 
+    public function autocompletarProductoPromocion($idproducto,$dni,$idpromocion)
+    {
+        $nombre = null;
+        try {
+            if($idpromocion!=0) {
+                $cliente = Persona::obtenerDatosDni($dni);
+
+                foreach ($cliente as $cl) {
+                    $idpersona = $cl->idPersona;
+                }
+                $producto = Producto::consultarPrmocionProductoNombre($idproducto, $idpersona, $idpromocion);
+                foreach ($producto as $p) {
+                    $idProducto = $p->idProducto;
+                    $nombre = $p->nombre;
+                    $tipoProducto = $p->tipoProducto;
+                    $tipoPaquete = $p->tipoPaquete;
+                    $cantidadPaquete = $p->cantidadPaquete;
+                    $precioVenta = $p->precioVenta;
+                    $cantidadStockUnidad = $p->cantidadStockUnidad;
+                    $precioVentaUnidad = $p->precioVentaUnidad;
+                    $cantidadunidadpaquete = $p->cantidadProductosPaquete;
+                }
+                if ($nombre != null)
+                    return response()->json(array('error' => 1, 'idproducto' => $idProducto, 'nombre' => $nombre, 'tipoproducto' => $tipoProducto
+                    , 'tipopaquete' => $tipoPaquete, 'cantidadpaq' => $cantidadPaquete, 'precioventapaq' => $precioVenta, 'cantidaduni' => $cantidadStockUnidad,
+                        'precioventauni' => $precioVentaUnidad, 'cantpaquuni' => $cantidadunidadpaquete
+                    ));
+                else
+                    return response()->json(array('error' => 0));
+            }
+            else
+                return response()->json(array('error' => 0));
+
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
     public function enviarPedidos($array)
     {
         // return response()->json(array('error' => 0,'url'=>0,'id'=>1));
         try {
-            $idpedidoreporte=null;
+            $idpedidoreporte = null;
             $data = json_decode($array);
             $persona = $data->persona;
 
@@ -166,9 +212,9 @@ class NuevoPedidoController extends Controller
             $pedido->usuarioEliminacion = null;
             $pedido->razonEliminar = null;
             $pedido->costoBruto = $persona->total;
-            $pedido->impuesto=($persona->total*0.18);
+            $pedido->impuesto = ($persona->total * 0.18);
             $pedido->descuento = 0;
-            $pedido->totalPago = ($persona->total*0.18)+$persona->total;
+            $pedido->totalPago = ($persona->total * 0.18) + $persona->total;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->id_DireccionTienda = $persona->tienda;
@@ -199,12 +245,12 @@ class NuevoPedidoController extends Controller
                 }
             });
             $tipousu = Session('tipoUsuario');
-            $idpedidoreporte=$pedido->idPedido;
+            $idpedidoreporte = $pedido->idPedido;
 
             if ($tipousu === 0) {
-                return response()->json(array('error' => 0,'url'=>1,'id'=>$idpedidoreporte));
+                return response()->json(array('error' => 0, 'url' => 1, 'id' => $idpedidoreporte));
             } elseif ($tipousu === 1) {
-                return response()->json(array('error' => 0,'url'=>0,'id'=>$idpedidoreporte));
+                return response()->json(array('error' => 0, 'url' => 0, 'id' => $idpedidoreporte));
             }
 
         } catch (Exception $e) {
@@ -215,10 +261,25 @@ class NuevoPedidoController extends Controller
 
     public function compilarReporte()
     {
-        return  $tipousu = Session('tipoUsuario');
+        return $tipousu = Session('tipoUsuario');
 
     }
 
+    public function listarPromociones($id)
+    {
+        try {
+
+
+            $arreglo = array();
+            $promocion = Promocion::listarPromocionesProducto($id);
+            foreach ($promocion as $d) {
+                array_push($arreglo, array('value' => $d->nombre, 'id' => $d->idPromocion));
+            }
+            return json_encode($arreglo);
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
 
 
 }

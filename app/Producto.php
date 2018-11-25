@@ -32,15 +32,76 @@ class Producto extends Model
             ->update(['estado' => $estado]);
     }
 
-    public static function consultarProductoNombre($nombre)
+    public static function consultarProductoNombre($nombre,$idPersona)
     {
-        return static::select('*')
-            ->from('producto as p')
-            ->where('p.nombre', $nombre)
-            ->get();
+
+        return  DB::select('SELECT idProducto,nombre, tipoProducto,tipoPaquete,cantidadPaquete,
+                                    CASE
+                                        WHEN (select tipoCliente from persona where persona.idPersona='.$idPersona.')  = 1 THEN producto.precioVentaMino
+                                        ELSE producto.precioVentaMayo
+                                    END precioVenta, cantidadStockUnidad, precioVentaUnidad,cantidadProductosPaquete
+                                FROM
+                                    producto
+                                where producto.nombre="'.$nombre.'"'
+);
+
 
     }
+    public static function consultarPrmocionProductoNombre($nombre,$idPersona,$idPromocion)
+    {
 
+        return DB::select('SELECT 
+            producto.idProducto,
+            producto.nombre,
+            producto.tipoProducto,
+            producto.tipoPaquete,
+            producto.cantidadPaquete,
+            CASE
+                WHEN
+                    productopromocion.activoCaja = 0
+                THEN
+                    CASE
+                        WHEN
+                            (SELECT 
+                                    tipoCliente
+                                FROM
+                                    persona
+                                WHERE
+                                    persona.idPersona = '.$idPersona.') = 1
+                        THEN
+                            producto.precioVentaMino
+                        ELSE producto.precioVentaMayo
+                    END
+                ELSE CASE
+                    WHEN
+                        (SELECT 
+                                tipoCliente
+                            FROM
+                                persona
+                            WHERE
+                                persona.idPersona = '.$idPersona.') = 1
+                    THEN
+                        ABS((ABS(producto.precioCompra - producto.precioVentaMino) * (promocion.descuento / 100)) - producto.precioVentaMino)
+                    ELSE ABS((ABS(producto.precioCompra - producto.precioVentaMayo) * (promocion.descuento / 100)) - producto.precioVentaMayo)
+                END
+            END precioVenta,
+            cantidadStockUnidad,
+            CASE
+                WHEN productopromocion.activoUnidad = 0 THEN producto.precioVentaUnidad
+                ELSE ABS((ABS(producto.precioCompraUnidad - producto.precioVentaUnidad) * (promocion.descuento / 100)) - producto.precioVentaUnidad)
+            END precioVentaUnidad,
+            cantidadProductosPaquete
+        FROM
+            producto
+                LEFT JOIN
+            productopromocion ON producto.idProducto = productopromocion.id_Producto
+                LEFT JOIN
+            promocion ON promocion.idPromocion = productopromocion.id_Promocion
+        WHERE
+            promocion.idPromocion = '.$idPromocion.'
+                AND producto.nombre = "'.$nombre.'"'
+                );
+    }
     public static function consultarProducto($idproducto)
     {
         return static::select('*')

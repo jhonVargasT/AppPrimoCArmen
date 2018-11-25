@@ -181,7 +181,7 @@
                     </div>
 
                     <div class="row form-group row m-b-15">
-                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nro paquete adicional :</label>
+                        <label class="col-md-2 col-sm-2 col-form-label" for="fullname">Nro caja adicional :</label>
                         <div class="col-md-4 col-sm-4">
                             <br>
                             <input type="number" data-parsley-type="number" placeholder="0" id="paquete"/>

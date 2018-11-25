@@ -241,9 +241,9 @@
                 <div class="modal-body">
 
                     <div class="row form-group row m-b-15">
-                        <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto"> <strong> Nombre producto
-                                :</strong></label>
-                        <div class="col-md-6 col-sm-6">
+                        <label class="col-md-4 col-sm-4 col-form-label" for="nombre_producto"> <strong> Nombre producto
+                                </strong></label>
+                        <div class="col-md-7 col-sm-7">
                             <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
                                    name="id_producto" hidden
                             >
@@ -281,10 +281,13 @@
 
                         </div>
                     </div>
+                    <div id="promociones">
+
+                    </div>
                     <div class="row form-group m-b-15 ">
-                        <div class="col-md-5 col-sm-5 col-form-label">
+                        <div class="col-md-4 col-sm-4 col-form-label">
                             <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
-                                    cajas </strong></label>
+                                    cajas  </strong></label>
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_paquetes" type="number" class="form-control m-b-1 "
@@ -295,9 +298,9 @@
                                 class="col-form-label text-left">S./</label>
                     </div>
                     <div class="row form-group  m-b-15">
-                        <div class="col-md-5 col-sm-5 col-form-label">
+                        <div class="col-md-4 col-sm-4 col-form-label">
                             <label class="col-form-label" for="numero_unidades"> <strong>Numero de
-                                    unidades </strong></label>
+                                    unidades  </strong></label>
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_unidades" type="number" class="form-control m-b-5"
@@ -308,14 +311,15 @@
                                 class="col-form-label text-left">S./</label>
                     </div>
                     <div class="row form-group row m-b-15">
-                        <div class="col-md-5 col-sm-5 col-form-label">
+                        <div class="col-md-4 col-sm-4 col-form-label">
                             <label class=" col-form-label text-left" for="sumtotales"> <strong>Sum
                                     totales
-                                    : </strong></label>
+                                     </strong></label>
                         </div>
                         <label class="col-form-label text-right" id="sumtotales"></label><label
                                 class="col-form-label text-left">S./</label>
                     </div>
+
                     <div class="bg-orange-lighter">
                         <div class="row form-group row m-b-15 ">
                             <label class="col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del

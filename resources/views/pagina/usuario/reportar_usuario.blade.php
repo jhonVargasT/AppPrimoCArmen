@@ -86,6 +86,18 @@
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 159px;">
+                                    Meta
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 159px;">
+                                    porcentaje comision
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 159px;">
                                     Estado
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
@@ -144,6 +156,8 @@
                 {data: 'pdni', name: 'pdni'},
                 {data: 'pdireccion', name: 'pdireccion'},
                 {data: 'uusuario', name: 'uusuario'},
+                {data: 'metaminima', name: 'metaminima'},
+                {data: 'porcentajeDeComision', name: 'porcentajeDeComision'},
                 {
                     data: function (row) {
                         if (row.uestado === '1') {

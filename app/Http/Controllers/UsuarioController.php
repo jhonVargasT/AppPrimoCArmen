@@ -62,23 +62,25 @@ class UsuarioController extends Controller
             $persona->distrito = strtoupper($request->distrito);
             $persona->usuarioCreacion = util::fecha();
             $usuario = new Usuario();
-            if($request->tipousuario==='Administrador')
-                $usuario->tipoUsuario=1;
-            elseif ($request->tipousuario==='Vendedor')
-                $usuario->tipoUsuario=0;
+            if ($request->tipousuario === 'Administrador')
+                $usuario->tipoUsuario = 1;
+            elseif ($request->tipousuario === 'Vendedor')
+                $usuario->tipoUsuario = 0;
             $usuario->password = bcrypt($request->password);
             $usuario->usuario = $request->usuario;
             $usuario->fechaCreacion = util::fecha();
+            $usuario->metaminima = $request->metamini;
+            $usuario->porcentajeDeComision = $request->podesc;
             $usuario->usuarioCreacion = Session('idusuario');
 
-            DB::transaction(function () use ($persona, $usuario,$request) {
+            DB::transaction(function () use ($persona, $usuario, $request) {
                 $persona->save();
 
                 $usuario->id_Persona = $persona->idPersona;
                 $usuario->save();
-                $usuario->password=$request->password;
-                $usuario->tipoUsuario=$request->tipousuario;
-                Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
+                $usuario->password = $request->password;
+                $usuario->tipoUsuario = $request->tipousuario;
+             //   Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
 
             });
 
@@ -138,24 +140,24 @@ class UsuarioController extends Controller
             $persona->distrito = strtoupper($request->distrito);
 
             $usuario = Usuario::findOrFail($id);
-            if($usuario->password===$request->password){
+            if ($usuario->password === $request->password) {
                 $usuario->password = $request->password;
-            }
-            else{
-                $usuario->password =  bcrypt($request->password);
+            } else {
+                $usuario->password = bcrypt($request->password);
             }
             $usuario->usuario = $request->usuario;
             $usuario->passwordAntigua = '';
             $usuario->fechaCambioPassword = $fecha;
-
-            DB::transaction(function () use ($persona, $usuario,$request) {
+            $usuario->metaminima = $request->metamini;
+            $usuario->porcentajeDeComision = $request->podesc;
+            DB::transaction(function () use ($persona, $usuario, $request) {
                 $persona->save();
 
                 $usuario->id_Persona = $persona->idPersona;
                 $usuario->save();
-                $usuario->password=$request->password;
-                $usuario->tipoUsuario=$request->tipousuario;
-                Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario,$persona));
+                $usuario->password = $request->password;
+                $usuario->tipoUsuario = $request->tipousuario;
+               // Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
             });
 
             return 'success';

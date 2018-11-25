@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    comision();
+  //  comision();
 });
 
 function llenarVerProductos(idpedido) {

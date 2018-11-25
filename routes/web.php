@@ -141,7 +141,8 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/reportevendedor', 'ReporteVendedorController@index');
 
 //añadir producto al carrito
-    Route::get('autocompletarproducto/{idproducto}', 'NuevoPedidoController@autocompletarproducto');
+    Route::get('autocompletarproducto/{idproducto}/{dni}', 'NuevoPedidoController@autocompletarproducto');
+    Route::get('autocompletarproductopromocion/{idproducto}/{dni}/{idpromocion}', 'NuevoPedidoController@autocompletarProductoPromocion');
 //reporte vendedor
     Route::get('verproductos/{idproductos}', 'ReporteVendedorController@obtenerPrdocutosPedido');
     Route::get('enviarfactura/{idpedido}', 'ReporteVendedorController@enviarfactura');
@@ -188,6 +189,7 @@ Route::get('/eliminarpromocion/{id}', 'Promocioncontroller@actualizarPromocion')
 Route::get('/verpromocionproducto/{id}', 'Promocioncontroller@verPromocionProducto');
 Route::get('/listarproductopromocion/{val}', 'Promocioncontroller@listarProductoPromocion');
 Route::get('/verpromocionproducto/{id}/{estado}/{tipo}/{prod}/{prom}','Promocioncontroller@activarDesactivar');
+Route::get('/listarPromocionProducto/{id}', 'NuevoPedidoController@listarPromociones');
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP

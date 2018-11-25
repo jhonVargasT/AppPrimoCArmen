@@ -46,7 +46,7 @@ FROM
     productopromocion ON producto.idProducto = productopromocion.id_Producto
         left  JOIN
     promocion ON promocion.idPromocion = productopromocion.id_Promocion
-    where promocion.idPromocion='.$id.'
+    where promocion.idPromocion=' . $id . '
     union
 SELECT 
     0 id,
@@ -58,11 +58,17 @@ SELECT
     producto.precioVentaMino montomino,
 	producto.precioVentaUnidad  montouni,
     producto.idProducto,
-    '.$id.' idpromo
+    ' . $id . ' idpromo
 FROM
     producto
-where producto.idProducto not in(select id_Producto from productopromocion where id_Promocion='.$id.')');
+where producto.idProducto not in(select id_Producto from productopromocion where id_Promocion=' . $id . ')');
     }
 
+    public static function listarPromocionesProducto($id)
+    {
+        return DB::select('SELECT promocion.idPromocion idPromocion,promocion.nombre  nombre FROM productopromocion
+                                    inner join promocion on productopromocion.id_Promocion = promocion.idPromocion
+                                    where productopromocion.id_Producto=1 and promocion.activo=' . $id);
+    }
 
 }

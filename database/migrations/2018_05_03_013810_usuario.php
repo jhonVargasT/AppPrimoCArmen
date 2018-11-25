@@ -24,6 +24,8 @@ class Usuario extends Migration
             $table->integer('tipoUsuario')->nullable();
             $table->integer('usuarioCreacion')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
+            $table->double('metaminima')->nullable();
+            $table->double('porcentajeDeComision')->nullable();
             $table->integer('estado')->default('1');
             $table->rememberToken();
 

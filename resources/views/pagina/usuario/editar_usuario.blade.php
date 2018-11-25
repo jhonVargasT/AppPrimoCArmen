@@ -66,7 +66,7 @@
                             <a href="#step-2">
                                 <span class="number">2</span>
                                 <span class="info text-ellipsis">
-						Informacion de contacto
+						Informacion de contacto y comision
 					</span>
                             </a>
                         </li>
@@ -169,7 +169,7 @@
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Direccion <span
                                                         class="text-danger">*</span></label>
-                                            <div class="col-md-9">
+                                            <div class="col-md-6">
                                                 <input type="text" name="direccion" class="form-control" id="direccion"
                                                        data-parsley-group="step-1" data-parsley-required="true"
                                                        value="{{$usuario[0]->pdireccion}}"/>
@@ -193,7 +193,7 @@
                                     <!-- begin col-8 -->
                                     <div class="col-md-8 md-offset-2">
                                         <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
-                                            Informacion de contacto
+                                            Informacion de contacto y comision
                                         </legend>
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
@@ -216,6 +216,28 @@
                                                        data-parsley-group="step-2" data-parsley-required="true"
                                                        data-parsley-type="email" value="{{$usuario[0]->pcorreo}}"/>
                                             </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">Meta minima<span
+                                                        class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="number" name="metamini" data-parsley-group="step-2"
+                                                       data-parsley-required="true" data-parsley-type="number"
+                                                       class="form-control" id="metamini" value="{{$usuario[0]->metaminima}}"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-sm-3 col-form-label text-md-right">
+                                                porcentaje comision
+                                            </label>
+                                            <div class="col-md-2 col-sm-2">
+                                                <input class="form-control" type="number" id="podesc" name="podesc"
+                                                       data-parsley-group="step-2" data-parsley-required="true"
+                                                       min="1" max="100" value="{{$usuario[0]->porcentajeDeComision}}">
+                                            </div>
+                                            <label class="col-md-1 col-sm-1 col-form-label">
+                                                %
+                                            </label>
                                         </div>
                                         <!-- end form-group -->
                                     </div>
