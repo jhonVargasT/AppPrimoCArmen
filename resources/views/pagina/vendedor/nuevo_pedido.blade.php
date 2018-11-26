@@ -21,8 +21,8 @@
 
 <!---------->
 <div id="response">
-    <h1 class="page-header">Nuevo pedido
-        <small>Aqui puedo vender los productos</small>
+    <h1 class="page-header">Pedidos
+        <small>Aqui puedo vender los productos en la tienda</small>
     </h1>
     <!-- final cabecera -->
 
@@ -39,7 +39,7 @@
                             class="fa fa-minus"></i></a>
 
             </div>
-            <h4 class="panel-title">Venta</h4>
+            <h4 class="panel-title">Tienda</h4>
         </div>
 
         <div class="panel-body">
@@ -47,14 +47,15 @@
                 <div class="form-group row m-b-15">
                     <input id="idtienda" name="idtienda" hidden>
                     <input id="idpersona" name="idpersona" hidden>
-                    <label class="col-form-label col-md-3">DNI :</label>
+                    <input id="tipousuario" name="tipousuario" hidden>
+                    <label class="col-form-label col-md-3 text-left">DNI :</label>
                     <div class="col-md-9">
                         <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="number"
                                class="form-control m-b-5" placeholder="Ingresa Dni">
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Nombres y apellidos</label>
+                    <label class="col-form-label col-md-3 text-left">Nombres y apellidos</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control m-b-5 typeahead" id="nombresapellidos"
                                name="nombresapellidos" onkeypress="if(event.keyCode == 13) completarNombresApellidos()"
@@ -89,7 +90,7 @@
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Nombre tienda</label>
+                    <label class="col-form-label col-md-3 text-left">Nombre tienda</label>
                     <div class="col-md-9">
 
                         <input type="text" class="form-control m-b-5 typeahead" id="nombretienda" name="nombretienda"
@@ -126,9 +127,9 @@
                 </div>
 
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Direccion tienda</label>
+                    <label class="col-form-label col-md-3 text-left">Direccion tienda</label>
                     <div class="col-md-9">
-                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion()">
+                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion();activarBotonAnadirProducto()">
                             <option>
                                 Seleccione
                             </option>
@@ -143,6 +144,13 @@
                                placeholder="Auto Close Datepicker">
                     </div>
                 </div>
+                <div class="form-group row m-b-15">
+                    <label class="col-form-label col-md-3 text-left">Tipo usuario</label>
+                    <div class="col-md-9 text-left">
+                        <label class="col-form-label " id="tipousu"></label>
+                    </div>
+                </div>
+
             </div>
 
             <div class=".row.row-space-2 .p-2 disabled" align="center">
@@ -172,7 +180,7 @@
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="min-width: 50px;">
+                                    style="min-width: 30px;">
                                     Codigo
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
@@ -184,19 +192,31 @@
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
+                                    style="width: 100%;; min-width: 30px;">
                                     Cant caja
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 187px;">
+                                    style="width: 100%;; min-width: 30px;">
+                                    Total paquete
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
                                     cant unidad
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 30px;">
+                                    Total unidades
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 242px;">
-                                    Precio
+                                    style="width: 100%;; min-width: 30px;">
+                                    Monto total
                                 </th>
                                 <th class="text-nowrap sorting align-items-center" tabindex="0"
                                     aria-controls="data-table-fixed-header"
@@ -222,7 +242,7 @@
                 <label class="col-form-label "> total : S/. <label class="col-form-label "
                                                                    id="total">0.00 </label> </label>
             </div>
-            <div class="col-md-12" align="center">
+            <div class="col-md-12" align="center" id="opc">
                 <a href="/reportevendedor" class="btn btn-danger" data-toggle="ajax">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
@@ -230,6 +250,11 @@
                     <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
                 </button>
             </div>
+            <br>
+            <div class="col-md-12" align="center" id="impirmir">
+
+            </div>
+
         </div>
     </div>
     <!---adicionar stock--->
@@ -243,9 +268,9 @@
                 <div class="modal-body">
 
                     <div class="row form-group row m-b-15">
-                        <label class="col-md-5 col-sm-5 col-form-label" for="nombre_producto"> <strong> Nombre producto
-                                :</strong></label>
-                        <div class="col-md-6 col-sm-6">
+                        <label class="col-md-4 col-sm-4 col-form-label" for="nombre_producto"> <strong> Nombre producto
+                            </strong></label>
+                        <div class="col-md-7 col-sm-7">
                             <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
                                    name="id_producto" hidden
                             >
@@ -283,38 +308,45 @@
 
                         </div>
                     </div>
+                    <div id="promociones">
+
+                    </div>
                     <div class="row form-group m-b-15 ">
-                        <div class="col-md-5 col-sm-5 col-form-label">
+                        <div class="col-md-4 col-sm-4 col-form-label">
                             <label class=col-form-label" for="numero_paquetes"> <strong>Numero de
-                                    cajas </strong></label>
+                                    cajas  </strong></label>
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_paquetes" type="number" class="form-control m-b-1 "
                                    data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
                         </div>
                         <label class="col-form-label text-left" for="totpaque">Total :</label>
-                        <label class="col-form-label text-left" id="totpaque"></label><label class="col-form-label text-left">S./</label>
+                        <label class="col-form-label text-left" id="totpaque"></label><label
+                                class="col-form-label text-left">S./</label>
                     </div>
                     <div class="row form-group  m-b-15">
-                        <div class="col-md-5 col-sm-5 col-form-label">
+                        <div class="col-md-4 col-sm-4 col-form-label">
                             <label class="col-form-label" for="numero_unidades"> <strong>Numero de
-                                    unidades </strong></label>
+                                    unidades  </strong></label>
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_unidades" type="number" class="form-control m-b-5"
                                    data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
                         </div>
                         <label class="col-form-label text-left" for="totunu">Total :</label>
-                        <label class="col-form-label text-left" id="totunu"> </label><label class="col-form-label text-left">S./</label>
+                        <label class="col-form-label text-left" id="totunu"> </label><label
+                                class="col-form-label text-left">S./</label>
                     </div>
                     <div class="row form-group row m-b-15">
-                        <div class="col-md-5 col-sm-5 col-form-label">
-                        <label class=" col-form-label text-left" for="sumtotales"> <strong>Sum
-                                totales
-                                : </strong></label>
+                        <div class="col-md-4 col-sm-4 col-form-label">
+                            <label class=" col-form-label text-left" for="sumtotales"> <strong>Sum
+                                    totales
+                                </strong></label>
                         </div>
-                        <label class="col-form-label text-right" id="sumtotales"></label><label class="col-form-label text-left">S./</label>
+                        <label class="col-form-label text-right" id="sumtotales"></label><label
+                                class="col-form-label text-left">S./</label>
                     </div>
+
                     <div class="bg-orange-lighter">
                         <div class="row form-group row m-b-15 ">
                             <label class="col-md-12 col-form-label text-center"><h4><u> <strong> Informacion del
@@ -339,7 +371,7 @@
                             <label class="col-form-label text-left" id="tippa" name="tippa"></label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-right" for="capa">&nbsp;&nbsp;&nbsp;Cant unid x paq
+                            <label class="col-form-label text-right" for="capa">&nbsp;&nbsp;&nbsp;Cant unid x caja
                                 :</label>
                             <label class=" col-form-label text-left" id="capa" name="capa"></label>
                         </div>
@@ -353,7 +385,7 @@
                             </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;caja :</label>
+                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;Caja :</label>
                         </div>
                         <div class="row form-group row m-b-15">
                             <label class="col-form-label text-right" for="cantidadpa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad
@@ -391,6 +423,7 @@
                        onclick="anadirProductoATabla()" data-dismiss="modal">
                         <i class="fas fa-lg fa-fw m-r-10 fa-shopping-cart"> </i>Agregar carrito</a>
                 </div>
+
             </div>
         </div>
     </div>

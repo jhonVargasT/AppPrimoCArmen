@@ -268,11 +268,12 @@ function mostrarMonto() {
         }
         else {
             if (cantpaque >= 0 && cantunidad >= 0) {
-                var totpaque = cantpaque * preciopaquetes;
-                var totunidad = cantunidad * preciounidades;
+                var totpaque = number_format(cantpaque * preciopaquetes,2);
+                var totunidad = number_format(cantunidad * preciounidades,2);
+                var total=number_format(parseFloat(totpaque)+parseFloat(totunidad),2);
                 $("#totpaque").html(totpaque);
                 $("#totunu").html(totunidad);
-                $("#sumtotales").html(totunidad + totpaque);
+                $("#sumtotales").html(total);
 
             }
             else {
@@ -385,8 +386,10 @@ function modificarTotal() {
     for (var i = 0; i < productos.length; i++) {
         sum = sum + parseFloat(productos[i]["total"]);
     }
-    igv = (sum * 0.18);
-    $("#totalproducto").html(sum - igv);
+    sum=number_format(sum,2);
+    igv =number_format((parseFloat(sum) * 0.18),2);
+    tot=number_format((sum - igv),2);
+    $("#totalproducto").html(tot);
     $("#igv").html(igv);
     $("#total").html(sum);
 }
@@ -439,7 +442,7 @@ function eliminarProductoTabla(id) {
             var posicion;
             for (var i = 0; i < productos.length; i++) {
                 if (productos[i]['id'].toString() === id.toString()) {
-                    productos.splice(i, 1);
+                    productos.splice(0, 1);
                 }
             }
             llenarTabla();
@@ -447,7 +450,6 @@ function eliminarProductoTabla(id) {
     })
 
 }
-
 function correcto(data) {
     const toast = swal.mixin({
         toast: true,
@@ -457,7 +459,7 @@ function correcto(data) {
     });
     toast({
         type: 'success',
-        title: 'Registro correcto, pedido numero ' + data
+        title: 'Registro correcto, pedido numero '+data
     })
 }
 
@@ -466,8 +468,8 @@ function editarProducto(event, id) {
     resetearModal();
     var res = false;
     for (var i = 0; i < productos.length; i++) {
-        if (productos[i]['nombre'].toString() === id.toString()) {
-            $('#nombre_producto').val(productos[i]['nombre']);
+        if (productos[i]['id'].toString() === id.toString()) {
+            $('#nombre_producto').val(productos[i]['id']);
             $('#numero_paquetes').val(productos[i]['paquete']);
             $('#numero_unidades').val(productos[i]['unidades']);
             res = true;
@@ -531,17 +533,6 @@ function agreimpirmir(id) {
     var html = '  <a href="/compilarticket/' + id + '" class="btn btn-primary"  title="Imprimir nota de venta" onclick="redirectvendedor()">' +
         '<i  class=" fas fa-lg fa-fw  fa-print"></i> Imprimir nota</a>';
     $('#impirmir').html(html);
-}
-
-function print(id) {
-    $.ajax({
-        type: "GET",
-        url: "/compilarticket/1",
-        dataType: "html",
-        success: function () {
-            window.location = url;
-        }
-    });
 }
 
 function redirectvendedor() {
@@ -646,3 +637,25 @@ $('#txt_usuario').typeahead({
     $("#txt_usuario_id").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
 });
 
+function number_format(amount, decimals) {
+
+    amount += ''; // por si pasan un numero en vez de un string
+    amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+
+    decimals = decimals || 0; // por si la variable no fue fue pasada
+
+    // si no es un numero o es igual a cero retorno el mismo cero
+    if (isNaN(amount) || amount === 0)
+        return parseFloat(0).toFixed(decimals);
+
+    // si es mayor o menor que cero retorno el valor formateado como numero
+    amount = '' + amount.toFixed(decimals);
+
+    var amount_parts = amount.split('.'),
+        regexp = /(\d+)(\d{3})/;
+
+    while (regexp.test(amount_parts[0]))
+        amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+
+    return amount_parts.join('.');
+}

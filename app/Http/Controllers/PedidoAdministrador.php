@@ -143,9 +143,9 @@ class PedidoAdministrador extends Controller
                     }
                     Pedido::cambiarEstado($idpedido, 4);
                 }
-                return 'success';
+                return response()->json(array('error' => 1,'id'=>$idpedido));
             } else {
-                return 'error';
+                return response()->json(array('error' => 0,'id'=>$idpedido));
             }
         } catch (Exception $e) {
             return $e;

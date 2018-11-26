@@ -68,7 +68,7 @@ where producto.idProducto not in(select id_Producto from productopromocion where
     {
         return DB::select('SELECT promocion.idPromocion idPromocion,promocion.nombre  nombre FROM productopromocion
                                     inner join promocion on productopromocion.id_Promocion = promocion.idPromocion
-                                    where productopromocion.id_Producto=1 and promocion.activo=' . $id);
+                                    where productopromocion.id_Producto='. $id.' and promocion.activo=1' );
     }
 
 }

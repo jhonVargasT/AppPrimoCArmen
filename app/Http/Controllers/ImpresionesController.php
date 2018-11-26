@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Devolucion;
 use App\Pedido;
 use App\Producto;
+use App\util;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
@@ -51,7 +52,7 @@ class ImpresionesController extends Controller
         $pdf = new PDF();
         $pdf = PDF::loadView('pdf.ticket', ['pedido' => $pedido, 'productos' => $productos, 'impuestos' => $impuestos]);
         $pdf->setPaper(array(0, 0, 800, 165), 'landscape');
-        return $pdf->download('archivo.pdf');
+        return $pdf->download('notaventa-'.$id.'-'.util::fecha().'.pdf');
     }
 
     public function facturaEletronica($id)

@@ -37,9 +37,9 @@ class Producto extends Model
 
         return  DB::select('SELECT idProducto,nombre, tipoProducto,tipoPaquete,cantidadPaquete,
                                     CASE
-                                        WHEN (select tipoCliente from persona where persona.idPersona='.$idPersona.')  = 1 THEN producto.precioVentaMino
-                                        ELSE producto.precioVentaMayo
-                                    END precioVenta, cantidadStockUnidad, precioVentaUnidad,cantidadProductosPaquete
+                                        WHEN (select tipoCliente from persona where persona.idPersona='.$idPersona.')  = 1 THEN  FORMAT(producto.precioVentaMino,2)
+                                        ELSE FORMAT(producto.precioVentaMayo,2)
+                                    END precioVenta, cantidadStockUnidad, FORMAT(precioVentaUnidad,2) precioVentaUnidad,cantidadProductosPaquete
                                 FROM
                                     producto
                                 where producto.nombre="'.$nombre.'"'
@@ -163,18 +163,18 @@ pr.tipoPaquete,
                                 WHERE
                                     persona.idPersona = '.$idpersona.') = 1
                         THEN
-                            pr.precioVentaMino
-                        ELSE pr.precioVentaMayo
+                            Format(pr.precioVentaMino,2)
+                        ELSE  Format(pr.precioVentaMayo,2)
                     END precioVentapaque
                         ,pp.cantidadPaquetes,
-                        pp.montoPaquetes+pp.DescuentoPaquetes totpaque,
-                        pr.precioVentaUnidad,
+                        Format( pp.montoPaquetes+pp.DescuentoPaquetes,2) totpaque,
+                         Format(pr.precioVentaUnidad,2) precioVentaUnidad,
                         pp.cantidadUnidades,
-                        pp.montoUnidades+pp.DescuentoUnidades totuni,
+                         Format(pp.montoUnidades+pp.DescuentoUnidades,2) totuni,
                         pp.id_Promocion,
                         pro.nombre descpro,
-                        pp.DescuentoUnidades,
-                        pp.DescuentoPaquetes
+                         Format(pp.DescuentoUnidades,2) DescuentoUnidades,
+                         Format(pp.DescuentoPaquetes,2) DescuentoPaquetes
                         FROM productopedido pp
                         inner JOIN producto pr on pp.id_Producto=pr.idProducto
                         left join promocion pro on pp.id_Promocion=pro.idPromocion

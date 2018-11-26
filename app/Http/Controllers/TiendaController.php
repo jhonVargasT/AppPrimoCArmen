@@ -106,9 +106,9 @@ class TiendaController extends Controller
             $pedido->idPersona = $persona->persona;
             $pedido->usuarioEliminacion = null;
             $pedido->razonEliminar = null;
-            $pedido->impuesto = ($persona->total * 0.18);
-            $pedido->costoBruto = abs(($persona->total * 0.18) - $persona->total);
-            $pedido->totalPago =$persona->total  ;
+            $pedido->impuesto = round(($persona->total * 0.18),2);
+            $pedido->costoBruto =  round(abs(($persona->total * 0.18) - $persona->total),2);
+            $pedido->totalPago = round($persona->total,2);
             $pedido->descuento = 0;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
@@ -136,10 +136,10 @@ class TiendaController extends Controller
                     $productopedido = new ProductoPedido();
                     $unidades = $pr->unidades;
                     $paquetes = $pr->paquete;
-                    $productopedido->montoUnidades=$pr->montounidades;
-                    $productopedido->DescuentoUnidades=abs($pr->montounidades-($montounida*$unidades));
-                    $productopedido->montoPaquetes=$pr->montopaquete;
-                    $productopedido->DescuentoPaquetes=abs($pr->montopaquete-($montopaque*$paquetes));
+                    $productopedido->montoUnidades= round($pr->montounidades,2);
+                    $productopedido->DescuentoUnidades= round(abs($pr->montounidades-($montounida*$unidades)),2);
+                    $productopedido->montoPaquetes= round($pr->montopaquete,2);
+                    $productopedido->DescuentoPaquetes= round(abs($pr->montopaquete-($montopaque*$paquetes)),2);
                     $productopedido->cantidadUnidades = $unidades;
                     if($pr->idpromo!=0)
                     $productopedido->id_Promocion=$pr->idpromo;
@@ -159,7 +159,7 @@ class TiendaController extends Controller
 
                     $totaldescuento=+ $productopedido->DescuentoUnidades+ $productopedido->DescuentoPaquetes;
                 }
-                Pedido::cambiarDescuento($idpedidoreporte,$totaldescuento);
+                Pedido::cambiarDescuento($idpedidoreporte, round($totaldescuento,2));
 
                 $boleta = new Boleta();
                 $boleta->id_Pedido = $idpedidoreporte;

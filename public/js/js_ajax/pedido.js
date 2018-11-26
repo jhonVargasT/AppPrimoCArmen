@@ -159,13 +159,13 @@ function cambiarEstadoPedido(idpedido) {
                 url: url,
                 data: '_token = <?php echo csrf_token() ?>',
                 success: function (data) {
-                    if (data === 'success') {
-                        pedidoRealizado();
+                    if (data.error === 1) {
+                        pedidoRealizado(data.id);
                         redirect();
                     }
                     else {
-                        if (data === 'error') {
-                            error('por favor revizar los productos preparados para la entrega!');
+                        if (data.error === 0) {
+                            error('por favor revizar los productos preparados para la entrega!, pedido nro '+data.id);
                             redirect();
                         }
                     }
@@ -178,7 +178,7 @@ function cambiarEstadoPedido(idpedido) {
 
 }
 
-function pedidoRealizado() {
+function pedidoRealizado(id) {
     const toast = swal.mixin({
         toast: true,
         position: 'top-end',
@@ -187,7 +187,7 @@ function pedidoRealizado() {
     });
     toast({
         type: 'success',
-        title: 'El pedido se entrego correctamente!'
+        title: 'El pedido se entrego correctamente! Pedido nro '+id,
     })
 }
 
@@ -386,8 +386,8 @@ function cambiarTabla() {
             },
             {
                 data: function (row) {
-                    return '<th">' +
-                        '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Imprimir nota de venta" onclick="">' +
+                    return '<th>' +
+                        '<a href="/compilarticket/'+row.idPedido+'" class="btn btn-link"  title="Imprimir nota de venta" >' +
                         '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
                         '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                         '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +

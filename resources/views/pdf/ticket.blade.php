@@ -33,6 +33,12 @@
             font-family: 'DejaVu Sans Mono';
         }
 
+        .todo{
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+            border-left: 1px solid black;
+        }
         .tabla {
             border-top: 1px solid black;
             border-bottom: 1px solid black;
@@ -69,11 +75,16 @@
         <tr>
             <th colspan="8" align="center"> RUC Nro 20602872182</th>
         </tr>
+
+        <tr >
+            <th colspan="8" align="center" valign="top" class="todo">NOTA DE VENTA NRO : {{$pedido[0]->id}}</th>
+        </tr>
         <tr>
             <th colspan="2" align="left" valign="top">FECHA</th>
             <th colspan="1" align="left" valign="top">:</th>
             <th colspan="5" align="left" valign="top"> {{$pedido[0]->fechaimpre}}</th>
         </tr>
+
         <tr>
             <th colspan="2" align="left" valign="top">CLIENTE</th>
             <th colspan="1" align="left" valign="top">:</th>
@@ -93,14 +104,14 @@
         </tbody>
     </table>
     <br><br>
-    <table>
+    <table WIDTH="100%">
         <thead class="tabla">
         <tr>
-            <th align="center">CODIGO</th>
-            <th align="center">DESCRIPCIO</th>
-            <th align="center">CANTIDAD</th>
-            <th align="center">PRECIO</th>
-            <th align="center">TOTAL</th>
+            <th align="center" width="20px">CODIDO</th>
+            <th align="center" width="30px">DESCRIP</th>
+            <th align="center" width="30px">CANTI</th>
+            <th align="center" width="30px">PRECIO</th>
+            <th align="right" width="50px">TOTAL</th>
 
         </tr>
         </thead>
@@ -117,14 +128,15 @@
                     <td></td>
                     <td align="center">{{$producto->cantidadPaquetes}}</td>
                     <td align="center">{{$producto->precioVentapaque}}</td>
-                    <td align="center">{{$producto->totpaque}}</td>
+                    <td align="right">{{$producto->totpaque}}</td>
                 </tr>
             @endif
             @if($producto->id_Promocion!=null && $producto->DescuentoPaquetes!=0)
                 <tr>
-                    <td colspan="3" align="right">{{$producto->descpro}}</td>
-                    <td align="right">DESC</td>
-                    <td align="center">-{{$producto->DescuentoPaquetes}}</td>
+                    <td></td>
+                    <td colspan="2" align="left">{{$producto->descpro}}</td>
+                    <td></td>
+                    <td align="right">-{{$producto->DescuentoPaquetes}}</td>
                 </tr>
             @endif
             @if($producto->cantidadUnidades!=0)
@@ -137,40 +149,37 @@
                     <td></td>
                     <td align="center">{{$producto->cantidadUnidades}}</td>
                     <td align="center">{{$producto->precioVentaUnidad}}</td>
-                    <td align="center">{{$producto->totuni}}</td>
+                    <td align="right">{{$producto->totuni}}</td>
                 </tr>
             @endif
             @if($producto->id_Promocion!=null && $producto->DescuentoUnidades!=0)
                 <tr>
-                    <td colspan="3" align="right">{{$producto->descpro}}</td>
-                    <td align="right">DESC</td>
-                    <td align="center">-{{$producto->DescuentoUnidades}}</td>
+                    <td></td>
+                    <td colspan="2" align="left">{{$producto->descpro}}</td>
+                    <td></td>
+                    <td align="right">-{{$producto->DescuentoUnidades}}</td>
                 </tr>
             @endif
         @endforeach
         <tr>
 
-            <td class="lineaarriba" colspan="3" align="right">OP.GRAVADA</td>
-            <td class="lineaarriba" align="center">:</td>
-            <td class="lineaarriba" align="center">{{$impuestos[0]->costoBruto}}</td>
+            <td class="lineaarriba" colspan="4" align="right">OP.GRAVADA :</td>
+            <td class="lineaarriba" align="right">{{$impuestos[0]->costoBruto}}</td>
         </tr>
         <tr>
 
-            <td colspan="3" align="right">I.G.V</td>
-            <td align="center">:</td>
-            <td align="center">{{$impuestos[0]->impuesto}}</td>
+            <td colspan="4" align="right">I.G.V :</td>
+            <td align="right">{{$impuestos[0]->impuesto}}</td>
         </tr>
         <tr>
 
-            <td colspan="3" align="right">DESCUENTO</td>
-            <td align="center">:</td>
-            <td align="center">-{{$impuestos[0]->descuento}}</td>
+            <td colspan="4" align="right">DESCUENTO :</td>
+            <td align="right">-{{$impuestos[0]->descuento}}</td>
         </tr>
         <tr>
 
-            <td colspan="3" align="right">TOTAL</td>
-            <td align="center">:</td>
-            <td align="center">{{$impuestos[0]->totalPago}}</td>
+            <td colspan="4" align="right">TOTAL :</td>
+            <td align="right">{{$impuestos[0]->totalPago}}</td>
         </tr>
         </tbody>
     </table>

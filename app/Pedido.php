@@ -64,7 +64,7 @@ class Pedido extends Model
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->join('usuario as us', 'us.idUsuario', '=', 'p.idUsuario')
-            ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
+           // ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
             ->where('p.estadoPedido', $val)
             ->groupBy('p.idPedido')
             ->orderBy('p.idPedido', 'DESC')
@@ -90,7 +90,7 @@ class Pedido extends Model
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->join('usuario as us', 'us.idUsuario', '=', 'p.idUsuario')
-            ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
+         //   ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
             ->groupBy('p.idPedido')
             ->orderBy('p.idPedido', 'DESC')
             ->get();
@@ -173,7 +173,7 @@ class Pedido extends Model
     }
     public static function obetenerCuerpoTicket($idpedido)
     {
-        return DB::select('SELECT costoBruto,impuesto,descuento,totalPago FROM pedido where idPedido='.$idpedido);
+        return DB::select('SELECT format(costoBruto,2) costoBruto,format(impuesto,2) impuesto,format(descuento,2) descuento,format(totalPago,2) totalPago FROM pedido where idPedido='.$idpedido);
 
     }
 }

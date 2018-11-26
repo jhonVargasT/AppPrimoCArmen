@@ -333,7 +333,7 @@
                 },
                 {
                     data: function (row) {
-                        return '<th">' +
+                        return '<th>' +
                             '<a href="/compilarticket/'+row.idPedido+'" class="btn btn-link"  title="Imprimir nota de venta" >' +
                             '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +

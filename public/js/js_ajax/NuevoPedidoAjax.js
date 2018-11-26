@@ -4,7 +4,6 @@ var productos = [];
 /*$(document).ready(function () {
     llenarTabla();
 });*/
-
 function autoCompletar() {
     "use strict";
     var dni = $("#dni").val();
@@ -19,6 +18,15 @@ function autoCompletar() {
                 $("#nombretienda").val(data.tienda);
                 $("#idtienda").val(data.idtienda);
                 $("#idpersona").val(data.idpersona);
+                $("#tipousuario").val(data.tipusu);
+                if (data.tipusu === 2) {
+                    $("#tipousu").removeClass('text-purple');
+                    $("#tipousu").text('MAYORISTA').addClass('text-success');
+                }
+                else {
+                    $("#tipousu").removeClass('text-success');
+                    $("#tipousu").text('MINORISTA').addClass('text-purple');
+                }
             }
             else {
                 error('Usuario no esta registrado!');
@@ -28,6 +36,7 @@ function autoCompletar() {
 
     });
 }
+
 
 function limpiarDatos() {
     $("#nombresapellidos").val('');
@@ -54,6 +63,15 @@ function completarTienda() {
                     $("#nombretienda").val(data.tienda);
                     $("#idtienda").val(data.idtienda);
                     $("#idpersona").val(data.idpersona);
+                    $("#tipousuario").val(data.tipusu);
+                    if (data.tipusu === 2) {
+                        $("#tipousu").removeClass('text-purple');
+                        $("#tipousu").text('MAYORISTA').addClass('text-success');
+                    }
+                    else {
+                        $("#tipousu").removeClass('text-success');
+                        $("#tipousu").text('MINORISTA').addClass('text-purple');
+                    }
                 }
                 else {
                     error('Usuario no esta registrado!');
@@ -84,6 +102,15 @@ function completarNombresApellidos() {
                     $("#nombretienda").val(data.tienda);
                     $("#idtienda").val(data.idtienda);
                     $("#idpersona").val(data.idpersona);
+                    $("#tipousuario").val(data.tipusu);
+                    if (data.tipusu === 2) {
+                        $("#tipousu").removeClass('text-purple');
+                        $("#tipousu").text('MAYORISTA').addClass('text-success');
+                    }
+                    else {
+                        $("#tipousu").removeClass('text-success');
+                        $("#tipousu").text('MINORISTA').addClass('text-purple');
+                    }
                 }
                 else {
                     error('Usuario no esta registrado!');
@@ -94,6 +121,7 @@ function completarNombresApellidos() {
         }
     );
 }
+
 
 function llenarDireccion() {
     "use strict";
@@ -125,7 +153,8 @@ function llenarDireccion() {
 function buscarProductoNombre() {
     "use strict";
     var idproducto = $("#nombre_producto").val();
-    var url = "autocompletarproducto/" + idproducto;
+    var dni = $("#dni").val();
+    var url = "autocompletarproducto/" + idproducto + "/" + dni;
     $.ajax({
         type: "GET",
         url: url,
@@ -134,6 +163,7 @@ function buscarProductoNombre() {
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
             if (data.error === 1) {
+                $('#hijos').remove()
                 $("#id_producto").val(data.idproducto);
                 $("#nompro").html(data.nombre);
                 $("#tippro").html(data.tipoproducto);
@@ -148,11 +178,75 @@ function buscarProductoNombre() {
                 $("#numero_unidades").attr('max', data.cantidaduni);
                 $("#numero_paquetes").removeAttr('readOnly');
                 $("#numero_unidades").removeAttr('readOnly');
+                buscarPromocion(data.idproducto);
             } else {
+                $('#hijos').remove()
                 error();
             }
         }
     });
+}
+
+function autocompletarProductoPromocion() {
+    "use strict";
+    var idproducto = $("#nombre_producto").val();
+    var dni = $("#dni").val();
+    var idpromo = $("#Promocion option:selected").attr("id");
+    // var idpromo = $("#Promocion").val();
+    var url = "autocompletarproductopromocion/" + idproducto + "/" + dni + "/" + idpromo;
+    if (idpromo !== '0') {
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                if (data.error === 1) {
+
+                    $("#totpaque").html('');
+                    $("#totunu").html('');
+                    $("#total").html('');
+                    $("#numero_paquetes").val(0);
+                    $("#numero_unidades").val(0);
+                    $("#sumtotales").html('');
+                    $("#enviar").addClass('disabled');
+
+                    $("#id_producto").val(data.idproducto);
+                    $("#nompro").html(data.nombre);
+                    $("#tippro").html(data.tipoproducto);
+                    $("#tippa").html(data.tipopaquete);
+                    $("#capa").html(data.cantpaquuni);
+
+                    $("#cantidadpa").html(data.cantidadpaq);
+                    $("#preciopa").html(data.precioventapaq);
+                    $("#cantidadun").html(data.cantidaduni);
+                    $("#precioun").html(data.precioventauni);
+                    $("#numero_paquetes").attr('max', data.cantidadpaq);
+                    $("#numero_unidades").attr('max', data.cantidaduni);
+                    $("#numero_paquetes").removeAttr('readOnly');
+                    $("#numero_unidades").removeAttr('readOnly');
+                    // buscarPromocion(data.idproducto);
+                } else {
+
+
+                    $('#hijos').remove()
+                    error();
+                }
+            }
+        });
+    }
+    else {
+        $("#totpaque").html('');
+        $("#totunu").html('');
+        $("#total").html('');
+        $("#numero_paquetes").val(0);
+        $("#numero_unidades").val(0);
+        $("#sumtotales").html('');
+        $("#enviar").addClass('disabled');
+        buscarProductoNombre();
+    }
+
 }
 
 function mostrarMonto() {
@@ -175,11 +269,12 @@ function mostrarMonto() {
         }
         else {
             if (cantpaque >= 0 && cantunidad >= 0) {
-                var totpaque = cantpaque * preciopaquetes;
-                var totunidad = cantunidad * preciounidades;
+                var totpaque = number_format(cantpaque * preciopaquetes,2);
+                var totunidad = number_format(cantunidad * preciounidades,2);
+                var total=number_format(parseFloat(totpaque)+parseFloat(totunidad),2);
                 $("#totpaque").html(totpaque);
-               $("#totunu").html(totunidad);
-                $("#sumtotales").html(totunidad + totpaque);
+                $("#totunu").html(totunidad);
+                $("#sumtotales").html(total);
 
             }
             else {
@@ -222,6 +317,7 @@ function resetearModal() {
     $("#numero_unidades").val(0);
     $("#nombre_producto").val('');
     $("#enviar").addClass('disabled');
+    $('#hijos').remove()
 
 }
 
@@ -247,20 +343,31 @@ function anadirProductoATabla() {
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
     var numerounidades = $("#numero_unidades").val();
+    var totalpaque = $("#totpaque").text();
+    var totaluni = $("#totunu").text();
     var totalpro = $("#sumtotales").text();
-
+    var idpromo = $("#Promocion option:selected").attr("id");
+    if (!$("#Promocion").length) {
+        idpromo = 0;
+    }
     var producto = {
         id: idproducto,
         nombre: nombreproducto,
         paquete: numeropaquete,
+        montopaquete: totalpaque,
         unidades: numerounidades,
+        montounidades: totaluni,
+        idpromo: idpromo,
         total: totalpro
     };
 
     for (var i = 0; i < productos.length; i++) {
         if (productos[i]["id"] === producto["id"]) {
             productos[i]["paquete"] = producto["paquete"];
+            productos[i]["montopaquete"] = producto["montopaquete"];
             productos[i]["unidades"] = producto["unidades"];
+            productos[i]["montounidades"] = producto["montounidades"];
+            productos[i]["idpromo"] = producto["idpromo"];
             productos[i]["total"] = producto["total"];
             res = true;
         }
@@ -275,16 +382,17 @@ function anadirProductoATabla() {
 
 function modificarTotal() {
     var sum = 0;
-    var igv=0;
-    var tot=0;
+    var igv = 0;
+    var tot = 0;
     for (var i = 0; i < productos.length; i++) {
         sum = sum + parseFloat(productos[i]["total"]);
     }
-    $("#totalproducto").html(sum);
-    igv=(sum*0.18);
+    sum=number_format(sum,2);
+    igv =number_format((parseFloat(sum) * 0.18),2);
+    tot=number_format((sum - igv),2);
+    $("#totalproducto").html(tot);
     $("#igv").html(igv);
-    tot=sum+igv;
-    $("#total").html(tot);
+    $("#total").html(sum);
 }
 
 function llenarTabla() {
@@ -301,13 +409,15 @@ function llenarTabla() {
             {title: "Codigo", data: ['id']},
             {title: "Nombre producto", data: ['nombre']},
             {title: "Cant paquete", data: ['paquete']},
-            {title: "cant unidade", data: ['unidades']},
+            {title: "Monto paquete", data: ['montopaquete']},
+            {title: "Cant unidades", data: ['unidades']},
+            {title: "Monto unidades", data: ['montounidades']},
             {title: "Monto total", data: ['total']},
             {
                 data: function (row) {
                     return '<div align="center">\n' +
-                        '<a href="#modal-dialog" style="color: green" TITLE="Editar"   data-toggle="modal" onclick="editarProducto(event,' + row.id + ')">\n' +
-                        '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
+                        /*'<a href="#modal-dialog" style="color: green" TITLE="Editar"   data-toggle="modal" onclick="editarProducto(event,' + row.nombre + ')">\n' +
+                        '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +*/
                         '<a href="#" style="color: red" TITLE="Anular" onclick="eliminarProductoTabla(' + row.id + ')" >\n' +
                         '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
                         '</div>';
@@ -379,16 +489,20 @@ function enviarPedido() {
     var idpersona = $('#idpersona').val();
     var iddireccion = $('#direcciones').find('option:selected').attr('id');
     var fechaentrega = new Date($('#datepicker-autoClose').val());
-    var costototal = $('#totalproducto').text();
+    var costototal = $('#total').text();
+    var tipousuario = $("#tipousuario").val();
+
     var datosper = {
         persona: idpersona,
         tienda: iddireccion,
         fechaentrega: fechaentrega,
+        tipousuario: tipousuario,
         total: costototal
     };
 
     var datos = {persona: datosper, productos: productos};
     var arr = JSON.stringify(datos);
+
 
     var url = "enviarpedidos/" + arr;
     $.ajax({
@@ -401,11 +515,11 @@ function enviarPedido() {
             if (data.error === 0) {
                 if(data.url===0){
                     correcto(data.id);
-                    redirectvendedor();
+                    redirectadministrador();
                 }
                 else {
                     correcto(data.id);
-                   redirectadministrador();
+                    redirectvendedor();
                 }
             }
             else {
@@ -438,6 +552,56 @@ function redirectadministrador() {
         }
     });
 }
+//autocompletado
+
+
+function buscarPromocion(id) {
+    $.ajax({
+        type: "GET",
+        url: "/listarPromocionProducto/" + id,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+
+            if (data.length > 0) {
+                $("#direcciones").attr('disabled', false);
+
+                //alert(response); // show [object, Object]
+
+                var html = ' <div class="form-group row " id="hijos"> <div class="col-md-4 col-sm-4 col-form-label" >\n' +
+                    '                            <label class=" col-form-label text-left" for="Promocion"> <strong>Promocion\n' +
+                    '                                     </strong></label>\n' +
+                    '                        </div>\n' +
+                    '                        <div class="col-md-7 col-sm-7">\n' +
+                    '                            <select id="Promocion" class="form-control" onchange="autocompletarProductoPromocion()" >\n' +
+                    '                                <option>\n' +
+                    '                                    Seleccione\n' +
+                    '                                </option>\n' +
+                    '                            </select>\n' +
+                    '                        </div></div>';
+                $('#promociones').html(html);
+
+                var $select = $('#Promocion');
+                //  console.log( data["value"]);
+                $select.find('option').remove();
+                $select.append('<option id="0">Seleccione </option>');
+                for (var i = 0; i < data.length; i++) {
+                    $select.append('<option id=' + data[i].id + ' >' + data[i].value + '</option>');
+                }
+            }
+        }
+    });
+}
+
+
+function agregarPromocion(promocion) {
+    console.log(promocion);
+
+
+}
+
+
 //autocompletado
 
 //ID DEL INPUT
@@ -473,3 +637,25 @@ $('#txt_usuario').typeahead({
     $("#txt_usuario_id").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
 });
 
+function number_format(amount, decimals) {
+
+    amount += ''; // por si pasan un numero en vez de un string
+    amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+
+    decimals = decimals || 0; // por si la variable no fue fue pasada
+
+    // si no es un numero o es igual a cero retorno el mismo cero
+    if (isNaN(amount) || amount === 0)
+        return parseFloat(0).toFixed(decimals);
+
+    // si es mayor o menor que cero retorno el valor formateado como numero
+    amount = '' + amount.toFixed(decimals);
+
+    var amount_parts = amount.split('.'),
+        regexp = /(\d+)(\d{3})/;
+
+    while (regexp.test(amount_parts[0]))
+        amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+
+    return amount_parts.join('.');
+}
