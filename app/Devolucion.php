@@ -41,8 +41,8 @@ class Devolucion extends Model
     public static function obtenerImpresion($id)
     {
         return DB::select('SELECT producto.nombre,LPAD(devolucion.iddevolucion, 6, \'0\') as codigo, 
-        devolucion.cantidadUnidades,date(devolucion.fechaCreacion) fechaCreacion,producto.precioVenta as precio,
-        producto.precioVenta*devolucion.cantidadUnidades as total FROM devolucion
+        devolucion.cantidadUnidades,date(devolucion.fechaCreacion) fechaCreacion,producto.precioVentaUnidad as precio,
+        producto.precioVentaUnidad*devolucion.cantidadUnidades as total FROM devolucion
         inner join producto on producto.idProducto=devolucion.id_Producto
         where devolucion.iddevolucion=' . $id);
 

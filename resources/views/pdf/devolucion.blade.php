@@ -4,40 +4,11 @@
 <head>
     <style>
         html {
-            margin: 0;
+            margin: 1px;
         }
 
         * {
             font-size: 7pt;
-        }
-
-        td,
-        th,
-        tr,
-        table {
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        .centrado {
-            text-align: center;
-            align-content: center;
-        }
-
-        .izquerda {
-            text-align: left;
-            align-content: left;
-        }
-
-        .centro {
-            text-align: center;
-            align-content: center;
-        }
-
-        .derecha {
-            text-align: right;
-            align-content: right;
         }
 
         .Titulo {
@@ -47,18 +18,6 @@
             font-weight: bold;
             border-bottom: 1px solid black;
 
-        }
-
-        .nota {
-            text-align: center;
-            align-content: center;
-            font-weight: bold;
-        }
-
-        .fecha {
-            text-align: right;
-            align-content: right;
-            font-weight: bold;
         }
 
         .rayaarr {
@@ -73,59 +32,100 @@
         body {
             font-family: 'DejaVu Sans Mono';
         }
+
+        .todo {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            border-right: 1px solid black;
+            border-left: 1px solid black;
+        }
+
+        .tabla {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .lineaarriba {
+            border-top: 1px solid black;
+        }
     </style>
 
 </head>
 
 <body>
 <div class="ticket">
-    <img src="..\public\assets\img\logo\logo-arp.jpg" width="200" height="200" align="middle" vspace="30">
-    <p class="centrado">
-        <label class="Titulo">ARPEMAR S.A.C</label>
-        <br>
-        <br>PARCELA NRO. 32B FUNDO SANTO TOMAS(ALTURA POSTA SAN PEDRO DE CARABAYLLO) LIMA-LIMA.
-        <br>RUC : 20602872182
-        ********************************************************
-        <br><label class="nota">DEVOLUCION NRO: </label>{{$devolucion[0]->codigo}}
-        <br>
-        ********************************************************
-    </p>
-    <p class="izquerda">
-        <label class="raya"><label class="fecha">FECHA DEVOLUCION : {{$devolucion[0]->fechaCreacion}} </label><label>
-            </label>
-
-        </label>
-    </p>
     <table>
         <thead>
+
+        </thead>
+        <tbody>
         <tr>
-            <th align="center">COD</th>
-            <th align="center">NOMBRE</th>
-            <th align="center">CANT</th>
-            <th align="center">PRE</th>
-            <th align="center">TOT</th>
+            <th colspan="8" class="Titulo" align="center"><img src="..\public\assets\img\logo\logo-arp.jpg" width="100"
+                                                               height="100" align="middle" vspace="30"></th>
+        </tr>
+        <tr>
+            <th colspan="8" class="Titulo" align="center"> ARPEMAR S.A.C</th>
+        </tr>
+        <tr>
+            <th colspan="8" align="center"> PARCELA NRO. 32B FUNDO SANTO TOMAS(ALTURA POSTA SAN PEDRO DE
+                CARABAYLLO) LIMA-LIMA.
+            </th>
+        </tr>
+        <tr>
+            <th colspan="8" align="center"> RUC Nro 20602872182</th>
+        </tr>
+        <tr >
+            <th colspan="8" align="center" valign="top" class="todo">DEVOLUCION NRO: {{$devolucion[0]->codigo}}</th>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <table WIDTH="100%">
+        <thead class="tabla">
+        <tr>
+            <th align="center" width="20px">CODIDO</th>
+            <th align="center" width="30px">DESCRIP</th>
+            <th align="center" width="30px">CANTI</th>
+            <th align="center" width="30px">PRECIO</th>
+            <th align="right" width="50px">TOTAL</th>
 
         </tr>
         </thead>
         <tbody>
-
         @foreach($devolucion as $devo)
-            <tr>
-                <td align="center">{{$devo->codigo}}</td>
-                <td>{{$devo->nombre}} X UNIDAD</td>
-                <td align="center">{{$devo->cantidadUnidades}}</td>
-                <td align="center">{{$devo->precio}}</td>
-                <td align="center">{{$devo->total}}</td>
-            </tr>
-        @endforeach
+                <tr>
+                    <td align="center">{{$devo->codigo}}</td>
+                    <td colspan="4" align="left">{{$devo->nombre}} X UNIDAD</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td align="center">{{$devo->cantidadUnidades}}</td>
+                    <td align="center">{{$devo->precio}}</td>
+                    <td align="center">{{$devo->total}}</td>
+                </tr>
+               @endforeach
         </tbody>
     </table>
+    <br>
+    <table>
+        <thead></thead>
+        <tbody>
+        <tr>
+            <th colspan="8" align="center">ARPEMAR S.A.C AGRADECE SU PREFERENCIA
+            </th>
+        </tr>
+        <tr>
+            <th colspan="1" align="left" valign="top">NOTA:
+            </th>
+            <th colspan="7" align="left"  valign="top">ESTA ES UNA NOTA DE CAMBIO DE PRODUCTOS
+                </label>
+            </th>
+        </tr>
 
-    <p class="centrado">
-        <label>ARPEMAR S.A.C AGRADECE SU PREFERENCIA</label>
-        <br> <label><label class="nota">NOTA : </label>ESTA ES UNA NOTA DE CAMBIO DE PRODUCTOS
-        </label>
-    </p>
+        </tbody>
+    </table>
 </div>
 </body>
 

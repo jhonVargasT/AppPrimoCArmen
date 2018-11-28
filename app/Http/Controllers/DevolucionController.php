@@ -27,7 +27,7 @@ class DevolucionController extends Controller
         try {
             $id_devolucion = null;
             $devolucion = new Devolucion();
-            $producto = Producto::consultarProductoNombre($nombreProducto);
+            $producto = Producto::consultarProductoDev($nombreProducto);
             foreach ($producto as $p) {
                 $devolucion->id_Producto = $p->idProducto;
             }

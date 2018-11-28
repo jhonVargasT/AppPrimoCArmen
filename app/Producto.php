@@ -32,22 +32,33 @@ class Producto extends Model
             ->update(['estado' => $estado]);
     }
 
-    public static function consultarProductoNombre($nombre,$idPersona)
+    public static function consultarProductoDev($nombre)
     {
 
-        return  DB::select('SELECT idProducto,nombre, tipoProducto,tipoPaquete,cantidadPaquete,
+        return DB::select('select *
+                                FROM
+                                    producto
+                                where producto.nombre="' . $nombre . '"'
+        );
+    }
+
+    public static function consultarProductoNombre($nombre, $idPersona)
+    {
+
+        return DB::select('SELECT idProducto,nombre, tipoProducto,tipoPaquete,cantidadPaquete,
                                     CASE
-                                        WHEN (select tipoCliente from persona where persona.idPersona='.$idPersona.')  = 1 THEN  FORMAT(producto.precioVentaMino,2)
+                                        WHEN (select tipoCliente from persona where persona.idPersona=' . $idPersona . ')  = 1 THEN  FORMAT(producto.precioVentaMino,2)
                                         ELSE FORMAT(producto.precioVentaMayo,2)
                                     END precioVenta, cantidadStockUnidad, FORMAT(precioVentaUnidad,2) precioVentaUnidad,cantidadProductosPaquete
                                 FROM
                                     producto
-                                where producto.nombre="'.$nombre.'"'
-);
+                                where producto.nombre="' . $nombre . '"'
+        );
 
 
     }
-    public static function consultarPrmocionProductoNombre($nombre,$idPersona,$idPromocion)
+
+    public static function consultarPrmocionProductoNombre($nombre, $idPersona, $idPromocion)
     {
 
         return DB::select('SELECT 
@@ -67,7 +78,7 @@ class Producto extends Model
                                 FROM
                                     persona
                                 WHERE
-                                    persona.idPersona = '.$idPersona.') = 1
+                                    persona.idPersona = ' . $idPersona . ') = 1
                         THEN
                             producto.precioVentaMino
                         ELSE producto.precioVentaMayo
@@ -79,7 +90,7 @@ class Producto extends Model
                             FROM
                                 persona
                             WHERE
-                                persona.idPersona = '.$idPersona.') = 1
+                                persona.idPersona = ' . $idPersona . ') = 1
                     THEN
                         ABS((ABS(producto.precioCompra - producto.precioVentaMino) * (promocion.descuento / 100)) - producto.precioVentaMino)
                     ELSE ABS((ABS(producto.precioCompra - producto.precioVentaMayo) * (promocion.descuento / 100)) - producto.precioVentaMayo)
@@ -98,10 +109,11 @@ class Producto extends Model
                 LEFT JOIN
             promocion ON promocion.idPromocion = productopromocion.id_Promocion
         WHERE
-            promocion.idPromocion = '.$idPromocion.'
-                AND producto.nombre = "'.$nombre.'"'
-                );
+            promocion.idPromocion = ' . $idPromocion . '
+                AND producto.nombre = "' . $nombre . '"'
+        );
     }
+
     public static function consultarProducto($idproducto)
     {
         return static::select('*')
@@ -149,7 +161,7 @@ class Producto extends Model
                       ');
     }
 
-    public static function obtenerProductosTicket($idPedido,$idpersona)
+    public static function obtenerProductosTicket($idPedido, $idpersona)
     {
         return $res =
             DB::select('SELECT LPAD(pp.idProductoPedido, 6, \'0\') as id ,pr.nombre,
@@ -161,7 +173,7 @@ pr.tipoPaquete,
                                 FROM
                                     persona
                                 WHERE
-                                    persona.idPersona = '.$idpersona.') = 1
+                                    persona.idPersona = ' . $idpersona . ') = 1
                         THEN
                             Format(pr.precioVentaMino,2)
                         ELSE  Format(pr.precioVentaMayo,2)
@@ -178,7 +190,7 @@ pr.tipoPaquete,
                         FROM productopedido pp
                         inner JOIN producto pr on pp.id_Producto=pr.idProducto
                         left join promocion pro on pp.id_Promocion=pro.idPromocion
-                          where pp.id_Pedido='.$idPedido.' and pp.estado !=0 and pp.estado !=5
+                          where pp.id_Pedido=' . $idPedido . ' and pp.estado !=0 and pp.estado !=5
                         group by pp.idProductoPedido
                       ');
     }

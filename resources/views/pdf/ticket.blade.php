@@ -103,7 +103,7 @@
 
         </tbody>
     </table>
-    <br><br>
+    <br>
     <table WIDTH="100%">
         <thead class="tabla">
         <tr>
@@ -183,7 +183,7 @@
         </tr>
         </tbody>
     </table>
-    <br><br>
+    <br>
     <table>
         <thead></thead>
         <tbody>
