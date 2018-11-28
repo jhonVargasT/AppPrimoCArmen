@@ -33,14 +33,20 @@ class ProductoPedido extends Model
             ->update(['estado' => $estado]);
     }
 
-    public static function actualizarCantidadProductoPedido($id, $cantpaque,$cantuni)
+    public static function actualizarCantidadProductoPedido($id, $cantpaque, $cantuni)
     {
         static::where('idProductoPedido', $id)
-            ->update(['cantidadPaquetes' => $cantpaque,'cantidadUnidades'=>$cantuni]);
+            ->update(['cantidadPaquetes' => $cantpaque, 'cantidadUnidades' => $cantuni]);
     }
 
     public static function consultarProductoPedidoPorId($idproductopedido)
     {
         return static::select('*')->where('idProductoPedido', $idproductopedido);
+    }
+
+    public static function CambiarCantidadPaquetesUnidades($id, $cantpaque, $montopaque, $despaque, $cantuni, $montuni, $descuni)
+    {
+        static::where('idProductoPedido', $id)
+            ->update(['cantidadUnidades' => $cantuni, 'montoUnidades' => $montuni, 'DescuentoUnidades' => $descuni, 'cantidadPaquetes' => $cantpaque, 'montoPaquetes' => $montopaque, 'DescuentoPaquetes' => $despaque]);
     }
 }

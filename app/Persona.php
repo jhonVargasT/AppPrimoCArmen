@@ -99,4 +99,10 @@ class Persona extends Model
             ->Where('tienda.estado', '=', 1)
             ->get();
     }
+    public static function obtenerDatosPersonaId($id)
+    {
+        return static::select('*')
+            ->Where('idPersona', '=', $id)
+            ->get();
+    }
 }

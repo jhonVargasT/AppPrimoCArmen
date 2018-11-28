@@ -263,7 +263,7 @@ class NuevoPedidoController extends Controller
                     $totalunidades = ($stockunidad - $unidades);
                     $totalpaquetes = ($stockpaquete - $paquetes);
                     Producto::disminuirStock($pr->id, $totalpaquetes, $totalunidades);
-                    $totaldescuento=+ $productopedido->DescuentoUnidades+ $productopedido->DescuentoPaquetes;
+                    $totaldescuento= $totaldescuento+ $productopedido->DescuentoUnidades+ $productopedido->DescuentoPaquetes;
                 }
                 Pedido::cambiarDescuento($idpedidoreporte, round($totaldescuento,2));
             });

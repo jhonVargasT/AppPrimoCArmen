@@ -178,7 +178,7 @@ pr.tipoPaquete,
                         FROM productopedido pp
                         inner JOIN producto pr on pp.id_Producto=pr.idProducto
                         left join promocion pro on pp.id_Promocion=pro.idPromocion
-                          where pp.id_Pedido='.$idPedido.'
+                          where pp.id_Pedido='.$idPedido.' and pp.estado !=0 and pp.estado !=5
                         group by pp.idProductoPedido
                       ');
     }

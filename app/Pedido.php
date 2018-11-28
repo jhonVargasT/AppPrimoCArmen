@@ -17,6 +17,17 @@ class Pedido extends Model
         return static::where('idPedido', $idpedido)
             ->update(['costoBruto' => $monto, 'impuesto' => ($monto * 0.18), 'totalPago' => $monto + ($monto * 0.18)]);
     }
+
+    public static function cambiarMontoPedidoDescuento($idpedido, $total,$descuento,$igv,$opegrav)
+    {
+        return static::where('idPedido', $idpedido)
+            ->update(['costoBruto'=>$opegrav,'impuesto'=>$igv,'descuento'=>$descuento,'totalPago'=>$total]);
+    }
+    public static function cambiarMontoDesc($idpedido, $totalpag,$descuento)
+    {
+        return static::where('idPedido', $idpedido)
+            ->update(['totalPago' => $totalpag,'descuento'=>$descuento]);
+    }
     public static function cambiarDescuento($idpedido, $monto)
     {
         return static::where('idPedido', $idpedido)

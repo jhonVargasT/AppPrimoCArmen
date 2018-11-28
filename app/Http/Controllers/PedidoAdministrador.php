@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\boleta;
 use App\Pedido;
+use App\Persona;
 use App\Producto;
 
+use App\Promocion;
 use http\Exception;
 use Illuminate\Http\Request;
 use App\ProductoPedido;
@@ -29,12 +31,20 @@ class PedidoAdministrador extends Controller
     public
     function cambiarEstadoProducto($idProductoPedido, $estado)
     {
+
+
+
         $productoPedido = ProductoPedido::consultarProductosPedidos($idProductoPedido);
         foreach ($productoPedido as $pro) {
-            $cantunipedi = $pro->cantidadUnidades;
-            $cantpaqpedi = $pro->cantidadPaquetes;
+            $cantpaqueprodupedi = $pro->cantidadPaquetes;
+            $montopaque = $pro->montoPaquetes;
+            $descpaque = $pro->DescuentoPaquetes;
+            $cantunidadeprodupedi = $pro->cantidadUnidades;
+            $montouni = $pro->montoUnidades;
+            $desuni = $pro->DescuentoUnidades;
             $idproducto = $pro->id_Producto;
             $idpedido = $pro->id_Pedido;
+            $idPromocion = $pro->id_Promocion;
         }
         $producto = Producto::consultarProducto($idproducto);
         foreach ($producto as $pr) {
@@ -43,26 +53,26 @@ class PedidoAdministrador extends Controller
             $cantPaqueProd = $pr->cantidadPaquete;
             $cantUnidProd = $pr->cantidadStockUnidad;
         }
-        $cantuni = $cantunipedi * $ventuni;
-        $cantpaq = $cantpaqpedi * $ventpaque;
-        $totalProducto = $cantuni + $cantpaq;
-        $pedidores = Pedido::obtenerPedido($idpedido);
-        foreach ($pedidores as $ped) {
-            $totalpedi = $ped->costoBruto;
+        $pedido = Pedido::obtenerPedido($idpedido);
+        foreach ($pedido as $pedi) {
+            $idPersona = $pedi->idPersona;
+            $pedidototapago = $pedi->totalPago;
+            $pedidesc = $pedi->descuento;
         }
 
         switch ($estado) {
             case 0:
+                //poner estado en espera
                 $estadopro = 1;
-                $totalmontopedido = abs($totalpedi + $totalProducto);
-                Pedido::cambiarMontoPedido($idpedido, $totalmontopedido);
                 Pedido::actualizarEmilinacion($idpedido, null, Session('idusuario'), 2);
                 ProductoPedido::actualizarEstadoProductoPedido($idProductoPedido, $estadopro);
-                Pedido::cambiarEstado($idpedido, 2);
-                $rescantpaq = abs($cantPaqueProd + $cantpaqpedi);
-                $rescantuni = abs($cantUnidProd + $cantunipedi);
-                Producto::disminuirStock($idproducto, $rescantpaq, $rescantuni);
-                //enproceso
+                $total = abs($pedidototapago - ($montopaque + $montouni));
+                $descuentototal = abs($pedidesc - ($descpaque + $desuni));
+                $impuesto = round(($total * 0.18), 2);
+                $costoBruto = round(abs(($total * 0.18) - $total), 2);
+                $totalPago = round($total, 2);
+                Pedido::cambiarMontoPedidoDescuento($idpedido, $totalPago, $descuentototal, $impuesto, $costoBruto);
+                Producto::disminuirStock($idproducto, abs($cantPaqueProd - $cantpaqueprodupedi), abs($cantUnidProd - $cantunidadeprodupedi));
                 break;
             case 1:
                 $estadopro = 2;
@@ -72,20 +82,26 @@ class PedidoAdministrador extends Controller
                 break;
             case 2:
                 $estadopro = 0;
-                $totalmontopedido = abs($totalpedi - $totalProducto);
-                Pedido::cambiarMontoPedido($idpedido, $totalmontopedido);
                 ProductoPedido::actualizarEstadoProductoPedido($idProductoPedido, $estadopro);
+
+                //se recalcula los montos del pedido y se aumenta el stock del producto
+                $total = abs($pedidototapago - ($montopaque + $montouni));
+                $descuentototal = abs($pedidesc - ($descpaque + $desuni));
+                $impuesto = round(($total * 0.18), 2);
+                $costoBruto = round(abs(($total * 0.18) - $total), 2);
+                $totalPago = round($total, 2);
+                Pedido::cambiarMontoPedidoDescuento($idpedido, $totalPago, $descuentototal, $impuesto, $costoBruto);
+                Producto::disminuirStock($idproducto, abs($cantPaqueProd + $cantpaqueprodupedi), abs($cantUnidProd + $cantunidadeprodupedi));
+                //cuenta los productos pedido que estan activos
                 $contador = ProductoPedido::consultarProductosPedido($idpedido);
                 $contEstados = count($contador);
                 $c = 0;
-                $rescantpaq = abs($cantPaqueProd - $cantpaqpedi);
-                $rescantuni = abs($cantUnidProd - $cantunipedi);
-                Producto::disminuirStock($idproducto, $rescantpaq, $rescantuni);
                 foreach ($contador as $cont) {
                     if ($cont->estado === 0) {
                         $c++;
                     }
                 }
+                //si no hya productopedido activos elimina el pedido
                 if ($c === $contEstados) {
                     Pedido::actualizarEmilinacion($idpedido, 'Se elimino por no tener productos para entregar ' . util::fecha(), Session('idusuario'), 0);
                 }
@@ -101,8 +117,8 @@ class PedidoAdministrador extends Controller
             $pedido = Pedido::obtenerPedido($idpedido);
             foreach ($pedido as $pe) {
                 $estado = $pe->estadoPedido;
-                $idPersona= $pe->idPersona;
-                $montoletra=$pe->totalPago;
+                $idPersona = $pe->idPersona;
+                $montoletra = $pe->totalPago;
             }
             $contador = ProductoPedido::consultarProductosPedido($idpedido);
             $contEstados = count($contador);
@@ -114,17 +130,17 @@ class PedidoAdministrador extends Controller
             }
             if ($c >= 1) {
                 if ($c === $contEstados) {
-                    $boleta=new Boleta();
-                    $boleta->id_Pedido=$idpedido;
-                    $boleta->estado=1;
-                    $boleta->entregado=0;
-                    $boleta->fechaCreacion=util::fecha();
-                    $boleta->nroimpresiones=0;
-                    $boleta->tipocomprobante=null;
-                    $boleta->montoletras=util::convertirSeisCifras($montoletra);
-                    $boleta->nroboleta=null;
-                    $boleta->idcliente=$idPersona;
-                    $boleta->idUsuario=Session('idusuario');
+                    $boleta = new Boleta();
+                    $boleta->id_Pedido = $idpedido;
+                    $boleta->estado = 1;
+                    $boleta->entregado = 0;
+                    $boleta->fechaCreacion = util::fecha();
+                    $boleta->nroimpresiones = 0;
+                    $boleta->tipocomprobante = null;
+                    $boleta->montoletras = util::convertirSeisCifras($montoletra);
+                    $boleta->nroboleta = null;
+                    $boleta->idcliente = $idPersona;
+                    $boleta->idUsuario = Session('idusuario');
                     $boleta->save();
                     Pedido::cambiarEstado($idpedido, 3);
                     foreach ($contador as $cont) {
@@ -143,9 +159,9 @@ class PedidoAdministrador extends Controller
                     }
                     Pedido::cambiarEstado($idpedido, 4);
                 }
-                return response()->json(array('error' => 1,'id'=>$idpedido));
+                return response()->json(array('error' => 1, 'id' => $idpedido));
             } else {
-                return response()->json(array('error' => 0,'id'=>$idpedido));
+                return response()->json(array('error' => 0, 'id' => $idpedido));
             }
         } catch (Exception $e) {
             return $e;
@@ -154,14 +170,13 @@ class PedidoAdministrador extends Controller
 
     public function agregarBoleta($idPedido)
     {
-        try{
-            $boleta=new Boleta();
-            DB::transaction(function () use ($idPedido,$boleta) {
-
+        try {
+            $boleta = new Boleta();
+            DB::transaction(function () use ($idPedido, $boleta) {
 
 
             });
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return $e;
         }
     }
@@ -200,53 +215,103 @@ class PedidoAdministrador extends Controller
     function cambiarCantProducto($idproductopedido, $cantpaquete, $cantunidades)
     {
         try {
+            $cantunidades = (int)$cantunidades;
+            $cantpaquete = (int)$cantpaquete;
             $productopedido = ProductoPedido::consultarProductosPedidos($idproductopedido);
 
             foreach ($productopedido as $produc) {
                 $cantpaqueprodupedi = $produc->cantidadPaquetes;
+                $montopaque = $produc->montoPaquetes;
+                $descpaque = $produc->DescuentoPaquetes;
                 $cantunidadeprodupedi = $produc->cantidadUnidades;
+                $montouni = $produc->montoUnidades;
+                $desuni = $produc->DescuentoUnidades;
                 $idproducto = $produc->id_Producto;
                 $idpedido = $produc->id_Pedido;
+                $idPromocion = $produc->id_Promocion;
             }
-
-
             $producto = Producto::consultarProducto($idproducto);
             foreach ($producto as $product) {
                 $cantidaduniproducto = $product->cantidadStockUnidad;
                 $cantidadpaqueteproducto = $product->cantidadPaquete;
-                $preciounidadproducto = $product->precioVentaUnidad;
-                $preciopaqueteproducto = $product->precioVenta;
                 $nombreproducto = $product->nombre;
             }
 
+            $resultuni = abs($cantunidadeprodupedi + $cantidaduniproducto);
+            $resulpaque = abs($cantpaqueprodupedi + $cantidadpaqueteproducto);
+
+            if ($cantunidades <= $resultuni && $cantpaquete <= $resulpaque) {
+
+                Producto::disminuirStock($idproducto, abs($resulpaque - $cantpaquete), abs($resultuni - $cantunidades));
+                $pedido = Pedido::obtenerPedido($idpedido);
+                foreach ($pedido as $pedi) {
+                    $idPersona = $pedi->idPersona;
+                    $pedidototapago = $pedi->totalPago;
+                    $pedidesc = $pedi->descuento;
+                }
+                $pedidototapago = abs($pedidototapago - ($montopaque + $montouni));
+                $pedidesc = abs($pedidesc - ($descpaque + $desuni));
+                Pedido::cambiarMontoDesc($idpedido, $pedidototapago, $pedidesc);
+                $productopedido = ProductoPedido::consultarProductosPedidos($idproductopedido);
+                foreach ($productopedido as $produc) {
+                    $cantpaqueprodupedi = $produc->cantidadPaquetes;
+                    $montopaque = $produc->montoPaquetes;
+                    $descpaque = $produc->DescuentoPaquetes;
+                    $cantunidadeprodupedi = $produc->cantidadUnidades;
+                    $montouni = $produc->montoUnidades;
+                    $desuni = $produc->DescuentoUnidades;
+                    $idproducto = $produc->id_Producto;
+                    $idpedido = $produc->id_Pedido;
+                    $idPromocion = $produc->id_Promocion;
+                }
+                if ($cantunidadeprodupedi === '0') {
+                    $cantunidadeprodupedi = 1;
+                }
 
 
-            $resultuni = $cantunidades - $cantunidadeprodupedi;
-            $resulpaque = $cantpaquete - $cantpaqueprodupedi;
-
-            if ($resultuni <= $cantidaduniproducto && $resulpaque <= $cantidadpaqueteproducto) {
-                Producto::disminuirStock($idproducto, (abs($cantidadpaqueteproducto + $cantpaqueprodupedi)), abs($cantidaduniproducto + $cantunidadeprodupedi));
+                if ($cantpaqueprodupedi === '0')
+                    $cantpaqueprodupedi = 1;
+                $respreciouni = abs($cantunidades * abs($montouni / $cantunidadeprodupedi));
+                $resdescuni = abs($cantunidades * abs($desuni / $cantunidadeprodupedi));
+                $respreciopaque = abs($cantpaquete * abs($montopaque / $cantpaqueprodupedi));
+                $resdescpaque = abs($cantpaquete * abs($descpaque / $cantpaqueprodupedi));
+                $person = Persona::obtenerDatosPersonaId($idPersona);
+                foreach ($person as $per) {
+                    $tippersona = $per->tipoCliente;
+                }
                 $producto = Producto::consultarProducto($idproducto);
                 foreach ($producto as $product) {
                     $cantidaduniproducto = $product->cantidadStockUnidad;
                     $cantidadpaqueteproducto = $product->cantidadPaquete;
-                    $preciounidadproducto = $product->precioVentaUnidad;
-                    $preciopaqueteproducto = $product->precioVenta;
-
+                    if ($tippersona === 1)
+                        $precioventa = $product->precioVentaMino;
+                    elseif ($tippersona === 2)
+                        $precioventa = $product->precioVentaMayo;
+                    $precioventaunidad = $product->precioVentaUnidad;
+                    $nombreproducto = $product->nombre;
                 }
-                Producto::disminuirStock($idproducto, (abs($cantidadpaqueteproducto - $cantpaquete)), abs($cantidaduniproducto - $cantunidades));
-                ProductoPedido::actualizarCantidadProductoPedido($idproductopedido, $cantpaquete, $cantunidades);
-                //obtener el precio del pedido anterior
-                $precioAnterior=($preciounidadproducto*$cantunidadeprodupedi)+($cantpaqueprodupedi*$preciopaqueteproducto);
-                $pedidoAnte=Pedido::obtenerPedido($idpedido);
-                foreach ($pedidoAnte as $pedia)
-                {
-                    $costobruto=$pedia->costoBruto;
+                if ($respreciopaque == 0) {
+                    $respreciopaque = $cantpaquete * $precioventa;
                 }
-                $rescotobruto=ABS($costobruto-$precioAnterior);
-                Pedido::cambiarMontoPedido($idpedido, (($preciounidadproducto * $cantunidades) + ($preciopaqueteproducto * $cantpaquete))+$rescotobruto);
+                if ($respreciouni == 0) {
+                    $respreciouni = $precioventaunidad * $cantunidades;
+                }
 
+
+                ProductoPedido::CambiarCantidadPaquetesUnidades($idproductopedido, $cantpaquete, $respreciopaque, $resdescpaque, $cantunidades, $respreciouni, $resdescuni);
+                $pedido = Pedido::obtenerPedido($idpedido);
+                foreach ($pedido as $pedi) {
+                    $pedidototapago = $pedi->totalPago;
+                    $pedidesc = $pedi->descuento;
+                }
+                $total = $respreciouni + $respreciopaque + $pedidototapago;
+                $descuentototal = $resdescuni + $resdescpaque + $pedidesc;
+                $impuesto = round(($total * 0.18), 2);
+                $costoBruto = round(abs(($total * 0.18) - $total), 2);
+                $totalPago = round($total, 2);
+                Pedido::cambiarMontoPedidoDescuento($idpedido, $totalPago, $descuentototal, $impuesto, $costoBruto);
                 return response()->json(array('error' => 1));
+
             } else {
                 return response()->json(array('error' => 0, 'cantpaque' => $cantidadpaqueteproducto, 'cantuni' => $cantidaduniproducto, 'nombre' => $nombreproducto));
             }
