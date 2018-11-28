@@ -146,7 +146,8 @@ Route::group(['can:administrador,vendedor'], function () {
 //reporte vendedor
     Route::get('verproductos/{idproductos}', 'ReporteVendedorController@obtenerPrdocutosPedido');
     Route::get('enviarfactura/{idpedido}', 'ReporteVendedorController@enviarfactura');
-    Route::get('obtenercomision', 'ReporteVendedorController@obtenerComision');
+    Route::get('obtenermeta', 'ReporteVendedorController@meta');
+    Route::get('ventamensual', 'ReporteVendedorController@ventaMensual');
 
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 
@@ -170,7 +171,7 @@ Route::get('/factura/{id}', 'ImpresionesController@facturaEletronica');
 Route::get('/tienda','TiendaController@index');
 
 Route::get('/devolucion', 'DevolucionController@index');
-Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@guardarDevolucion');
+Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@obtenercomision');
 Route::get('/eliminardevolucion/{iddevolucion}', 'DevolucionController@eliminarDevolucion');
 Route::get('/devolver/{iddevolucion}', 'DevolucionController@entregarDevolucion');
 Route::get('/promocion','Promocioncontroller@index');

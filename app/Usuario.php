@@ -19,7 +19,7 @@ class Usuario extends Authenticatable
     {
         return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.nroCelular as pnroCelular',
             'p.correo as pcorreo', 'p.dni as pdni', 'p.direccion  as pdireccion', 'usuario.usuario as uusuario', 'p.idPersona as idPersona',
-            'p.idPersona as idPersona', 'usuario.idUsuario as idUsuario', 'usuario.idUsuario as idUsuario', 'usuario.estado as uestado','usuario.metaminima','usuario.porcentajeDeComision')
+            'p.idPersona as idPersona', 'usuario.idUsuario as idUsuario', 'usuario.idUsuario as idUsuario', 'usuario.estado as uestado', 'usuario.metaminima', 'usuario.porcentajeDeComision')
             ->join('persona as p', 'p.idPersona', '=', 'usuario.id_Persona')
             ->get();
     }
@@ -29,7 +29,7 @@ class Usuario extends Authenticatable
         return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.nroCelular as pnroCelular', 'p.correo as pcorreo', 'p.dni as pdni',
             'p.ruc as pruc', 'p.direccion as pdireccion', 'p.idPersona as idPersona', 'p.fechaNacimiento as pfechaNacimiento', 'usuario.idUsuario as idUsuario',
             'p.departamento as pdepartamento', 'p.provincia as pprovincia', 'p.distrito as pdistrito', 'p.nroCelular as pnroCelular',
-            'p.correo as pcorreo', 'p.idPersona as idPersona', 'usuario.password as upassword', 'usuario.usuario as uusuario','usuario.metaminima','usuario.porcentajeDeComision')
+            'p.correo as pcorreo', 'p.idPersona as idPersona', 'usuario.password as upassword', 'usuario.usuario as uusuario', 'usuario.metaminima', 'usuario.porcentajeDeComision')
             ->join('persona as p', 'p.idPersona', '=', 'usuario.id_Persona')
             ->where('idUsuario', $id)
             ->get();
@@ -61,17 +61,21 @@ class Usuario extends Authenticatable
         return $this->estado;
     }
 
-    public static function obtenerComision($idusuario)
+    public static function obtenerMeta($idusuario)
     {
-        return static::select(DB::raw('sum(pp.cantidadPaquetes*p.comisionPaquete) as suma'))
-            ->from('productopedido  as pp')
-            ->join('producto as p', 'pp.id_Producto', '=', 'p.idProducto')
-            ->join('pedido as pe', 'pe.idPedido', '=', 'pp.id_Pedido')
-            ->where('pp.idUsuario', $idusuario)
-            ->where(DB::raw('MONTH(pe.fechaEntrega)'),DB::raw('MONTH(NOW())'))
-            ->where(['pe.estadoPedido'=>3])
-        //    ->where('pe.estadoPedido', 4)
+        return static::select(DB::raw('*'))
+            ->where('idUsuario', $idusuario)
             ->get();
+    }
+
+    public static function obtenerTotalVenta($idusuario)
+    {
+        return DB::select('SELECT format(sum(totalPago),2) as total FROM pedido where idUsuario=' . $idusuario . ' and 
+        month(fechaEntrega)=month(now()) and year(fechaEntrega) =year(now())  and estadoPedido=3');
+    }
+    public static function obtenerTotalVentsa($idusuario)
+    {
+        return DB::select('SELECT format(sum(totalPago),2) as total FROM pedido where idUsuario=' . $idusuario . ' and month(fechaEntrega)=month(now()) and year(fechaEntrega) =year(now())');
     }
 
     public static function findByCodigoOrDescription($term)
@@ -82,7 +86,8 @@ class Usuario extends Authenticatable
             ->limit(50)
             ->get();
     }
-    public static function cambiarContrasena($id,$password)
+
+    public static function cambiarContrasena($id, $password)
     {
         static::where('idUsuario', $id)
             ->update(['password' => $password]);

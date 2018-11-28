@@ -18,7 +18,7 @@ class Comision extends Migration
 
             $table->increments('idComision')->unique();
             $table->integer('mes')->nullable();
-            $table->integer('year')->nullable();
+            $table->integer('anio')->nullable();
             $table->double('monto')->nullable();
             $table->dateTime('fechaActualizacion')->nullable();
             $table->dateTime('fechaCreacion')->nullable();

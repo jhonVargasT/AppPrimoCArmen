@@ -50,13 +50,27 @@ class ReporteVendedorController extends Controller
 
     }
 
-    public function obtenerComision()
+    public function meta()
     {
         try {
             $idusuario = Session('idusuario');
-            $comision = Usuario::obtenerComision($idusuario);
+            $comision = Usuario::obtenerMeta($idusuario);
             foreach ($comision as $com) {
-                $comision = $com->suma;
+                $comision = $com->metaminima;
+            }
+            return response()->json(array('error' => 1, 'comi' => $comision));
+        } catch (Exception $e) {
+            return response()->json(array('error' => 2));
+        }
+
+    }
+    public function ventaMensual()
+    {
+        try {
+            $idusuario = Session('idusuario');
+            $comision = Usuario::obtenerTotalVenta($idusuario);
+            foreach ($comision as $com) {
+                $comision = $com->total;
             }
             return response()->json(array('error' => 1, 'comi' => $comision));
         } catch (Exception $e) {

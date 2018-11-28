@@ -1,5 +1,6 @@
 $(document).ready(function () {
-  //  comision();
+   comision();
+   ventaMensual();
 });
 
 function llenarVerProductos(idpedido) {
@@ -97,7 +98,7 @@ function llenarVerProductos(idpedido) {
 
 function comision() {
     "use strict";
-    var url = "obtenercomision";
+    var url = "obtenermeta";
     $.ajax(
         {
             type: "GET",
@@ -108,9 +109,9 @@ function comision() {
             success: function (data) {
                 if (data.error === 1) {
                     if (data.comi === null) {
-                        $('#comision').text('S/. 0.00');
+                        $('#meta').text('S/. 0.00');
                     } else {
-                        $('#comision').text('S/. ' + data.comi);
+                        $('#meta').text('S/. ' + data.comi);
                     }
                 }
                 else
@@ -122,7 +123,32 @@ function comision() {
     );
 }
 
+function ventaMensual() {
+    "use strict";
+    var url = "ventamensual";
+    $.ajax(
+        {
+            type: "GET",
+            url: url,
+            cache: false,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                if (data.error === 1) {
+                    if (data.comi === null) {
+                        $('#ventamensual').text('S/. 0.00');
+                    } else {
+                        $('#ventamensual').text('S/. ' + data.comi);
+                    }
+                }
+                else
+                    alert('nohay');
 
+            }
+
+        }
+    );
+}
 function verDetalleEliminacion(idpedido) {
     var url = '/verEliminacionPedido/' + idpedido;
     $.ajax({

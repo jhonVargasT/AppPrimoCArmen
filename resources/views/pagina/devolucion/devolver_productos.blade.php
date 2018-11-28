@@ -34,7 +34,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-1">Nombre producto</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control m-b-5" placeholder="Escriba nombre producto"
+                            <input type="text" class="form-control m-b-5" placeholder="Nombre producto"
                                    id="nombreproducto">
                             <script>
                                 $('#nombreproducto').typeahead({
@@ -66,7 +66,7 @@
                         </div>
                         <label class="col-form-label col-md-2">Cantidad de unidades</label>
                         <div class="col-md-1">
-                            <input type="number" class="form-control m-b-5" placeholder="nro unidades" min="1"
+                            <input type="number" class="form-control m-b-5" placeholder="0" min="1"
                                    id="cantuni">
                         </div>
                         <label class="col-form-label col-md-1">Motivo devolucion</label>

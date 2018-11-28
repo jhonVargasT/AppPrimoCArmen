@@ -40,18 +40,40 @@
 <script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
 <script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
 <div  id="response">
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-green">
-            <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
-            <div class="stats-info">
-                <h4>Comision mensual</h4>
-                <p id="comision">
-                    0.00
-                </p>
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="widget widget-stats bg-red">
+                <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>
+                <div class="stats-info">
+                    <h4>META MENSUAL</h4>
+                    <p id="meta">0</p>
+                </div>
             </div>
-
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="widget widget-stats bg-aqua">
+                <div class="stats-icon"><i class="fa fa-shopping-bag "></i></div>
+                <div class="stats-info">
+                    <h4>VENTA MENSUAL</h4>
+                    <p id="ventamensual">0</p>
+                </div>
+            </div>
+        </div>
+        <!-- end col-3 -->
+        <!-- begin col-3 -->
+        <div class="col-lg-3 col-md-6">
+            <div class="widget widget-stats bg-orange">
+                <div class="stats-icon"><i class="fas fa-lg fa-fw m-r-10 fa-dollar-sign"></i></div>
+                <div class="stats-info">
+                    <h4>COMISION </h4>
+                    <p id="provendi">
+                        0.00
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
+
     <h1 class="page-header">Pedidos
         <small>Aqui puedo administrar pedidos</small>
     </h1>
@@ -83,6 +105,24 @@
                 </a>
             </div>
             <br>
+            <br>
+            <div class="form-group row col-sm-12 col-xs-12 col-md-12">
+                <label class="col-md-2 col-sm-2 col-form-label">Estado Pedido
+                    :</label>
+                <div class="col-md-3 col-sm-3">
+                    <select id="estado"  name="estado" class=" form-control">
+                        <option value="5">Seleccionar</option>
+                        <option style="color: green" value="3">  Entregado</option>
+                        <option style="color: green" value="4">  Entregadocon observacion  </option>
+                        <option style="color: rgba(186,184,0,0.78);"  value="2"> En Proceso</option>
+                        <option style="color: darkorange;" value="1"> En espera</option>
+                        <option style="color: #ca0000;" value="0"> Cancelado</option>
+                    </select>
+                </div>
+                <a href="#" class="btn btn-default btn-icon btn-circle btn-lg" onclick="cambiarTabla()" title="buscar">
+                    <i class="fa fa-search"></i>
+                </a>
+            </div>
             <br>
             <br>
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
