@@ -25,9 +25,13 @@ class ReporteVendedorController extends Controller
         return view('pagina/vendedor/reporte_vendedor');
     }
 
-    public function obtenerPedido()
+    public function obtenerPedido($val)
     {
-        return datatables()->of(Pedido::reporteVendedor(Session('idusuario')))->toJson();
+        if ($val != 5) {
+            return datatables()->of(Pedido::reporteVendedorbusc(Session('idusuario'),$val))->toJson();
+        } else {
+            return datatables()->of(Pedido::reporteVendedor(Session('idusuario')))->toJson();
+        }
     }
 
     public function obtenerPrdocutosPedido($idpedido)

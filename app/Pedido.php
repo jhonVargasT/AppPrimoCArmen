@@ -34,8 +34,29 @@ class Pedido extends Model
             ->update(['descuento' =>$monto]);
     }
 
-    public static function reporteVendedor($idusuario)
+    public static function reporteVendedorbusc($idusuario,$val)
+    {
+        return static::select(
+            'p.idPedido',
+            DB::raw('sum(pp.cantidadUnidades + pp.cantidadPaquetes) as cantidad'),
+            DB::raw('CONCAT(pe.apellidos, \', \', pe.nombres) AS nombres'),
+            'pe.nroCelular',
+            DB::raw(' CONCAT(t.nombreTienda,\' - \', d.distrito, \' - \',d.provincia,\' - \',d.nombreCalle) AS tienda'),
+            'p.fechaEntrega',
+            'p.totalPago', 'p.estadoPedido as estado')
+            ->from('pedido as p')
+            ->join('productopedido as pp', 'pp.id_Pedido', '=', 'p.idPedido')
+            ->join('direcciontienda as d', 'd.idDireccionTienda', '=', 'p.id_DireccionTienda')
+            ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
+            ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
+            //   ->where('p.fechaEntrega', '>=', util::fecha())
+            ->where('p.idUsuario', '=', $idusuario)
+            ->where('p.estadoPedido', $val)
+            ->groupBy('p.idPedido')
+            ->get();
 
+    }
+    public static function reporteVendedor($idusuario)
     {
         return static::select(
             'p.idPedido',

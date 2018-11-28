@@ -156,7 +156,7 @@ Route::group(['can:administrador,vendedor'], function () {
         Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
-        Route::get('/listarPedidos', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
+
         Route::get('/listarTipoPquete', 'DatosAdiconalesController@listarTipoPquete')->name('datatable.listarTipoPquete');
         Route::get('/listarTipoProducto', 'DatosAdiconalesController@listarTipoProducto')->name('datatable.listarTipoProducto');
         Route::get('/listarDevoluciones', 'DevolucionController@listarDevoluciones')->name('datatable.listarDevoluciones');
@@ -164,6 +164,7 @@ Route::group(['can:administrador,vendedor'], function () {
     });
 
     Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
+    Route::get('/listarPedidos/{val}', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
 });
 
 Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');

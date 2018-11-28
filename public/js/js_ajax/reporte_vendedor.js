@@ -4,6 +4,72 @@ $(document).ready(function () {
    meta();
 });
 
+
+function cambiarTabla() {
+    var val =  $('#estado').val();
+    $('#data-table-fixed-header').DataTable({
+
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+        processing: true,
+        serverSide: true,
+        select: true,
+        destroy: true,
+        rowId: 'idPedido',
+        aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
+        ajax: '/listarPedidos/'+val,
+        columns: [
+            {data: 'idPedido', name: 'idPedido'},
+            {data: 'nombres', name: 'nombres'},
+            {data: 'nroCelular', name: 'nroCelular'},
+            {data: 'tienda', name: 'tienda'},
+            {data: 'cantidad', name: 'cantidad'},
+            {data: 'fechaEntrega', name: 'fechaEntrega'},
+            {data: 'totalPago', name: 'totalPago'},
+            {
+                data: function (row) {
+                    if (row.estado === '1') {
+                        return '<div style="vertical-align: middle;"><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></div>';
+                    }
+                    else {
+                        if (row.estado === '2') {
+                            return '<div><i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                        }
+                        else {
+                            if (row.estado === '3') {
+                                return ' <div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                            }
+                            else {
+                                if (row.estado === '4') {
+                                    return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
+                                } else {
+
+                                    return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                }
+
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                data: function (row) {
+                    return '<th">' +
+                        '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal"title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
+                        '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
+                        '</th> ';
+
+                }
+            }
+        ]
+
+    });
+
+}
+
+
+
 function llenarVerProductos(idpedido) {
     var url = 'verproductos/' + idpedido;
 

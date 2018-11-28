@@ -313,7 +313,9 @@
 <script>
 
     $(function () {
+        var val=5;
         $('#data-table-fixed-header').DataTable({
+
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
@@ -322,7 +324,7 @@
             select: true,
             rowId: 'idPedido',
             aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
-            ajax: '{!! route('datatable.pedidos') !!}',
+            ajax: '/listarPedidos/'+val,
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombres', name: 'nombres'},
