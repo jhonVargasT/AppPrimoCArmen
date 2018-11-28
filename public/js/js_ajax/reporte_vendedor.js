@@ -1,6 +1,7 @@
 $(document).ready(function () {
    comision();
    ventaMensual();
+   meta();
 });
 
 function llenarVerProductos(idpedido) {
@@ -96,7 +97,7 @@ function llenarVerProductos(idpedido) {
     });
 }
 
-function comision() {
+function meta() {
     "use strict";
     var url = "obtenermeta";
     $.ajax(
@@ -139,6 +140,32 @@ function ventaMensual() {
                         $('#ventamensual').text('S/. 0.00');
                     } else {
                         $('#ventamensual').text('S/. ' + data.comi);
+                    }
+                }
+                else
+                    alert('nohay');
+
+            }
+
+        }
+    );
+}
+function comision() {
+    "use strict";
+    var url = "comision";
+    $.ajax(
+        {
+            type: "GET",
+            url: url,
+            cache: false,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                if (data.error === 1) {
+                    if (data.comi === null) {
+                        $('#comision').text('S/. 0.00');
+                    } else {
+                        $('#comision').text('S/. ' + data.comi);
                     }
                 }
                 else

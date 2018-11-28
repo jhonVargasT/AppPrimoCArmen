@@ -148,6 +148,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('enviarfactura/{idpedido}', 'ReporteVendedorController@enviarfactura');
     Route::get('obtenermeta', 'ReporteVendedorController@meta');
     Route::get('ventamensual', 'ReporteVendedorController@ventaMensual');
+    Route::get('comision', 'ReporteVendedorController@comision');
 
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 

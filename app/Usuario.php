@@ -73,9 +73,16 @@ class Usuario extends Authenticatable
         return DB::select('SELECT format(sum(totalPago),2) as total FROM pedido where idUsuario=' . $idusuario . ' and 
         month(fechaEntrega)=month(now()) and year(fechaEntrega) =year(now())  and estadoPedido=3');
     }
-    public static function obtenerTotalVentsa($idusuario)
+
+    public static function obtenerComision($idusuario)
     {
-        return DB::select('SELECT format(sum(totalPago),2) as total FROM pedido where idUsuario=' . $idusuario . ' and month(fechaEntrega)=month(now()) and year(fechaEntrega) =year(now())');
+        return DB::select('select  case when  totpa <= meta then format(totpa *0.025,2)
+            else format(totpa *0.03,2)   end comi
+             from
+            (select sum(pedido.totalPago) totpa,usuario.metaminima meta from pedido
+            inner join usuario on usuario.idUsuario=pedido.idUsuario
+             where pedido.idUsuario='.$idusuario.' and  month(fechaEntrega)=month(now()) and year(fechaEntrega) =year(now())  and estadoPedido=3)
+             dato');
     }
 
     public static function findByCodigoOrDescription($term)

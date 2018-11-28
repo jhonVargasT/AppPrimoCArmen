@@ -79,6 +79,20 @@ class ReporteVendedorController extends Controller
 
     }
 
+    public function comision()
+    {
+        try {
+            $idusuario = Session('idusuario');
+            $comision = Usuario::obtenerComision($idusuario);
+            foreach ($comision as $com) {
+                $comision = $com->comi;
+            }
+            return response()->json(array('error' => 1, 'comi' => $comision));
+        } catch (Exception $e) {
+            return response()->json(array('error' => 2));
+        }
+
+    }
     public function factura_xml($idpedido, $pedido, $productos, $impuestos)
     {
         $invoice_line = null;

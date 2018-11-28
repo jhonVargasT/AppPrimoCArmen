@@ -66,7 +66,7 @@
                 <div class="stats-icon"><i class="fas fa-lg fa-fw m-r-10 fa-dollar-sign"></i></div>
                 <div class="stats-info">
                     <h4>COMISION </h4>
-                    <p id="provendi">
+                    <p id="comision">
                         0.00
                     </p>
                 </div>
