@@ -32,7 +32,7 @@
             <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
 
                 <a href="/nuevafactura" data-toggle="ajax" class="btn btn-success"><i
-                            class="fas fa-lg fa-fw m-r-10 fa-cart-plus"></i>
+                            class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
                     Nueva factura
                 </a>
             </div>
@@ -137,11 +137,15 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
             serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
             ajax: '{!! route('datatable.facturas') !!}',
+
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nroboleta', name: 'nroboleta'},

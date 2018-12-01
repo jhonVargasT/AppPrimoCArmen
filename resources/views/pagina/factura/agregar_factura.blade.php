@@ -158,7 +158,8 @@
             </table>
             <br>
             <div class="col-md-12" align="center" id="opc">
-                <a href="/facturas" class="btn btn-danger" data-toggle="ajax">
+
+                <a href="/facturas"  class="btn btn-danger" data-toggle="ajax">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
                 <button href="javascript:;" class="btn btn-success " id="enviarpedido" onclick="enviarFacturaSunat()">
