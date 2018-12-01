@@ -4,68 +4,8 @@
 
 <div class="row">
 
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-red">
-            <div class="stats-icon"><i class="fa fa-desktop"></i></div>
-            <div class="stats-info">
-                <h4>TOTAL EN CAJA/MES</h4>
-                <p id="cajames">0</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-aqua">
-            <div class="stats-icon"><i class="fa fa-desktop"></i></div>
-            <div class="stats-info">
-                <h4>TOTAL EN CAJA/DIA</h4>
-                <p id="cajadia">0</p>
-            </div>
-        </div>
-    </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-orange">
-            <div class="stats-icon"><i class="fa fa-link"></i></div>
-            <div class="stats-info">
-                <h4>TOTAL PRODUCTOS VENDIDOS </h4>
-                <p id="provendi">
-                    0.00
-                </p>
-            </div>
-        </div>
-    </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-green">
-            <div class="stats-icon"><i class="fa fa-users"></i></div>
-            <div class="stats-info">
-                <h4>TOTAL CLIENTES</h4>
-                <p id="cantcliente">0</p>
-            </div>
-
-        </div>
-    </div>
-    <!-- end col-3 -->
-    <!-- begin col-3 -->
-    <div class="col-lg-3 col-md-6">
-        <div class="widget widget-stats bg-orange-lighter">
-            <div class="stats-icon"><i class="fa fa-users"></i></div>
-            <div class="stats-info">
-                <h4> PRODUCTO MAS VENDIDO</h4>
-                <p id="productoVendido">
-                    null
-                </p>
-            </div>
-
-        </div>
-    </div>
-    <!-- end col-3 -->
-</div>
-
-<h1 class="page-header">Reporte general
-    <small>reporte general...</small>
+<h1 class="page-header">Reporte facturas
+    <small>reporte facturas...</small>
 </h1>
 <!-- end page-header -->
 
@@ -80,9 +20,18 @@
             <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
                         class="fa fa-minus"></i></a>
         </div>
-        <h4 class="panel-title">Reporte general</h4>
+        <h4 class="panel-title">Reporte facturas</h4>
     </div>
     <div class="panel-body">
+        <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
+
+            <a href="/nuevafactura" data-toggle="ajax" class="btn btn-success"><i
+                        class="fas fa-lg fa-fw m-r-10 fa-cart-plus"></i>
+                Nueva factura
+            </a>
+        </div>
+        <br>
+        <br>
 
         <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
             <div class="row">
@@ -97,11 +46,11 @@
                         <tr role="row">
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 20%; min-width: 100px;text-align: center">nro Boleta
+                                style="width: 20%; min-width: 100px;text-align: center">Nro
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
-                                style="width: 20%; min-width: 100px;text-align: center">nro Pedido
+                                style="width: 20%; min-width: 100px;text-align: center">Dni/Ruc
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
@@ -111,17 +60,17 @@
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"
                                 style="width: 100%; min-width: 100px;text-align: center">
-                                Dni o Ruc
+                                Direcion
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                 style="width: 100%; min-width: 60px;text-align: center">
-                                Telefono
+                                Fecha envio
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
                                 style="width: 100%; min-width: 300px; text-align: center">
-                                Direccion fiscal
+                                Vendedor
                             </th>
                             <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                 rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
@@ -166,7 +115,7 @@
 <script>
     App.setPageTitle('Productos | ARPEMAR SAC');
     App.restartGlobalFunction();
-  /*  $(function () {
+    $(function () {
         $('#data-table-fixed-header').DataTable({
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -176,47 +125,23 @@
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
-            ajax: '/obetenerReporteAdministrador/0/0/0',
+            ajax: '{!! route('datatable.facturas') !!}',
             columns: [
                 {data: 'nroboleta', name: 'nroboleta'},
-                {data: 'idPedido', name: 'idPedido'},
-                {data: 'raz', name: 'raz'},
-                {data: 'ruc', name: 'ruc'},
-                {data: 'nroCelular', name: 'nroCelular'},
+                {data: 'dnioruc', name: 'dnioruc'},
+                {data: 'clienterazonsocial', name: 'clienterazonsocial'},
                 {data: 'direccion', name: 'direccion'},
-                {data: 'fechaCreacion', name: 'fechaCreacion'},
+                {data: 'fechaEntrega', name: 'fechaEntrega'},
+                {data: 'vendedor', name: 'vendedor'},
+                {data: 'pedidoentreg', name: 'pedidoentreg'},
                 {data: 'costoBruto', name: 'costoBruto'},
                 {data: 'impuesto', name: 'impuesto'},
                 {data: 'totalPago', name: 'totalPago'},
-                {
-                    data: function (row) {
-                        if (row.entregado === '1') {
-                            return '<div class="text-success" >Entregado</div>';
-                        }
-                        else {
-                            return '<div class="text-danger" >No entregado</div>';
-                        }
-                    }
-                },
-                {
-                    data: function (row) {
-                        if (row.entregado === '1') {
-                            return '<th">' +
-                                '<a href="/factura/' + row.idPedido + '" class="btn btn-link"  title="Imprimir factura electronica" >' +
-                                '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>'
-                                '</th> ';
-                        }
-                        else {
-                            return '<th>' +
-                                '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Enviar factura" onclick="enviarfactura(' + row.idPedido + ')">' +
-                                '<i class="fas fa-lg fa-fw  fa-paper-plane"></i></a>' +
-                                '</th> ';
-                        }
-                    }
-                }
+                {data: 'entregado', name: 'entregado'},
+                {data: 'entregado', name: 'entregado'}
             ]
         });
-    });*/
+    });
 </script>
 <!-- end panel -->
 

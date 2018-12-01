@@ -33,12 +33,13 @@
             font-family: 'DejaVu Sans Mono';
         }
 
-        .todo{
+        .todo {
             border-top: 1px solid black;
             border-bottom: 1px solid black;
             border-right: 1px solid black;
             border-left: 1px solid black;
         }
+
         .tabla {
             border-top: 1px solid black;
             border-bottom: 1px solid black;
@@ -76,7 +77,7 @@
             <th colspan="8" align="center"> RUC Nro 20602872182</th>
         </tr>
 
-        <tr >
+        <tr>
             <th colspan="8" align="center" valign="top" class="todo">NOTA DE VENTA NRO : {{$pedido[0]->id}}</th>
         </tr>
         <tr>
@@ -84,22 +85,23 @@
             <th colspan="1" align="left" valign="top">:</th>
             <th colspan="5" align="left" valign="top"> {{$pedido[0]->fechaimpre}}</th>
         </tr>
-
-        <tr>
-            <th colspan="2" align="left" valign="top">CLIENTE</th>
-            <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->clie}}</th>
-        </tr>
-        <tr>
-            <th colspan="2" align="left" valign="top">RUC O DNI</th>
-            <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->dni}}&nbsp;</th>
-        </tr>
-        <tr>
-            <th colspan="2" align="left" valign="top">DIRECCION</th>
-            <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->direccion}}&nbsp;</th>
-        </tr>
+        @if($pedido[0]->clie!=0)
+            <tr>
+                <th colspan="2" align="left" valign="top">CLIENTE</th>
+                <th colspan="1" align="left" valign="top">:</th>
+                <th colspan="5" align="left" valign="top"> {{$pedido[0]->clie}}</th>
+            </tr>
+            <tr>
+                <th colspan="2" align="left" valign="top">RUC O DNI</th>
+                <th colspan="1" align="left" valign="top">:</th>
+                <th colspan="5" align="left" valign="top"> {{$pedido[0]->dni}}&nbsp;</th>
+            </tr>
+            <tr>
+                <th colspan="2" align="left" valign="top">DIRECCION</th>
+                <th colspan="1" align="left" valign="top">:</th>
+                <th colspan="5" align="left" valign="top"> {{$pedido[0]->direccion}}&nbsp;</th>
+            </tr>
+        @endif
 
         </tbody>
     </table>
@@ -194,7 +196,7 @@
         <tr>
             <th colspan="1" align="left" valign="top">NOTA:
             </th>
-            <th colspan="7" align="left"  valign="top">ESTA ES UNA NOTA DE VENTA QUE PUEDE SER CANJEADA POR UNA FACTURA O
+            <th colspan="7" align="left" valign="top">ESTA ES UNA NOTA DE VENTA QUE PUEDE SER CANJEADA POR UNA FACTURA O
                 BOLETA
             </th>
         </tr>

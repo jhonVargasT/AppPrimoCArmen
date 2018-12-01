@@ -208,4 +208,14 @@ class Pedido extends Model
         return DB::select('SELECT format(costoBruto,2) costoBruto,format(impuesto,2) impuesto,format(descuento,2) descuento,format(totalPago,2) totalPago FROM pedido where idPedido='.$idpedido);
 
     }
+
+    public static function obetenerCabezaFactura($idpedido)
+    {
+        return DB::select('SELECT date(now()) fecha,concat(perusu.nombres,\', \',perusu.apellidos) usu, ifnull(per.ruc,per.dni) dni, ifnull(per.razonsocial,concat(per.nombres,\', \',per.apellidos)) razsoc,per.direccion,per.idPersona FROM pedido pedi
+                                join persona  per on per.idPersona=pedi.idPersona
+                                join usuario usu on usu.idUsuario=pedi.idUsuario 
+                                join persona  perusu on perusu.idPersona=usu.id_Persona
+                                where pedi.idPedido='.$idpedido);
+
+    }
 }

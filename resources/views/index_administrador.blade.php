@@ -100,6 +100,12 @@
                     </a>
                 </li>
                 <li class="has-sub">
+                    <a href="/facturas" data-toggle="ajax">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-calculator"></i>
+                        <span>Facturas</span>
+                    </a>
+                </li>
+                <li class="has-sub">
                     <a href="/tienda" data-toggle="ajax">
 
                         <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>

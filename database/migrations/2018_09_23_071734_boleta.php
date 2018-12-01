@@ -17,19 +17,25 @@ class Boleta extends Migration
             $table->collate = 'latin1_spanish_ci';
             $table->increments('idBoleta')->unique();
             $table->integer('idUsuario')->nullable();
-            $table->integer('idcliente')->nullable();
             $table->string('nroboleta')->nullable();
             $table->string('montoletras')->nullable();
+            $table->string('vendedor')->nullable();
+            $table->string('tipoVenta')->nullable();
+            $table->string('dnioruc')->nullable();
+            $table->string('clienterazonsocial')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('moneda')->nullable();
+            $table->integer('documento')->nullable();
+            $table->integer('serie')->nullable();
+            $table->integer('numero')->nullable();
             $table->integer('tipocomprobante')->nullable();
-            $table->integer('nroimpresiones')->nullable();
             $table->dateTime('fechaEntrega')->nullable();
-            $table->dateTime('fechaCreacion')->nullable();
-            $table->integer('entregado')->default('0');
+            $table->integer('entregado')->default('1');
             $table->integer('estado')->default('1');
             $table->integer('id_Pedido')->unsigned()->nullable();
         });
 
-        Schema::table('boleta', function( $table) {
+        Schema::table('boleta', function ($table) {
             $table->foreign('id_Pedido')->references('idPedido')->on('pedido');
         });
     }

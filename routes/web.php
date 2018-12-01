@@ -145,7 +145,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('autocompletarproductopromocion/{idproducto}/{dni}/{idpromocion}', 'NuevoPedidoController@autocompletarProductoPromocion');
 //reporte vendedor
     Route::get('verproductos/{idproductos}', 'ReporteVendedorController@obtenerPrdocutosPedido');
-    Route::get('enviarfactura/{idpedido}', 'ReporteVendedorController@enviarfactura');
+    Route::get('/enviarfactura/{array}', 'FacturaController@enviarFactura');
     Route::get('obtenermeta', 'ReporteVendedorController@meta');
     Route::get('ventamensual', 'ReporteVendedorController@ventaMensual');
     Route::get('comision', 'ReporteVendedorController@comision');
@@ -156,7 +156,7 @@ Route::group(['can:administrador,vendedor'], function () {
         Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
-
+        Route::get('/listafacturas', 'FacturaController@listarFacturas')->name('datatable.facturas');
         Route::get('/listarTipoPquete', 'DatosAdiconalesController@listarTipoPquete')->name('datatable.listarTipoPquete');
         Route::get('/listarTipoProducto', 'DatosAdiconalesController@listarTipoProducto')->name('datatable.listarTipoProducto');
         Route::get('/listarDevoluciones', 'DevolucionController@listarDevoluciones')->name('datatable.listarDevoluciones');
@@ -193,6 +193,9 @@ Route::get('/verpromocionproducto/{id}', 'Promocioncontroller@verPromocionProduc
 Route::get('/listarproductopromocion/{val}', 'Promocioncontroller@listarProductoPromocion');
 Route::get('/verpromocionproducto/{id}/{estado}/{tipo}/{prod}/{prom}','Promocioncontroller@activarDesactivar');
 Route::get('/listarPromocionProducto/{id}', 'NuevoPedidoController@listarPromociones');
+Route::get('/facturas','FacturaController@index');
+Route::get('/nuevafactura','FacturaController@nuevaFactura');
+Route::get('/buscarfactura/{idpedido}','FacturaController@buscarFactura');
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP

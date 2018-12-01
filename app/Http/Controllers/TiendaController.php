@@ -160,19 +160,6 @@ class TiendaController extends Controller
                     $totaldescuento=+ $productopedido->DescuentoUnidades+ $productopedido->DescuentoPaquetes;
                 }
                 Pedido::cambiarDescuento($idpedidoreporte, round($totaldescuento,2));
-
-                $boleta = new Boleta();
-                $boleta->id_Pedido = $idpedidoreporte;
-                $boleta->estado = 1;
-                $boleta->entregado = 0;
-                $boleta->fechaCreacion = util::fecha();
-                $boleta->nroimpresiones = 0;
-                $boleta->tipocomprobante = null;
-                //  $boleta->montoletras = util::convertirSeisCifras($montoletra);
-                $boleta->nroboleta = null;
-                $boleta->idcliente = $pedido->idPersona;
-                $boleta->idUsuario = Session('idusuario');
-                $boleta->save();
             });
             $tipousu = Session('tipoUsuario');
             $idpedidoreporte = $pedido->idPedido;

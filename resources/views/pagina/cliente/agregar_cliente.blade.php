@@ -300,21 +300,21 @@
                                         <!-- begin form-group -->
                                         <div id="dir">
                                             <div class="form-group row m-b-10">
-                                                <label class="col-md-3 col-form-label text-md-right">Distrito<span
-                                                            class="text-danger">*</span></label>
-                                                <div class="col-md-6">
-                                                    <input type="text" id="dtdistrito1" class="form-control"
-                                                           name="dtdistrito1"
-                                                           data-parsley-group="step-3" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group row m-b-10">
                                                 <label class="col-md-3 col-form-label text-md-right">Provincia<span
                                                             class="text-danger">*</span></label>
                                                 <div class="col-md-6">
                                                     <input type="text" id="dtprovincia1" class="form-control"
                                                            name="dtprovincia1"
                                                            data-parsley-group="step-3"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row m-b-10">
+                                                <label class="col-md-3 col-form-label text-md-right">Distrito<span
+                                                            class="text-danger">*</span></label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="dtdistrito1" class="form-control"
+                                                           name="dtdistrito1"
+                                                           data-parsley-group="step-3" />
                                                 </div>
                                             </div>
                                             <div class="form-group row m-b-10">

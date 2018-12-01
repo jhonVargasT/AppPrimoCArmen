@@ -130,18 +130,7 @@ class PedidoAdministrador extends Controller
             }
             if ($c >= 1) {
                 if ($c === $contEstados) {
-                    $boleta = new Boleta();
-                    $boleta->id_Pedido = $idpedido;
-                    $boleta->estado = 1;
-                    $boleta->entregado = 0;
-                    $boleta->fechaCreacion = util::fecha();
-                    $boleta->nroimpresiones = 0;
-                    $boleta->tipocomprobante = null;
-                    $boleta->montoletras = util::convertirSeisCifras($montoletra);
-                    $boleta->nroboleta = null;
-                    $boleta->idcliente = $idPersona;
-                    $boleta->idUsuario = Session('idusuario');
-                    $boleta->save();
+
                     Pedido::cambiarEstado($idpedido, 3);
                     foreach ($contador as $cont) {
                         ProductoPedido::actualizarEstadoProductoPedido($cont->idprod, 4);

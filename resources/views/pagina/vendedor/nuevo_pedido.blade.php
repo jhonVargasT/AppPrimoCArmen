@@ -137,7 +137,7 @@
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3">Fecha de entrega</label>
+                    <label class="col-form-label col-md-3 text-left">Fecha de entrega</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" id="datepicker-autoClose"
                                onmouseover="activarBotonAnadirProducto()"
