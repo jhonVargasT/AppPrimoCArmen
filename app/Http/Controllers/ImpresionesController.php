@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\boleta;
 use App\Devolucion;
 use App\Pedido;
 use App\Producto;
@@ -59,14 +60,16 @@ class ImpresionesController extends Controller
     {
 
         $data = array();
-        $pedido = Pedido::obtenerCabezaFactura($id);
-
-        $productos = Producto::obtenerProductosTicket($id);
+        $cabezaPedido = Boleta::listarFacturaPedido($id);
+        foreach ($cabezaPedido as $cab) {
+            $idPersona = $cab->idPersona;
+        }
+        $productos = Producto::obtenerProductosTicket($id, $idPersona);
         $impuestos = Pedido::obetenerCuerpoTicket($id);
         $pdf = new PDF();
-        $pdf = PDF::loadView('pdf.factura', ['pedido' => $pedido, 'productos' => $productos, 'impuestos' => $impuestos]);
+        $pdf = PDF::loadView('pdf.factura', ['cabezaPedido' => $cabezaPedido, 'productos' => $productos, 'impuestos' => $impuestos]);
         $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
-        return $pdf->print('factura.pdf');
+        return $pdf->download('factura.pdf');
     }
 
     public function devoluciones($id)

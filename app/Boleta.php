@@ -27,10 +27,20 @@ class boleta extends Model
 
     public static function listarFacturas()
     {
-        return DB::select('SELECT boleta.nroboleta,boleta.dnioruc,boleta.vendedor,boleta.clienterazonsocial,
-                boleta.direccion,boleta.fechaEntrega,pedido.costoBruto,pedido.impuesto,
-                pedido.totalPago,boleta.entregado,pedido.fechaEntrega as pedidoentreg
+        return DB::select('SELECT LPAD(pedido.idPedido, 6, \'0\')  idPedido,boleta.nroboleta,boleta.dnioruc,boleta.vendedor,boleta.clienterazonsocial,
+                boleta.direccion,date(boleta.fechaEntrega) fechaEntrega ,pedido.costoBruto,pedido.impuesto,
+                pedido.totalPago,boleta.entregado,date(pedido.fechaEntrega) as pedidoentreg
                  FROM boleta
                 join pedido on pedido.idPedido=boleta.id_Pedido');
+    }
+
+    public static function listarFacturaPedido($idpedido)
+    {
+        return DB::select('SELECT LPAD(pedido.idPedido, 6, \'0\')  idPedido,boleta.nroboleta,boleta.dnioruc,boleta.vendedor,boleta.clienterazonsocial,
+                boleta.direccion,date(boleta.fechaEntrega) fechaEntrega ,pedido.costoBruto,pedido.impuesto,
+                pedido.totalPago,boleta.entregado,date(pedido.fechaEntrega) as pedidoentreg,pedido.idPersona
+                 FROM boleta
+                join pedido on pedido.idPedido=boleta.id_Pedido
+                where pedido.idPedido='.$idpedido);
     }
 }

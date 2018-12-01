@@ -77,28 +77,28 @@
         </tr>
 
         <tr>
-            <th colspan="8" align="center" valign="top" class="todo">NOTA DE VENTA NRO : {{$pedido[0]->id}}</th>
+            <th colspan="8" align="center" valign="top" class="todo">FACTURA NRO : {{$cabezaPedido[0]->nroboleta}}</th>
         </tr>
         <tr>
             <th colspan="2" align="left" valign="top">FECHA</th>
             <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->fechaimpre}}</th>
-        </tr>
-
-        <tr>
-            <th colspan="2" align="left" valign="top">CLIENTE</th>
-            <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->clie}}</th>
+            <th colspan="5" align="left" valign="top"> {{$cabezaPedido[0]->fechaEntrega}}</th>
         </tr>
         <tr>
             <th colspan="2" align="left" valign="top">RUC O DNI</th>
             <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->dni}}&nbsp;</th>
+            <th colspan="5" align="left" valign="top"> {{$cabezaPedido[0]->dnioruc}}&nbsp;</th>
         </tr>
+        <tr>
+            <th colspan="2" align="left" valign="top">CLIENTE/RAZON SOCIAL</th>
+            <th colspan="1" align="left" valign="top">:</th>
+            <th colspan="5" align="left" valign="top"> {{$cabezaPedido[0]->clienterazonsocial}}</th>
+        </tr>
+
         <tr>
             <th colspan="2" align="left" valign="top">DIRECCION</th>
             <th colspan="1" align="left" valign="top">:</th>
-            <th colspan="5" align="left" valign="top"> {{$pedido[0]->direccion}}&nbsp;</th>
+            <th colspan="5" align="left" valign="top"> {{$cabezaPedido[0]->direccion}}&nbsp;</th>
         </tr>
 
         </tbody>
@@ -111,7 +111,7 @@
             <th align="center" width="30px">DESCRIP</th>
             <th align="center" width="30px">CANTI</th>
             <th align="center" width="30px">PRECIO</th>
-            <th align="right" width="50px">TOTAL</th>
+            <th align="right" width="40px">TOTAL</th>
 
         </tr>
         </thead>
@@ -200,7 +200,7 @@
         <tr>
             <th colspan="3" align="right">ATENDIDO POR :
             </th>
-            <th colspan="5" align="left">{{$pedido[0]->usu}}
+            <th colspan="5" align="left">{{$cabezaPedido[0]->vendedor}}
             </th>
         </tr>
         </tbody>
