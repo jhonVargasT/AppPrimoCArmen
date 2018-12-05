@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Vendedor;
 use App\Pedido;
 use App\Persona;
 use App\Producto;
+use App\Usuario;
+use App\util;
 use Illuminate\Http\Request;
 use vakata\database\Exception;
 
@@ -155,11 +158,39 @@ class ReporteController extends Controller
     public function reportarBoletas($cliente, $fechainicio, $fechafin)
     {
         try {
-            if ($cliente === '0' && $fechainicio === '0' && $fechafin === '0'){
-                return datatables()->of(Pedido::obtenerReporte())->toJson();}
-                else{
+            if ($cliente === '0' && $fechainicio === '0' && $fechafin === '0') {
+                return datatables()->of(Pedido::obtenerReporte())->toJson();
+            } else {
                 return null;
-                }
+            }
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    public function reporteClienteIngresos($vendedor, $fechaini, $fechafin)
+    {
+        try {
+          return datatables()->of(Pedido::obetenerVendedorIngresos($vendedor, $fechaini, $fechafin))->toJson();
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    public function obtenerVendedores()
+    {
+        try {
+            $usuario= Usuario::listado();
+            return response()->json(array('usuario' => $usuario));
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
+
+    public function reporteProductoIngresos($id, $fechaini, $fechafin)
+    {
+        try {
+            return datatables()->of(Pedido::obetenerProductosIngresos($id, $fechaini, $fechafin))->toJson();
         } catch (Exception $e) {
             return $e;
         }

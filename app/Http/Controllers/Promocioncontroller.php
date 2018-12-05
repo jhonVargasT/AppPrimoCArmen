@@ -13,7 +13,7 @@ class Promocioncontroller extends Controller
 {
     public function index()
     {
-        return view('pagina.promociones.promociones');
+        return view('pagina.Promociones.promociones');
     }
 
     public function listar()

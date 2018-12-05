@@ -196,6 +196,13 @@ Route::get('/listarPromocionProducto/{id}', 'NuevoPedidoController@listarPromoci
 Route::get('/facturas','FacturaController@index');
 Route::get('/nuevafactura','FacturaController@nuevaFactura');
 Route::get('/buscarfactura/{idpedido}','FacturaController@buscarFactura');
+
+/// Reportes
+/// ingresos por cliente
+Route::get('/reporteVendedorIngresos/{vendedor}/{fechaini}/{fechafin}','ReporteController@reporteClienteIngresos');
+Route::get('/obtenerVendedores','ReporteController@obtenerVendedores');
+Route::get('/reporteProductoIngresos/{producto}/{fechaini}/{fechafin}','ReporteController@reporteProductoIngresos');
+
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP

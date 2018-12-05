@@ -113,6 +113,7 @@ class TiendaController extends Controller
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->fechaEntrega = util::fecha();
+            $pedido->lugar =1;
             $pedido->id_DireccionTienda = $persona->tienda;
             $pedido->estadoPedido = 3;
             $productos = $data->productos;

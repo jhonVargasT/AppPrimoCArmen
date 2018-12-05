@@ -35,7 +35,6 @@ function buscarPedido() {
 
 
 function llenarTabla(productos, impuestos) {
-    console.log(impuestos);
     html = $("#cuerpotabla").html();
     html = '';
     tablaCentro = ''

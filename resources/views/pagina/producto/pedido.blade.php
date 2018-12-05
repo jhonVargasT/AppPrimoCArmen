@@ -44,22 +44,22 @@
             </div>
             <br>
             <br>
-           <div class="form-group row col-sm-12 col-xs-12 col-md-12">
+            <div class="form-group row col-sm-12 col-xs-12 col-md-12">
                 <label class="col-md-2 col-sm-2 col-form-label">Estado Pedido
                     :</label>
                 <div class="col-md-3 col-sm-3">
-                    <select id="estado"  name="estado" class=" form-control">
+                    <select id="estado" name="estado" class=" form-control">
                         <option value="5">Seleccionar</option>
-                        <option style="color: green" value="3">  Entregado</option>
-                        <option style="color: green" value="4">  Entregadocon observacion  </option>
-                        <option style="color: rgba(186,184,0,0.78);"  value="2"> En Proceso</option>
+                        <option style="color: green" value="3"> Entregado</option>
+                        <option style="color: green" value="4"> Entregadocon observacion</option>
+                        <option style="color: rgba(186,184,0,0.78);" value="2"> En Proceso</option>
                         <option style="color: darkorange;" value="1"> En espera</option>
                         <option style="color: #ca0000;" value="0"> Cancelado</option>
                     </select>
                 </div>
-               <a href="#" class="btn btn-default btn-icon btn-circle btn-lg" onclick="cambiarTabla()" title="buscar">
-                   <i class="fa fa-search"></i>
-               </a>
+                <a href="#" class="btn btn-default btn-icon btn-circle btn-lg" onclick="cambiarTabla()" title="buscar">
+                    <i class="fa fa-search"></i>
+                </a>
             </div>
             <br>
             <br>
@@ -150,10 +150,11 @@
                                     style="width: 100%;; min-width: 20px;">
                                     Estado
                                 </th>
-                                <th class="text-nowrap sorting align-content-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting align-content-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 150px;" >
+                                    style="width: 100%;; min-width: 150px;">
                                     Opciones
                                 </th>
                             </tr>
@@ -281,7 +282,7 @@
     App.setPageTitle('Pedidos | ARPEMAR SAC');
     App.restartGlobalFunction();
     $(function () {
-        var val=5;
+        var val = 5;
         $('#data-table-fixed-header').DataTable({
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -290,8 +291,8 @@
             serverSide: true,
             select: true,
             rowId: 'idPedido',
-            aaSorting: [[10, "asc"],[8, "asc"], [0, "desc"], [1, "asc"] ],
-            ajax: '/listarPedidosAdmin/'+val,
+            aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],
+            ajax: '/listarPedidosAdmin/' + val,
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombreTienda', name: 'nombreTienda'},
@@ -334,7 +335,7 @@
                 {
                     data: function (row) {
                         return '<th>' +
-                            '<a href="/compilarticket/'+row.idPedido+'" class="btn btn-link"  title="Imprimir nota de venta" >' +
+                            '<a href="/compilarticket/' + row.idPedido + '" class="btn btn-link"  title="Imprimir nota de venta" >' +
                             '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
                             '<a href="#modal-dialog" class="btn btn-link" data-toggle="modal" title="Ver productos" onclick="llenarVerProductos(' + row.idPedido + ')">' +
                             '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +

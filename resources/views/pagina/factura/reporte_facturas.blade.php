@@ -7,6 +7,23 @@
 
 <script src="{{ asset('js/js_ajax/cliente.js') }}"></script>
 
+<link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
+<link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+
+
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
 <div id="response">
@@ -137,8 +154,9 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
+            dom: 'Bfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'excel', 'print'
             ],
             serverSide: true,
             select: true,

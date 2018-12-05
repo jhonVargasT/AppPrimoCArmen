@@ -219,6 +219,7 @@ class NuevoPedidoController extends Controller
             $pedido->costoBruto =  round(abs(($persona->total * 0.18) - $persona->total),2);
             $pedido->totalPago = round($persona->total,2);
             $pedido->descuento = 0;
+            $pedido->lugar =2;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->id_DireccionTienda = $persona->tienda;

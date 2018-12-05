@@ -29,6 +29,7 @@ class Pedido extends Migration
             $table->integer('idUsuario')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');
+            $table->integer('lugar')->nullable();
             $table->integer('id_DireccionTienda')->unsigned()->nullable();
 
         });

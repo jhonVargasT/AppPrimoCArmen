@@ -18,23 +18,25 @@ class Pedido extends Model
             ->update(['costoBruto' => $monto, 'impuesto' => ($monto * 0.18), 'totalPago' => $monto + ($monto * 0.18)]);
     }
 
-    public static function cambiarMontoPedidoDescuento($idpedido, $total,$descuento,$igv,$opegrav)
+    public static function cambiarMontoPedidoDescuento($idpedido, $total, $descuento, $igv, $opegrav)
     {
         return static::where('idPedido', $idpedido)
-            ->update(['costoBruto'=>$opegrav,'impuesto'=>$igv,'descuento'=>$descuento,'totalPago'=>$total]);
+            ->update(['costoBruto' => $opegrav, 'impuesto' => $igv, 'descuento' => $descuento, 'totalPago' => $total]);
     }
-    public static function cambiarMontoDesc($idpedido, $totalpag,$descuento)
+
+    public static function cambiarMontoDesc($idpedido, $totalpag, $descuento)
     {
         return static::where('idPedido', $idpedido)
-            ->update(['totalPago' => $totalpag,'descuento'=>$descuento]);
+            ->update(['totalPago' => $totalpag, 'descuento' => $descuento]);
     }
+
     public static function cambiarDescuento($idpedido, $monto)
     {
         return static::where('idPedido', $idpedido)
-            ->update(['descuento' =>$monto]);
+            ->update(['descuento' => $monto]);
     }
 
-    public static function reporteVendedorbusc($idusuario,$val)
+    public static function reporteVendedorbusc($idusuario, $val)
     {
         return static::select(
             'p.idPedido',
@@ -56,6 +58,7 @@ class Pedido extends Model
             ->get();
 
     }
+
     public static function reporteVendedor($idusuario)
     {
         return static::select(
@@ -96,7 +99,7 @@ class Pedido extends Model
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->join('usuario as us', 'us.idUsuario', '=', 'p.idUsuario')
-           // ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
+            // ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
             ->where('p.estadoPedido', $val)
             ->groupBy('p.idPedido')
             ->orderBy('p.idPedido', 'DESC')
@@ -122,7 +125,7 @@ class Pedido extends Model
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->join('usuario as us', 'us.idUsuario', '=', 'p.idUsuario')
-         //   ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
+            //   ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
             ->groupBy('p.idPedido')
             ->orderBy('p.idPedido', 'DESC')
             ->get();
@@ -189,6 +192,7 @@ class Pedido extends Model
                                     where pe.estado=1  AND pe.idPedido=' . $idpedido);
 
     }
+
     public static function obtenerCabezaFactura($idpedido)
     {
         return DB::select('SELECT DATE(now()) fechaimpre,concat(pers.apellidos,\',\',pers.nombres)  usu,bol.nroboleta  id,
@@ -203,9 +207,10 @@ class Pedido extends Model
                                     where pe.estado=1  AND pe.idPedido=' . $idpedido);
 
     }
+
     public static function obetenerCuerpoTicket($idpedido)
     {
-        return DB::select('SELECT format(costoBruto,2) costoBruto,format(impuesto,2) impuesto,format(descuento,2) descuento,format(totalPago,2) totalPago FROM pedido where idPedido='.$idpedido);
+        return DB::select('SELECT format(costoBruto,2) costoBruto,format(impuesto,2) impuesto,format(descuento,2) descuento,format(totalPago,2) totalPago FROM pedido where idPedido=' . $idpedido);
 
     }
 
@@ -215,7 +220,58 @@ class Pedido extends Model
                                 join persona  per on per.idPersona=pedi.idPersona
                                 join usuario usu on usu.idUsuario=pedi.idUsuario 
                                 join persona  perusu on perusu.idPersona=usu.id_Persona
-                                where pedi.idPedido='.$idpedido);
+                                where pedi.idPedido=' . $idpedido);
 
+    }
+
+    public static function obetenerVendedorIngresos($vendedor, $fechaini, $fechafin)
+    {
+        if ($vendedor != 0)
+            $vendedor = 'and usuario.idUsuario=' . $vendedor;
+        else
+            $vendedor = '';
+        if ($fechaini != 0)
+            $fechaini = ' and date(pedido.fechaEntrega) between "' . $fechaini . '" and "' . $fechafin.'"';
+        else
+            $fechaini = '';
+
+        return DB::select('SELECT usuario.idUsuario,concat(persona.apellidos,\' ,\' ,persona.nombres) as vendedor, 
+                    sum(pedido.totalPago) total,
+                    sum(pedido.costoBruto) opgv,
+                     sum((productopedido.cantidadPaquetes*producto.precioCompra)+(productopedido.cantidadUnidades*producto.precioCompraUnidad)) as gastoprod,
+                     format(abs(sum((productopedido.cantidadPaquetes*producto.precioCompra)+(productopedido.cantidadUnidades*producto.precioCompraUnidad))- sum(pedido.costoBruto)),2) ganancia,
+                     date(pedido.fechaEntrega) fecha,
+                     IF(pedido.lugar=1, "TIENDA", "CALLE") lugar
+                     FROM pedido 
+                     join productopedido on productopedido.id_Pedido= pedido.idPedido
+                     join producto on producto.idProducto= productopedido.id_Producto
+                    join usuario on usuario.idUsuario= pedido.idUsuario
+                    join persona on persona.idPersona=usuario.id_Persona
+                    where pedido.estadoPedido=3 ' . $vendedor . ' ' . $fechaini . ' 
+                    group by  usuario.idUsuario,pedido.lugar,date(pedido.fechaEntrega)
+                    order by usuario.idUsuario,date(pedido.fechaEntrega)');
+    }
+
+    public static function obetenerProductosIngresos($producto, $fechaini, $fechafin)
+    {
+        if ($producto != 0)
+            $producto = 'and  producto.idProducto=' . $producto;
+        else
+            $producto = '';
+        if ($fechaini != 0)
+            $fechaini = 'and date(pedido.fechaEntrega) between "'.$fechaini.'" and "'.$fechafin.'" ';
+        else
+            $fechaini = '';
+
+        return DB::select('SELECT producto.idProducto, producto.nombre,sum(productopedido.cantidadPaquetes) cantpa,
+                sum(productopedido.montoPaquetes) montpaque,
+                sum(productopedido.cantidadUnidades) cantuni,
+                sum(productopedido.montoUnidades) monuni,
+                date(pedido.fechaEntrega) fecha
+                FROM producto
+                join productopedido on productopedido.id_Producto=producto.idProducto
+                join pedido on pedido.idPedido=productopedido.id_Pedido
+                where pedido.estadoPedido=3 '.$producto.' '.$fechaini.'
+                group by producto.nombre,date(pedido.fechaEntrega)');
     }
 }
