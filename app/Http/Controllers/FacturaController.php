@@ -47,24 +47,22 @@ class FacturaController extends Controller
 
     public function enviarFactura($factura)
     {
-
         try {
-            //amic separas este arreglo cen 3 arreglos cabezafactura,piefactura, productos
             $factura = json_decode($factura);
-            dd($factura);
             $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
         } catch (Exception $e) {
             return $e;
         }
     }
 
-    public function factura_xml($cabezafactura, $productos, $piefactura)
+    public function factura_xml($cabezafactura, $producto, $piefactura)
     {
         $invoice_line = array();
         $count = 1;
 
-        foreach ($productos as $producto) {
+        dd($producto[0]);
 
+        for($i =0; $i < count($producto); $i++){
             if ($producto->cantidadUnidades > 0) {
                 $cantidad = $producto->cantidadUnidades;
                 $precio = $producto->precioVentaUnidad * $cantidad;
@@ -112,7 +110,7 @@ class FacturaController extends Controller
                 $count++;
             } elseif ($producto->cantidadPaquetes > 0) {
                 $cantidad = $producto->cantidadPaquetes;
-                $precio = $producto->precioVenta * $cantidad;
+                $precio = $producto->precioVentapaque * $cantidad;
 
                 $invoice_line[$count] = '
                                    <cac:InvoiceLine>
@@ -167,7 +165,7 @@ class FacturaController extends Controller
                             <sac:AdditionalInformation>
                                <sac:AdditionalMonetaryTotal>
                                   <cbc:ID>1001</cbc:ID>
-                                  <cbc:PayableAmount currencyID="PEN">' . $piefactura->opgrav . '</cbc:PayableAmount>
+                                  <cbc:PayableAmount currencyID="PEN">' . $piefactura->costobruto . '</cbc:PayableAmount>
                                </sac:AdditionalMonetaryTotal>
                                <sac:AdditionalMonetaryTotal>
                                   <cbc:ID>1002</cbc:ID>
@@ -183,7 +181,7 @@ class FacturaController extends Controller
                                </sac:AdditionalMonetaryTotal>
                                <sac:AdditionalProperty>
                                   <cbc:ID>1000</cbc:ID>
-                                  <cbc:Value>' . NumeroALetras::convertir($piefactura->tot) . '</cbc:Value>
+                                  <cbc:Value>' . NumeroALetras::convertir($piefactura->totalPago) . '</cbc:Value>
                                </sac:AdditionalProperty>
                             </sac:AdditionalInformation>
                          </ext:ExtensionContent>
@@ -247,9 +245,9 @@ class FacturaController extends Controller
                       </cac:Party>
                    </cac:AccountingCustomerParty>
                    <cac:TaxTotal>
-                      <cbc:TaxAmount currencyID="PEN">' . number_format((float)($piefactura->igv), 2, '.', '') . '</cbc:TaxAmount>
+                      <cbc:TaxAmount currencyID="PEN">' . number_format((float)($piefactura->impuesto), 2, '.', '') . '</cbc:TaxAmount>
                       <cac:TaxSubtotal>
-                         <cbc:TaxAmount currencyID="PEN">' . number_format((float)($piefactura->igv), 2, '.', '') . '</cbc:TaxAmount>
+                         <cbc:TaxAmount currencyID="PEN">' . number_format((float)($piefactura->impuesto), 2, '.', '') . '</cbc:TaxAmount>
                          <cac:TaxCategory>
                             <cac:TaxScheme>
                                <cbc:ID>1000</cbc:ID>
@@ -260,7 +258,7 @@ class FacturaController extends Controller
                       </cac:TaxSubtotal>
                    </cac:TaxTotal>
                    <cac:LegalMonetaryTotal>
-                      <cbc:PayableAmount currencyID="PEN">' . number_format((float)$piefactura->tot, 2, '.', '') . '</cbc:PayableAmount>
+                      <cbc:PayableAmount currencyID="PEN">' . number_format((float)$piefactura->totalPago, 2, '.', '') . '</cbc:PayableAmount>
                    </cac:LegalMonetaryTotal>';
         for ($i = 1; $i <= count($invoice_line); $i++) {
             $xml .= $invoice_line[$i];
@@ -281,7 +279,6 @@ class FacturaController extends Controller
             $this->comprimir_factura($filename);
 
             $this->consumo_soap($filename);
-            Boleta::cambiarNumeroBoleta($cabezafactura->idpedido, $filename, util::fecha());
         }
     }
 
