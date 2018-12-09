@@ -60,8 +60,6 @@ class FacturaController extends Controller
         $invoice_line = array();
         $count = 1;
 
-        dd($producto[0]);
-
         for($i =0; $i < count($producto); $i++){
             if ($producto->cantidadUnidades > 0) {
                 $cantidad = $producto->cantidadUnidades;
