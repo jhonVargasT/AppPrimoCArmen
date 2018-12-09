@@ -203,4 +203,13 @@ class ReporteController extends Controller
             return $e;
         }
     }
+
+    public function reporteClienteTotal($fechaini, $fechafin)
+    {
+        try {
+            return datatables()->of(Pedido::obetenerIngresosClientes( $fechaini, $fechafin))->toJson();
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
 }

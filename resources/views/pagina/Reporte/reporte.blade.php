@@ -114,48 +114,46 @@
         <br>
         <div id="data">
 
+
             <div class="row form-group">
-                <div class="col-xs-4 col-sm-4 col-lg-4">\
-                    <label class="col-md-6 col-sm-6 col-form-label" for="nombre_producto"> <strong> Nombre producto
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <label class=" col-form-label" for="nombre_producto"> <strong> Nombre producto
                         </strong></label>
-                    <div class="col-md-6 col-sm-6">
-                        <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
-                               name="id_producto" hidden
-                        >
-                        <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
-                               onkeypress="if(event.keyCode == 13) buscarProductoNombre()"
-                               name="nombre_producto"
-                        >
-                        <script>
-                            $('#nombre_producto').typeahead({
-                                name: 'data',
-                                displayKey: 'name',
-                                source: function (query, process) {
-                                    $.ajax({
-                                        url: "/buscarnombre",
-                                        type: 'GET',
-                                        data: 'query=' + query,
-                                        dataType: 'JSON',
-                                        async: 'false',
-                                        success: function (data) {
-                                            bondObjs = {};
-                                            bondNames = [];
-                                            $.each(data, function (i, item) {
-                                                bondNames.push({id: item.idProducto, name: item.nombre});
-                                                bondObjs[item.id] = item.idProducto;
-                                                bondObjs[item.name] = item.nombre;
-                                            });
+                    <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
+                           name="id_producto" hidden
+                    >
+                    <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
+                           onkeypress="if(event.keyCode == 13) buscarProductoNombre()"
+                           name="nombre_producto"
+                    >
+                    <script>
+                        $('#nombre_producto').typeahead({
+                            name: 'data',
+                            displayKey: 'name',
+                            source: function (query, process) {
+                                $.ajax({
+                                    url: "/buscarnombre",
+                                    type: 'GET',
+                                    data: 'query=' + query,
+                                    dataType: 'JSON',
+                                    async: 'false',
+                                    success: function (data) {
+                                        bondObjs = {};
+                                        bondNames = [];
+                                        $.each(data, function (i, item) {
+                                            bondNames.push({id: item.idProducto, name: item.nombre});
+                                            bondObjs[item.id] = item.idProducto;
+                                            bondObjs[item.name] = item.nombre;
+                                        });
 
-                                            process(bondNames);
-                                        }
-                                    });
-                                }
-                            }).on('typeahead:selected', function (even, datum) {
-                                $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
-                            });
-                        </script>
-                    </div>
-
+                                        process(bondNames);
+                                    }
+                                });
+                            }
+                        }).on('typeahead:selected', function (even, datum) {
+                            $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+                        });
+                    </script>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">fecha</label>
@@ -231,6 +229,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
 
     </div>

@@ -295,7 +295,22 @@ class Pedido extends Model
                                 inner join usuario on usuario.idUsuario=pedido.idUsuario
                                 inner join producto on producto.idProducto=productopedido.id_Producto
                                 inner join persona on persona.idPersona = usuario.id_Persona
-                                 where pedido.estadoPedido =1 '.$idusuario.' '.$fechaini.'
+                                 where pedido.estadoPedido =1 ' . $idusuario . ' ' . $fechaini . '
                                  group by producto.nombre,date(pedido.fechaPedido)');
+    }
+
+    public static function obetenerIngresosClientes( $fechaini, $fechafin)
+    {
+
+        if ($fechaini != 0)
+            $fechaini = 'and date(pedido.fechaEntrega) between "' . $fechaini . '" and "' . $fechafin . '" ';
+        else
+            $fechaini = '';
+
+        return DB::select('SELECT persona.idPersona ,concat(persona.nombres,\', \',persona.apellidos) as nomb,sum(totalPago) tot,date(pedido.fechaEntrega)  as fec FROM pedido 
+inner join persona on persona.idPersona=pedido.idPersona
+where pedido.estadoPedido=3 '.$fechaini.'
+group by concat(persona.nombres,\', \',persona.apellidos) ,date(pedido.fechaEntrega) 
+order by date(pedido.fechaEntrega) desc,concat(persona.nombres,\', \',persona.apellidos) asc') ;
     }
 }

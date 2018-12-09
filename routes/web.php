@@ -206,6 +206,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/obtenerVendedores', 'ReporteController@obtenerVendedores');
     Route::get('/reporteProductoIngresos/{producto}/{fechaini}/{fechafin}', 'ReporteController@reporteProductoIngresos');
     Route::get('/reporteProductoRuta/{idvendedor}/{fechaini}/{fechafin}', 'ReporteController@reporteProductoPedido');
+    Route::get('/reporteClienteIngresos/{fechaini}/{fechafin}', 'ReporteController@reporteClienteTotal');
 });
 /*
 Route::get('/compilar', function () {

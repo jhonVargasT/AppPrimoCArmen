@@ -163,7 +163,7 @@ function cambiarTabla() {
             $('#data').html(htmlProductoRuta());
             break;
         case '4':
-            $('#data').html(html);
+            $('#data').html(htmlClienteIngresos());
             break;
     }
 }
@@ -466,6 +466,67 @@ function htmlProductoRuta() {
         '            </div>'
     return html;
 }
+function htmlClienteIngresos() {
+    var html = '  <div class="row form-group">\n' +
+        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
+        '                    <label class="col-form-label">fecha</label>\n' +
+        '                    <div class="input-group input-daterange">\n' +
+        '                        <input type="text" class="form-control" name="inicio" id="inicio"\n' +
+        '                               placeholder="Fecha inicio">\n' +
+        '                        <span class="input-group-addon">a</span>\n' +
+        '                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '                <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+        '                    <label class="col-form-label">Buscar</label>\n' +
+        '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
+        '                       onclick="clienteTotal()"><i\n' +
+        '                                class="fa fa-search-plus"></i></a>\n' +
+        '                </div>\n' +
+        '            </div>\n' +
+        '            <br>\n' +
+        '            <br>\n' +
+        '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
+        '                <div class="row">\n' +
+        '                    <div class="col-sm-12">\n' +
+        '                        <table id="data-table-fixed-header"\n' +
+        '                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"\n' +
+        '                               role="grid"\n' +
+        '                               aria-describedby="data-table-fixed-header_info"  style="width: 100%;">\n' +
+        '                            <tbody>\n' +
+        '                            </tbody>\n' +
+        '                            <thead>\n' +
+        '                            <tr role="row">\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 20%; min-width: 152px;text-align: center">Id Cliente\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width: 400px;text-align: center">Nombre Cliente\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width: 100px;text-align: center">\n' +
+        '                                    Monto invertido\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width: 200px;text-align: center">\n' +
+        '                                    Fecha\n' +
+        '                                </th>\n' +
+        '                            </tr>\n' +
+        '                            </thead>\n' +
+        '                        </table>\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '            </div>'
+    return html;
+}
 
 function vendedorIngresos() {
 
@@ -570,6 +631,40 @@ function vendedorPtoductosRuta() {
             {data: 'paque', name: 'paque'},
             {data: 'uni', name: 'uni'},
             {data: 'fechaPedido', name: 'fechaPedido'},
+        ]
+
+    });
+}
+
+
+function clienteTotal() {
+
+    "use strict";
+    var fechaini = convertiFecha($("#inicio").val());
+    var fechafin = convertiFecha($("#final").val());
+    var url = '/reporteClienteIngresos/'+fechaini+'/'+fechafin;
+    var sum = 0;
+    $('#data-table-fixed-header').DataTable({
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+        processing: true,
+        serverSide: true,
+        select: true,
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'print'
+        ],
+        rowId: 'idUsuario',
+        aaSorting: [[0, "desc"]],
+        ajax: url,
+        columns: [
+            {data: 'idPersona', name: 'idPersona'},
+            {data: 'nomb', name: 'nomb'},
+            {data: 'tot', name: 'tot'},
+            {data: 'fec', name: 'fec'},
+
         ]
 
     });
