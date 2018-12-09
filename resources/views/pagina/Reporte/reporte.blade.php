@@ -98,7 +98,7 @@
                 <select id="tiporeporte" name="tiporeporte" class=" form-control"
                 >
                     <option id="1" selected>PRODUCTOS VENDIDOS</option>
-                    <option id="2" >GANANCIA POR VENDEDOR</option>
+                    <option id="2">GANANCIA POR VENDEDOR</option>
                     <option id="3">PRODUCTOS PEDIDOS POR RUTA</option>
                     <option id="4">MONTO VENIDO POR CLIENTE</option>
                 </select>
@@ -114,7 +114,123 @@
         <br>
         <div id="data">
 
+            <div class="row form-group">
+                <div class="col-xs-4 col-sm-4 col-lg-4">\
+                    <label class="col-md-6 col-sm-6 col-form-label" for="nombre_producto"> <strong> Nombre producto
+                        </strong></label>
+                    <div class="col-md-6 col-sm-6">
+                        <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
+                               name="id_producto" hidden
+                        >
+                        <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
+                               onkeypress="if(event.keyCode == 13) buscarProductoNombre()"
+                               name="nombre_producto"
+                        >
+                        <script>
+                            $('#nombre_producto').typeahead({
+                                name: 'data',
+                                displayKey: 'name',
+                                source: function (query, process) {
+                                    $.ajax({
+                                        url: "/buscarnombre",
+                                        type: 'GET',
+                                        data: 'query=' + query,
+                                        dataType: 'JSON',
+                                        async: 'false',
+                                        success: function (data) {
+                                            bondObjs = {};
+                                            bondNames = [];
+                                            $.each(data, function (i, item) {
+                                                bondNames.push({id: item.idProducto, name: item.nombre});
+                                                bondObjs[item.id] = item.idProducto;
+                                                bondObjs[item.name] = item.nombre;
+                                            });
 
+                                            process(bondNames);
+                                        }
+                                    });
+                                }
+                            }).on('typeahead:selected', function (even, datum) {
+                                $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+                            });
+                        </script>
+                    </div>
+
+                </div>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <label class="col-form-label">fecha</label>
+                    <div class="input-group input-daterange">
+                        <input type="text" class="form-control" name="inicio" id="inicio"
+                               placeholder="Fecha inicio">
+                        <span class="input-group-addon">a</span>
+                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">
+                    </div>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-lg-1">
+                    <label class="col-form-label">Buscar</label>
+                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"
+                       onclick="productoIngresos()"><i
+                                class="fa fa-search-plus"></i></a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="data-table-fixed-header"
+                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                               role="grid"
+                               aria-describedby="data-table-fixed-header_info">
+                            <tbody>
+                            </tbody>
+                            <thead>
+                            <tr role="row">
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 20%; min-width: 100px;text-align: center">Id producto
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%; min-width: 300px;text-align: center">Nombre
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%; min-width: 100px;text-align: center">
+                                    Cantidad paquete vendidas
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Rendering engine: activate to sort column ascending"
+                                    style="width: 100%; min-width: 100px;text-align: center">
+                                    Monto recaudado paquete
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
+                                    style="width: 100%; min-width: 60px;text-align: center">
+                                    Cantidad unidades vendidas
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending"
+                                    style="width: 100%; min-width: 100px; text-align: center">
+                                    Monto recaudado unidades
+                                </th>
+                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Platform(s): activate to sort column ascending"
+                                    style="width: 100%; min-width: 100px; text-align: center">
+                                    Fecha
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
