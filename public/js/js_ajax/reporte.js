@@ -460,3 +460,38 @@ function productoIngresos() {
 
     });
 }
+
+
+function vendedorPtoductosRuta() {
+
+    "use strict";
+    var id = $('#vendedores').find('option:selected').attr('id');
+    var fechaini = convertiFecha($("#inicio").val());
+    var fechafin = convertiFecha($("#final").val());
+    var url = "/reporteProductoRuta/" + id + "/" + fechaini + "/" + fechafin;
+    var sum = 0;
+    $('#data-table-fixed-header').DataTable({
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        },
+        processing: true,
+        serverSide: true,
+        select: true,
+        destroy: true,
+        dom: 'Bfrtip',
+        buttons: [
+            'excel', 'print'
+        ],
+        rowId: 'idUsuario',
+        aaSorting: [[0, "desc"]],
+        ajax: url,
+        columns: [
+            {data: 'usu', name: 'usu'},
+            {data: 'nombre', name: 'nombre'},
+            {data: 'paque', name: 'paque'},
+            {data: 'uni', name: 'uni'},
+            {data: 'fechaPedido', name: 'fechaPedido'},
+        ]
+
+    });
+}

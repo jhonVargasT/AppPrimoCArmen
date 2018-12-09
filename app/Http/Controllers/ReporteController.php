@@ -195,5 +195,12 @@ class ReporteController extends Controller
             return $e;
         }
     }
-
+    public function reporteProductoPedido($id, $fechaini, $fechafin)
+    {
+        try {
+            return datatables()->of(Pedido::obetenerProductosPedidos($id, $fechaini, $fechafin))->toJson();
+        } catch (Exception $e) {
+            return $e;
+        }
+    }
 }

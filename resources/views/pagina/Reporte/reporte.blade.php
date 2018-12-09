@@ -115,42 +115,13 @@
         <div id="data">
 
             <div class="row form-group">
-                <div class="col-xs-6 col-sm-6 col-lg-6">
-                    <label class="col-md-4 col-sm-4 col-form-label" for="nombre_producto"> <strong> Nombre producto
-                        </strong></label>
-                    <div class="col-md-7 col-sm-7">
-                        <input type="text" class="form-control m-b-12 typeahead" id="id_producto" name="id_producto" hidden>
-                        <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
-                               name="nombre_producto">
-                        <script>
-                            $('#nombre_producto').typeahead({
-                                name: 'data',
-                                displayKey: 'name',
-                                source: function (query, process) {
-                                    $.ajax({
-                                        url: "/buscarnombre",
-                                        type: 'GET',
-                                        data: 'query=' + query,
-                                        dataType: 'JSON',
-                                        async: 'false',
-                                        success: function (data) {
-                                            bondObjs = {};
-                                            bondNames = [];
-                                            $.each(data, function (i, item) {
-                                                bondNames.push({id: item.idProducto, name: item.nombre});
-                                                bondObjs[item.id] = item.idProducto;
-                                                bondObjs[item.name] = item.nombre;
-                                            });
-                                            process(bondNames);
-                                        }
-                                    });
-                                }
-                            }).on('typeahead:selected', function (even, datum) {
-                                $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
-                            });
-                        </script>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                                       <label class="col-form-label">Vendedor</label>
+                                        <select id="vendedores" name="vendedores" class=" form-control"
+                                                onmouseover="llenarVendedores()">
+                                            <option id="0">Seleccionar</option>
+                                        </select>
 
-                    </div>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">fecha</label>
@@ -164,7 +135,7 @@
                 <div class="col-xs-1 col-sm-1 col-lg-1">
                     <label class="col-form-label">Buscar</label>
                     <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"
-                       onclick="productoIngresos()"><i
+                       onclick="vendedorPtoductosRuta()"><i
                                 class="fa fa-search-plus"></i></a>
                 </div>
             </div>
@@ -207,18 +178,6 @@
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                     style="width: 100%; min-width: 60px;text-align: center">
                                     Cantidad unidades vendidas
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending"
-                                    style="width: 100%; min-width: 100px; text-align: center">
-                                    Monto recaudado unidades
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Platform(s): activate to sort column ascending"
-                                    style="width: 100%; min-width: 100px; text-align: center">
-                                    Fecha
                                 </th>
                             </tr>
                             </thead>

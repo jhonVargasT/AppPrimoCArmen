@@ -288,7 +288,7 @@ class Pedido extends Model
             $fechaini = '';
 
         return DB::select('SELECT concat(persona.apellidos,\', \',persona.nombres) as usu,
-                                producto.nombre, sum(productopedido.cantidadPaquetes) as paque,sum(productopedido.cantidadUnidades) as uni,pedido.fechaPedido
+                                producto.nombre, sum(productopedido.cantidadPaquetes) as paque,sum(productopedido.cantidadUnidades) as uni, date(pedido.fechaPedido) fechaPedido
                                  FROM productopedido
                                 inner join 
                                 pedido on pedido.idPedido=productopedido.id_Pedido
