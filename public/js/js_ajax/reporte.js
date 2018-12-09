@@ -274,7 +274,6 @@ function htmlProductoIngresos() {
         '                                   name="id_producto" hidden\n' +
         '                            >\n' +
         '                            <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"\n' +
-        '                                   onkeypress="if(event.keyCode == 13) buscarProductoNombre()"\n' +
         '                                   name="nombre_producto"\n' +
         '                            >\n' +
         '                            <script>\n' +
@@ -389,7 +388,6 @@ function htmlProductoIngresos() {
 }
 
 
-
 function htmlProductoRuta() {
     var html = ' <div class="row form-group">\n' +
         '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
@@ -466,6 +464,7 @@ function htmlProductoRuta() {
         '            </div>'
     return html;
 }
+
 function htmlClienteIngresos() {
     var html = '  <div class="row form-group">\n' +
         '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
@@ -569,6 +568,10 @@ function productoIngresos() {
 
     "use strict";
     var id = $("#nombre_producto").val();
+    if (id)
+        id = $("#nombre_producto").val();
+    else
+        id = 0;
     var fechaini = convertiFecha($("#inicio").val());
     var fechafin = convertiFecha($("#final").val());
     var url = "/reporteProductoIngresos/" + id + "/" + fechaini + "/" + fechafin;
@@ -642,7 +645,7 @@ function clienteTotal() {
     "use strict";
     var fechaini = convertiFecha($("#inicio").val());
     var fechafin = convertiFecha($("#final").val());
-    var url = '/reporteClienteIngresos/'+fechaini+'/'+fechafin;
+    var url = '/reporteClienteIngresos/' + fechaini + '/' + fechafin;
     var sum = 0;
     $('#data-table-fixed-header').DataTable({
         language: {

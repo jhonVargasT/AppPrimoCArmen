@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class Devolucion extends Model
 {
     protected $primaryKey = 'iddevolucion';
-    protected $table = 'Devolucion';
+    protected $table = 'devolucion';
     public $timestamps = false;
 
     public static function obtenerDevolucion()
@@ -19,7 +19,7 @@ class Devolucion extends Model
     public static function obtenerDevolucionId($iddevolucion)
     {
         return static::select('*')
-            ->from('Devolucion as d')
+            ->from('devolucion as d')
             ->where('d.iddevolucion', $iddevolucion)
             ->get();
     }

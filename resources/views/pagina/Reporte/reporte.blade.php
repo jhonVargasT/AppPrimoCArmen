@@ -123,7 +123,6 @@
                            name="id_producto" hidden
                     >
                     <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
-                           onkeypress="if(event.keyCode == 13) buscarProductoNombre()"
                            name="nombre_producto"
                     >
                     <script>
