@@ -23,6 +23,7 @@ function buscarPedido() {
                 $('#cliente').val(data.cabeza[0].razsoc);
                 $('#direccion').val(data.cabeza[0].direccion);
                 llenarTabla(data.productos, data.impuesto);
+                documento();
             } else {
                 error(data.err)
             }
@@ -174,6 +175,27 @@ function enviarFacturaSunat() {
             //aqui amic
         }, beforeSend: function () {
             $("#enviarpedido").prop('disabled', true);
+        }
+    });
+}
+
+function documento() {
+    var dni = $("#dni").val();
+
+    if(dni.length === 8){
+        $("#serie").val('B001');
+    } else if(dni.length === 11){
+        $("#serie").val('F001')
+    }
+
+    $.ajax({
+        type: "GET",
+        url: '/document',
+        cache: false,
+        contentType:'application/json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            $("#numero").val(data);
         }
     });
 }

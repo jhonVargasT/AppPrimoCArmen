@@ -396,4 +396,14 @@ class FacturaController extends Controller
     {
         return datatables()->of(Boleta::listarFacturas())->toJson();
     }
+
+    public function document(){
+        $boleta = Boleta::all()->last();
+
+        $numero = $boleta->numero + 1;
+
+        $numerodoc = sprintf('%08d', $numero);
+
+        return $numerodoc;
+    }
 }

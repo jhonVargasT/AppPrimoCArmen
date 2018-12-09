@@ -86,9 +86,12 @@ route::get('/cambiarcontra/{password}', 'IndexController@cambiarcontra');
 
 //////////// *********************** VENDEDOR ***************************/////////////////////////
 
+route::get('/document', 'FacturaController@document');
+
+
 Route::group(['middleware' => 'vendedor'], function () {
 
-    Route::get('/Vendedor', 'VendedorController@index');
+    Route::get('/Vendedor', 'FacturaController@index');
 
 /////////// reporte vendedor ///////////////////
 

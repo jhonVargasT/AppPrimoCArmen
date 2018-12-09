@@ -107,11 +107,11 @@
                 </div>
                 <div class="col-xs-2 col-sm-2 col-lg-2">
                     <label class="col-form-label">SERIE</label>
-                    <input type="text" class="form-control " id="serie" name="serie" disabled/>
+                    <input type="text" class="form-control " id="serie" name="serie" readonly/>
                 </div>
                 <div class="col-xs-2 col-sm-2 col-lg-2">
                     <label class="col-form-label">NUMERO</label>
-                    <input type="text" class="form-control " id="numero" name="numero" disabled/>
+                    <input type="text" class="form-control " id="numero" name="numero" readonly/>
                 </div>
             </div>
             <br>
