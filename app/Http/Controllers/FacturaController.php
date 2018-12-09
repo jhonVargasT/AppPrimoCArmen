@@ -8,13 +8,13 @@ use App\NumeroALetras;
 use App\Pedido;
 use DOMDocument;
 use App\Producto;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use RobRichards\XMLSecLibs\XMLSecurityDSig;
 use RobRichards\XMLSecLibs\XMLSecurityKey;
 use vakata\database\Exception;
 use ZanySoft\Zip\Zip;
 use Illuminate\Support\Facades\File;
-use App\util;
 
 class FacturaController extends Controller
 {
@@ -57,11 +57,11 @@ class FacturaController extends Controller
 
     public function factura_xml($cabezafactura, $producto, $piefactura)
     {
-        dd($piefactura[0]);
+//        dd($cabezafactura,$piefactura );
         $invoice_line = array();
         $count = 1;
 
-        for($i =0; $i < count($producto); $i++){
+        for ($i = 0; $i < count($producto); $i++) {
             if ($producto[$i]->cantidadUnidades > 0) {
                 $cantidad = $producto[$i]->cantidadUnidades;
                 $precio = $producto[$i]->precioVentaUnidad * $cantidad;
@@ -164,7 +164,7 @@ class FacturaController extends Controller
                             <sac:AdditionalInformation>
                                <sac:AdditionalMonetaryTotal>
                                   <cbc:ID>1001</cbc:ID>
-                                  <cbc:PayableAmount currencyID="PEN">' . $piefactura[0]->costobruto . '</cbc:PayableAmount>
+                                  <cbc:PayableAmount currencyID="PEN">' . $piefactura[0]->costoBruto . '</cbc:PayableAmount>
                                </sac:AdditionalMonetaryTotal>
                                <sac:AdditionalMonetaryTotal>
                                   <cbc:ID>1002</cbc:ID>
@@ -270,16 +270,7 @@ class FacturaController extends Controller
         $exists = Storage::disk('xml')->exists($filename . '.xml');
 
         if ($exists == false) {
-
-            File::put(public_path('xml/' . $filename . '.xml'), $xml);
-
-            $this->firmar_documento($filename);
-
-            //$this->comprimir_factura($filename);
-
-            //$this->consumo_soap($filename);
-
-            $this->saveBoleta($cabezafactura);
+            $this->saveBoleta($cabezafactura, $piefactura, $filename, $xml);
         }
     }
 
@@ -330,7 +321,7 @@ class FacturaController extends Controller
     private function consumo_soap($filename)
     {
         $nombre_archivo = $filename . '.zip';
-        $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
+        $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';//RATA (URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
         $XMLString = '<?xml version="1.0" encoding="UTF-8"?>
         <soapenv:Envelope 
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -339,8 +330,8 @@ class FacturaController extends Controller
         <soapenv:Header>
         <wsse:Security>
         <wsse:UsernameToken>
-        <wsse:Username>20602872182MODDATOS</wsse:Username>
-        <wsse:Password>moddatos</wsse:Password>
+        <wsse:Username>20602872182MODDATOS</wsse:Username>//RATA
+        <wsse:Password>moddatos</wsse:Password>//RATA
         </wsse:UsernameToken>
         </wsse:Security>
         </soapenv:Header>
@@ -353,7 +344,6 @@ class FacturaController extends Controller
         </soapenv:Envelope>';
 
         $this->soapCall($wsdlURL, $callFunction = "sendBill", $XMLString, $filename);
-
     }
 
     function soapCall($wsdlURL, $callFunction = "", $XMLString, $filename)
@@ -395,7 +385,8 @@ class FacturaController extends Controller
         return datatables()->of(Boleta::listarFacturas())->toJson();
     }
 
-    public function document(){
+    public function document()
+    {
         $boleta = Boleta::all()->last();
 
         $numero = $boleta->numero + 1;
@@ -405,26 +396,37 @@ class FacturaController extends Controller
         return $numerodoc;
     }
 
-    public function saveBoleta($cabezafactura){
-
-        dd($cabezafactura);
-
+    private function saveBoleta($cabezafactura, $piefactura, $filename, $xml)
+    {
+        $pedido = Pedido::findOrFail($cabezafactura->idpedido);
         $boleta = new Boleta();
-        $boleta->idUsuario = '';
-        $boleta->nroBoleta = '';
-        $boleta->montoletras = '';
-        $boleta->vendedor = '';
-        $boleta->tipoVenta = '';
-        $boleta->dnioruc = '';
-        $boleta->clienterazonsocial = '';
-        $boleta->direccion = '';
-        $boleta->moneda = '';
-        $boleta->serie = '';
-        $boleta->numero = '';
-        $boleta->tipocomprobante = '';
-        $boleta->fechaEntrega = '';
-        $boleta->entregado = '';
-        $boleta->estado = '';
-        $boleta->id_Pedido = '';
+        $boleta->idUsuario = $pedido->idUsuario;
+        $boleta->nroBoleta = $cabezafactura->serie . '-' . $cabezafactura->numero;
+        $boleta->montoletras = NumeroALetras::convertir($piefactura[0]->totalPago);
+        $boleta->vendedor = $cabezafactura->vendedor;
+        $boleta->tipoVenta = $cabezafactura->tipventa;
+        $boleta->dnioruc = $cabezafactura->dni;
+        $boleta->clienterazonsocial = $cabezafactura->cliente;
+        $boleta->direccion = $cabezafactura->direccion;
+        $boleta->moneda = $cabezafactura->moneda;
+        $boleta->serie = $cabezafactura->serie;
+        $boleta->numero = $cabezafactura->numero;
+        $boleta->tipocomprobante = $cabezafactura->docum;
+        $boleta->fechaEntrega = $cabezafactura->fecha;
+        $boleta->entregado = 1;
+        $boleta->estado = 1;
+        $boleta->id_Pedido = $cabezafactura->idpedido;
+        DB::transaction(function () use ($boleta, $filename, $xml) {
+
+            File::put(public_path('xml/' . $filename . '.xml'), $xml);
+
+            $this->firmar_documento($filename);
+
+            $this->comprimir_factura($filename);
+
+            $boleta->save();
+
+            $this->consumo_soap($filename);
+        });
     }
 }
