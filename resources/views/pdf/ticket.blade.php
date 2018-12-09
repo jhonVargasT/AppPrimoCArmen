@@ -85,7 +85,7 @@
             <th colspan="1" align="left" valign="top">:</th>
             <th colspan="5" align="left" valign="top"> {{$pedido[0]->fechaimpre}}</th>
         </tr>
-        @if($pedido[0]->clie!=0)
+        @if($pedido[0]->clie!='0')
             <tr>
                 <th colspan="2" align="left" valign="top">CLIENTE</th>
                 <th colspan="1" align="left" valign="top">:</th>

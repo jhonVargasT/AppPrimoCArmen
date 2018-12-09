@@ -428,7 +428,7 @@ function vendedorIngresos() {
 function productoIngresos() {
 
     "use strict";
-    var id = convertiFecha($("#id_producto").val());
+    var id = $("#nombre_producto").val();
     var fechaini = convertiFecha($("#inicio").val());
     var fechafin = convertiFecha($("#final").val());
     var url = "/reporteProductoIngresos/" + id + "/" + fechaini + "/" + fechafin;

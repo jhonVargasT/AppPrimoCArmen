@@ -165,44 +165,44 @@ Route::group(['can:administrador,vendedor'], function () {
 
     Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
     Route::get('/listarPedidos/{val}', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
-});
 
-Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');
-Route::get('/ticket', 'ImpresionesController@ticketeraDirecta');
-Route::get('/factura/{id}', 'ImpresionesController@facturaEletronica');
-Route::get('/tienda','TiendaController@index');
 
-Route::get('/devolucion', 'DevolucionController@index');
-Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@obtenercomision');
-Route::get('/eliminardevolucion/{iddevolucion}', 'DevolucionController@eliminarDevolucion');
-Route::get('/devolver/{iddevolucion}', 'DevolucionController@entregarDevolucion');
-Route::get('/promocion','Promocioncontroller@index');
+    Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');
+    Route::get('/ticket', 'ImpresionesController@ticketeraDirecta');
+    Route::get('/factura/{id}', 'ImpresionesController@facturaEletronica');
+    Route::get('/tienda', 'TiendaController@index');
 
-Route::get('/devolucionespd/{id}', 'ImpresionesController@devoluciones');
+    Route::get('/devolucion', 'DevolucionController@index');
+    Route::get('/enviarDevolucion/{nombreProducto}/{cant}/{motivo}', 'DevolucionController@obtenercomision');
+    Route::get('/eliminardevolucion/{iddevolucion}', 'DevolucionController@eliminarDevolucion');
+    Route::get('/devolver/{iddevolucion}', 'DevolucionController@entregarDevolucion');
+    Route::get('/promocion', 'Promocioncontroller@index');
 
-Route::prefix('promocion')->group(function () {
-    Route::get('/create', 'Promocioncontroller@create');
-    Route::post('/store', 'Promocioncontroller@store');
-    //Route::get('/{id}', 'PersonaController@show');
-    Route::get('/{id}/edit', 'Promocioncontroller@edit');
-    Route::put('/{id}', 'Promocioncontroller@update');
-  //  Route::delete('/{id}', 'Promocioncontroller@actualizarPromocion');
-});
-Route::get('/eliminarpromocion/{id}', 'Promocioncontroller@actualizarPromocion');
-Route::get('/verpromocionproducto/{id}', 'Promocioncontroller@verPromocionProducto');
-Route::get('/listarproductopromocion/{val}', 'Promocioncontroller@listarProductoPromocion');
-Route::get('/verpromocionproducto/{id}/{estado}/{tipo}/{prod}/{prom}','Promocioncontroller@activarDesactivar');
-Route::get('/listarPromocionProducto/{id}', 'NuevoPedidoController@listarPromociones');
-Route::get('/facturas','FacturaController@index');
-Route::get('/nuevafactura','FacturaController@nuevaFactura');
-Route::get('/buscarfactura/{idpedido}','FacturaController@buscarFactura');
+    Route::get('/devolucionespd/{id}', 'ImpresionesController@devoluciones');
+
+    Route::prefix('promocion')->group(function () {
+        Route::get('/create', 'Promocioncontroller@create');
+        Route::post('/store', 'Promocioncontroller@store');
+        //Route::get('/{id}', 'PersonaController@show');
+        Route::get('/{id}/edit', 'Promocioncontroller@edit');
+        Route::put('/{id}', 'Promocioncontroller@update');
+        //  Route::delete('/{id}', 'Promocioncontroller@actualizarPromocion');
+    });
+    Route::get('/eliminarpromocion/{id}', 'Promocioncontroller@actualizarPromocion');
+    Route::get('/verpromocionproducto/{id}', 'Promocioncontroller@verPromocionProducto');
+    Route::get('/listarproductopromocion/{val}', 'Promocioncontroller@listarProductoPromocion');
+    Route::get('/verpromocionproducto/{id}/{estado}/{tipo}/{prod}/{prom}', 'Promocioncontroller@activarDesactivar');
+    Route::get('/listarPromocionProducto/{id}', 'NuevoPedidoController@listarPromociones');
+    Route::get('/facturas', 'FacturaController@index');
+    Route::get('/nuevafactura', 'FacturaController@nuevaFactura');
+    Route::get('/buscarfactura/{idpedido}', 'FacturaController@buscarFactura');
 
 /// Reportes
 /// ingresos por cliente
-Route::get('/reporteVendedorIngresos/{vendedor}/{fechaini}/{fechafin}','ReporteController@reporteClienteIngresos');
-Route::get('/obtenerVendedores','ReporteController@obtenerVendedores');
-Route::get('/reporteProductoIngresos/{producto}/{fechaini}/{fechafin}','ReporteController@reporteProductoIngresos');
-
+    Route::get('/reporteVendedorIngresos/{vendedor}/{fechaini}/{fechafin}', 'ReporteController@reporteClienteIngresos');
+    Route::get('/obtenerVendedores', 'ReporteController@obtenerVendedores');
+    Route::get('/reporteProductoIngresos/{producto}/{fechaini}/{fechafin}', 'ReporteController@reporteProductoIngresos');
+});
 /*
 Route::get('/compilar', function () {
     // Crear el objeto JasperPHP

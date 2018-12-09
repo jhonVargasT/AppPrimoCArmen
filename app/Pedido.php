@@ -231,7 +231,7 @@ class Pedido extends Model
         else
             $vendedor = '';
         if ($fechaini != 0)
-            $fechaini = ' and date(pedido.fechaEntrega) between "' . $fechaini . '" and "' . $fechafin.'"';
+            $fechaini = ' and date(pedido.fechaEntrega) between "' . $fechaini . '" and "' . $fechafin . '"';
         else
             $fechaini = '';
 
@@ -254,12 +254,12 @@ class Pedido extends Model
 
     public static function obetenerProductosIngresos($producto, $fechaini, $fechafin)
     {
-        if ($producto != 0)
-            $producto = 'and  producto.idProducto=' . $producto;
+        if ($producto != '0')
+            $producto = 'and  producto.nombre= "' . $producto . '"';
         else
             $producto = '';
         if ($fechaini != 0)
-            $fechaini = 'and date(pedido.fechaEntrega) between "'.$fechaini.'" and "'.$fechafin.'" ';
+            $fechaini = 'and date(pedido.fechaEntrega) between "' . $fechaini . '" and "' . $fechafin . '" ';
         else
             $fechaini = '';
 
@@ -271,7 +271,31 @@ class Pedido extends Model
                 FROM producto
                 join productopedido on productopedido.id_Producto=producto.idProducto
                 join pedido on pedido.idPedido=productopedido.id_Pedido
-                where pedido.estadoPedido=3 '.$producto.' '.$fechaini.'
+                where pedido.estadoPedido=3 ' . $producto . ' ' . $fechaini . '
                 group by producto.nombre,date(pedido.fechaEntrega)');
+    }
+
+
+    public static function obetenerProductosPedidos($idusuario, $fechaini, $fechafin)
+    {
+        if ($idusuario != '0')
+            $idusuario = ' and usuario.idUsuario=' . $idusuario;
+        else
+            $idusuario = '';
+        if ($fechaini != 0)
+            $fechaini = 'and date(pedido.fechaPedido) between "' . $fechaini . '" and "' . $fechafin . '" ';
+        else
+            $fechaini = '';
+
+        return DB::select('SELECT concat(persona.apellidos,\', \',persona.nombres) as usu,
+                                producto.nombre, sum(productopedido.cantidadPaquetes) as paque,sum(productopedido.cantidadUnidades) as uni,pedido.fechaPedido
+                                 FROM productopedido
+                                inner join 
+                                pedido on pedido.idPedido=productopedido.id_Pedido
+                                inner join usuario on usuario.idUsuario=pedido.idUsuario
+                                inner join producto on producto.idProducto=productopedido.id_Producto
+                                inner join persona on persona.idPersona = usuario.id_Persona
+                                 where pedido.estadoPedido ' . $idusuario . ' ' . $fechaini . '
+                                 group by producto.nombre,concat(persona.apellidos,\', \',persona.nombres)');
     }
 }
