@@ -287,7 +287,7 @@ class Pedido extends Model
         else
             $fechaini = '';
 
-        return DB::select('SELECT concat(persona.apellidos,\', \',persona.nombres) as usu,
+        return DB::select('SELECT usuario.idUsuario,concat(persona.apellidos,\', \',persona.nombres) as usu,
                                 producto.nombre, sum(productopedido.cantidadPaquetes) as paque,sum(productopedido.cantidadUnidades) as uni, date(pedido.fechaPedido) fechaPedido
                                  FROM productopedido
                                 inner join 
@@ -295,7 +295,7 @@ class Pedido extends Model
                                 inner join usuario on usuario.idUsuario=pedido.idUsuario
                                 inner join producto on producto.idProducto=productopedido.id_Producto
                                 inner join persona on persona.idPersona = usuario.id_Persona
-                                 where pedido.estadoPedido ' . $idusuario . ' ' . $fechaini . '
-                                 group by producto.nombre,concat(persona.apellidos,\', \',persona.nombres)');
+                                 where pedido.estadoPedido =1 '.$idusuario.' '.$fechaini.'
+                                 group by producto.nombre,date(pedido.fechaPedido)');
     }
 }

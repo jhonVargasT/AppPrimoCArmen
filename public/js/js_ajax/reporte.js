@@ -160,7 +160,7 @@ function cambiarTabla() {
             $('#data').html(htmlVendedorIngresos());
             break;
         case '3':
-            $('#data').html(html);
+            $('#data').html(htmlProductoRuta());
             break;
         case '4':
             $('#data').html(html);
@@ -266,10 +266,10 @@ function htmlVendedorIngresos() {
 
 function htmlProductoIngresos() {
     var html = '<div class="row form-group">\n' +
-        '                <div class="col-xs-6 col-sm-6 col-lg-6">\n' +
-        '                        <label class="col-md-4 col-sm-4 col-form-label" for="nombre_producto"> <strong> Nombre producto\n' +
+        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
+        '                        <label class="col-md-6 col-sm-6 col-form-label" for="nombre_producto"> <strong> Nombre producto\n' +
         '                            </strong></label>\n' +
-        '                        <div class="col-md-7 col-sm-7">\n' +
+        '                        <div class="col-md-6 col-sm-6">\n' +
         '                            <input type="text" class="form-control m-b-12 typeahead" id="id_producto"\n' +
         '                                   name="id_producto" hidden\n' +
         '                            >\n' +
@@ -384,6 +384,85 @@ function htmlProductoIngresos() {
         '                    </div>\n' +
         '                </div>\n' +
         '\n' +
+        '            </div>'
+    return html;
+}
+
+
+
+function htmlProductoRuta() {
+    var html = ' <div class="row form-group">\n' +
+        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
+        '                                       <label class="col-form-label">Vendedor</label>\n' +
+        '                                        <select id="vendedores" name="vendedores" class=" form-control"\n' +
+        '                                                onmouseover="llenarVendedores()">\n' +
+        '                                            <option id="0">Seleccionar</option>\n' +
+        '                                        </select>\n' +
+        '\n' +
+        '                </div>\n' +
+        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
+        '                    <label class="col-form-label">fecha</label>\n' +
+        '                    <div class="input-group input-daterange">\n' +
+        '                        <input type="text" class="form-control" name="inicio" id="inicio"\n' +
+        '                               placeholder="Fecha inicio">\n' +
+        '                        <span class="input-group-addon">a</span>\n' +
+        '                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '                <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+        '                    <label class="col-form-label">Buscar </label>\n' +
+        '                    <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+        '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
+        '                       onclick="vendedorPtoductosRuta()"><i\n' +
+        '                                class="fa fa-search-plus"></i></a>\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
+        '            </div>\n' +
+        '            <br>\n' +
+        '            <br>\n' +
+        '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
+        '                <div class="row">\n' +
+        '                    <div class="col-sm-12">\n' +
+        '                        <table id="data-table-fixed-header"\n' +
+        '                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"\n' +
+        '                               role="grid"\n' +
+        '                               aria-describedby="data-table-fixed-header_info"  style="width: 100%; min-width: 100%">\n' +
+        '                            <tbody>\n' +
+        '                            </tbody>\n' +
+        '                            <thead>\n' +
+        '                            <tr role="row">\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width: 200px;text-align: center">Usuario\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width:  100%;text-align: center">Nombre producto\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width:  100%;text-align: center">\n' +
+        '                                    Cant paquetes\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width:  100%;text-align: center">\n' +
+        '                                    Can unidades\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width:  120px;text-align: center">\n' +
+        '                                    Fecha Entrega\n' +
+        '                                </th>\n' +
+        '                            </tr>\n' +
+        '                            </thead>\n' +
+        '                        </table>\n' +
+        '                    </div>\n' +
+        '                </div>\n' +
         '            </div>'
     return html;
 }

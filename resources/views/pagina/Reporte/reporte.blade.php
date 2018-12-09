@@ -114,77 +114,7 @@
         <br>
         <div id="data">
 
-            <div class="row form-group">
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                                       <label class="col-form-label">Vendedor</label>
-                                        <select id="vendedores" name="vendedores" class=" form-control"
-                                                onmouseover="llenarVendedores()">
-                                            <option id="0">Seleccionar</option>
-                                        </select>
 
-                </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <label class="col-form-label">fecha</label>
-                    <div class="input-group input-daterange">
-                        <input type="text" class="form-control" name="inicio" id="inicio"
-                               placeholder="Fecha inicio">
-                        <span class="input-group-addon">a</span>
-                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">
-                    </div>
-                </div>
-                <div class="col-xs-1 col-sm-1 col-lg-1">
-                    <label class="col-form-label">Buscar</label>
-                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"
-                       onclick="vendedorPtoductosRuta()"><i
-                                class="fa fa-search-plus"></i></a>
-                </div>
-            </div>
-            <br>
-            <br>
-            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <table id="data-table-fixed-header"
-                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
-                               role="grid"
-                               aria-describedby="data-table-fixed-header_info">
-                            <tbody>
-                            </tbody>
-                            <thead>
-                            <tr role="row">
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 20%; min-width: 100px;text-align: center">Id producto
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%; min-width: 300px;text-align: center">Nombre
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%; min-width: 100px;text-align: center">
-                                    Cantidad paquete vendidas
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1"
-                                    aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%; min-width: 100px;text-align: center">
-                                    Monto recaudado paquete
-                                </th>
-                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                    rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 100%; min-width: 60px;text-align: center">
-                                    Cantidad unidades vendidas
-                                </th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
 
     </div>
