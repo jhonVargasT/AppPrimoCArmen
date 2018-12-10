@@ -162,29 +162,61 @@ function enviarFacturaSunat() {
 
     var datos = {cabezafactura: cabezafactura, productos: productos, piefactura: piefactura};
     var arr = JSON.stringify(datos);
+    swal({
+        title: 'Esta seguro?',
+        text: "La factura se remitira a la sunat!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, enviar!"
+    }).then(function (result) {
+        if (result.value) {
 
+            var url = "/enviarfactura/" + arr;
+            $.ajax({
+                type: "GET",
+                url: url,
+                cache: false,
+                dataType: 'json',
+                data: '_token = <?php echo csrf_token() ?>',
+                success: function (data) {
+                    if (data.error === 1) {
+                        redirect('facturas');
+                        ok(data.mensaje);
+                    } else {
+                        redirect('facturas');
+                        error(data.mensaje);
+                    }
 
-    var url = "/enviarfactura/" + arr;
-    $.ajax({
-        type: "GET",
-        url: url,
-        cache: false,
-        dataType: 'json',
-        data: '_token = <?php echo csrf_token() ?>',
-        success: function (data) {
-            //aqui amic
-        }, beforeSend: function () {
-            $("#enviarpedido").prop('disabled', true);
+                }, beforeSend: function () {
+                    $("#enviarpedido").prop('disabled', true);
+                }
+            });
         }
+    })
+
+}
+
+function ok(mensaje) {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 5000
     });
+    toast({
+        type: 'success',
+        title: mensaje
+    })
 }
 
 function documento() {
     var dni = $("#dni").val();
 
-    if(dni.length === 8){
+    if (dni.length === 8) {
         $("#serie").val('B001');
-    } else if(dni.length === 11){
+    } else if (dni.length === 11) {
         $("#serie").val('F001')
     }
 
@@ -192,10 +224,21 @@ function documento() {
         type: "GET",
         url: '/document',
         cache: false,
-        contentType:'application/json',
+        contentType: 'application/json',
         data: '_token = <?php echo csrf_token() ?>',
         success: function (data) {
             $("#numero").val(data);
+        }
+    });
+}
+
+function redirect(ruta) {
+    $.ajax({
+        type: "GET",
+        url: "/" + ruta,
+        dataType: "html",
+        success: function (data) {
+            $("#response").html(data);
         }
     });
 }

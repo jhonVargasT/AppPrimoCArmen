@@ -48,10 +48,12 @@ class FacturaController extends Controller
     public function enviarFactura($factura)
     {
         try {
+            $nro=null;
             $factura = json_decode($factura);
-            $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
+            $nro= $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
+            return response()->json(array('error' => 1, 'mensaje' => 'factura nro '.$nro));
         } catch (Exception $e) {
-            return $e;
+            return response()->json(array('error' => 0, 'mensaje' => $e));
         }
     }
 
@@ -268,16 +270,18 @@ class FacturaController extends Controller
         $filename = '20602872182-01-' . $cabezafactura->serie . '-' . $cabezafactura->numero;
 
         $exists = Storage::disk('xml')->exists($filename . '.xml');
-
+        $nro=null;
         if ($exists == false) {
-            $this->saveBoleta($cabezafactura, $piefactura, $filename, $xml);
+            $nro=$this->saveBoleta($cabezafactura, $piefactura, $filename, $xml);//aca
         }
+
+        return $nro;
     }
 
     public function firmar_documento($filename)
     {
         $doc = new DOMDocument();
-        $doc->load(public_path().'/xml/' . $filename . '.xml');
+        $doc->load(public_path() . '/xml/' . $filename . '.xml');
         // Crear un nuevo objeto de seguridad
         $objDSig = new XMLSecurityDSig();
         // Utilizar la canonización exclusiva de c14n
@@ -296,26 +300,26 @@ class FacturaController extends Controller
         $objKey->passphrase = 'DqhikNMrcy5wEysR';
 
         //Cargamos la clave privada
-        $objKey->loadKey(public_path().'/certificado/private.pem', TRUE);
+        $objKey->loadKey(public_path() . '/certificado/private.pem', TRUE);
         $objDSig->sign($objKey);
         // Agregue la clave pública asociada a la firma
-        $objDSig->add509Cert(file_get_contents(public_path().'/certificado/public.pem'), true, false, array('subjectName' => true));
+        $objDSig->add509Cert(file_get_contents(public_path() . '/certificado/public.pem'), true, false, array('subjectName' => true));
         // Anexar la firma al XML
         $objDSig->appendSignature($doc->getElementsByTagName('ExtensionContent')->item(1));
 
         // Guardar el XML firmado
-        $doc->save(public_path().'/xml/' . $filename . '.xml');
+        $doc->save(public_path() . '/xml/' . $filename . '.xml');
     }
 
     private function comprimir_factura($filename)
     {
         $zip = Zip::create($filename . '.zip');
 
-        $zip->add(public_path().'./xml/' . $filename . '.xml');
+        $zip->add(public_path() . './xml/' . $filename . '.xml');
 
         $zip->close();
 
-        rename(public_path().'/' . $filename . '.zip', '../public/zip/' . $filename . '.zip');
+        rename(public_path() . '/' . $filename . '.zip', '../public/zip/' . $filename . '.zip');
     }
 
     private function consumo_soap($filename)
@@ -339,7 +343,7 @@ class FacturaController extends Controller
         <soapenv:Body>
         <ser:sendBill>
         <fileName>' . $nombre_archivo . '</fileName>
-        <contentFile>' . base64_encode(file_get_contents(public_path().'/zip/' . $filename . '.zip')) . '</contentFile>
+        <contentFile>' . base64_encode(file_get_contents(public_path() . '/zip/' . $filename . '.zip')) . '</contentFile>
         </ser:sendBill>
         </soapenv:Body>
         </soapenv:Envelope>';
@@ -360,11 +364,11 @@ class FacturaController extends Controller
     function descargar_cdr($result, $filename)
     {
         $repuesta = null;
-        $archivo = fopen(public_path().'/xml/' . 'C' . $filename . '.xml', 'w+');
+        $archivo = fopen(public_path() . '/xml/' . 'C' . $filename . '.xml', 'w+');
         fputs($archivo, $result);
         fclose($archivo);
         //LEEMOS EL ARCHIVO XML
-        $xml = simplexml_load_file(public_path().'/xml/' . 'C' . $filename . '.xml');
+        $xml = simplexml_load_file(public_path() . '/xml/' . 'C' . $filename . '.xml');
 
         foreach ($xml->xpath('//applicationResponse') as $response) {
             $repuesta = $response;
@@ -372,13 +376,13 @@ class FacturaController extends Controller
 
         //AQUI DESCARGAMOS EL ARCHIVO CDR(CONSTANCIA DE RECEPCIÓN)
         $cdr = base64_decode($repuesta);
-        $archivo = fopen(public_path().'/xml/' . 'R-' . $filename . '.zip', 'w+');
+        $archivo = fopen(public_path() . '/xml/' . 'R-' . $filename . '.zip', 'w+');
         fputs($archivo, $cdr);
         fclose($archivo);
-        chmod(public_path().'/xml/' . 'R-' . $filename . '.zip', 0777);
+        chmod(public_path() . '/xml/' . 'R-' . $filename . '.zip', 0777);
 
         //Eliminamos el Archivo Response
-        unlink(public_path().'/xml/' . 'C' . $filename . '.xml');
+        unlink(public_path() . '/xml/' . 'C' . $filename . '.xml');
     }
 
     public function listarFacturas()
@@ -399,35 +403,40 @@ class FacturaController extends Controller
 
     private function saveBoleta($cabezafactura, $piefactura, $filename, $xml)
     {
-        $pedido = Pedido::findOrFail($cabezafactura->idpedido);
-        $boleta = new Boleta();
-        $boleta->idUsuario = $pedido->idUsuario;
-        $boleta->nroBoleta = $cabezafactura->serie . '-' . $cabezafactura->numero;
-        $boleta->montoletras = NumeroALetras::convertir($piefactura[0]->totalPago);
-        $boleta->vendedor = $cabezafactura->vendedor;
-        $boleta->tipoVenta = $cabezafactura->tipventa;
-        $boleta->dnioruc = $cabezafactura->dni;
-        $boleta->clienterazonsocial = $cabezafactura->cliente;
-        $boleta->direccion = $cabezafactura->direccion;
-        $boleta->moneda = $cabezafactura->moneda;
-        $boleta->serie = $cabezafactura->serie;
-        $boleta->numero = $cabezafactura->numero;
-        $boleta->tipocomprobante = $cabezafactura->docum;
-        $boleta->fechaEntrega = $cabezafactura->fecha;
-        $boleta->entregado = 1;
-        $boleta->estado = 1;
-        $boleta->id_Pedido = $cabezafactura->idpedido;
-        DB::transaction(function () use ($boleta, $filename, $xml) {
+        try {
+            $pedido = Pedido::findOrFail($cabezafactura->idpedido);
+            $boleta = new Boleta();
+            $boleta->idUsuario = $pedido->idUsuario;
+            $boleta->nroBoleta = $cabezafactura->serie . '-' . $cabezafactura->numero;
+            $boleta->montoletras = NumeroALetras::convertir($piefactura[0]->totalPago);
+            $boleta->vendedor = $cabezafactura->vendedor;
+            $boleta->tipoVenta = $cabezafactura->tipventa;
+            $boleta->dnioruc = $cabezafactura->dni;
+            $boleta->clienterazonsocial = $cabezafactura->cliente;
+            $boleta->direccion = $cabezafactura->direccion;
+            $boleta->moneda = $cabezafactura->moneda;
+            $boleta->serie = $cabezafactura->serie;
+            $boleta->numero = $cabezafactura->numero;
+            $boleta->tipocomprobante = $cabezafactura->docum;
+            $boleta->fechaEntrega = $cabezafactura->fecha;
+            $boleta->entregado = 1;
+            $boleta->estado = 1;
+            $boleta->id_Pedido = $cabezafactura->idpedido;
+            DB::transaction(function () use ($boleta, $filename, $xml) {
 
-            File::put(public_path('xml/' . $filename . '.xml'), $xml);
+                File::put(public_path('xml/' . $filename . '.xml'), $xml);
 
-            $this->firmar_documento($filename);
+                $this->firmar_documento($filename);
 
-            $this->comprimir_factura($filename);
+                $this->comprimir_factura($filename);
 
-            $boleta->save();
+                $boleta->save();
 
-            $this->consumo_soap($filename);
-        });
+                $this->consumo_soap($filename);
+            });
+            return $boleta->nroBoleta;;
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 }
