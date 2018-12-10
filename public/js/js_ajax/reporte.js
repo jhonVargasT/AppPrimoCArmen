@@ -151,53 +151,59 @@ function cambiarTabla() {
     console.log(dato);
     html = $("#data").html();
     html = '';
+    boton = $("#boton").html();
+    boton = '';
+    $('#data').html(html);
+    $("#boton").html(boton);
+    $('#nombreproductodiv').attr('hidden', true);
+    $('#vendedordiv').attr('hidden', true);
     switch (dato) {
         case '1':
-            $('#data').html(html);
+            boton = '<div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+                '                    <label class="col-form-label">Buscar</label>\n' +
+                '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
+                '                       onclick="productoIngresos()"><i\n' +
+                '                                class="fa fa-search-plus"></i></a>\n' +
+                '                </div>';
+            $('#boton').html(boton);
             $('#data').html(htmlProductoIngresos());
             break;
         case '2':
+            boton = '<div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+                '                    <label class="col-form-label">Buscar</label>\n' +
+                '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
+                '                       onclick="vendedorIngresos()"><i\n' +
+                '                                class="fa fa-search-plus"></i></a>\n' +
+                '                </div>';
+            $('#boton').html(boton);
             $('#data').html(htmlVendedorIngresos());
             break;
         case '3':
+            boton = '<div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+                '                    <label class="col-form-label">Buscar</label>\n' +
+                '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
+                '                       onclick="vendedorPtoductosRuta()"><i\n' +
+                '                                class="fa fa-search-plus"></i></a>\n' +
+                '                </div>';
+            $('#boton').html(boton);
             $('#data').html(htmlProductoRuta());
             break;
         case '4':
+            boton = '<div class="col-xs-1 col-sm-1 col-lg-1">\n' +
+                '                    <label class="col-form-label">Buscar</label>\n' +
+                '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
+                '                       onclick="clienteTotal()"><i\n' +
+                '                                class="fa fa-search-plus"></i></a>\n' +
+                '                </div>';
+            $('#boton').html(boton);
             $('#data').html(htmlClienteIngresos());
             break;
     }
 }
 
 function htmlVendedorIngresos() {
-    var html = ' <div class="row form-group">\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                    <label class="col-form-label">Vendedor</label>\n' +
-        '                    <select id="vendedores" name="vendedores" class=" form-control"\n' +
-        '                            onmouseover="llenarVendedores()">\n' +
-        '                        <option id="0">Seleccionar</option>\n' +
-        '                    </select>\n' +
-        '\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                    <label class="col-form-label">fecha</label>\n' +
-        '                    <div class="input-group input-daterange">\n' +
-        '                        <input type="text" class="form-control" name="inicio" id="inicio"\n' +
-        '                               placeholder="Fecha inicio">\n' +
-        '                        <span class="input-group-addon">a</span>\n' +
-        '                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">\n' +
-        '                    </div>\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
-        '                    <label class="col-form-label">Buscar</label>\n' +
-        '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
-        '                       onclick="vendedorIngresos()"><i\n' +
-        '                                class="fa fa-search-plus"></i></a>\n' +
-        '                </div>\n' +
-        '\n' +
-        '            </div>\n' +
-        '            <br>\n' +
-        '            <br>\n' +
-        '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
+    $('#vendedordiv').removeAttr('hidden');
+    var html = '   <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
         '                    <div class="col-sm-12">\n' +
         '                        <table id="data-table-fixed-header"\n' +
@@ -265,68 +271,8 @@ function htmlVendedorIngresos() {
 }
 
 function htmlProductoIngresos() {
-    var html = '<div class="row form-group">\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                        <label class="col-md-6 col-sm-6 col-form-label" for="nombre_producto"> <strong> Nombre producto\n' +
-        '                            </strong></label>\n' +
-        '                        <div class="col-md-6 col-sm-6">\n' +
-        '                            <input type="text" class="form-control m-b-12 typeahead" id="id_producto"\n' +
-        '                                   name="id_producto" hidden\n' +
-        '                            >\n' +
-        '                            <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"\n' +
-        '                                   name="nombre_producto"\n' +
-        '                            >\n' +
-        '                            <script>\n' +
-        '                                $(\'#nombre_producto\').typeahead({\n' +
-        '                                    name: \'data\',\n' +
-        '                                    displayKey: \'name\',\n' +
-        '                                    source: function (query, process) {\n' +
-        '                                        $.ajax({\n' +
-        '                                            url: "/buscarnombre",\n' +
-        '                                            type: \'GET\',\n' +
-        '                                            data: \'query=\' + query,\n' +
-        '                                            dataType: \'JSON\',\n' +
-        '                                            async: \'false\',\n' +
-        '                                            success: function (data) {\n' +
-        '                                                bondObjs = {};\n' +
-        '                                                bondNames = [];\n' +
-        '                                                $.each(data, function (i, item) {\n' +
-        '                                                    bondNames.push({id: item.idProducto, name: item.nombre});\n' +
-        '                                                    bondObjs[item.id] = item.idProducto;\n' +
-        '                                                    bondObjs[item.name] = item.nombre;\n' +
-        '                                                });\n' +
-        '                                                process(bondNames);\n' +
-        '                                            }\n' +
-        '                                        });\n' +
-        '                                    }\n' +
-        '                                }).on(\'typeahead:selected\', function (even, datum) {\n' +
-        '                                    $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT\n' +
-        '                                });\n' +
-        '                            </script>\n' +
-        '\n' +
-        '                        </div>\n' +
-        '\n' +
-        '\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                    <label class="col-form-label">fecha</label>\n' +
-        '                    <div class="input-group input-daterange">\n' +
-        '                        <input type="text" class="form-control" name="inicio" id="inicio"\n' +
-        '                               placeholder="Fecha inicio">\n' +
-        '                        <span class="input-group-addon">a</span>\n' +
-        '                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">\n' +
-        '                    </div>\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
-        '                    <label class="col-form-label">Buscar</label>\n' +
-        '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
-        '                       onclick="productoIngresos()"><i\n' +
-        '                                class="fa fa-search-plus"></i></a>\n' +
-        '                </div>\n' +
-        '\n' +
-        '            </div>\n' +
-        '            <br>\n' +
-        '            <br>\n' +
+    $('#nombreproductodiv').removeAttr('hidden');
+    var html =
         '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
         '                    <div class="col-sm-12">\n' +
@@ -389,36 +335,8 @@ function htmlProductoIngresos() {
 
 
 function htmlProductoRuta() {
-    var html = ' <div class="row form-group">\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                                       <label class="col-form-label">Vendedor</label>\n' +
-        '                                        <select id="vendedores" name="vendedores" class=" form-control"\n' +
-        '                                                onmouseover="llenarVendedores()">\n' +
-        '                                            <option id="0">Seleccionar</option>\n' +
-        '                                        </select>\n' +
-        '\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                    <label class="col-form-label">fecha</label>\n' +
-        '                    <div class="input-group input-daterange">\n' +
-        '                        <input type="text" class="form-control" name="inicio" id="inicio"\n' +
-        '                               placeholder="Fecha inicio">\n' +
-        '                        <span class="input-group-addon">a</span>\n' +
-        '                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">\n' +
-        '                    </div>\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
-        '                    <label class="col-form-label">Buscar </label>\n' +
-        '                    <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
-        '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
-        '                       onclick="vendedorPtoductosRuta()"><i\n' +
-        '                                class="fa fa-search-plus"></i></a>\n' +
-        '                    </div>\n' +
-        '                </div>\n' +
-        '            </div>\n' +
-        '            <br>\n' +
-        '            <br>\n' +
-        '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
+    $('#vendedordiv').removeAttr('hidden');
+    var html = '     <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
         '                    <div class="col-sm-12">\n' +
         '                        <table id="data-table-fixed-header"\n' +
@@ -466,26 +384,7 @@ function htmlProductoRuta() {
 }
 
 function htmlClienteIngresos() {
-    var html = '  <div class="row form-group">\n' +
-        '                <div class="col-xs-4 col-sm-4 col-lg-4">\n' +
-        '                    <label class="col-form-label">fecha</label>\n' +
-        '                    <div class="input-group input-daterange">\n' +
-        '                        <input type="text" class="form-control" name="inicio" id="inicio"\n' +
-        '                               placeholder="Fecha inicio">\n' +
-        '                        <span class="input-group-addon">a</span>\n' +
-        '                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">\n' +
-        '                    </div>\n' +
-        '                </div>\n' +
-        '                <div class="col-xs-1 col-sm-1 col-lg-1">\n' +
-        '                    <label class="col-form-label">Buscar</label>\n' +
-        '                    <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"\n' +
-        '                       onclick="clienteTotal()"><i\n' +
-        '                                class="fa fa-search-plus"></i></a>\n' +
-        '                </div>\n' +
-        '            </div>\n' +
-        '            <br>\n' +
-        '            <br>\n' +
-        '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
+    var html = '  <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
         '                    <div class="col-sm-12">\n' +
         '                        <table id="data-table-fixed-header"\n' +

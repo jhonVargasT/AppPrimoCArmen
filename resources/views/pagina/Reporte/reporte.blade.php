@@ -112,57 +112,65 @@
         </div>
         <br>
         <br>
-        <div id="data">
 
 
-            <div class="row form-group">
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <label class=" col-form-label" for="nombre_producto"> <strong> Nombre producto
-                        </strong></label>
-                    <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
-                           name="id_producto" hidden
-                    >
-                    <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
-                           name="nombre_producto"
-                    >
-                    <script>
-                        $('#nombre_producto').typeahead({
-                            name: 'data',
-                            displayKey: 'name',
-                            source: function (query, process) {
-                                $.ajax({
-                                    url: "/buscarnombre",
-                                    type: 'GET',
-                                    data: 'query=' + query,
-                                    dataType: 'JSON',
-                                    async: 'false',
-                                    success: function (data) {
-                                        bondObjs = {};
-                                        bondNames = [];
-                                        $.each(data, function (i, item) {
-                                            bondNames.push({id: item.idProducto, name: item.nombre});
-                                            bondObjs[item.id] = item.idProducto;
-                                            bondObjs[item.name] = item.nombre;
-                                        });
+        <div class="row form-group">
+            <div class="col-xs-4 col-sm-4 col-lg-4" id="vendedordiv" hidden>
+                <label class="col-form-label">Vendedor</label>
+                <select id="vendedores" name="vendedores" class=" form-control"
+                        onmouseover="llenarVendedores()">
+                    <option id="0">Seleccionar</option>
+                </select>
 
-                                        process(bondNames);
-                                    }
-                                });
-                            }
-                        }).on('typeahead:selected', function (even, datum) {
-                            $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
-                        });
-                    </script>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-lg-4" id="nombreproductodiv">
+                <label class=" col-form-label" for="nombre_producto"> <strong> Nombre producto
+                    </strong></label>
+                <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
+                       name="id_producto" hidden
+                >
+                <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
+                       name="nombre_producto"
+                >
+                <script>
+                    $('#nombre_producto').typeahead({
+                        name: 'data',
+                        displayKey: 'name',
+                        source: function (query, process) {
+                            $.ajax({
+                                url: "/buscarnombre",
+                                type: 'GET',
+                                data: 'query=' + query,
+                                dataType: 'JSON',
+                                async: 'false',
+                                success: function (data) {
+                                    bondObjs = {};
+                                    bondNames = [];
+                                    $.each(data, function (i, item) {
+                                        bondNames.push({id: item.idProducto, name: item.nombre});
+                                        bondObjs[item.id] = item.idProducto;
+                                        bondObjs[item.name] = item.nombre;
+                                    });
+
+                                    process(bondNames);
+                                }
+                            });
+                        }
+                    }).on('typeahead:selected', function (even, datum) {
+                        $("#id_producto").val(bondObjs[datum.id]);//IMPRIMIR EL ID DEL RESULTADO SELECCIONADO EN UN INPUT
+                    });
+                </script>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-lg-4">
+                <label class="col-form-label">fecha</label>
+                <div class="input-group input-daterange">
+                    <input type="text" class="form-control" name="inicio" id="inicio"
+                           placeholder="Fecha inicio">
+                    <span class="input-group-addon">a</span>
+                    <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">
                 </div>
-                <div class="col-xs-4 col-sm-4 col-lg-4">
-                    <label class="col-form-label">fecha</label>
-                    <div class="input-group input-daterange">
-                        <input type="text" class="form-control" name="inicio" id="inicio"
-                               placeholder="Fecha inicio">
-                        <span class="input-group-addon">a</span>
-                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin">
-                    </div>
-                </div>
+            </div>
+            <div id="boton">
                 <div class="col-xs-1 col-sm-1 col-lg-1">
                     <label class="col-form-label">Buscar</label>
                     <a href="javascript:;" class="btn btn-large btn-icon  btn-success" title="buscar"
@@ -170,8 +178,10 @@
                                 class="fa fa-search-plus"></i></a>
                 </div>
             </div>
-            <br>
-            <br>
+        </div>
+        <br>
+        <br>
+        <div id="data">
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
                     <div class="col-sm-12">
@@ -230,9 +240,9 @@
             </div>
         </div>
 
-        </div>
-
     </div>
+
+</div>
 
 </div>
 <script>

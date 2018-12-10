@@ -313,13 +313,11 @@ class FacturaController extends Controller
 
     private function comprimir_factura($filename)
     {
-        $zip = Zip::create($filename . '.zip');
+        $zip = Zip::create(public_path() .'/zip/' . $filename . '.zip');
 
-        $zip->add(public_path() . './xml/' . $filename . '.xml');
+        $zip->add(public_path() . '/xml/' . $filename . '.xml');
 
         $zip->close();
-
-        rename(public_path() . '/' . $filename . '.zip', '../public/zip/' . $filename . '.zip');
     }
 
     private function consumo_soap($filename)
