@@ -320,8 +320,9 @@ class FacturaController extends Controller
 
     private function consumo_soap($filename)
     {
+        //RATA (URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
         $nombre_archivo = $filename . '.zip';
-        $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';//RATA (URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
+        $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
         $XMLString = '<?xml version="1.0" encoding="UTF-8"?>
         <soapenv:Envelope 
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
