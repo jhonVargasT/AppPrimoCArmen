@@ -39,9 +39,9 @@ function pedido(id) {
                 $('#dni').val(data.cabeza[0].dni);
                 $('#cliente').val(data.cabeza[0].razsoc);
                 $('#direccion').val(data.cabeza[0].direccion);
-                if(data.cabeza[0].dni.length === 8){
+                if (data.cabeza[0].dni.length === 8) {
                     $("#docum").val('BOLETA');
-                } else if(data.cabeza[0].dni.length === 11){
+                } else if (data.cabeza[0].dni.length === 11) {
                     $("#docum").val('FACTURA');
                 }
                 llenarTabla(data.productos, data.impuesto);
@@ -259,12 +259,14 @@ function documento() {
     if (dni.length === 8) {
         $("#serie").val('B001');
     } else if (dni.length === 11) {
-        $("#serie").val('F001')
+        $("#serie").val('F001');
     }
+
+    var serie = $("#serie").val();
 
     $.ajax({
         type: "GET",
-        url: '/document',
+        url: '/document/'+ serie,
         cache: false,
         contentType: 'application/json',
         data: '_token = <?php echo csrf_token() ?>',

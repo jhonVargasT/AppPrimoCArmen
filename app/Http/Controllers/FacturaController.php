@@ -15,6 +15,8 @@ use RobRichards\XMLSecLibs\XMLSecurityKey;
 use vakata\database\Exception;
 use ZanySoft\Zip\Zip;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
+
 
 class FacturaController extends Controller
 {
@@ -610,9 +612,9 @@ class FacturaController extends Controller
         return datatables()->of(Boleta::listarFacturas())->toJson();
     }
 
-    public function document()
+    public function document($serie)
     {
-        $boleta = Boleta::all()->last();
+        $boleta = Boleta::where('serie', '=', $serie)->get()->last();
 
         if ($boleta) {
             $numero = $boleta->numero + 1;
@@ -659,6 +661,7 @@ class FacturaController extends Controller
             $boleta->entregado = 1;
             $boleta->estado = 1;
             $boleta->id_Pedido = $cabezafactura->idpedido;
+            $boleta->documento = $cabezafactura->docum;
             DB::transaction(function () use ($boleta, $filename, $xml) {
 
                 File::put(public_path('xml/' . $filename . '.xml'), $xml);
@@ -671,7 +674,7 @@ class FacturaController extends Controller
 
                 $this->consumo_soap($filename);
             });
-            return $boleta->nroBoleta;;
+            return $boleta->nroBoleta;
         } catch (Exception $e) {
             return $e;
         }
