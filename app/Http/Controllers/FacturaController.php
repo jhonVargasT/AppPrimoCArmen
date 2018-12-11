@@ -48,10 +48,15 @@ class FacturaController extends Controller
     public function enviarFactura($factura)
     {
         try {
-            $nro=null;
+            $nro = null;
             $factura = json_decode($factura);
-            $nro= $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
-            return response()->json(array('error' => 1, 'mensaje' => 'factura nro '.$nro));
+            if($factura->cabezafactura->docum == 'FACTURA'){
+                $nro = $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
+            } elseif($factura->cabezafactura->docum == 'BOLETA'){
+                $nro = $this->boleta_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
+            }
+
+            return response()->json(array('error' => 1, 'mensaje' => 'factura nro ' . $nro));
         } catch (Exception $e) {
             return response()->json(array('error' => 0, 'mensaje' => $e));
         }
@@ -59,7 +64,6 @@ class FacturaController extends Controller
 
     public function factura_xml($cabezafactura, $producto, $piefactura)
     {
-//        dd($cabezafactura,$piefactura );
         $invoice_line = array();
         $count = 1;
 
@@ -266,13 +270,231 @@ class FacturaController extends Controller
         }
 
         $xml .= '</Invoice>';
-
         $filename = '20602872182-01-' . $cabezafactura->serie . '-' . $cabezafactura->numero;
+        $exists = Storage::disk('xml')->exists($filename . '.xml');
+        $nro = null;
+        if ($exists == false) {
+            $nro = $this->saveBoleta($cabezafactura, $piefactura, $filename, $xml);//aca
+        }
+
+        return $nro;
+    }
+
+    public function boleta_xml($cabezafactura, $producto, $piefactura)
+    {
+        $invoice_line = array();
+        $count = 1;
+
+        for ($i = 0; $i < count($producto); $i++) {
+            if ($producto[$i]->cantidadUnidades > 0) {
+                $cantidad = $producto[$i]->cantidadUnidades;
+                $precio = $producto[$i]->precioVentaUnidad * $cantidad;
+                $invoice_line[$count] = '
+                                   <cac:InvoiceLine>
+                                      <cbc:ID>' . $count . '</cbc:ID>
+                                      <cbc:InvoicedQuantity unitCode="NIU">' . number_format((float)$cantidad, 2, '.', '') . '</cbc:InvoicedQuantity>
+                                      <cbc:LineExtensionAmount currencyID="PEN">' . number_format((float)$precio, 2, '.', '') . '</cbc:LineExtensionAmount>
+                                      <cac:PricingReference>
+                                            <cac:AlternativeConditionPrice>
+                                                 <cbc:PriceAmount currencyID="PEN">0.00</cbc:PriceAmount>
+                                                <cbc:PriceTypeCode>01</cbc:PriceTypeCode>
+                                            </cac:AlternativeConditionPrice>
+                                      </cac:PricingReference>
+                                       <cac:AllowanceCharge>
+                                          <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                                          <cbc:Amount currencyID="PEN">0.00</cbc:Amount>
+                                      </cac:AllowanceCharge>
+                                      <cac:TaxTotal>
+                                         <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                         <cac:TaxSubtotal>
+                                            <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                            <cbc:Percent>18.0</cbc:Percent>
+                                            <cac:TaxCategory>
+                                               <cbc:TaxExemptionReasonCode>10</cbc:TaxExemptionReasonCode>
+                                               <cbc:TierRange>00</cbc:TierRange>
+                                               <cac:TaxScheme>
+                                                  <cbc:ID>1000</cbc:ID>
+                                                  <cbc:Name>IGV</cbc:Name>
+                                                  <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+                                               </cac:TaxScheme>
+                                            </cac:TaxCategory>
+                                         </cac:TaxSubtotal>
+                                      </cac:TaxTotal>
+                                      <cac:Item>
+                                         <cbc:Description>' . $producto[$i]->nombre . '</cbc:Description>
+                                         <cac:SellersItemIdentification>
+                                            <cbc:ID>' . $producto[$i]->id . '</cbc:ID>
+                                         </cac:SellersItemIdentification>
+                                      </cac:Item>
+                                      <cac:Price>
+                                         <cbc:PriceAmount currencyID="PEN">' . number_format((float)$producto[$i]->precioVentaUnidad, 2, '.', '') . '</cbc:PriceAmount>
+                                      </cac:Price>
+                                   </cac:InvoiceLine>';
+                $count++;
+            } elseif ($producto[$i]->cantidadPaquetes > 0) {
+                $cantidad = $producto[$i]->cantidadPaquetes;
+                $precio = $producto[$i]->precioVentapaque * $cantidad;
+
+                $invoice_line[$count] = '
+                                   <cac:InvoiceLine>
+                                      <cbc:ID>' . $count . '</cbc:ID>
+                                      <cbc:InvoicedQuantity unitCode="NIU">' . number_format((float)$cantidad, 2, '.', '') . '</cbc:InvoicedQuantity>
+                                      <cbc:LineExtensionAmount currencyID="PEN">' . number_format((float)$precio, 2, '.', '') . '</cbc:LineExtensionAmount>
+                                      <cac:PricingReference>
+                                            <cac:AlternativeConditionPrice>
+                                                 <cbc:PriceAmount currencyID="PEN">0.00</cbc:PriceAmount>
+                                                <cbc:PriceTypeCode>01</cbc:PriceTypeCode>
+                                            </cac:AlternativeConditionPrice>
+                                      </cac:PricingReference>
+                                      <cac:AllowanceCharge>
+                                          <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
+                                          <cbc:Amount currencyID="PEN">0.00</cbc:Amount>
+                                      </cac:AllowanceCharge>
+                                      <cac:TaxTotal>
+                                         <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                         <cac:TaxSubtotal>
+                                            <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
+                                            <cbc:Percent>18.0</cbc:Percent>
+                                            <cac:TaxCategory>
+                                               <cbc:TaxExemptionReasonCode>10</cbc:TaxExemptionReasonCode>
+                                               <cbc:TierRange>00</cbc:TierRange>
+                                               <cac:TaxScheme>
+                                                  <cbc:ID>1000</cbc:ID>
+                                                  <cbc:Name>IGV</cbc:Name>
+                                                  <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+                                               </cac:TaxScheme>
+                                            </cac:TaxCategory>
+                                         </cac:TaxSubtotal>
+                                      </cac:TaxTotal>
+                                      <cac:Item>
+                                         <cbc:Description>' . $producto[$i]->nombre . '</cbc:Description>
+                                         <cac:SellersItemIdentification>
+                                            <cbc:ID>' . $producto[$i]->id . '</cbc:ID>
+                                         </cac:SellersItemIdentification>
+                                      </cac:Item>
+                                      <cac:Price>
+                                         <cbc:PriceAmount currencyID="PEN">' . number_format((float)$producto[$i]->precioVentapaque, 2, '.', '') . '</cbc:PriceAmount>
+                                      </cac:Price>
+                                   </cac:InvoiceLine>';
+                $count++;
+            }
+        }
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>
+                <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                   <ext:UBLExtensions>
+                      <ext:UBLExtension>
+                         <ext:ExtensionContent>
+                            <sac:AdditionalInformation>
+                               <sac:AdditionalMonetaryTotal>
+                                  <cbc:ID>1001</cbc:ID>
+                                  <cbc:PayableAmount currencyID="PEN">' . $piefactura[0]->costoBruto . '</cbc:PayableAmount>
+                               </sac:AdditionalMonetaryTotal>
+                               <sac:AdditionalMonetaryTotal>
+                                  <cbc:ID>1002</cbc:ID>
+                                  <cbc:PayableAmount currencyID="PEN">0.00</cbc:PayableAmount>
+                               </sac:AdditionalMonetaryTotal>
+                               <sac:AdditionalMonetaryTotal>
+                                  <cbc:ID>1004</cbc:ID>
+                                  <cbc:PayableAmount currencyID="PEN">0.00</cbc:PayableAmount>
+                               </sac:AdditionalMonetaryTotal>
+                               <sac:AdditionalMonetaryTotal>
+                                  <cbc:ID>2005</cbc:ID>
+                                  <cbc:PayableAmount currencyID="PEN">0.00</cbc:PayableAmount>
+                               </sac:AdditionalMonetaryTotal>
+                               <sac:AdditionalProperty>
+                                  <cbc:ID>1000</cbc:ID>
+                                  <cbc:Value>' . NumeroALetras::convertir($piefactura[0]->totalPago) . '</cbc:Value>
+                               </sac:AdditionalProperty>
+                            </sac:AdditionalInformation>
+                         </ext:ExtensionContent>
+                      </ext:UBLExtension>
+                      <ext:UBLExtension>
+                      <ext:ExtensionContent></ext:ExtensionContent>
+                   </ext:UBLExtension>
+                   </ext:UBLExtensions>
+                   <cbc:UBLVersionID>2.0</cbc:UBLVersionID>
+                   <cbc:CustomizationID>1.0</cbc:CustomizationID>
+                   <cbc:ID>' . $cabezafactura->serie . '-' . $cabezafactura->numero . '</cbc:ID>
+                   <cbc:IssueDate>' . $cabezafactura->fecha . '</cbc:IssueDate>
+                   <cbc:InvoiceTypeCode>03</cbc:InvoiceTypeCode>
+                   <cbc:DocumentCurrencyCode>PEN</cbc:DocumentCurrencyCode>
+                   <cac:Signature>
+                      <cbc:ID>SF' . $cabezafactura->serie . '-' . $cabezafactura->numero . '</cbc:ID>
+                      <cac:SignatoryParty>
+                         <cac:PartyIdentification>
+                            <cbc:ID>20602872182</cbc:ID>
+                         </cac:PartyIdentification>
+                         <cac:PartyName>
+                            <cbc:Name>ARPEMAR S.A.C.</cbc:Name>
+                         </cac:PartyName>
+                      </cac:SignatoryParty>
+                      <cac:DigitalSignatureAttachment>
+                         <cac:ExternalReference>
+                            <cbc:URI>SF#' . $cabezafactura->serie . '-' . $cabezafactura->numero . '</cbc:URI>
+                         </cac:ExternalReference>
+                      </cac:DigitalSignatureAttachment>
+                   </cac:Signature>
+                   <cac:AccountingSupplierParty>
+                      <cbc:CustomerAssignedAccountID>20602872182</cbc:CustomerAssignedAccountID>
+                      <cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
+                      <cac:Party>
+                          <cac:PostalAddress>
+                              <cbc:ID>150106</cbc:ID>
+                              <cbc:StreetName>PARCELA 32B ASC. FUNDO SANTO TOMAS</cbc:StreetName>
+                              <cbc:CitySubdivisionName>San Juan de Lurigancho</cbc:CitySubdivisionName>
+                              <cbc:CityName>LIMA</cbc:CityName>
+                              <cbc:CountrySubentity></cbc:CountrySubentity>
+                              <cbc:District>Carabayllo</cbc:District>
+                              <cac:Country>
+                                <cbc:IdentificationCode>PE</cbc:IdentificationCode>
+                              </cac:Country>
+                          </cac:PostalAddress>
+                          <cac:PartyLegalEntity>
+                          <cbc:RegistrationName>ARPEMAR S.A.C.</cbc:RegistrationName>
+                          </cac:PartyLegalEntity>
+                      </cac:Party>
+                   </cac:AccountingSupplierParty>
+                   <cac:AccountingCustomerParty>
+                      <cbc:CustomerAssignedAccountID>' . $cabezafactura->dni . '</cbc:CustomerAssignedAccountID>
+                      <cbc:AdditionalAccountID>1</cbc:AdditionalAccountID>
+                      <cac:Party>
+                         <cac:PartyLegalEntity>
+                            <cbc:RegistrationName>' . $cabezafactura->cliente . '</cbc:RegistrationName>
+                            <cac:RegistrationAddress>
+                                <cbc:StreetName>' . $cabezafactura->direccion . '</cbc:StreetName>
+                            </cac:RegistrationAddress>
+                         </cac:PartyLegalEntity>
+                      </cac:Party>
+                   </cac:AccountingCustomerParty>
+                   <cac:TaxTotal>
+                      <cbc:TaxAmount currencyID="PEN">' . number_format((float)($piefactura[0]->impuesto), 2, '.', '') . '</cbc:TaxAmount>
+                      <cac:TaxSubtotal>
+                         <cbc:TaxAmount currencyID="PEN">' . number_format((float)($piefactura[0]->impuesto), 2, '.', '') . '</cbc:TaxAmount>
+                         <cac:TaxCategory>
+                            <cac:TaxScheme>
+                               <cbc:ID>1000</cbc:ID>
+                               <cbc:Name>IGV</cbc:Name>
+                               <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+                            </cac:TaxScheme>
+                         </cac:TaxCategory>
+                      </cac:TaxSubtotal>
+                   </cac:TaxTotal>
+                   <cac:LegalMonetaryTotal>
+                      <cbc:PayableAmount currencyID="PEN">' . number_format((float)$piefactura[0]->totalPago, 2, '.', '') . '</cbc:PayableAmount>
+                   </cac:LegalMonetaryTotal>';
+        for ($i = 1; $i <= count($invoice_line); $i++) {
+            $xml .= $invoice_line[$i];
+        }
+
+        $xml .= '</Invoice>';
+
+        $filename = '20602872182-03-' . $cabezafactura->serie . '-' . $cabezafactura->numero;
 
         $exists = Storage::disk('xml')->exists($filename . '.xml');
-        $nro=null;
+        $nro = null;
         if ($exists == false) {
-            $nro=$this->saveBoleta($cabezafactura, $piefactura, $filename, $xml);//aca
+            $nro = $this->saveBoleta($cabezafactura, $piefactura, $filename, $xml);//aca
         }
 
         return $nro;
@@ -313,7 +535,7 @@ class FacturaController extends Controller
 
     private function comprimir_factura($filename)
     {
-        $zip = Zip::create(public_path() .'/zip/' . $filename . '.zip');
+        $zip = Zip::create(public_path() . '/zip/' . $filename . '.zip');
 
         $zip->add(public_path() . '/xml/' . $filename . '.xml');
 
@@ -392,7 +614,7 @@ class FacturaController extends Controller
     {
         $boleta = Boleta::all()->last();
 
-        if($boleta){
+        if ($boleta) {
             $numero = $boleta->numero + 1;
         } else {
             $numero = 1;
@@ -403,12 +625,13 @@ class FacturaController extends Controller
         return $numerodoc;
     }
 
-    public function buscarboletapedido($id){
+    public function buscarboletapedido($id)
+    {
         $boleta = Boleta::where('id_Pedido', '=', $id)->first();
 
-        if($boleta){
+        if ($boleta) {
             $r['respuesta'] = 'El pedido se encuentra registrado';
-        } else{
+        } else {
             $r['respuesta'] = 'ok';
         }
 

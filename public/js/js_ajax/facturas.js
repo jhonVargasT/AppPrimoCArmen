@@ -39,6 +39,11 @@ function pedido(id) {
                 $('#dni').val(data.cabeza[0].dni);
                 $('#cliente').val(data.cabeza[0].razsoc);
                 $('#direccion').val(data.cabeza[0].direccion);
+                if(data.cabeza[0].dni.length === 8){
+                    $("#docum").val('BOLETA');
+                } else if(data.cabeza[0].dni.length === 11){
+                    $("#docum").val('FACTURA');
+                }
                 llenarTabla(data.productos, data.impuesto);
                 documento();
             } else {
