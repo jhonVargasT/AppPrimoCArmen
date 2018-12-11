@@ -6,6 +6,23 @@ var piefactura = [];
 
 function buscarPedido() {
     var id = $('#idpedido').val();
+    buscarboletapedido(id);
+}
+
+function cleanall() {
+    $('#fecha').val('');
+    $('#vendedor').val('');
+    $('#dni').val('');
+    $('#cliente').val('');
+    $('#tipventa').val('');
+    $('#moneda').val('');
+    $('#docum').val('');
+    $('#serie').val('');
+    $('#numero').val('');
+    $('#data-table-fixed-header tbody').empty();
+}
+
+function pedido(id) {
     var url = "/buscarfactura/" + id;
     $.ajax({
         type: "GET",
@@ -30,6 +47,26 @@ function buscarPedido() {
         },
         beforeSend: function () {
             $("#guardar").prop('disabled', true);
+        }
+    });
+}
+
+function buscarboletapedido(id) {
+    $.ajax({
+        type: "GET",
+        url: "/buscarboletapedido/" + id,
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.respuesta === 'ok') {
+                $("#enviarpedido").prop('disabled', false);
+                $("#respuesta").val(data.respuesta);
+                pedido(id);
+            } else {
+                $("#enviarpedido").prop('disabled', true);
+                $("#respuesta").val(data.respuesta);
+                error(data.respuesta)
+                cleanall();
+            }
         }
     });
 }

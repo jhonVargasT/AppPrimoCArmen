@@ -65,6 +65,7 @@
                             </div>
                         </a>
                     </div>
+                    <input type="hidden" id="respuesta">
                 </div>
             </div>
             <div class="row form-group">

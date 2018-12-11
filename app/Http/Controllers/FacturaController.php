@@ -392,11 +392,27 @@ class FacturaController extends Controller
     {
         $boleta = Boleta::all()->last();
 
-        $numero = $boleta->numero + 1;
+        if($boleta){
+            $numero = $boleta->numero + 1;
+        } else {
+            $numero = 1;
+        }
 
         $numerodoc = sprintf('%08d', $numero);
 
         return $numerodoc;
+    }
+
+    public function buscarboletapedido($id){
+        $boleta = Boleta::where('id_Pedido', '=', $id)->first();
+
+        if($boleta){
+            $r['respuesta'] = 'El pedido se encuentra registrado';
+        } else{
+            $r['respuesta'] = 'ok';
+        }
+
+        return $r;
     }
 
     private function saveBoleta($cabezafactura, $piefactura, $filename, $xml)
