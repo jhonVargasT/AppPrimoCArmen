@@ -7,6 +7,7 @@ var piefactura = [];
 function buscarPedido() {
     var id = $('#idpedido').val();
     buscarboletapedido(id);
+    $("#docum").prop('disabled', false);
 }
 
 function cleanall() {
@@ -36,16 +37,10 @@ function pedido(id) {
                 ok('Pedido encontrado');
                 $('#fecha').val(data.cabeza[0].fecha);
                 $('#vendedor').val(data.cabeza[0].usu);
-                $('#dni').val(data.cabeza[0].dni);
                 $('#cliente').val(data.cabeza[0].razsoc);
                 $('#direccion').val(data.cabeza[0].direccion);
-                if (data.cabeza[0].dni.length === 8) {
-                    $("#docum").val('BOLETA');
-                } else if (data.cabeza[0].dni.length === 11) {
-                    $("#docum").val('FACTURA');
-                }
+                $("#docum").prop('disabled', false);
                 llenarTabla(data.productos, data.impuesto);
-                documento();
             } else {
                 error(data.err)
             }
@@ -69,7 +64,7 @@ function buscarboletapedido(id) {
             } else {
                 $("#enviarpedido").prop('disabled', true);
                 $("#respuesta").val(data.respuesta);
-                error(data.respuesta)
+                error(data.respuesta);
                 cleanall();
             }
         }
@@ -283,6 +278,37 @@ function redirect(ruta) {
         dataType: "html",
         success: function (data) {
             $("#response").html(data);
+        }
+    });
+}
+
+function dnioruc(value) {
+    var id = $("#idpedido").val();
+    var url = "/buscarusuario/" + id;
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        contentType: 'application/json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if(value === 'FACTURA'){
+                if(data.ruc){
+                    $("#dni").val(data.ruc);
+                    documento();
+                } else{
+                    $("#docum").val('BOLETA').change();
+                    error('No posee RUC');
+                }
+            } else if(value === 'BOLETA'){
+                if(data.dni){
+                    $("#dni").val(data.dni);
+                    documento();
+                } else{
+                    $("#docum").val('FACTURA').change();
+                    error('No posee DNI');
+                }
+            }
         }
     });
 }

@@ -6,6 +6,7 @@ use App\boleta;
 use App\feedSoap;
 use App\NumeroALetras;
 use App\Pedido;
+use App\Persona;
 use DOMDocument;
 use App\Producto;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +46,13 @@ class FacturaController extends Controller
         } catch (Exception $e) {
             return response()->json(array('error' => 0, 'err' => $e));
         }
+    }
+
+    public function buscarusuario($idpedido){
+        $pedido = Pedido::findOrFail($idpedido);
+        $persona = Persona::findOrFail($pedido->idPersona);
+
+        return $persona;
     }
 
     public function enviarFactura($factura)
@@ -546,7 +554,8 @@ class FacturaController extends Controller
 
     private function consumo_soap($filename)
     {
-        //RATA (URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
+        //(URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
+        //$wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
         $nombre_archivo = $filename . '.zip';
         $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
         $XMLString = '<?xml version="1.0" encoding="UTF-8"?>
@@ -557,8 +566,8 @@ class FacturaController extends Controller
         <soapenv:Header>
         <wsse:Security>
         <wsse:UsernameToken>
-        <wsse:Username>20602872182MODDATOS</wsse:Username>//RATA
-        <wsse:Password>moddatos</wsse:Password>//RATA
+        <wsse:Username>20602872182arisjrq5</wsse:Username>
+        <wsse:Password>arisrojas</wsse:Password>
         </wsse:UsernameToken>
         </wsse:Security>
         </soapenv:Header>

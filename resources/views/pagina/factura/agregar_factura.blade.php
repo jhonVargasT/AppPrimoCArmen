@@ -86,7 +86,7 @@
             <div class="row form-group">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">DNI/RUC</label>
-                    <input type="text" class="form-control " id="dni" name="dni"/>
+                    <input type="text" class="form-control " id="dni" name="dni" readonly/>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">CLIENTE/RAZON SOCIAL</label>
@@ -104,7 +104,11 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">DOCUMENTO</label>
-                    <input type="text" class="form-control" value="FACTURA" id="docum" name="docum" disabled/>
+                    <select name="docum" id="docum" class="form-control" onchange="dnioruc(this.value)" disabled>
+                        <option value="null" disabled selected>SELECCIONAR</option>
+                        <option value="BOLETA">BOLETA</option>
+                        <option value="FACTURA">FACTURA</option>
+                    </select>
                 </div>
                 <div class="col-xs-2 col-sm-2 col-lg-2">
                     <label class="col-form-label">SERIE</label>
