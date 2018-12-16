@@ -253,7 +253,7 @@
 
 
                                         <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-sm-3 col-form-label text-md-right" for="email">Tipo
+                                            <label class="col-md-3 col-sm-3 col-form-label text-md-right" for="tipousuario">Tipo
                                                 de usuario
                                                 :</label>
                                             <div class="col-md-6 col-sm-6">

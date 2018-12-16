@@ -6,6 +6,7 @@ use App\boleta;
 use App\feedSoap;
 use App\NumeroALetras;
 use App\Pedido;
+use App\Persona;
 use DOMDocument;
 use App\Producto;
 use Illuminate\Support\Facades\DB;
@@ -47,18 +48,28 @@ class FacturaController extends Controller
         }
     }
 
+    public function buscarusuario($idpedido)
+    {
+        $pedido = Pedido::findOrFail($idpedido);
+        $persona = Persona::findOrFail($pedido->idPersona);
+
+        return $persona;
+    }
+
     public function enviarFactura($factura)
     {
         try {
             $nro = null;
             $factura = json_decode($factura);
-            if($factura->cabezafactura->docum == 'FACTURA'){
+
+
+            if ($factura->cabezafactura->docum == 'FACTURA') {
                 $nro = $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
-            } elseif($factura->cabezafactura->docum == 'BOLETA'){
+            } elseif ($factura->cabezafactura->docum == 'BOLETA') {
                 $nro = $this->boleta_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
             }
-
-            return response()->json(array('error' => 1, 'mensaje' => 'factura nro ' . $nro));
+            $cabeza = $factura->cabezafactura;
+            return response()->json(array('error' => 1, 'mensaje' => 'factura nro ' . $nro, 'id' => $cabeza->idpedido));
         } catch (Exception $e) {
             return response()->json(array('error' => 0, 'mensaje' => $e));
         }
@@ -546,7 +557,8 @@ class FacturaController extends Controller
 
     private function consumo_soap($filename)
     {
-        //RATA (URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
+        //(URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
+        //$wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
         $nombre_archivo = $filename . '.zip';
         $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
         $XMLString = '<?xml version="1.0" encoding="UTF-8"?>
@@ -557,8 +569,8 @@ class FacturaController extends Controller
         <soapenv:Header>
         <wsse:Security>
         <wsse:UsernameToken>
-        <wsse:Username>20602872182MODDATOS</wsse:Username>//RATA
-        <wsse:Password>moddatos</wsse:Password>//RATA
+        <wsse:Username>20602872182arisjrq5</wsse:Username>
+        <wsse:Password>arisrojas</wsse:Password>
         </wsse:UsernameToken>
         </wsse:Security>
         </soapenv:Header>

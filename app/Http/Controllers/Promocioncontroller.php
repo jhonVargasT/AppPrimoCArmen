@@ -79,6 +79,7 @@ class Promocioncontroller extends Controller
             $promocion->nombre = strtoupper($request->nombre);
             $promocion->descripcion = strtoupper($request->descripcion);
             $promocion->descuento = $request->podesc;
+            $promocion->activo=1;
             $promocion->fechaCreacion = util::fecha();
             $promocion->fechaVigencia = date('Y-m-d H:i:s', strtotime($request->fechaFina));;
             DB::transaction(function () use ($promocion) {

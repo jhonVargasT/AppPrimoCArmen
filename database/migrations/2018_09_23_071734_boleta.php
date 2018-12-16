@@ -25,10 +25,10 @@ class Boleta extends Migration
             $table->string('clienterazonsocial')->nullable();
             $table->string('direccion')->nullable();
             $table->string('moneda')->nullable();
-            $table->integer('documento')->nullable();
-            $table->integer('serie')->nullable();
-            $table->integer('numero')->nullable();
-            $table->integer('tipocomprobante')->nullable();
+            $table->string('documento')->nullable();
+            $table->string('serie')->nullable();
+            $table->string('numero')->nullable();
+            $table->string('tipocomprobante')->nullable();
             $table->dateTime('fechaEntrega')->nullable();
             $table->integer('entregado')->default('1');
             $table->integer('estado')->default('1');

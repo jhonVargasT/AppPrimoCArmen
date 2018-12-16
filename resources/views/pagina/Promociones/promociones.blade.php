@@ -147,10 +147,10 @@
                 {
                     data: function (row) {
                         if (row.activo === '1') {
-                            return '<label class="text-success">SI</label>';
+                            return '<a><label class="text-success">SI</label></a>';
                         }
                         else {
-                            return '<label class="text-danger">NO</label>';
+                            return '<a><label class="text-danger">NO</label>';
                         }
                     }
                 },

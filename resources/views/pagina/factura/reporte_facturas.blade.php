@@ -27,8 +27,8 @@
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 
 <div id="response">
-    <h1 class="page-header">Clientes
-        <small>Aqui puedo agregar clientes, eliminarlos o editarlos...</small>
+    <h1 class="page-header">Factura/Boleta
+        <small>Aqui puedo agregar Facturas o boletas</small>
     </h1>
     <!-- final cabecera -->
 
@@ -43,14 +43,14 @@
                 <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i
                             class="fa fa-minus"></i></a>
             </div>
-            <h4 class="panel-title">Reporte facturas</h4>
+            <h4 class="panel-title">Reporte facturas/boletas</h4>
         </div>
         <div class="panel-body">
             <div class=" row col-sm-12 col-xs-12 col-md-12" align="center">
 
                 <a href="/nuevafactura" data-toggle="ajax" class="btn btn-success"><i
                             class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
-                    Nueva factura
+                    Nueva factura/boleta
                 </a>
             </div>
             <br>
@@ -132,6 +132,12 @@
                                         rowspan="1" colspan="1"
                                         aria-label="CSS grade: activate to sort column ascending"
                                         style="width: 100%; min-width: 40px;text-align: center">
+                                        Tipo Doc
+                                    </th>
+                                    <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
+                                        rowspan="1" colspan="1"
+                                        aria-label="CSS grade: activate to sort column ascending"
+                                        style="width: 100%; min-width: 40px;text-align: center">
                                         Opciones
                                     </th>
                                 </tr>
@@ -171,21 +177,22 @@
                 {data: 'clienterazonsocial', name: 'clienterazonsocial'},
                 {data: 'direccion', name: 'direccion'},
                 {data: 'fechaEntrega', name: 'fechaEntrega'},
-                   {data: 'vendedor', name: 'vendedor'},
-                   {data: 'pedidoentreg', name: 'pedidoentreg'},
-                   {data: 'costoBruto', name: 'costoBruto'},
-                   {data: 'impuesto', name: 'impuesto'},
-                   {data: 'totalPago', name: 'totalPago'},
-                   {
-                       data: function (row) {
-                           if (row.entregado === '1') {
-                               return '<th">' +
-                                   '<a href="/factura/' + row.idPedido + '" class="btn btn-link"  title="Imprimir factura electronica" >' +
-                                   '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>'
-                               '</th> ';
-                           }
-                       }
-                   }
+                {data: 'vendedor', name: 'vendedor'},
+                {data: 'pedidoentreg', name: 'pedidoentreg'},
+                {data: 'costoBruto', name: 'costoBruto'},
+                {data: 'impuesto', name: 'impuesto'},
+                {data: 'totalPago', name: 'totalPago'},
+                {data: 'documento', name: 'documento'},
+                {
+                    data: function (row) {
+                        if (row.entregado === '1') {
+                            return '<th">' +
+                                '<a href="/factura/' + row.idPedido + '" class="btn btn-link"  title="Imprimir factura electronica" >' +
+                                '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>'
+                            '</th> ';
+                        }
+                    }
+                }
             ]
         });
     });

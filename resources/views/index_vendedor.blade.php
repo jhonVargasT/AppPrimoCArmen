@@ -110,6 +110,12 @@
                     </a>
                 </li>
                 <li class="has-sub">
+                    <a href="/facturas" data-toggle="ajax">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-calculator"></i>
+                        <span>Facturas/Boletas</span>
+                    </a>
+                </li>
+                <li class="has-sub">
                     <a href="/devolucion" data-toggle="ajax">
 
                         <i class="fas fa-lg fa-fw m-r-10 fa-history"></i>

@@ -86,7 +86,7 @@
             <div class="row form-group">
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">DNI/RUC</label>
-                    <input type="text" class="form-control " id="dni" name="dni"/>
+                    <input type="text" class="form-control " id="dni" name="dni" onchange="cambiarDniORuc()"/>
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">CLIENTE/RAZON SOCIAL</label>
@@ -104,7 +104,11 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">DOCUMENTO</label>
-                    <input type="text" class="form-control" value="FACTURA" id="docum" name="docum" disabled/>
+                    <select name="docum" id="docum" class="form-control" onclick="dnioruc(this.value)" disabled>
+                        <option value="null" disabled selected>SELECCIONAR</option>
+                        <option value="BOLETA">BOLETA</option>
+                        <option value="FACTURA">FACTURA</option>
+                    </select>
                 </div>
                 <div class="col-xs-2 col-sm-2 col-lg-2">
                     <label class="col-form-label">SERIE</label>
@@ -160,12 +164,15 @@
             <br>
             <div class="col-md-12" align="center" id="opc">
 
-                <a href="/facturas"  class="btn btn-danger" data-toggle="ajax">
+                <a href="/facturas" class="btn btn-danger" data-toggle="ajax">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
                 <button href="javascript:;" class="btn btn-success " id="enviarpedido" onclick="enviarFacturaSunat()">
                     <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
                 </button>
+            </div>
+            <div class="col-md-12" align="center" id="impirmir">
+
             </div>
         </div>
 

@@ -77,7 +77,7 @@
         </tr>
 
         <tr>
-            <th colspan="8" align="center" valign="top" class="todo">FACTURA NRO : {{$cabezaPedido[0]->nroboleta}}</th>
+            <th colspan="8" align="center" valign="top" class="todo">{{$cabezaPedido[0]->documento}} NRO : {{$cabezaPedido[0]->nroboleta}}</th>
         </tr>
         <tr>
             <th colspan="2" align="left" valign="top">FECHA</th>

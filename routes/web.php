@@ -88,7 +88,6 @@ route::get('/cambiarcontra/{password}', 'IndexController@cambiarcontra');
 
 route::get('/document/{serie}', 'FacturaController@document');
 
-
 Route::group(['middleware' => 'vendedor'], function () {
 
     Route::get('/Vendedor', 'FacturaController@index');
@@ -200,6 +199,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/nuevafactura', 'FacturaController@nuevaFactura');
     Route::get('/buscarfactura/{idpedido}', 'FacturaController@buscarFactura');
     Route::get('/buscarboletapedido/{idpedido}', 'FacturaController@buscarboletapedido');
+    Route::get('/buscarusuario/{idpedido}', 'FacturaController@buscarusuario');
 
 /// Reportes
 /// ingresos por cliente
