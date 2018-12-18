@@ -1,34 +1,8 @@
+
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/parsley/src/parsley.css" rel="stylesheet"/>
-<!-- ================== END PAGE LEVEL STYLE ================== -->
-<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/jquery-smart-wizard/src/css/smart_wizard.css" rel="stylesheet"/>
-<link href="../assets/plugins/parsley/src/parsley.css" rel="stylesheet"/>
-<link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet"/>
-<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet"/>
-<link href="../assets/plugins/ionRangeSlider/css/ion.rangeSlider.css" rel="stylesheet"/>
-<link href="../assets/plugins/ionRangeSlider/css/ion.rangeSlider.skinNice.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/password-indicator/css/password-indicator.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-combobox/css/bootstrap-combobox.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet"/>
-<link href="../assets/plugins/jquery-tag-it/css/jquery.tagit.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
-      rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-colorpalette/css/bootstrap-colorpalette.css" rel="stylesheet"/>
-<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-fontawesome.css" rel="stylesheet"/>
-<link href="../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker-glyphicons.css" rel="stylesheet"/>
 
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
-
 <script src="{{ asset('js/js_ajax/facturas.js') }}"></script>
 
 <!-- ================== END PAGE LEVEL STYLE ================== -->
@@ -183,40 +157,7 @@
 <script>
     App.setPageTitle('Agregar productos | ARPEMAR SAC');
     App.restartGlobalFunction();
-    $.when(
-        $.getScript('../assets/plugins/parsley/dist/parsley.js'),
-        $.getScript('../assets/plugins/jquery-smart-wizard/src/js/jquery.smartWizard.js'),
-        $.getScript('../assets/js/demo/form-wizards-validation.demo.min.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        FormWizardValidation.init();
-    });
 
-    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
-            $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
-            $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
-            $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),
-            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js'),
-            $.getScript('../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'),
-            $.getScript('../assets/plugins/clipboard/clipboard.min.js'),
-            <!---->
-            $.getScript('../assets/plugins/parsley/dist/parsley.js'),
-            $.getScript('../assets/plugins/highlight/highlight.common.js'),
-            $.getScript('../assets/js/demo/render.highlight.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
-                FormPlugins.init();
-            });
-        });
-    });
 </script>
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 

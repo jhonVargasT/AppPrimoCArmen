@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -22,7 +22,7 @@
     <link href="{{asset('assets/css/default/style-responsive.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/default/theme/default.css')}}" rel="stylesheet" id="theme"/>
     <!-- ================== END BASE CSS STYLE ================== -->
-    <link rel="shortcut icon" href="../assets/img/logo/icono-arper.jpg">
+    <link rel="shortcut icon" href="{{asset('/assets/img/logo/icono-arper.jpg')}}">
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{{asset('assets/plugins/jquery-jvectormap/jquery-jvectormap.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
@@ -34,11 +34,6 @@
     <script src="{{ asset('js/js_ajax/sesiones.js') }}"></script>
 
     <!-- ================== END BASE JS ================== -->
-
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="Last-Modified" content="0">
-    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
-    <meta http-equiv="Pragma" content="no-cache">
 
 </head>
 <body>
@@ -52,7 +47,7 @@
     <div id="header" class="header navbar-default">
         <!-- begin navbar-header -->
         <div class="navbar-header">
-            <a class="navbar-brand"><img  src="../assets/img/logo/icono-arper.jpg" width="40px" height="40px"> <b>ARPEMAR</b> SAC</a>
+            <a class="navbar-brand"><img  src="../assets/img/logo/icono-arper.jpg" width="40px" height="40px"> <b>ARPEMAR</b> SAC </a>
             <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -64,11 +59,9 @@
         <!-- begin header-nav -->
         <ul class="navbar-nav navbar-right">
 
-
             <li class="dropdown navbar-user">
-
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                   VENDEDOR :
+                    VENDEDOR :
                     <img src="{{asset('assets/img/user/user-13.jpg')}}" alt=""/>
                     <span class="d-none d-md-inline" id="usuario"></span> <b class="caret"></b>
                 </a>
@@ -98,15 +91,8 @@
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
                     <a href="/reportevendedor" data-toggle="ajax">
-                        <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
-                        <span>Pedidos</span>
-                    </a>
-                </li>
-                <li class="has-sub">
-                    <a href="/tienda" data-toggle="ajax">
-
-                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>
-                        <span>Tienda</span>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-chart-pie"></i>
+                        <span>Pedidos vendedor</span>
                     </a>
                 </li>
                 <li class="has-sub">
@@ -116,12 +102,27 @@
                     </a>
                 </li>
                 <li class="has-sub">
+                    <a href="/tienda" data-toggle="ajax">
+
+                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>
+                        <span>Tienda</span>
+                    </a>
+                </li>
+          <!--      <li class="has-sub">
+                    <a href="/Pedidos" data-toggle="ajax">
+
+                        <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
+                        <span>Pedidos</span>
+                    </a>
+                </li> -->
+                <li class="has-sub">
                     <a href="/devolucion" data-toggle="ajax">
 
                         <i class="fas fa-lg fa-fw m-r-10 fa-history"></i>
                         <span>Devolucion</span>
                     </a>
                 </li>
+
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret"></b>
@@ -129,9 +130,34 @@
                         <span>Administrar datos</span>
                     </a>
                     <ul class="sub-menu">
+                        <li> <a href="/Productos" data-toggle="ajax">
+                                <i class="fas fa-lg fa-fw m-r-10 fa-cubes"></i>
+                                Productos</a></li>
+                     <!--   <li class="has-sub">
+                            <a href="javascript:;">
+                                <b class="caret"></b>
+                                Menu producto
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="/Productos" data-toggle="ajax">
+                                        <i class="fas fa-lg fa-fw m-r-10 fa-cubes"></i>
+                                        Productos</a>
+                                </li>
+                             <!--   <li>
+                                    <a href="/promocion" data-toggle="ajax">
+                                        <i class="fas fa-lg fa-fw m-r-10 fa-money-bill-alt"></i>
+                                        Promociones </a>
+                                </li>
+                                <li><a href="/datosadicionales" data-toggle="ajax">
+                                        <i class="fas fa-lg fa-fw m-r-10 fa-print"></i>Datos adicionales</a></li>
 
+                            </ul>
+                        </li>-->
                         <li><a href="/Clientes" data-toggle="ajax">
                                 <i class="fas fa-lg fa-fw m-r-10 fa-users"></i>Clientes</a></li>
+                      <!--  <li><a href="/Usuarios" data-toggle="ajax">
+                                <i class="fas fa-lg fa-fw m-r-10 fa-user-secret"></i>Usuarios</a></li> -->
                     </ul>
 
                 </li>
@@ -172,7 +198,7 @@
 
                 <!-- begin form-group -->
                 <div class="form-group row m-b-10">
-                    <label class="col-md-3 col-form-label text-md-right">Nueva contraseña <span
+                    <label class="col-md-3 col-form-label text-md-right" for="password">Nueva contraseña <span
                                 class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password" id="password"
@@ -183,11 +209,11 @@
                 <!-- end form-group -->
                 <!-- begin form-group -->
                 <div class="form-group row m-b-10">
-                    <label class="col-md-3 col-form-label text-md-right">Confirmar contraseña
+                    <label class="col-md-3 col-form-label text-md-right" for="password2">Confirmar contraseña
                         <span class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password2" id="password2"
-                               class="form-control" onmouseover="compararContraseñas()" />
+                               class="form-control" onmouseover="compararContrasenias()"/>
                     </div>
                 </div>
                 <div class="form-group row m-b-10" id="aviso">
@@ -199,7 +225,7 @@
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
                 <a href="javascript:;" class="btn btn-success " id="enviar"
-                   data-dismiss="modal" onclick="cambiarContraseña()" onmouseover="compararContraseñas()">
+                   data-dismiss="modal" onclick="cambiarContrasenia();" onmouseover="compararContrasenias();">
                     <i class="fas fa-lg fa-fw m-r-10 fa-check-circle"> </i>Cambiar</a>
             </div>
         </div>
@@ -210,11 +236,6 @@
 <script src="{{asset('assets/plugins/jquery/jquery-migrate-1.1.0.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap/4.0.0/js/bootstrap.bundle.min.js')}}"></script>
-<!--[if lt IE 9]>
-<script src="{{asset('assets/crossbrowserjs/html5shiv.js')}}"></script>
-<script src="{{asset('assets/crossbrowserjs/respond.min.js')}}"></script>
-<script src="{{asset('assets/crossbrowserjs/excanvas.min.js')}}"></script>
-<![endif]-->
 <script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{asset('assets/plugins/js-cookie/js.cookie.js')}}"></script>
 <script src="{{asset('assets/js/theme/default.min.js')}}"></script>
@@ -244,8 +265,8 @@
         });
         obtenerSession();
 
-
     });
+
 </script>
 </body>
 </html>

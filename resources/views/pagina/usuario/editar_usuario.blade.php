@@ -259,6 +259,7 @@
                                         <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
                                             Selecciona tu ususario y contraseña
                                         </legend>
+
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Usuario<span

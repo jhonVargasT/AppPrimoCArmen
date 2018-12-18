@@ -2,16 +2,7 @@
 <script src="{{ asset('js/js_ajax/reporte.js') }}"></script>
 <script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
 <link href="https://code.jquery.com/jquery-3.3.1.js" rel="stylesheet"/>
-
-<link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
-<link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
-
-
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -92,11 +83,10 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-xs-4 col-sm-4 col-lg-4">
-                <label class="col-form-label text-md-right"> Tipo de reporte
+                <label class="col-form-label text-md-right" for="tiporeporte"> Tipo de reporte
                     :</label>
 
-                <select id="tiporeporte" name="tiporeporte" class=" form-control"
-                >
+                <select id="tiporeporte" name="tiporeporte" class=" form-control">
                     <option id="1" selected>PRODUCTOS VENDIDOS</option>
                     <option id="2">GANANCIA POR VENDEDOR</option>
                     <option id="3">PRODUCTOS PEDIDOS POR RUTA</option>
@@ -244,7 +234,6 @@
 
 </div>
 
-</div>
 <script>
     App.setPageTitle('Productos | ARPEMAR SAC');
     App.restartGlobalFunction();

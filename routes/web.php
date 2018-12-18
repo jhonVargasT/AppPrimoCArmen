@@ -1,6 +1,6 @@
 <?php
 
-use JasperPHP\JasperPHP as JasperPHP;
+
 
 
 /*
@@ -22,8 +22,26 @@ Route::get('/', 'IndexController@index');
 
 Route::group(['middleware' => 'administrador'], function () {
 //////////////////////////////////////ADMINISTRADOR///////////////////////////////////////////
-
     Route::get('/Administrador', 'AdministradorController@index');
+});
+
+
+Route::group(['middleware' => 'vendedor'], function () {
+
+    Route::get('/Vendedor', 'VendedorController@index');
+
+/////////// reporte vendedor ///////////////////
+
+
+});
+
+Route::group(['can:administrador,vendedor'], function () {
+    route::get('/cambiarcontra/{password}', 'IndexController@cambiarcontra');
+
+//////////// *********************** VENDEDOR ***************************/////////////////////////
+
+    route::get('/document/{serie}', 'FacturaController@document');
+
 
     Route::get('/creacionCorreo/{id}', 'CorreoController@correoCreacionUsuario');
 
@@ -81,23 +99,7 @@ Route::group(['middleware' => 'administrador'], function () {
 
 //////////////DATOS ADICIONALES //////////////////
     Route::get('/datosadicionales', 'DatosAdiconalesController@index');
-});
-route::get('/cambiarcontra/{password}', 'IndexController@cambiarcontra');
 
-//////////// *********************** VENDEDOR ***************************/////////////////////////
-
-route::get('/document/{serie}', 'FacturaController@document');
-
-Route::group(['middleware' => 'vendedor'], function () {
-
-    Route::get('/Vendedor', 'FacturaController@index');
-
-/////////// reporte vendedor ///////////////////
-
-
-});
-
-Route::group(['can:administrador,vendedor'], function () {
     Route::get('/obetenerReporteAdministrador/{idcliente}/{fechaini}/{fechafin}', 'ReporteController@reportarBoletas');
     Route::get('/obetnerProductoMasVendido', 'ReporteController@obtenerProductoMasvendido');
     Route::get('/obtenerClientes', 'ReporteController@obtenerNumeroClientes');
@@ -210,32 +212,3 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/reporteClienteIngresos/{fechaini}/{fechafin}', 'ReporteController@reporteClienteTotal');
 });
 /*
-Route::get('/compilar', function () {
-    // Crear el objeto JasperPHP
-    $jasper = new JasperPHP;
-
-    // Compilar el reporte para generar .jasper
-    $jasper->compile(base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jrxml')->execute();
-
-  //  return view('welcome');
-});
-
-Route::get('/reporte', function () {
-    // Crear el objeto JasperPHP
-    $jasper = new JasperPHP;
-
-    // Generar el Reporte
-    $jasper->process(
-    // Ruta y nombre de archivo de entrada del reporte
-        base_path() . '/vendor/cossou/jasperphp/examples/hello_world.jasper',
-        false, // Ruta y nombre de archivo de salida del reporte (sin extensión)
-        array('pdf', 'rtf'), // Formatos de salida del reporte
-        array('php_version' => phpversion()) // Parámetros del reporte
-    )->execute();
-
-   // return view('welcome');
-});*/
-
-//Route::get('/listarPedidosAdmin', 'PedidoAdministrador@obtenerPedidos');
-
-//Route::get('/PRUEBA', 'DatosAdiconalesController@llenarTipos');

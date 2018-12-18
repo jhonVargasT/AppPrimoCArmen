@@ -1,21 +1,8 @@
-<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
 
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
-
 <script src="{{ asset('js/js_ajax/cliente.js') }}"></script>
-
-<link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
-<link href="plugins/datatables/dataTables.bootstrap.min.css" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
-
-
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
-<script src="plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -152,7 +139,7 @@
 </div>
 <!-- end panel -->
 <script>
-    App.setPageTitle('Productos | ARPEMAR SAC');
+    App.setPageTitle('Facturas | ARPEMAR SAC');
     App.restartGlobalFunction();
     $(function () {
         $('#data-table-fixed-header').DataTable({
@@ -195,52 +182,6 @@
                 }
             ]
         });
-    });
-</script>
-<!-- end panel -->
-
-<!-- ================== BEGIN PAGE LEVEL JS ================== -->
-<script>
-    App.setPageTitle('Reporte administrador | ARPEMAR SAC');
-    App.restartGlobalFunction();
-    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
-            $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'),
-            $.getScript('../assets/plugins/masked-input/masked-input.min.js'),
-            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
-            $.getScript('../assets/plugins/password-indicator/js/password-indicator.js'),
-            $.getScript('../assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js'),
-            $.getScript('../assets/plugins/bootstrap-select/bootstrap-select.min.js'),
-            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js'),
-            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js'),
-            $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
-            $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
-            $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),
-            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
-            $.getScript('../assets/plugins/bootstrap-show-password/bootstrap-show-password.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js'),
-            $.getScript('../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'),
-            $.getScript('../assets/plugins/clipboard/clipboard.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
-                FormPlugins.init();
-            });
-        });
-    });
-    $.when(
-        $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
-        $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
-        $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Notification.init();
     });
 </script>
 

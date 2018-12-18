@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
 <!--[if !IE]><!-->
@@ -22,7 +22,7 @@
     <link href="{{asset('assets/css/default/style-responsive.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/css/default/theme/default.css')}}" rel="stylesheet" id="theme"/>
     <!-- ================== END BASE CSS STYLE ================== -->
-    <link rel="shortcut icon" href="../assets/img/logo/icono-arper.jpg">
+    <link rel="shortcut icon" href="{{asset('/assets/img/logo/icono-arper.jpg')}}">
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
     <link href="{{asset('assets/plugins/jquery-jvectormap/jquery-jvectormap.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css')}}" rel="stylesheet"/>
@@ -35,10 +35,6 @@
 
     <!-- ================== END BASE JS ================== -->
 
-    <meta http-equiv="Expires" content="0">
-    <meta http-equiv="Last-Modified" content="0">
-    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
-    <meta http-equiv="Pragma" content="no-cache">
 </head>
 <body>
 <!-- begin #page-loader -->
@@ -199,7 +195,7 @@
 
                 <!-- begin form-group -->
                 <div class="form-group row m-b-10">
-                    <label class="col-md-3 col-form-label text-md-right">Nueva contraseña <span
+                    <label class="col-md-3 col-form-label text-md-right" for="password">Nueva contraseña <span
                                 class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password" id="password"
@@ -210,11 +206,11 @@
                 <!-- end form-group -->
                 <!-- begin form-group -->
                 <div class="form-group row m-b-10">
-                    <label class="col-md-3 col-form-label text-md-right">Confirmar contraseña
+                    <label class="col-md-3 col-form-label text-md-right" for="password2">Confirmar contraseña
                         <span class="text-danger">*</span></label>
                     <div class="col-md-6">
                         <input type="password" name="password2" id="password2"
-                               class="form-control" onmouseover="compararContraseñas()"/>
+                               class="form-control" onmouseover="compararContrasenias()"/>
                     </div>
                 </div>
                 <div class="form-group row m-b-10" id="aviso">
@@ -226,7 +222,7 @@
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
                 <a href="javascript:;" class="btn btn-success " id="enviar"
-                   data-dismiss="modal" onclick="cambiarContraseña()" onmouseover="compararContraseñas()">
+                   data-dismiss="modal" onclick="cambiarContrasenia();" onmouseover="compararContrasenias();">
                     <i class="fas fa-lg fa-fw m-r-10 fa-check-circle"> </i>Cambiar</a>
             </div>
         </div>
@@ -237,11 +233,6 @@
 <script src="{{asset('assets/plugins/jquery/jquery-migrate-1.1.0.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap/4.0.0/js/bootstrap.bundle.min.js')}}"></script>
-<!--[if lt IE 9]>
-<script src="{{asset('assets/crossbrowserjs/html5shiv.js')}}"></script>
-<script src="{{asset('assets/crossbrowserjs/respond.min.js')}}"></script>
-<script src="{{asset('assets/crossbrowserjs/excanvas.min.js')}}"></script>
-<![endif]-->
 <script src="{{asset('assets/plugins/slimscroll/jquery.slimscroll.min.js')}}"></script>
 <script src="{{asset('assets/plugins/js-cookie/js.cookie.js')}}"></script>
 <script src="{{asset('assets/js/theme/default.min.js')}}"></script>

@@ -1,11 +1,6 @@
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet"/>
 <!-- ================== END PAGE LEVEL STYLE ================== -->
-<script language="JavaScript" type="text/javascript" src="../assets/agregarcliente.js"></script>
-<!-- ================== END PAGE LEVEL STYLE ================== -->
-<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
+
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
@@ -154,7 +149,7 @@
                                     aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 150px;">
+                                    style="width: 100%;; min-width: 200px;">
                                     Opciones
                                 </th>
                             </tr>
@@ -349,68 +344,6 @@
 
         });
     });
-    /*App.setPageTitle('Pedidos | ARPEMAR SAC');
-    App.restartGlobalFunction();
 
-    $.when(
-        $.getScript('../assets/plugins/highlight/highlight.common.js'),
-        $.getScript('../assets/js/demo/render.highlight.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Highlight.init();
-    });
-    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
-            $.getScript('../assets/plugins/DataTables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js'),
-            $.getScript('../assets/js/demo/table-manage-fixed-columns.demo.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            TableManageFixedColumns.init();
-        });
-    });
-    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
-            $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js'),
-            $.getScript('../assets/plugins/masked-input/masked-input.min.js'),
-            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
-            $.getScript('../assets/plugins/password-indicator/js/password-indicator.js'),
-            $.getScript('../assets/plugins/bootstrap-combobox/js/bootstrap-combobox.js'),
-            $.getScript('../assets/plugins/bootstrap-select/bootstrap-select.min.js'),
-            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js'),
-            $.getScript('../assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.js'),
-            $.getScript('../assets/plugins/jquery-tag-it/js/tag-it.min.js'),
-            $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
-            $.getScript('../assets/plugins/select2/dist/js/select2.min.js'),
-            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
-            $.getScript('../assets/plugins/bootstrap-show-password/bootstrap-show-password.js'),
-            $.getScript('../assets/plugins/bootstrap-colorpalette/js/bootstrap-colorpalette.js'),
-            $.getScript('../assets/plugins/jquery-simplecolorpicker/jquery.simplecolorpicker.js'),
-            $.getScript('../assets/plugins/clipboard/clipboard.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
-                FormPlugins.init();
-            });
-        });
-    });
-    $.when(
-        $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
-        $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
-        $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Notification.init();
-    });*/
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

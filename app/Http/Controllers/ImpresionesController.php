@@ -63,13 +63,14 @@ class ImpresionesController extends Controller
         $cabezaPedido = Boleta::listarFacturaPedido($id);
         foreach ($cabezaPedido as $cab) {
             $idPersona = $cab->idPersona;
+            $tipodoc=$cab->documento;
         }
         $productos = Producto::obtenerProductosTicket($id, $idPersona);
         $impuestos = Pedido::obetenerCuerpoTicket($id);
         $pdf = new PDF();
         $pdf = PDF::loadView('pdf.factura', ['cabezaPedido' => $cabezaPedido, 'productos' => $productos, 'impuestos' => $impuestos]);
         $pdf->setPaper(array(0, 0, 800, 155), 'landscape');
-        return $pdf->download('factura.pdf');
+        return $pdf->download($tipodoc.'.pdf');
     }
 
     public function devoluciones($id)

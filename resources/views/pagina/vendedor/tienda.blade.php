@@ -1,14 +1,4 @@
-<!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-<link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-</script>
-<link href="../assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
-      rel="stylesheet"/>
 
-<link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet"/>
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 <script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
@@ -427,42 +417,5 @@
 <script>
     App.setPageTitle('Vender| ARPEMAR SAC');
     App.restartGlobalFunction();
-
-    $.when(
-        $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
-        $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
-        $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Notification.init();
-    });
-    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
-            $.getScript('../assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js'),
-            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
-                FormPlugins.init();
-            });
-        });
-    });
-    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
-            $.getScript('../assets/plugins/DataTables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js'),
-            $.getScript('../assets/js/demo/table-manage-fixed-columns.demo.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            TableManageFixedColumns.init();
-        });
-    });
 </script>
 <!-- =====

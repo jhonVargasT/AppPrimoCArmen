@@ -1,9 +1,9 @@
-$(document).ready(function () {
-   comision();
-   ventaMensual();
-   meta();
-});
 
+$(document).ready(function () {
+    comision();
+    ventaMensual();
+    meta();
+});
 
 function cambiarTabla() {
     var val =  $('#estado').val();

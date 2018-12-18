@@ -1,14 +1,9 @@
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 <link href="../assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
-<link href="../assets/plugins/DataTables/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-</script>
+
 <link href="../assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
       rel="stylesheet"/>
 
-<link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet"/>
-<link href="../assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet"/>
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 <script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
@@ -129,7 +124,7 @@
                 <div class="form-group row m-b-15">
                     <label class="col-form-label col-md-3 text-left">Direccion tienda</label>
                     <div class="col-md-9">
-                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion();activarBotonAnadirProducto()">
+                        <select id="direcciones" class=" form-control" onmouseover="llenarDireccion()">
                             <option>
                                 Seleccione
                             </option>
@@ -140,7 +135,6 @@
                     <label class="col-form-label col-md-3 text-left">Fecha de entrega</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control" id="datepicker-autoClose"
-                               onmouseover="activarBotonAnadirProducto()"
                                placeholder="Auto Close Datepicker">
                     </div>
                 </div>
@@ -155,7 +149,7 @@
 
             <div class=".row.row-space-2 .p-2 disabled" align="center">
 
-                <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary disabled " onclick="resetearModal()"
+                <a href="#modal-dialog" class="btn btn-link btn-sm btn-primary " onclick="resetearModal()"
                    data-toggle="modal"
                    id="anadirproducto">
                     <i class="fas fa-lg fa-fw m-r-10 fa-plus-circle "></i>
@@ -436,16 +430,7 @@
     App.setPageTitle('Vender| ARPEMAR SAC');
     App.restartGlobalFunction();
 
-    $.when(
-        $.getScript('../assets/plugins/gritter/js/jquery.gritter.js'),
-        $.getScript('../assets/plugins/bootstrap-sweetalert/sweetalert.min.js'),
-        $.getScript('../assets/js/demo/ui-modal-notification.demo.min.js'),
-        $.Deferred(function (deferred) {
-            $(deferred.resolve);
-        })
-    ).done(function () {
-        Notification.init();
-    });
+
     $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
         $.when(
             $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
@@ -460,17 +445,6 @@
             });
         });
     });
-    $.getScript('../assets/plugins/DataTables/media/js/jquery.dataTables.js').done(function () {
-        $.when(
-            $.getScript('../assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js'),
-            $.getScript('../assets/plugins/DataTables/extensions/FixedColumns/js/dataTables.fixedColumns.min.js'),
-            $.getScript('../assets/js/demo/table-manage-fixed-columns.demo.min.js'),
-            $.Deferred(function (deferred) {
-                $(deferred.resolve);
-            })
-        ).done(function () {
-            TableManageFixedColumns.init();
-        });
-    });
+
 </script>
 <!-- =====

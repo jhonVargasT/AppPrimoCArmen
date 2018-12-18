@@ -12,7 +12,7 @@ function obtenerSession() {
     });
 }
 
-function cambiarContraseña() {
+function cambiarContrasenia() {
     var paswword1 = $('#password').val();
     var paswword2 = $('#password2').val();
     var texto = $("#aviso");
@@ -43,7 +43,7 @@ function cambiarContraseña() {
 
 }
 
-function compararContraseñas() {
+function compararContrasenias() {
     var paswword1 = $('#password').val();
     var paswword2 = $('#password2').val();
     var texto = $("#aviso");

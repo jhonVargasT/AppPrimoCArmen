@@ -271,7 +271,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="usuario" id="usuario" class="form-control"
                                                        data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="alphanum" onmouseover="generarUsuario()"/>
+                                                       data-parsley-type="alphanum" />
                                             </div>
                                         </div>
                                         <!-- end form-group -->
