@@ -218,6 +218,7 @@ function ok(mensaje) {
 }
 
 function cerrarModal() {
+    actualizado();
     redirect();
 }
 
@@ -230,6 +231,19 @@ function redirect() {
             $("#response").html(data);
         }
     });
+}
+
+function actualizado() {
+    const toast = swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
+    toast({
+        type: 'success',
+        title: 'El pedido se ha preparado el pedido correctamente'
+    })
 }
 
 function eliminarPedido(idpedido) {

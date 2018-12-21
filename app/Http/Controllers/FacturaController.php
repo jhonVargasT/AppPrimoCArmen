@@ -69,7 +69,7 @@ class FacturaController extends Controller
                 $nro = $this->boleta_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
             }
             $cabeza = $factura->cabezafactura;
-            return response()->json(array('error' => 1, 'mensaje' => 'factura nro ' . $nro, 'id' => $cabeza->idpedido));
+            return response()->json(array('error' => 1, 'mensaje' => 'Documento nro ' . $nro, 'id' => $cabeza->idpedido));
         } catch (Exception $e) {
             return response()->json(array('error' => 0, 'mensaje' => $e));
         }

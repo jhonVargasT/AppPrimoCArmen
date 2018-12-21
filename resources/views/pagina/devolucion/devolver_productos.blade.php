@@ -195,7 +195,7 @@
                         if (row.estado === '1') {
                             if (row.devuelto === '1') {
                                 return '<div align="center">\n' +
-                                    '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
+                                    '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
                                     '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
                                     '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
                                     '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
@@ -205,7 +205,7 @@
                             }
                             else {
                                 return '<div align="center">\n' +
-                                    '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
+                                    '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
                                     '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
                                     '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
                                     '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
@@ -214,7 +214,7 @@
 
                         } else {
                             return '<div align="center">\n' +
-                                '<a href="#" style="color: blue" TITLE="Click para cangear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
+                                '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt"> </i></a>\n' +
                                 '<a href="#" style="color: green" TITLE="Activar" onclick="eliminar(' + row.iddevolucion + ',1)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +

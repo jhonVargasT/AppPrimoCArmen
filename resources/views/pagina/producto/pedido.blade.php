@@ -266,7 +266,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal" onclick="redirect()">Aceptar</a>
+                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal" onclick="cerrarModal()">Aceptar</a>
                 </div>
             </div>
         </div>
