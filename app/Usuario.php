@@ -90,7 +90,7 @@ class Usuario extends Authenticatable
         return static::select('idUsuario', 'usuario', DB::raw('concat(idUsuario," | ",usuario) as name'))
             ->Where(DB::raw('concat(idUsuario," ",usuario)'), 'LIKE', "%$term%")
             ->Where('estado', '=', 1)
-            ->limit(50)
+            ->limit(10000)
             ->get();
     }
 

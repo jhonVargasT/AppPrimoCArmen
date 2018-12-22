@@ -1,3 +1,4 @@
+
 <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
 
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
@@ -77,7 +78,7 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-lg-4">
                     <label class="col-form-label">DOCUMENTO</label>
-                    <select name="docum" id="docum" class="form-control" onchange="dnioruc(this.value)" disabled>
+                    <select name="docum" id="docum" class="form-control" onclick="dnioruc(this.value)" disabled>
                         <option value="null" disabled selected>SELECCIONAR</option>
                         <option value="BOLETA">BOLETA</option>
                         <option value="FACTURA">FACTURA</option>
