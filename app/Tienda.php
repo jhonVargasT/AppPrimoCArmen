@@ -25,7 +25,7 @@ class Tienda extends Model
         return static::select('idTienda', 'nombreTienda', DB::raw('concat(idTienda," | ",nombreTienda) as name'))
             ->Where('nombreTienda', 'LIKE', "%$term%")
             ->Where('estado', '=', 1)
-            ->limit(50)
+            ->limit(10000)
             ->get();
     }
 }

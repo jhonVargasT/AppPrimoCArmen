@@ -86,7 +86,7 @@ class Persona extends Model
         return static::select('idPersona', DB::raw('concat(apellidos,", ",nombres) as nombres'), DB::raw('concat(idPersona," | ",apellidos) as name'))
             ->Where(DB::raw('concat(idPersona," ",concat(nombres,", ",apellidos))'), 'LIKE', "%$term%")
             ->Where('estado', '=', 1)
-            ->limit(50)
+            ->limit(10000)
             ->get();
     }
 

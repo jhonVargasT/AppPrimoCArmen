@@ -137,7 +137,7 @@ class Producto extends Model
     {
         return static::select('idProducto', 'nombre', DB::raw('concat(idProducto," | ",nombre) as name'))
             ->Where('nombre', 'LIKE', "%$term%")
-            ->limit(50)
+            ->limit(10000)
             ->get();
     }
 
