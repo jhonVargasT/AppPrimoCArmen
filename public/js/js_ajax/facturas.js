@@ -37,10 +37,12 @@ function pedido(id) {
                 ok('Pedido encontrado');
                 $('#fecha').val(data.cabeza[0].fecha);
                 $('#vendedor').val(data.cabeza[0].usu);
+                $('#dni').val(data.cabeza[0].dni);
                 $('#cliente').val(data.cabeza[0].razsoc);
                 $('#direccion').val(data.cabeza[0].direccion);
                 $("#docum").prop('disabled', false);
                 llenarTabla(data.productos, data.impuesto);
+                documento();
             } else {
                 error(data.err)
             }
@@ -337,4 +339,34 @@ function cambiarDniORuc() {
             documento();
         }
     }
+}
+function dnioruc(value) {
+    var id = $("#idpedido").val();
+    var url = "/buscarusuario/" + id;
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        contentType: 'application/json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if(value === 'FACTURA'){
+                if(data.ruc){
+                    $("#dni").val(data.ruc);
+                    documento();
+                } else{
+                    $("#docum").val('BOLETA').change();
+                    error('No posee RUC');
+                }
+            } else if(value === 'BOLETA'){
+                if(data.dni){
+                    $("#dni").val(data.dni);
+                    documento();
+                } else{
+                    $("#docum").val('FACTURA').change();
+                    error('No posee DNI');
+                }
+            }
+        }
+    });
 }

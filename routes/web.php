@@ -200,6 +200,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/facturas', 'FacturaController@index');
     Route::get('/nuevafactura', 'FacturaController@nuevaFactura');
     Route::get('/buscarfactura/{idpedido}', 'FacturaController@buscarFactura');
+    Route::get('/buscarusuario/{idpedido}', 'FacturaController@buscarusuario');
     Route::get('/buscarboletapedido/{idpedido}', 'FacturaController@buscarboletapedido');
     Route::get('/buscarusuario/{idpedido}', 'FacturaController@buscarusuario');
 

@@ -48,8 +48,7 @@ class FacturaController extends Controller
         }
     }
 
-    public function buscarusuario($idpedido)
-    {
+    public function buscarusuario($idpedido){
         $pedido = Pedido::findOrFail($idpedido);
         $persona = Persona::findOrFail($pedido->idPersona);
 
@@ -61,15 +60,13 @@ class FacturaController extends Controller
         try {
             $nro = null;
             $factura = json_decode($factura);
-
-
-            if ($factura->cabezafactura->docum == 'FACTURA') {
+            if($factura->cabezafactura->docum == 'FACTURA'){
                 $nro = $this->factura_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
-            } elseif ($factura->cabezafactura->docum == 'BOLETA') {
+            } elseif($factura->cabezafactura->docum == 'BOLETA'){
                 $nro = $this->boleta_xml($factura->cabezafactura, $factura->productos, $factura->piefactura);
             }
-            $cabeza = $factura->cabezafactura;
-            return response()->json(array('error' => 1, 'mensaje' => 'Documento nro ' . $nro, 'id' => $cabeza->idpedido));
+
+            return response()->json(array('error' => 1, 'mensaje' => 'factura nro ' . $nro));
         } catch (Exception $e) {
             return response()->json(array('error' => 0, 'mensaje' => $e));
         }
@@ -557,10 +554,10 @@ class FacturaController extends Controller
 
     private function consumo_soap($filename)
     {
-        //(URL PRODUCCION https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl)
-        //$wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
+        //$wsdlURL = 'https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl';//PRODUCCION
+        //$wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';//BETA
         $nombre_archivo = $filename . '.zip';
-        $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService?wsdl';
+        $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService?wsdl';
         $XMLString = '<?xml version="1.0" encoding="UTF-8"?>
         <soapenv:Envelope 
         xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
