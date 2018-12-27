@@ -145,6 +145,8 @@ class TiendaController extends Controller
                         $productopedido->DescuentoUnidades = round(abs($pr->montounidades - ($montounida * $unidades)), 2);
                     } else {
                         $productopedido->id_Promocion = null;
+                        $productopedido->DescuentoPaquetes =0;
+                        $productopedido->DescuentoUnidades =0;
                     }
                     $productopedido->estado = 4;
                     $productopedido->cantidadPaquetes = $paquetes;
