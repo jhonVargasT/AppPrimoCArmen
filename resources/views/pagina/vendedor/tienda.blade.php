@@ -367,7 +367,8 @@
                             </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;Caja :</label>
+                            <label class="col-form-label text-left">&nbsp;&nbsp;&nbsp;Caja : <button disabled class="btn btn-link" onclick="dividirPaquete()" title="Click para partir paquete en unidades" id="partirpaquetes">
+                                    <i class="fas fa-lg fa-fw m-r-10 fa-cut"></i></button></label></label>
                         </div>
                         <div class="row form-group row m-b-15">
                             <label class="col-form-label text-right" for="cantidadpa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad
@@ -380,7 +381,7 @@
                                    name="preciopa"> </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-right">&nbsp;&nbsp;&nbsp;Unidad :</label>
+                            <label class="col-form-label text-right">&nbsp;&nbsp;&nbsp;Unidad :
                         </div>
                         <div class="row form-group row m-b-15">
                             <label class="col-form-label text-right" for="cantidadun">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad

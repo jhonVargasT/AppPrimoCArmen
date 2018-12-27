@@ -4,6 +4,38 @@ var productos = [];
     llenarTabla();
 });*/
 
+function dividirPaquete() {
+    swal({
+        title: 'Esta seguro?',
+        text: "Desea partir  1 paquete en unidades?",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Si, partir!"
+    }).then(function (result) {
+        if (result.value) {
+            var id= $("#id_producto").val();
+            var url = "/partirpaquete/" + id;
+            $.ajax({
+                type: "GET",
+                url: url,
+                cache: false,
+                dataType: 'json',
+                data: '_token = <?php echo csrf_token() ?>',
+                success: function (data) {
+                    if (data.error === 0) {
+                       buscarProductoNombre();
+                    } else {
+                        buscarProductoNombre();
+                    }
+                }
+            });
+        }
+    })
+
+
+}
 function autoCompletar() {
     "use strict";
     var dni = $("#dni").val();
@@ -176,6 +208,7 @@ function buscarProductoNombre() {
                 $("#numero_unidades").attr('max', data.cantidaduni);
                 $("#numero_paquetes").removeAttr('readOnly');
                 $("#numero_unidades").removeAttr('readOnly');
+                $("#partirpaquetes").removeAttr('disabled');
                 buscarPromocion(data.idproducto);
             } else {
                 $('#hijos').remove()
@@ -316,7 +349,8 @@ function resetearModal() {
     $("#numero_unidades").val(0);
     $("#nombre_producto").val('');
     $("#enviar").addClass('disabled');
-    $('#hijos').remove()
+    $('#hijos').remove();
+    $("#partirpaquetes").attr('disabled','');
 
 }
 

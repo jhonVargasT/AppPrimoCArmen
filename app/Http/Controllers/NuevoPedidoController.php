@@ -37,10 +37,10 @@ class NuevoPedidoController extends Controller
                 $tienda = $p->tienda;
                 $idtienda = $p->idTienda;
                 $idpersona = $p->idPersona;
-                $tipousuario=$p->tipoCliente;
+                $tipousuario = $p->tipoCliente;
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona,'tipusu'=>$tipousuario), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'tipusu' => $tipousuario), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -70,11 +70,11 @@ class NuevoPedidoController extends Controller
                 $dni = $p->dni;
                 $idtienda = $p->idTienda;
                 $idpersona = $p->idPersona;
-                $tipousuario=$p->tipoCliente;
+                $tipousuario = $p->tipoCliente;
 
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni,'tipusu'=>$tipousuario), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni, 'tipusu' => $tipousuario), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -85,7 +85,7 @@ class NuevoPedidoController extends Controller
     public function autoCompletarNombreTiendaTienda($nombreTienda)
     {
         try {
-          //  return view('pagina/vendedor/nuevo_pedido');
+            //  return view('pagina/vendedor/nuevo_pedido');
 
             $dni = null;
             $nombres = null;
@@ -104,7 +104,7 @@ class NuevoPedidoController extends Controller
 
             }
             if ($nombres != null)
-                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni,'tipusu'=>$tipousuario), 200);
+                return response()->json(array('error' => 0, 'nombre' => $nombres, 'tienda' => $tienda, 'idtienda' => $idtienda, 'idpersona' => $idpersona, 'dni' => $dni, 'tipusu' => $tipousuario), 200);
             else
                 return response()->json(array('error' => 1));
         } catch (Exception $e) {
@@ -127,16 +127,16 @@ class NuevoPedidoController extends Controller
         }
     }
 
-    public function autocompletarproducto($idproducto,$dni)
+    public function autocompletarproducto($idproducto, $dni)
     {
         $nombre = null;
         try {
-            $cliente=Persona::obtenerDatosDni($dni);
+            $cliente = Persona::obtenerDatosDni($dni);
 
-            foreach ($cliente as $cl){
-                $idpersona=$cl->idPersona;
+            foreach ($cliente as $cl) {
+                $idpersona = $cl->idPersona;
             }
-            $producto = Producto::consultarProductoNombre($idproducto,$idpersona);
+            $producto = Producto::consultarProductoNombre($idproducto, $idpersona);
             foreach ($producto as $p) {
                 $idProducto = $p->idProducto;
                 $nombre = $p->nombre;
@@ -161,11 +161,11 @@ class NuevoPedidoController extends Controller
         }
     }
 
-    public function autocompletarProductoPromocion($idproducto,$dni,$idpromocion)
+    public function autocompletarProductoPromocion($idproducto, $dni, $idpromocion)
     {
         $nombre = null;
         try {
-            if($idpromocion!=0) {
+            if ($idpromocion != 0) {
                 $cliente = Persona::obtenerDatosDni($dni);
 
                 foreach ($cliente as $cl) {
@@ -190,8 +190,7 @@ class NuevoPedidoController extends Controller
                     ));
                 else
                     return response()->json(array('error' => 0));
-            }
-            else
+            } else
                 return response()->json(array('error' => 0));
 
         } catch (Exception $e) {
@@ -215,45 +214,46 @@ class NuevoPedidoController extends Controller
             $pedido->idPersona = $persona->persona;
             $pedido->usuarioEliminacion = null;
             $pedido->razonEliminar = null;
-            $pedido->impuesto = round(($persona->total * 0.18),2);
-            $pedido->costoBruto =  round(abs(($persona->total * 0.18) - $persona->total),2);
-            $pedido->totalPago = round($persona->total,2);
+            $pedido->impuesto = round(($persona->total * 0.18), 2);
+            $pedido->costoBruto = round(abs(($persona->total * 0.18) - $persona->total), 2);
+            $pedido->totalPago = round($persona->total, 2);
             $pedido->descuento = 0;
-            $pedido->lugar =2;
+            $pedido->lugar = 2;
             $pedido->idUsuario = Session('idusuario');
             $pedido->fechaCreacion = util::fecha();
             $pedido->id_DireccionTienda = $persona->tienda;
             $productos = $data->productos;
 
-            DB::transaction(function () use ($pedido, $productos,$persona) {
+            DB::transaction(function () use ($pedido, $productos, $persona) {
                 $pedido->save();
                 $idpedidoreporte = $pedido->idPedido;
-                $totaldescuento=0;
+                $totaldescuento = 0;
                 foreach ($productos as $pr) {
                     $stockproducto = Producto::consultarProducto($pr->id);
                     foreach ($stockproducto as $stock) {
                         $stockunidad = $stock->cantidadStockUnidad;
                         $stockpaquete = $stock->cantidadPaquete;
-                        if($persona->tipousuario===2){
-                            $montopaque=$stock->precioVentaMayo;
+                        if ($persona->tipousuario === 2) {
+                            $montopaque = $stock->precioVentaMayo;
+                        } else {
+                            $montopaque = $stock->precioVentaMino;
                         }
-                        else{
-                            $montopaque= $stock->precioVentaMino;
-                        }
-                        $montounida=$stock->precioVentaUnidad;
+                        $montounida = $stock->precioVentaUnidad;
                     }
                     $productopedido = new ProductoPedido();
                     $unidades = $pr->unidades;
                     $paquetes = $pr->paquete;
-                    $productopedido->montoUnidades= round($pr->montounidades,2);
-                    $productopedido->DescuentoUnidades= round(abs($pr->montounidades-($montounida*$unidades)),2);
-                    $productopedido->montoPaquetes= round($pr->montopaquete,2);
-                    $productopedido->DescuentoPaquetes= round(abs($pr->montopaquete-($montopaque*$paquetes)),2);
+                    $productopedido->montoUnidades = round($pr->montounidades, 2);
+                    $productopedido->montoPaquetes = round($pr->montopaquete, 2);
                     $productopedido->cantidadUnidades = $unidades;
-                    if($pr->idpromo!=0)
-                        $productopedido->id_Promocion=$pr->idpromo;
-                    else{
-                        $productopedido->id_Promocion=null;
+                    if ($pr->idpromo != 0) {
+                        $productopedido->id_Promocion = $pr->idpromo;
+                        $productopedido->DescuentoPaquetes = round(abs($pr->montopaquete - ($montopaque * $paquetes)), 2);
+                        $productopedido->DescuentoUnidades = round(abs($pr->montounidades - ($montounida * $unidades)), 2);
+                    } else {
+                        $productopedido->DescuentoPaquetes = 0;
+                        $productopedido->DescuentoUnidades = 0;
+                        $productopedido->id_Promocion = null;
                     }
                     $productopedido->cantidadPaquetes = $paquetes;
                     $productopedido->idUsuario = Session('idusuario');;
@@ -264,9 +264,9 @@ class NuevoPedidoController extends Controller
                     $totalunidades = ($stockunidad - $unidades);
                     $totalpaquetes = ($stockpaquete - $paquetes);
                     Producto::disminuirStock($pr->id, $totalpaquetes, $totalunidades);
-                    $totaldescuento= $totaldescuento+ $productopedido->DescuentoUnidades+ $productopedido->DescuentoPaquetes;
+                    $totaldescuento = $totaldescuento + $productopedido->DescuentoUnidades + $productopedido->DescuentoPaquetes;
                 }
-                Pedido::cambiarDescuento($idpedidoreporte, round($totaldescuento,2));
+                Pedido::cambiarDescuento($idpedidoreporte, round($totaldescuento, 2));
             });
             $tipousu = Session('tipoUsuario');
             $idpedidoreporte = $pedido->idPedido;

@@ -80,8 +80,8 @@ class Producto extends Model
                                 WHERE
                                     persona.idPersona = ' . $idPersona . ') = 1
                         THEN
-                            producto.precioVentaMino
-                        ELSE producto.precioVentaMayo
+                            FORMAT(producto.precioVentaMino,2)
+                        ELSE FORMAT(producto.precioVentaMayo,2)
                     END
                 ELSE CASE
                     WHEN
@@ -92,14 +92,14 @@ class Producto extends Model
                             WHERE
                                 persona.idPersona = ' . $idPersona . ') = 1
                     THEN
-                        ABS((ABS(producto.precioCompra - producto.precioVentaMino) * (promocion.descuento / 100)) - producto.precioVentaMino)
-                    ELSE ABS((ABS(producto.precioCompra - producto.precioVentaMayo) * (promocion.descuento / 100)) - producto.precioVentaMayo)
+                       FORMAT(ABS((ABS(producto.precioCompra - producto.precioVentaMino) * (promocion.descuento / 100)) - producto.precioVentaMino),2)
+                    ELSE  FORMAT(ABS((ABS(producto.precioCompra - producto.precioVentaMayo) * (promocion.descuento / 100)) - producto.precioVentaMayo),2)
                 END
             END precioVenta,
             cantidadStockUnidad,
             CASE
-                WHEN productopromocion.activoUnidad = 0 THEN producto.precioVentaUnidad
-                ELSE ABS((ABS(producto.precioCompraUnidad - producto.precioVentaUnidad) * (promocion.descuento / 100)) - producto.precioVentaUnidad)
+                WHEN productopromocion.activoUnidad = 0 THEN FORMAT(producto.precioVentaUnidad,2)
+                ELSE FORMAT(ABS((ABS(producto.precioCompraUnidad - producto.precioVentaUnidad) * (promocion.descuento / 100)) - producto.precioVentaUnidad),2)
             END precioVentaUnidad,
             cantidadProductosPaquete
         FROM
