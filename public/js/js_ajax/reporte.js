@@ -234,6 +234,12 @@ function htmlVendedorIngresos() {
         '                                    rowspan="1" colspan="1"\n' +
         '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
         '                                    style="width: 100%; min-width: 100px;text-align: center">\n' +
+        '                                    Igv\n' +
+        '                                </th>\n' +
+        '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
+        '                                    rowspan="1" colspan="1"\n' +
+        '                                    aria-label="Rendering engine: activate to sort column ascending"\n' +
+        '                                    style="width: 100%; min-width: 100px;text-align: center">\n' +
         '                                    Op Gravada\n' +
         '                                </th>\n' +
         '                                <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"\n' +
@@ -453,6 +459,7 @@ function vendedorIngresos() {
             {data: 'idUsuario', name: 'idUsuario'},
             {data: 'vendedor', name: 'vendedor'},
             {data: 'total', name: 'total'},
+            {data: 'igv', name: 'igv'},
             {data: 'opgv', name: 'opgv'},
             {data: 'gastoprod', name: 'gastoprod'},
             {data: 'ganancia', name: 'ganancia'},

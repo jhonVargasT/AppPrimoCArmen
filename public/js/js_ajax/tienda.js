@@ -25,7 +25,7 @@ function dividirPaquete() {
                 data: '_token = <?php echo csrf_token() ?>',
                 success: function (data) {
                     if (data.error === 0) {
-                       buscarProductoNombre();
+                        buscarProductoNombre();
                     } else {
                         buscarProductoNombre();
                     }
@@ -51,7 +51,7 @@ function autoCompletar() {
                 $("#idtienda").val(data.idtienda);
                 $("#idpersona").val(data.idpersona);
                 $("#tipousuario").val(data.tipusu);
-                if (data.tipusu === 2) {
+                if (data.tipusu === '2') {
                     $("#tipousu").removeClass('text-purple');
                     $("#tipousu").text('MAYORISTA').addClass('text-success');
                 }
@@ -95,7 +95,7 @@ function completarTienda() {
                     $("#idtienda").val(data.idtienda);
                     $("#idpersona").val(data.idpersona);
                     $("#tipousuario").val(data.tipusu);
-                    if (data.tipusu === 2) {
+                    if (data.tipusu === '2') {
                         $("#tipousu").removeClass('text-purple');
                         $("#tipousu").text('MAYORISTA').addClass('text-success');
                     }
@@ -134,7 +134,7 @@ function completarNombresApellidos() {
                     $("#idtienda").val(data.idtienda);
                     $("#idpersona").val(data.idpersona);
                     $("#tipousuario").val(data.tipusu);
-                    if (data.tipusu === 2) {
+                    if (data.tipusu === '2') {
                         $("#tipousu").removeClass('text-purple');
                         $("#tipousu").text('MAYORISTA').addClass('text-success');
                     }

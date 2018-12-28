@@ -227,7 +227,7 @@ class Pedido extends Model
     public static function obetenerVendedorIngresos($vendedor, $fechaini, $fechafin)
     {
         if ($vendedor != 0)
-            $vendedor = 'and usuario.idUsuario=' . $vendedor;
+            $vendedor = 'and pedido.idUsuario=' . $vendedor;
         else
             $vendedor = '';
         if ($fechaini != 0)
@@ -235,21 +235,45 @@ class Pedido extends Model
         else
             $fechaini = '';
 
-        return DB::select('SELECT usuario.idUsuario,concat(persona.apellidos,\' ,\' ,persona.nombres) as vendedor, 
-                    sum(pedido.totalPago) total,
-                    sum(pedido.costoBruto) opgv,
-                     sum((productopedido.cantidadPaquetes*producto.precioCompra)+(productopedido.cantidadUnidades*producto.precioCompraUnidad)) as gastoprod,
-                     format(abs(sum((productopedido.cantidadPaquetes*producto.precioCompra)+(productopedido.cantidadUnidades*producto.precioCompraUnidad))- sum(pedido.costoBruto)),2) ganancia,
-                     date(pedido.fechaEntrega) fecha,
-                     IF(pedido.lugar=1, "TIENDA", "CALLE") lugar
-                     FROM pedido 
-                     join productopedido on productopedido.id_Pedido= pedido.idPedido
-                     join producto on producto.idProducto= productopedido.id_Producto
-                    join usuario on usuario.idUsuario= pedido.idUsuario
-                    join persona on persona.idPersona=usuario.id_Persona
-                    where pedido.estadoPedido=3 ' . $vendedor . ' ' . $fechaini . ' 
-                    group by  usuario.idUsuario,pedido.lugar,date(pedido.fechaEntrega)
-                    order by usuario.idUsuario,date(pedido.fechaEntrega)');
+        return DB::select('SELECT x.idUsuario,
+                                        x.vendedor,format(x.total,2) total
+                                        ,format(x.igv,2) igv,
+                                        format(x.opgv,2) opgv,
+                                        format(y.gastoprod,2) gastoprod,
+                                        format(x.total - y.gastoprod,2) as ganancia,x.fecha,
+                                         IF(x.lugar=1, "TIENDA", "CALLE") lugar
+                                        FROM
+                                            (SELECT 
+                                                usuario.idUsuario,
+                                                    CONCAT(persona.apellidos, \' ,\', persona.nombres) AS vendedor,
+                                                    SUM(pedido.totalPago) total,
+                                                    SUM(pedido.costoBruto) opgv,
+                                                    sum(pedido.impuesto) igv,
+                                                    DATE(pedido.fechaEntrega) fecha,
+                                                    pedido.lugar
+                                            FROM
+                                                pedido
+                                            JOIN usuario ON usuario.idUsuario = pedido.idUsuario
+                                            JOIN persona ON persona.idPersona = usuario.id_Persona
+                                            WHERE
+                                                pedido.estadoPedido = 3 '.$fechaini.' '.$vendedor.'
+                                            GROUP BY usuario.idUsuario , pedido.lugar , DATE(pedido.fechaEntrega)
+                                            ORDER BY usuario.idUsuario , DATE(pedido.fechaEntrega)) x
+                                                JOIN
+                                            (SELECT 
+                                                SUM(productopedido.cantidadPaquetes * producto.precioCompra + productopedido.cantidadUnidades * producto.precioCompraUnidad) AS gastoprod,
+                                                    pedido.idUsuario,
+                                                    DATE(pedido.fechaEntrega) fechaEntrega,
+                                                    pedido.lugar
+                                            FROM
+                                                productopedido
+                                            INNER JOIN pedido ON pedido.idPedido = productopedido.id_Pedido
+                                            JOIN producto ON producto.idProducto = productopedido.id_Producto
+                                            WHERE
+                                                pedido.estadoPedido = 3 '.$fechaini.' '.$vendedor.'
+                                            GROUP BY pedido.idUsuario , DATE(pedido.fechaEntrega)) y ON y.fechaEntrega = x.fecha
+                                                AND y.idUsuario = x.idUsuario
+                                                AND y.lugar = x.lugar');
     }
 
     public static function obetenerProductosIngresos($producto, $fechaini, $fechafin)
