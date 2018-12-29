@@ -126,7 +126,7 @@ class TiendaController extends Controller
                     foreach ($stockproducto as $stock) {
                         $stockunidad = $stock->cantidadStockUnidad;
                         $stockpaquete = $stock->cantidadPaquete;
-                        if ($persona->tipousuario === 2) {
+                        if ($persona->tipousuario === '2') {
                             $montopaque = $stock->precioVentaMayo;
                         } else {
                             $montopaque = $stock->precioVentaMino;
