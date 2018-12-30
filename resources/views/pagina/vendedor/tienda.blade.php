@@ -35,13 +35,13 @@
         <div class="panel-body">
             <div class="col-md-12 " align="center">
                 <div class="form-group row m-b-15">
-                    <input id="idtienda" name="idtienda" hidden>
-                    <input id="idpersona" name="idpersona" hidden>
-                    <input id="tipousuario" name="tipousuario" hidden>
+                    <input id="idtienda" name="idtienda" hidden autocomplete="off">
+                    <input id="idpersona" name="idpersona" hidden autocomplete="off">
+                    <input id="tipousuario" name="tipousuario" hidden autocomplete="off">
                     <label class="col-form-label col-md-3 text-left">DNI :</label>
                     <div class="col-md-9">
                         <input id="dni" onkeypress="if(event.keyCode == 13) autoCompletar()" name="dni" type="number"
-                               class="form-control m-b-5" placeholder="Ingresa Dni">
+                               class="form-control m-b-5" placeholder="Ingresa Dni" autocomplete="off">
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
@@ -49,7 +49,7 @@
                     <div class="col-md-9">
                         <input type="text" class="form-control m-b-5 typeahead" id="nombresapellidos"
                                name="nombresapellidos" onkeypress="if(event.keyCode == 13) completarNombresApellidos()"
-                        >
+                               autocomplete="off">
                         <script>
                             $('#nombresapellidos').typeahead({
                                 name: 'data',
@@ -84,7 +84,7 @@
                     <div class="col-md-9">
 
                         <input type="text" class="form-control m-b-5 typeahead" id="nombretienda" name="nombretienda"
-                               onkeypress="if(event.keyCode == 13) completarTienda()"
+                               onkeypress="if(event.keyCode == 13) completarTienda()" autocomplete="off"
                         >
                         <script>
                             $('#nombretienda').typeahead({
@@ -254,11 +254,11 @@
                                 </strong></label>
                         <div class="col-md-7 col-sm-7">
                             <input type="text" class="form-control m-b-12 typeahead" id="id_producto"
-                                   name="id_producto" hidden
+                                   name="id_producto" hidden autocomplete="off"
                             >
                             <input type="text" class="form-control m-b-12 typeahead" id="nombre_producto"
                                    onkeypress="if(event.keyCode == 13) buscarProductoNombre()"
-                                   name="nombre_producto"
+                                   name="nombre_producto" autocomplete="off"
                             >
                             <script>
                                 $('#nombre_producto').typeahead({
@@ -300,7 +300,7 @@
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_paquetes" type="number" class="form-control m-b-1 "
-                                   data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly/>
+                                   data-parsley-type="number" onchange="mostrarMonto()" value="0" min="0" readonly autocomplete="off"  />
                         </div>
                         <label class="col-form-label text-left" for="totpaque">Total :</label>
                         <label class="col-form-label text-left" id="totpaque"></label><label
@@ -313,7 +313,7 @@
                         </div>
                         <div class="col-md-2 col-sm-2">
                             <input id="numero_unidades" type="number" class="form-control m-b-5"
-                                   data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly/>
+                                   data-parsley-type="number" value="0" onchange="mostrarMonto()" min="0" readonly autocomplete="off" />
                         </div>
                         <label class="col-form-label text-left" for="totunu">Total :</label>
                         <label class="col-form-label text-left" id="totunu"> </label><label
@@ -381,7 +381,7 @@
                                    name="preciopa"> </label>
                         </div>
                         <div class="row form-group row m-b-15">
-                            <label class="col-form-label text-right">&nbsp;&nbsp;&nbsp;Unidad :
+                            <label class="col-form-label text-right">&nbsp;&nbsp;&nbsp;Unidad : </label>
                         </div>
                         <div class="row form-group row m-b-15">
                             <label class="col-form-label text-right" for="cantidadun">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cantidad

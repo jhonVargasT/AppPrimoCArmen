@@ -15,7 +15,7 @@ function dividirPaquete() {
         confirmButtonText: "Si, partir!"
     }).then(function (result) {
         if (result.value) {
-            var id= $("#id_producto").val();
+            var id = $("#id_producto").val();
             var url = "/partirpaquete/" + id;
             $.ajax({
                 type: "GET",
@@ -36,6 +36,7 @@ function dividirPaquete() {
 
 
 }
+
 function autoCompletar() {
     "use strict";
     var dni = $("#dni").val();
@@ -301,9 +302,9 @@ function mostrarMonto() {
         }
         else {
             if (cantpaque >= 0 && cantunidad >= 0) {
-                var totpaque = number_format(cantpaque * preciopaquetes,2);
-                var totunidad = number_format(cantunidad * preciounidades,2);
-                var total=number_format(parseFloat(totpaque)+parseFloat(totunidad),2);
+                var totpaque = number_format(cantpaque * preciopaquetes, 2);
+                var totunidad = number_format(cantunidad * preciounidades, 2);
+                var total = number_format(parseFloat(parseFloat(totpaque) + parseFloat(totunidad)).toFixed(1), 2);
                 $("#totpaque").html(totpaque);
                 $("#totunu").html(totunidad);
                 $("#sumtotales").html(total);
@@ -323,11 +324,19 @@ function activarBoton() {
     "use strict";
     var cantpaque = $("#numero_paquetes").val();
     var cantunidad = $("#numero_unidades").val();
+    if (cantpaque === '') {
+        $("#numero_paquetes").val(0);
+    }
+    if (cantunidad === '') {
+        $("#numero_unidades").val(0);
+    }
+
     if (cantpaque === 0 && cantunidad === 0) {
         $("#enviar").addClass('disabled');
     }
     else {
         $("#enviar").removeClass('disabled');
+
     }
 
 }
@@ -350,7 +359,7 @@ function resetearModal() {
     $("#nombre_producto").val('');
     $("#enviar").addClass('disabled');
     $('#hijos').remove();
-    $("#partirpaquetes").attr('disabled','');
+    $("#partirpaquetes").attr('disabled', '');
 
 }
 
@@ -376,9 +385,9 @@ function anadirProductoATabla() {
     var nombreproducto = $("#nompro").text();
     var numeropaquete = $("#numero_paquetes").val();
     var numerounidades = $("#numero_unidades").val();
-    var totalpaque = $("#totpaque").text();
-    var totaluni = $("#totunu").text();
-    var totalpro = $("#sumtotales").text();
+    var totalpaque = number_format(parseFloat($("#totpaque").text()).toFixed(1), 2);
+    var totaluni = number_format(parseFloat($("#totunu").text()).toFixed(1), 2);
+    var totalpro = number_format(parseFloat($("#sumtotales").text()).toFixed(1), 2);
     var idpromo = $("#Promocion option:selected").attr("id");
     if (!$("#Promocion").length) {
         idpromo = 0;
@@ -420,9 +429,9 @@ function modificarTotal() {
     for (var i = 0; i < productos.length; i++) {
         sum = sum + parseFloat(productos[i]["total"]);
     }
-    sum=number_format(sum,2);
-    igv =number_format((parseFloat(sum) * 0.18),2);
-    tot=number_format((sum - igv),2);
+    sum = number_format(parseFloat(sum, 2).toFixed(1), 2);
+    igv = number_format((parseFloat(sum) * 0.18), 2);
+    tot = number_format((sum - igv), 2);
     $("#totalproducto").html(tot);
     $("#igv").html(igv);
     $("#total").html(sum);
@@ -484,6 +493,7 @@ function eliminarProductoTabla(id) {
     })
 
 }
+
 function correcto(data) {
     const toast = swal.mixin({
         toast: true,
@@ -493,7 +503,7 @@ function correcto(data) {
     });
     toast({
         type: 'success',
-        title: 'Registro correcto, pedido numero '+data
+        title: 'Registro correcto, pedido numero ' + data
     })
 }
 
