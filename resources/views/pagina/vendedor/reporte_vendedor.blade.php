@@ -2,6 +2,16 @@
 <script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
 <div  id="response">
     <div class="row">
+
+        <div class="col-lg-3 col-md-6">
+            <div class="widget widget-stats bg-aqua">
+                <div class="stats-icon"><i class="fa fa-desktop"></i></div>
+                <div class="stats-info">
+                    <h4>TOTAL EN CAJA</h4>
+                    <p id="cajadia">0</p>
+                </div>
+            </div>
+        </div>
         <div class="col-lg-3 col-md-6">
             <div class="widget widget-stats bg-red">
                 <div class="stats-icon"><i class="fa fa-money-bill-alt"></i></div>

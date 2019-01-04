@@ -197,7 +197,7 @@
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%; min-width: 100px;text-align: center">
-                                    Cantidad paquete vendidas
+                                    Cantidad paquete vendidos
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
@@ -234,39 +234,6 @@
 
 </div>
 
-<script>
-    App.setPageTitle('Productos | ARPEMAR SAC');
-    App.restartGlobalFunction();
-    /* $(function () {
-         var id = 0;
-         var fechaini =0;
-         var fechafin = 0;
-         var url = "/reporteVendedorIngresos/" + id + "/" + fechaini + "/" + fechafin;
-         $('#data-table-fixed-header').DataTable({
-             language: {
-                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
-             },
-             processing: true,
-             serverSide: true,
-             select: true,
-             destroy: true,
-             rowId: 'id',
-             aaSorting: [[0, "desc"]],
-             ajax: url,
-             columns: [
-                 {data: 'idUsuario', name: 'idUsuario'},
-                 {data: 'vendedor', name: 'vendedor'},
-                 {data: 'total', name: 'total'},
-                 {data: 'opgv', name: 'opgv'},
-                 {data: 'gastoprod', name: 'gastoprod'},
-                 {data: 'ganancia', name: 'ganancia'},
-                 {data: 'fecha', name: 'fecha'},
-                 {data: 'lugar', name: 'lugar'},
-             ]
-         });
-     });*/
-</script>
-<!-- end panel -->
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
 <script>
@@ -311,5 +278,45 @@
     ).done(function () {
         Notification.init();
     });
+
+   /* $(function () {
+
+        "use strict";
+        var id = $("#nombre_producto").val();
+        if (id)
+            id = $("#nombre_producto").val();
+        else
+            id = '0';
+        var fechaini = convertiFecha($("#inicio").val());
+        var fechafin = convertiFecha($("#final").val());
+        var url = "/reporteProductoIngresos/" + id + "/" + fechaini + "/" + fechafin;
+        var sum = 0;
+        $('#data-table-fixed-header').DataTable({
+            language: {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            processing: true,
+            serverSide: true,
+            select: true,
+            destroy: true,
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'print'
+            ],
+            rowId: 'idUsuario',
+            aaSorting: [[0, "desc"]],
+            ajax: url,
+            columns: [
+                {data: 'idProducto', name: 'idProducto'},
+                {data: 'nombre', name: 'nombre'},
+                {data: 'cantpa', name: 'cantpa'},
+                {data: 'montpaque', name: 'montpaque'},
+                {data: 'cantuni', name: 'cantuni'},
+                {data: 'monuni', name: 'monuni'},
+                {data: 'fecha', name: 'fecha'},
+            ]
+
+        });
+    });*/
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

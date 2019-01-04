@@ -410,7 +410,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-danger" data-dismiss="modal">
+                    <a href="javascript:;" class="btn btn-danger" data-dismiss="modal" onclick="modificarTotal()">
                         <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                         Cancelar</a>
                     <a href="javascript:;" class="btn btn-success disabled" id="enviar" onmouseover="activarBoton()"

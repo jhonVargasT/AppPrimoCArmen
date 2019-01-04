@@ -25,6 +25,20 @@ class ReporteVendedorController extends Controller
         return view('pagina/vendedor/reporte_vendedor');
     }
 
+    public function ventadiaria(){
+        try{
+            $idusuario = Session('idusuario');
+            $result=Pedido::obtenerCajaDiariaVendedor($idusuario);
+            foreach ($result as $res) {
+                $cant = $res->tot;
+            }
+            return response()->json(array('error' => 1, 'tot' => $cant));
+        }
+        catch (Exception $e)
+        {
+            return $e;
+        }
+    }
     public function obtenerPedido($val)
     {
         if ($val != 5) {

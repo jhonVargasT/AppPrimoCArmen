@@ -1,10 +1,37 @@
 
 $(document).ready(function () {
+    cajaDiaria();
     comision();
     ventaMensual();
     meta();
 });
 
+function cajaDiaria() {
+    "use strict";
+    var url = "/cajaDiariavendedor";
+    $.ajax(
+        {
+            type: "GET",
+            url: url,
+            cache: false,
+            dataType: 'json',
+            data: '_token = <?php echo csrf_token() ?>',
+            success: function (data) {
+                if (data.error === 1) {
+                    if (data.tot === null) {
+                        $('#cajadia').text('S/.0.00');
+                    } else {
+                        $('#cajadia').text('S/.' +data.tot);
+                    }
+                }
+                else
+                    alert('nohay');
+
+            }
+
+        }
+    );
+}
 function cambiarTabla() {
     var val =  $('#estado').val();
     $('#data-table-fixed-header').DataTable({

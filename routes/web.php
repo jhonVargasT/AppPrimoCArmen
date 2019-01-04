@@ -106,7 +106,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/totalProductosVendidos', 'ReporteController@totalProductosVendidos');
     Route::get('/cajaMensual', 'ReporteController@ventasMensuales');
     Route::get('/cajaDiaria', 'ReporteController@ventasDiarias');
-
+    Route::get('/cajaDiariavendedor', 'ReporteVendedorController@ventadiaria');
     Route::get('/cambiarNumeroProducto/{idproductopedido}/{cantpaque}/{cantunidad}', 'PedidoAdministrador@cambiarCantProducto');
 //////////////////////////////////////CLIENTES///////////////////////////////////////////////
     Route::get('/session', 'IndexController@session');

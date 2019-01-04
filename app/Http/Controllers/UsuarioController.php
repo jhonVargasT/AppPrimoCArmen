@@ -80,7 +80,7 @@ class UsuarioController extends Controller
                 $usuario->save();
                 $usuario->password = $request->password;
                 $usuario->tipoUsuario = $request->tipousuario;
-             //   Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
+               Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
 
             });
 
@@ -157,7 +157,7 @@ class UsuarioController extends Controller
                 $usuario->save();
                 $usuario->password = $request->password;
                 $usuario->tipoUsuario = $request->tipousuario;
-               // Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
+               Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
             });
 
             return 'success';

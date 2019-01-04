@@ -450,7 +450,16 @@ function vendedorIngresos() {
         destroy: true,
         dom: 'Bfrtip',
         buttons: [
-            'excel', 'print'
+            {
+                extend: 'excel',
+                text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+                exportOptions: {
+                    modifier: {
+                        search: 'applied',
+                        order: 'applied'
+                    }
+                }
+            }
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -492,7 +501,16 @@ function productoIngresos() {
         destroy: true,
         dom: 'Bfrtip',
         buttons: [
-            'excel', 'print'
+            {
+                extend: 'excel',
+                text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+                exportOptions: {
+                    modifier: {
+                        search: 'applied',
+                        order: 'applied'
+                    }
+                }
+            }
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -529,7 +547,16 @@ function vendedorPtoductosRuta() {
         destroy: true,
         dom: 'Bfrtip',
         buttons: [
-            'excel', 'print'
+            {
+                extend: 'excel',
+                text: '<span class="fa fa-file-excel-o"></span> Excel Export',
+                exportOptions: {
+                    modifier: {
+                        search: 'applied',
+                        order: 'applied'
+                    }
+                }
+            }
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -563,7 +590,16 @@ function clienteTotal() {
         destroy: true,
         dom: 'Bfrtip',
         buttons: [
-            'excel', 'print'
+            {
+                extend: 'excel',
+                text: '<span class="fa fa-file-excel-o"></span> Exportar a excel',
+                exportOptions: {
+                    modifier: {
+                        search: 'applied',
+                        order: 'applied'
+                    }
+                }
+            }
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],

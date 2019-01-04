@@ -160,6 +160,15 @@ class Pedido extends Model
                                 and pedido.estadoPedido between 3 and 4');
     }
 
+    public static function obtenerCajaDiariaVendedor($idUsuario)
+    {
+        return DB::select('SELECT format(round(sum(pedido.totalPago),2),2) as tot FROM pedido
+                                where month(now())= month(pedido.fechaEntrega)
+                                and YEAR(now())= YEAR(pedido.fechaEntrega)
+                                and day(now())= day(pedido.fechaEntrega)
+                                and pedido.estadoPedido between 3 and 4 and pedido.idUsuario='.$idUsuario);
+    }
+
     public static function obtenerCajaMensual()
     {
         return DB::select('SELECT round(sum(pedido.totalPago),2) as tot FROM pedido

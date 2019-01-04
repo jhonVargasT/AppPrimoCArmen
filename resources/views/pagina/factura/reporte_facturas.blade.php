@@ -151,6 +151,9 @@
             buttons: [
                 'excel', 'print'
             ],
+            exportOptions: {
+                "columns": ':visible',
+            },
             serverSide: true,
             select: true,
             rowId: 'id',
