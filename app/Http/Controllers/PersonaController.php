@@ -154,12 +154,13 @@ class PersonaController extends Controller
             $persona = Persona::findOrFail($id);
 
             $persona->dni = $request->dni;
-            $persona->ruc = $request->ruc;
             $persona->nombres = strtoupper($request->nombres);
             $persona->apellidos = strtoupper($request->apellidos);
             $persona->fechaNacimiento = date('Y-m-d H:i:s', strtotime($persona->fechaNacimiento));
             $persona->direccion = strtoupper($request->direccion);
             $persona->nroCelular = $request->nroCelular;
+            $persona->ruc = $request->ruc;
+            $persona->razonsocial = $request->razonsocial;
             $persona->correo = $request->correo;
             $persona->tipoCliente=$request->tipocliente;
             $persona->nroCelular = $request->nroCelular;

@@ -155,6 +155,24 @@
                                             </div>
                                         </div>
                                         <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">R.U.C<span
+                                                        class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="text" name="ruc" class="form-control" id="ruc"
+                                                       data-parsley-group="step-1"
+                                                       data-parsley-type="number" value="{{$persona[0]->pruc}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-form-label text-md-right">Razon social<span
+                                                        class="text-danger">*</span></label>
+                                            <div class="col-md-6">
+                                                <input type="text" name="razonsocial" class="form-control" id="razonsocial"
+                                                       data-parsley-group="step-1" value="{{$persona[0]->prazon}}"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Departamento <span
                                                         class="text-danger">*</span></label>
                                             <div class="col-md-6">
@@ -284,16 +302,6 @@
                                         </div>
                                         <!-- end form-group -->
                                         <!-- begin form-group -->
-                                        <div class="form-group row m-b-10">
-                                            <label class="col-md-3 col-form-label text-md-right">R.U.C<span
-                                                        class="text-danger">*</span></label>
-                                            <div class="col-md-6">
-                                                <input type="text" name="ruc" class="form-control" id="ruc"
-                                                       data-parsley-group="step-3" data-parsley-required="true"
-                                                       data-parsley-type="number"
-                                                       value="{{$persona[0]->pruc}}"/>
-                                            </div>
-                                        </div>
 
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Numero de telefono<span

@@ -52,6 +52,16 @@
                         <option style="color: #ca0000;" value="0"> Cancelado</option>
                     </select>
                 </div>
+                <label class="col-md-1 col-sm-1 col-form-label text-right">fecha</label>
+                <div class="col-xs-4 col-sm-4 col-lg-4">
+                    <div class="input-group input-daterange">
+                        <input type="text" class="form-control" name="inicio" id="inicio"
+                               placeholder="Fecha inicio" autocomplete="off">
+                        <span class="input-group-addon">a</span>
+                        <input type="text" class="form-control" name="final" id="final" placeholder="Fecha fin"
+                               autocomplete="off">
+                    </div>
+                </div>
                 <a href="#" class="btn btn-default btn-icon btn-circle btn-lg" onclick="cambiarTabla()" title="buscar">
                     <i class="fa fa-search"></i>
                 </a>
@@ -266,7 +276,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal" onclick="cerrarModal()">Aceptar</a>
+                    <a href="javascript:;" class="btn btn-success" data-dismiss="modal"
+                       onclick="cerrarModal()">Aceptar</a>
                 </div>
             </div>
         </div>
@@ -276,6 +287,21 @@
 <script>
     App.setPageTitle('Pedidos | ARPEMAR SAC');
     App.restartGlobalFunction();
+    $.getScript('../assets/plugins/bootstrap-daterangepicker/moment.js').done(function () {
+        $.when(
+            $.getScript('../assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'),
+            $.getScript('../assets/plugins/ionRangeSlider/js/ion-rangeSlider/ion.rangeSlider.min.js'),
+            $.getScript('../assets/plugins/bootstrap-daterangepicker/daterangepicker.js'),
+            $.getScript('../assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js'),
+            $.Deferred(function (deferred) {
+                $(deferred.resolve);
+            })
+        ).done(function () {
+            $.getScript('../assets/js/demo/form-plugins.demo.min.js').done(function () {
+                FormPlugins.init();
+            });
+        });
+    });
     $(function () {
         var val = 5;
         $('#data-table-fixed-header').DataTable({
@@ -287,7 +313,7 @@
             select: true,
             rowId: 'idPedido',
             aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],
-            ajax: '/listarPedidosAdmin/' + val,
+            ajax: '/listarPedidosAdmin/' + val+'/'+0+'/'+0,
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombreTienda', name: 'nombreTienda'},

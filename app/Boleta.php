@@ -25,7 +25,7 @@ class boleta extends Model
             where fechaEntrega= (select max(fechaEntrega)from bd_app.boleta )');
     }
 
-    public static function listarFacturas()
+    public static function listarFacturas($fechaini,$fechafin)
     {
         return DB::select('SELECT LPAD(pedido.idPedido, 6, \'0\')  idPedido,boleta.nroboleta,boleta.dnioruc,boleta.vendedor,boleta.clienterazonsocial,boleta.documento,
                 boleta.direccion,date(boleta.fechaEntrega) fechaEntrega ,pedido.costoBruto,pedido.impuesto,

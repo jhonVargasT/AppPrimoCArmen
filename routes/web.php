@@ -167,7 +167,7 @@ Route::group(['can:administrador,vendedor'], function () {
         Route::get('/listarPromociones', 'Promocioncontroller@listar')->name('datatable.promociones');
     });
 
-    Route::get('/listarPedidosAdmin/{val}', 'PedidoAdministrador@obtenerPedidos');
+    Route::get('/listarPedidosAdmin/{val}/{fechaini}/{fechafin}', 'PedidoAdministrador@obtenerPedidos');
     Route::get('/listarPedidos/{val}', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
 
 

@@ -82,9 +82,10 @@ class Pedido extends Model
     }
 
     public
-    static function reporteAdministradorPar($val)
+    static function reporteAdministradorPar($val, $fechaini, $fechafin)
     {
-        return static::select(
+
+        $query = DB::table('pedido as p')->select(
             'p.idPedido',
             'pe.dni',
             DB::raw('sum(pp.cantidadUnidades + pp.cantidadPaquetes) as cantidad'),
@@ -93,17 +94,32 @@ class Pedido extends Model
             't.nombreTienda', 'd.provincia', 'd.distrito', 'd.nombreCalle',
             DB::raw('date(p.fechaPedido) as fechaEntrega'),
             DB::raw('p.totalPago as totalPago'), 'p.estadoPedido as estado', 'us.usuario')
-            ->from('pedido as p')
             ->join('productopedido as pp', 'pp.id_Pedido', '=', 'p.idPedido')
             ->join('direcciontienda as d', 'd.idDireccionTienda', '=', 'p.id_DireccionTienda')
             ->join('tienda as t', 't.idTienda', '=', 'd.id_Tienda')
             ->join('persona as pe', 'pe.idPersona', '=', 't.id_Persona')
             ->join('usuario as us', 'us.idUsuario', '=', 'p.idUsuario')
-            // ->where(DB::raw('DATE(p.fechaPedido)'), '>=', DB::raw('DATE(NOW())'))
-            ->where('p.estadoPedido', $val)
             ->groupBy('p.idPedido')
-            ->orderBy('p.idPedido', 'DESC')
-            ->get();
+            ->orderBy('p.idPedido', 'DESC');
+        if ($val === '1' || $val === '2') {
+            $query = $query->where('p.estadoPedido', $val);
+            if ($fechaini != 0)
+                $query = $query->whereBetween(DB::raw('date(p.fechaPedido) '), [$fechaini, $fechafin]);
+        } else {
+            if ($val === '3' || $val === '4') {
+                $query = $query->where('p.estadoPedido', $val);
+                if ($fechaini != 0)
+                    $query = $query->whereBetween(DB::raw('date(p.fechaEntrega) '), [$fechaini, $fechafin]);
+            } else {
+                if ($val === '0')
+                    $query = $query->where('p.estadoPedido', $val);
+                if ($fechaini != 0)
+                    $query = $query->whereBetween(DB::raw('date(p.fechaCreacion) '), [$fechaini, $fechafin]);
+            }
+        }
+
+
+        return $query->get();
 
     }
 
@@ -166,7 +182,7 @@ class Pedido extends Model
                                 where month(now())= month(pedido.fechaEntrega)
                                 and YEAR(now())= YEAR(pedido.fechaEntrega)
                                 and day(now())= day(pedido.fechaEntrega)
-                                and pedido.estadoPedido between 3 and 4 and pedido.idUsuario='.$idUsuario);
+                                and pedido.estadoPedido between 3 and 4 and pedido.idUsuario=' . $idUsuario);
     }
 
     public static function obtenerCajaMensual()
@@ -265,7 +281,7 @@ class Pedido extends Model
                                             JOIN usuario ON usuario.idUsuario = pedido.idUsuario
                                             JOIN persona ON persona.idPersona = usuario.id_Persona
                                             WHERE
-                                                pedido.estadoPedido = 3 '.$fechaini.' '.$vendedor.'
+                                                pedido.estadoPedido = 3 ' . $fechaini . ' ' . $vendedor . '
                                             GROUP BY usuario.idUsuario , pedido.lugar , DATE(pedido.fechaEntrega)
                                             ORDER BY usuario.idUsuario , DATE(pedido.fechaEntrega)) x
                                                 JOIN
@@ -279,7 +295,7 @@ class Pedido extends Model
                                             INNER JOIN pedido ON pedido.idPedido = productopedido.id_Pedido
                                             JOIN producto ON producto.idProducto = productopedido.id_Producto
                                             WHERE
-                                                pedido.estadoPedido = 3 '.$fechaini.' '.$vendedor.'
+                                                pedido.estadoPedido = 3 ' . $fechaini . ' ' . $vendedor . '
                                             GROUP BY pedido.idUsuario , DATE(pedido.fechaEntrega)) y ON y.fechaEntrega = x.fecha
                                                 AND y.idUsuario = x.idUsuario
                                                 AND y.lugar = x.lugar');
@@ -332,7 +348,7 @@ class Pedido extends Model
                                  group by producto.nombre,date(pedido.fechaPedido)');
     }
 
-    public static function obetenerIngresosClientes( $fechaini, $fechafin)
+    public static function obetenerIngresosClientes($fechaini, $fechafin)
     {
 
         if ($fechaini != 0)
@@ -342,8 +358,8 @@ class Pedido extends Model
 
         return DB::select('SELECT persona.idPersona ,concat(persona.nombres,\', \',persona.apellidos) as nomb,sum(totalPago) tot,date(pedido.fechaEntrega)  as fec FROM pedido 
 inner join persona on persona.idPersona=pedido.idPersona
-where pedido.estadoPedido=3 '.$fechaini.'
+where pedido.estadoPedido=3 ' . $fechaini . '
 group by concat(persona.nombres,\', \',persona.apellidos) ,date(pedido.fechaEntrega) 
-order by date(pedido.fechaEntrega) desc,concat(persona.nombres,\', \',persona.apellidos) asc') ;
+order by date(pedido.fechaEntrega) desc,concat(persona.nombres,\', \',persona.apellidos) asc');
     }
 }

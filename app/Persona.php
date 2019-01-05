@@ -25,7 +25,7 @@ class Persona extends Model
     public static function datos($id, $idt)
     {
         return static::select('p.nombres as pnombres', 'p.apellidos as papellidos', 'p.tipoCliente as tipoCliente','p.nroCelular as pnroCelular', 'p.correo as pcorreo', 'p.dni as pdni',
-        'p.ruc as pruc', 'p.direccion as pdireccion', 'p.idPersona as idPersona', 't.nombreTienda as tnombreTienda', 't.telefono as ttelefono',
+        'p.ruc as pruc','p.razonsocial as prazon', 'p.direccion as pdireccion', 'p.idPersona as idPersona', 't.nombreTienda as tnombreTienda', 't.telefono as ttelefono',
         'dt.nombreCalle as dtnombreCalle', 'dt.provincia as dtprovincia', 'dt.distrito as dtdistrito', 'p.fechaNacimiento as pfechaNacimiento',
         'p.departamento as pdepartamento', 'p.provincia as pprovincia', 'p.distrito as pdistrito', 'p.nroCelular as pnroCelular',
         'p.correo as pcorreo', 'p.idPersona as idPersona', 't.idTienda as idTienda', 'dt.idDireccionTienda as idDireccionTienda')

@@ -18,14 +18,10 @@ use Illuminate\Support\Facades\DB;
 
 class PedidoAdministrador extends Controller
 {
-    public function obtenerPedidos($val)
+    public function obtenerPedidos($val,$fechaini,$fechafin)
     {
-        if ($val != 5) {
-            return datatables()->of(Pedido::reporteAdministradorPar($val))->toJson();
-        } else {
-            return datatables()->of(Pedido::reporteAdministrador())->toJson();
-        }
 
+            return datatables()->of(Pedido::reporteAdministradorPar($val,$fechaini,$fechafin))->toJson();
     }
 
     public

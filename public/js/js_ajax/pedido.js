@@ -346,8 +346,17 @@ function verDetalleEliminacion(idpedido) {
     });
 }
 
+function convertiFecha(dato) {
+    var fecha = dato.split('/');
+    var res = fecha[2] + '-' + fecha[0] + '-' + fecha[1];
+    return res.toString();
+}
+
+
 function cambiarTabla() {
-    var val =  $('#estado').val();;
+    var val =  $('#estado').val();
+    var fechaini = convertiFecha($("#inicio").val());
+    var fechafin = convertiFecha($("#final").val());
     $('#data-table-fixed-header').DataTable({
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
@@ -358,7 +367,7 @@ function cambiarTabla() {
         destroy: true,
         rowId: 'idPedido',
         aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],
-        ajax: '/listarPedidosAdmin/' + val,
+        ajax: '/listarPedidosAdmin/' + val+'/'+fechaini+'/'+fechafin,
         columns: [
             {data: 'idPedido', name: 'idPedido'},
             {data: 'nombreTienda', name: 'nombreTienda'},

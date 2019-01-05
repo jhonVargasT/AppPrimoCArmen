@@ -198,9 +198,10 @@
             </th>
         </tr>
         <tr>
-            <th colspan="3" align="right">ATENDIDO POR :
+
+            <th colspan="4" align="right" valign="top">ATENDIDO POR:
             </th>
-            <th colspan="5" align="left">{{$cabezaPedido[0]->vendedor}}
+            <th colspan="4" align="left" valign="top">{{$cabezaPedido[0]->vendedor}}
             </th>
         </tr>
         </tbody>
