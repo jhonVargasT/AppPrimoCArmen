@@ -616,9 +616,9 @@ class FacturaController extends Controller
         unlink(public_path() . '/xml/' . 'C' . $filename . '.xml');
     }
 
-    public function listarFacturas($fechaini,$fechafin)
+    public function listarFacturas()
     {
-        return datatables()->of(Boleta::listarFacturas($fechaini,$fechafin))->toJson();
+        return datatables()->of(Boleta::listarFacturas())->toJson();
     }
 
     public function document($serie)
