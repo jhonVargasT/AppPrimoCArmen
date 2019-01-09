@@ -259,7 +259,24 @@
                                         <legend class="no-border f-w-700 p-b-0 m-t-0 m-b-20 f-s-16 text-inverse">
                                             Selecciona tu ususario y contraseña
                                         </legend>
+                                        <div class="form-group row m-b-10">
+                                            <label class="col-md-3 col-sm-3 col-form-label text-md-right" for="tipousuario">Tipo
+                                                de usuario
+                                                :</label>
+                                            <div class="col-md-6 col-sm-6">
 
+                                                <select class="form-control" type="text" id="tipousuario"
+                                                        name="tipousuario"
+                                                        data-parsley-required="true" data-parsley-group="step-3">
+                                                    @if($usuario[0]->tipoUsuario === 1)
+                                                        <option selected>Administrador</option>
+                                                        <option>Vendedor</option>
+                                                    @else
+                                                        <option>Administrador</option>
+                                                        <option selected>Vendedor</option>
+                                                    @endif
+                                                </select></div>
+                                        </div>
                                         <!-- begin form-group -->
                                         <div class="form-group row m-b-10">
                                             <label class="col-md-3 col-form-label text-md-right">Usuario<span

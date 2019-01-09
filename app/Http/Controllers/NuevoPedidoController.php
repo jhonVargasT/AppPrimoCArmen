@@ -127,16 +127,16 @@ class NuevoPedidoController extends Controller
         }
     }
 
-    public function autocompletarproducto($idproducto, $dni)
+    public function autocompletarproducto($idproducto, $id)
     {
         $nombre = null;
         try {
-            $cliente = Persona::obtenerDatosDni($dni);
+           /* $cliente = Persona::obtenerDatosDni($dni);
 
             foreach ($cliente as $cl) {
                 $idpersona = $cl->idPersona;
-            }
-            $producto = Producto::consultarProductoNombre($idproducto, $idpersona);
+            }*/
+            $producto = Producto::consultarProductoNombre($idproducto, $id);
             foreach ($producto as $p) {
                 $idProducto = $p->idProducto;
                 $nombre = $p->nombre;

@@ -37,6 +37,7 @@
 
 </head>
 <body>
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <!-- begin #page-loader -->
 <div id="page-loader" class="fade show"><span class="spinner"></span></div>
 <!-- end #page-loader -->

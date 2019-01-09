@@ -184,8 +184,8 @@ function llenarDireccion() {
 function buscarProductoNombre() {
     "use strict";
     var idproducto = $("#nombre_producto").val();
-    var dni = $("#dni").val();
-    var url = "autocompletarproducto/" + idproducto + "/" + dni;
+    var id = $("#idpersona").val();
+    var url = "autocompletarproducto/" + idproducto + "/" + id;
     $.ajax({
         type: "GET",
         url: url,

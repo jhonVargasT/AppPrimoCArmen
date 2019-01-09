@@ -40,7 +40,7 @@
 <!-- begin #page-loader -->
 <div id="page-loader" class="fade show"><span class="spinner"></span></div>
 <!-- end #page-loader -->
-
+<input type="hidden" name="_token" value="{{ csrf_token() }}">
 <!-- begin #page-container -->
 <div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed">
     <!-- begin #header -->

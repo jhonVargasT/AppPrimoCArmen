@@ -80,7 +80,7 @@ class UsuarioController extends Controller
                 $usuario->save();
                 $usuario->password = $request->password;
                 $usuario->tipoUsuario = $request->tipousuario;
-               Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
+                Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
 
             });
 
@@ -140,6 +140,11 @@ class UsuarioController extends Controller
             $persona->distrito = strtoupper($request->distrito);
 
             $usuario = Usuario::findOrFail($id);
+            if ($request->tipousuario === 'Administrador')
+                $usuario->tipoUsuario = 1;
+            elseif ($request->tipousuario === 'Vendedor')
+                $usuario->tipoUsuario = 0;
+
             if ($usuario->password === $request->password) {
                 $usuario->password = $request->password;
             } else {
@@ -157,7 +162,7 @@ class UsuarioController extends Controller
                 $usuario->save();
                 $usuario->password = $request->password;
                 $usuario->tipoUsuario = $request->tipousuario;
-               Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
+                Mail::to($persona->correo)->send(new  CorreoUsuarioCreado($usuario, $persona));
             });
 
             return 'success';
