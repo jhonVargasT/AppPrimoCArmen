@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="form-group row m-b-15">
-                    <label class="col-form-label col-md-3 text-left">Nombres y apellidos</label>
+                    <label class="col-form-label col-md-3 text-left">Nombres y Apellidos</label>
                     <div class="col-md-9">
                         <input type="text" class="form-control m-b-5 typeahead" id="nombresapellidos"
                                name="nombresapellidos" onkeypress="if(event.keyCode == 13) completarNombresApellidos()"
