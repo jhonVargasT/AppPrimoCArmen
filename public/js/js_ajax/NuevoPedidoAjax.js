@@ -435,7 +435,9 @@ function llenarTabla() {
 
 }
 
+
 function eliminarProductoTabla(id) {
+
     swal({
         title: 'Esta seguro?',
         text: "Este registro se eliminara!",
@@ -447,12 +449,15 @@ function eliminarProductoTabla(id) {
     }).then(function (result) {
         if (result.value) {
             var posicion;
+
             for (var i = 0; i < productos.length; i++) {
                 if (productos[i]['id'].toString() === id.toString()) {
-                    productos.splice(0, 1);
+                    /*  alert(productos[i]['id'].toString());*/
+                    productos.splice(i, 1);
                 }
             }
             llenarTabla();
+            modificarTotal();
         }
     })
 

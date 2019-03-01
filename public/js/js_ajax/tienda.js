@@ -447,6 +447,7 @@ function llenarTabla() {
         processing: true,
         select: true,
         data: productos,
+        aaSorting: [[0, "asc"]],
         columns: [
             {title: "Codigo", data: ['id']},
             {title: "Nombre producto", data: ['nombre']},
@@ -472,23 +473,27 @@ function llenarTabla() {
 }
 
 function eliminarProductoTabla(id) {
-    swal({
-        title: 'Esta seguro?',
-        text: "Este registro se eliminara!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: "Eliminar!"
-    }).then(function (result) {
-        if (result.value) {
-            var posicion;
-            for (var i = 0; i < productos.length; i++) {
-                if (productos[i]['id'].toString() === id.toString()) {
-                    productos.splice(0, 1);
-                }
-            }
+
+     swal({
+         title: 'Esta seguro?',
+         text: "Este registro se eliminara!",
+         type: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: "Eliminar!"
+     }).then(function (result) {
+         if (result.value) {
+             var posicion;
+
+             for (var i = 0; i < productos.length; i++) {
+                 if (productos[i]['id'].toString() === id.toString()) {
+                   /*  alert(productos[i]['id'].toString());*/
+                    productos.splice(i, 1);
+                 }
+             }
             llenarTabla();
+             modificarTotal();
         }
     })
 
