@@ -448,18 +448,9 @@ function vendedorIngresos() {
         serverSide: true,
         select: true,
         destroy: true,
-        dom: 'Bfrtip',
+        dom: 'lBfrtip',
         buttons: [
-            {
-                extend: 'excel',
-                text: '<span class="fa fa-file-excel-o"></span> Excel Export',
-                exportOptions: {
-                    modifier: {
-                        search: 'applied',
-                        order: 'applied'
-                    }
-                }
-            }
+            'excel', 'pdf'
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -499,18 +490,9 @@ function productoIngresos() {
         serverSide: true,
         select: true,
         destroy: true,
-        dom: 'Bfrtip',
+        dom: 'lBfrtip',
         buttons: [
-            {
-                extend: 'excel',
-                text: '<span class="fa fa-file-excel-o"></span> Excel Export',
-                exportOptions: {
-                    modifier: {
-                        search: 'applied',
-                        order: 'applied'
-                    }
-                }
-            }
+             'excel', 'pdf'
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -545,18 +527,9 @@ function vendedorPtoductosRuta() {
         serverSide: true,
         select: true,
         destroy: true,
-        dom: 'Bfrtip',
+        dom: 'lBfrtip',
         buttons: [
-            {
-                extend: 'excel',
-                text: '<span class="fa fa-file-excel-o"></span> Excel Export',
-                exportOptions: {
-                    modifier: {
-                        search: 'applied',
-                        order: 'applied'
-                    }
-                }
-            }
+            'excel', 'pdf'
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -588,18 +561,9 @@ function clienteTotal() {
         serverSide: true,
         select: true,
         destroy: true,
-        dom: 'Bfrtip',
+        dom: 'lBfrtip',
         buttons: [
-            {
-                extend: 'excel',
-                text: '<span class="fa fa-file-excel-o"></span> Exportar a excel',
-                exportOptions: {
-                    modifier: {
-                        search: 'applied',
-                        order: 'applied'
-                    }
-                }
-            }
+            'excel', 'pdf'
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],

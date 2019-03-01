@@ -17,6 +17,8 @@ use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 
+
+
 class ImpresionesController extends Controller
 {
 

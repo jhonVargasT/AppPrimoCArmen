@@ -411,6 +411,7 @@ function llenarTabla() {
         processing: true,
         select: true,
         data: productos,
+        aaSorting: [[0, "asc"]],
         columns: [
             {title: "Codigo", data: ['id']},
             {title: "Nombre producto", data: ['nombre']},

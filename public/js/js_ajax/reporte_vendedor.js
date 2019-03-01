@@ -43,6 +43,10 @@ function cambiarTabla() {
         serverSide: true,
         select: true,
         destroy: true,
+        dom: 'lBfrtip',
+        buttons: [
+            'excel', 'pdf'
+        ],
         rowId: 'idPedido',
         aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
         ajax: '/listarPedidos/'+val,

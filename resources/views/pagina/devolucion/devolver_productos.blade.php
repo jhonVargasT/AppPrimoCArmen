@@ -26,7 +26,6 @@
                     <h4 class="panel-title">Devolucion
 
                     </h4>
-z
                 </div>
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
