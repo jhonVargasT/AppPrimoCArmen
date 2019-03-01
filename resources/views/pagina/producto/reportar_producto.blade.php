@@ -243,6 +243,10 @@
             serverSide: true,
             select: true,
             rowId: 'id',
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             aaSorting: [[0, "desc"]],
             ajax: '{!! route('datatable.productos') !!}',
             columns: [

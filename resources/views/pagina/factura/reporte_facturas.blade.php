@@ -147,13 +147,10 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            dom: 'Bfrtip',
+            dom: 'lBfrtip',
             buttons: [
-                'excel', 'print'
+                'excel', 'pdf'
             ],
-            exportOptions: {
-                "columns": ':visible',
-            },
             serverSide: true,
             select: true,
             rowId: 'id',

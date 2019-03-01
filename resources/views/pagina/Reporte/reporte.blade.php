@@ -279,7 +279,7 @@
         Notification.init();
     });
 
-   /* $(function () {
+    $(function () {
 
         "use strict";
         var id = $("#nombre_producto").val();
@@ -299,9 +299,9 @@
             serverSide: true,
             select: true,
             destroy: true,
-            dom: 'Bfrtip',
+            dom: 'lBfrtip',
             buttons: [
-                'excel', 'print'
+                'excel', 'pdf'
             ],
             rowId: 'idUsuario',
             aaSorting: [[0, "desc"]],
@@ -317,6 +317,6 @@
             ]
 
         });
-    });*/
+    });
 </script>
 <!-- ================== END PAGE LEVEL JS ================== -->

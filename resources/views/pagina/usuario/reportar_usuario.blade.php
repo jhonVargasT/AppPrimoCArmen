@@ -148,6 +148,10 @@
             serverSide: true,
             select: true,
             rowId: 'id',
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '{!! route('datatable.usuarios') !!}',
             columns: [
                 {data: 'pnombres', name: 'pnombres'},

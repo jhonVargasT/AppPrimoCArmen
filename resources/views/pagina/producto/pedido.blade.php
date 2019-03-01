@@ -313,6 +313,10 @@
             select: true,
             rowId: 'idPedido',
             aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '/listarPedidosAdmin/' + val+'/'+0+'/'+0,
             columns: [
                 {data: 'idPedido', name: 'idPedido'},

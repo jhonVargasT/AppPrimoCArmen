@@ -172,6 +172,10 @@
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '{!! route('datatable.listarDevoluciones') !!}',
             columns: [
                 {data: 'iddevolucion', name: 'iddevolucion'},

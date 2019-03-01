@@ -134,6 +134,10 @@
             serverSide: true,
             select: true,
             rowId: 'id',
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '/listarproductopromocion/{{$id}}',
             columns: [
                 {data: 'id', name: 'id'},

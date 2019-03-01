@@ -136,6 +136,10 @@
             serverSide: true,
             select: true,
             rowId: 'id',
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '{!! route('datatable.promociones') !!}',
             columns: [
                 {data: 'idPromocion', name: 'idPromocion'},

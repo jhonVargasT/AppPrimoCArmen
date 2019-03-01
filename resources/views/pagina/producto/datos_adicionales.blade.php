@@ -191,6 +191,10 @@
             serverSide: true,
             select: true,
             rowId: 'idTipoPaquete',
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '{!! route('datatable.listarTipoPquete') !!}',
             columns: [
                 {data: 'idTipoPaquete', name: 'idTipoPaquete'},
@@ -236,6 +240,10 @@
             serverSide: true,
             select: true,
             rowId: 'idTipoProducto',
+            dom: 'lBfrtip',
+            buttons: [
+                'excel', 'pdf'
+            ],
             ajax: '{!! route('datatable.listarTipoProducto') !!}',
             columns: [
                 {data: 'idTipoProducto', name: 'idTipoProducto'},
