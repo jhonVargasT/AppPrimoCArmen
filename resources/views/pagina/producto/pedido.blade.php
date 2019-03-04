@@ -309,7 +309,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+          //  serverSide: true,
             select: true,
             rowId: 'idPedido',
             aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],

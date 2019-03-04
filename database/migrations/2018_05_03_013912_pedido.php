@@ -26,6 +26,8 @@ class Pedido extends Migration
             $table->double('impuesto')->nullable();
             $table->double('descuento')->nullable();
             $table->double('totalPago')->nullable();
+            $table->double('saldo')->nullable();
+            $table->double('vuelto')->nullable();
             $table->integer('idUsuario')->nullable();
             $table->dateTime('fechaCreacion')->nullable();
             $table->integer('estado')->default('1');

@@ -98,7 +98,6 @@ class TiendaController extends Controller
             $data = json_decode($array);
             $persona = $data->persona;
 
-
             $pedido = new Pedido;
             $pedido->fechaEntrega = null;
             $pedido->fechaPedido = util::fecha();
@@ -106,6 +105,22 @@ class TiendaController extends Controller
             $pedido->idPersona = $persona->persona;
             $pedido->usuarioEliminacion = null;
             $pedido->razonEliminar = null;
+            if ($persona->estado === '0') {
+                $pedido->vuelto = $persona->vuelto;
+                $pedido->saldo = 0;
+            } else {
+                if ($persona->estado === '1') {
+                    if ($persona->vuelto === '0') {
+                        $pedido->vuelto = 0;
+                        $pedido->saldo =round($persona->total, 2);
+                    } else {
+                        $pedido->vuelto = 0;
+                        $pedido->saldo = round(abs($persona->total - $persona->monto),2);
+                    }
+                }
+
+            }
+
             $pedido->impuesto = round(($persona->total * 0.18), 2);
             $pedido->costoBruto = round(abs(($persona->total * 0.18) - $persona->total), 2);
             $pedido->totalPago = round($persona->total, 2);
@@ -145,8 +160,8 @@ class TiendaController extends Controller
                         $productopedido->DescuentoUnidades = round(abs($pr->montounidades - ($montounida * $unidades)), 2);
                     } else {
                         $productopedido->id_Promocion = null;
-                        $productopedido->DescuentoPaquetes =0;
-                        $productopedido->DescuentoUnidades =0;
+                        $productopedido->DescuentoPaquetes = 0;
+                        $productopedido->DescuentoUnidades = 0;
                     }
                     $productopedido->estado = 4;
                     $productopedido->cantidadPaquetes = $paquetes;

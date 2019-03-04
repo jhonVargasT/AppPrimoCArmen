@@ -151,7 +151,7 @@
             buttons: [
                 'excel', 'pdf'
             ],
-            serverSide: true,
+          //  serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],

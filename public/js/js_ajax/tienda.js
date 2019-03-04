@@ -474,26 +474,26 @@ function llenarTabla() {
 
 function eliminarProductoTabla(id) {
 
-     swal({
-         title: 'Esta seguro?',
-         text: "Este registro se eliminara!",
-         type: 'warning',
-         showCancelButton: true,
-         confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: "Eliminar!"
-     }).then(function (result) {
-         if (result.value) {
-             var posicion;
+    swal({
+        title: 'Esta seguro?',
+        text: "Este registro se eliminara!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Eliminar!"
+    }).then(function (result) {
+        if (result.value) {
+            var posicion;
 
-             for (var i = 0; i < productos.length; i++) {
-                 if (productos[i]['id'].toString() === id.toString()) {
-                   /*  alert(productos[i]['id'].toString());*/
+            for (var i = 0; i < productos.length; i++) {
+                if (productos[i]['id'].toString() === id.toString()) {
+                    /*  alert(productos[i]['id'].toString());*/
                     productos.splice(i, 1);
-                 }
-             }
+                }
+            }
             llenarTabla();
-             modificarTotal();
+            modificarTotal();
         }
     })
 
@@ -530,48 +530,166 @@ function editarProducto(event, id) {
     }
 }
 
-//reparar esta mierda
-function enviarPedido() {
-    "use strict";
-    var idpersona = $('#idpersona').val();
-    var iddireccion = $('#direcciones').find('option:selected').attr('id');
-    var fechaentrega = new Date($('#datepicker-autoClose').val());
-    var costototal = $('#total').text();
-    var tipousuario = $("#tipousuario").val();
+function quitarPago() {
+    //var chec=$('#cssCheckbox1').;
+    //  console.log(chec);
 
-    var datosper = {
-        persona: idpersona,
-        tienda: iddireccion,
-        fechaentrega: fechaentrega,
-        tipousuario: tipousuario,
-        total: costototal
-    };
+    if (document.getElementById('cssCheckbox1').checked) {
+        $('#deuda').val(1);
+        console.log('yes');
+        $('#vuelto').remove();
+        $('#paga').remove();
 
-    var datos = {persona: datosper, productos: productos};
-    var arr = JSON.stringify(datos);
+    } else {
+        $('#deuda').val(0);
+        var html = $('#poner').html();
+        var html2 = '<div id="paga">' +
+            '<div><label class="swal2-text ">Paga con</label> </div>' +
+            '<div><input id="monto" class="swal2-input col-3 number text-center" type="number" min="0"' +
+            ' onkeyup="validarMonto()" ></div></div>' +
+            '<div id="vuelto">' +
+            ' </div> ' +
+            '</div>';
+        html = html + html2;
+        $('#poner').html(html);
+    }
 
-    var url = "enviarpedidosTienda/" + arr;
-    $.ajax({
-        type: "GET",
-        url: url,
-        cache: false,
-        dataType: 'json',
-        data: '_token = <?php echo csrf_token() ?>',
-        success: function (data) {
-            if (data.error === 0) {
-                correcto(data.id);
-                agreimpirmir(data.id);
+}
 
-            }
-            else {
-                //   redirect();
-                error(data.error);
-            }
-
-        }, beforeSend: function () {
-            $("#enviarpedido").prop('disabled', true);
+function validarMonto() {
+    var valor = $('#monto').val();
+    var total = $('#total').text()
+    if (valor > 0) {
+        var resta = valor - total
+        if (resta >= 0) {
+            $('#deuda').val(0);
+            var html2 = '<div><label class="swal2-text text-green">VUELTO</label> </div>' +
+                '        <div><label id="vueltopago" class="swal2-text ">' + number_format(parseFloat(parseFloat(resta)).toFixed(1), 2) + '</label> </div>';
+            $('#vuelto').html(html2);
         }
-    });
+        else {
+            $('#deuda').val(1);
+            var html2 = '<div><label class="swal2-text text-red">DEUDA</label> </div>' +
+                '        <div><label id="vueltopago" class="swal2-text text-red">' + number_format(parseFloat(parseFloat(resta)).toFixed(1), 2) + '</label> </div>' +
+                '<div><label class="swal2-text text-red">Este monto se agregara a la deuda del cliente</label> </div>';
+            $('#vuelto').html(html2)
+        }
+    }
+    else {
+        $('#deuda').val(0);
+        var html2 = '<div><label class="swal2-text text-red">Verifique el monto</label> </div>';
+        $('#vuelto').html(html2);
+    }
+}
+
+async function pagar(id) {
+    var estado, monto, vueltopago;
+    var total = $('#total').text();
+    const {value: formValues} = await Swal.fire({
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        cancelButtonText: 'No, cancelar',
+        confirmButtonText: 'Si, enviar',
+        imageUrl: '../assets/img/logo/calculadora.png',
+        imageWidth: 100,
+        imageHeight: 100,
+        imageAlt: 'Custom image',
+        animation: false,
+        showCancelButton: true,
+        title: 'CALCULADORA',
+        html:
+        '<div><label class="swal2-text ">Monto que debe pagar</label> </div>' +
+        '<input type="text" id="deuda" value="0" hidden>' +
+        '<div><label class="swal2-text text-green">S./ ' + total + '</label> </div>' +
+        '<div>' +
+        '<input type="checkbox" id="cssCheckbox1"  onclick="quitarPago()">' +
+        '<label for="cssCheckbox1" class="swal2-text text-blue">Credito (seleccione solo si va a fiar)</label>' +
+        '</div>' +
+        '<div id="poner" ><div id="paga">' +
+        '<div><label class="swal2-text ">Paga con</label> </div>' +
+        '<div><input id="monto" class="swal2-input col-3 number text-center" type="number" onkeyup="validarMonto(' + total + ')"></div>' +
+        '<div id="vuelto">' +
+        '</div>' +
+        '</div></div>',
+        focusConfirm: false,
+        inputAttributes: {
+            maxlength: 10
+        },
+        preConfirm: () => {
+            return [
+                $('#monto').val(),
+                $('#vueltopago').text(),
+                $('#deuda').val(),
+            ]
+        }
+    })
+    if (formValues) {
+        estado=formValues[2];
+        if (!formValues[1]) {
+            monto = '0';
+            vueltopago = '0';
+        }
+        else {
+            monto = formValues[0];
+            vueltopago = formValues[1];
+        }
+
+        enviarPedido(monto,vueltopago,estado);
+    }
+}
+
+//reparar esta mierda
+function enviarPedido(monto,vuelto,estado) {
+
+
+
+            "use strict";
+            var idpersona = $('#idpersona').val();
+            var iddireccion = $('#direcciones').find('option:selected').attr('id');
+            var fechaentrega = new Date($('#datepicker-autoClose').val());
+            var costototal = $('#total').text();
+            var tipousuario = $("#tipousuario").val();
+
+            var datosper = {
+                persona: idpersona,
+                tienda: iddireccion,
+                fechaentrega: fechaentrega,
+                tipousuario: tipousuario,
+                total: costototal,
+                monto:monto,
+                vuelto:vuelto,
+                estado:estado
+            };
+
+            var datos = {persona: datosper, productos: productos};
+            var arr = JSON.stringify(datos);
+
+            var url = "enviarpedidosTienda/" + arr;
+            $.ajax({
+                type: "GET",
+                url: url,
+                cache: false,
+                dataType: 'json',
+                data: '_token = <?php echo csrf_token() ?>',
+                success: function (data) {
+                    if (data.error === 0) {
+                        correcto(data.id);
+
+                        agreimpirmir(data.id);
+
+                    }
+                    else {
+                        //   redirect();
+                        error(data.error);
+                    }
+
+                }, beforeSend: function () {
+                    $("#enviarpedido").prop('disabled', true);
+                }
+            });
+
+
+
 }
 
 function agreimpirmir(id) {
