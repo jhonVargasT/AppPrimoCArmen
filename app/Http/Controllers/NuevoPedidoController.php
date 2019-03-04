@@ -224,6 +224,21 @@ class NuevoPedidoController extends Controller
             $pedido->id_DireccionTienda = $persona->tienda;
             $productos = $data->productos;
 
+            if ($persona->estado === '0') {
+                $pedido->vuelto = $persona->vuelto;
+                $pedido->saldo = 0;
+            } else {
+                if ($persona->estado === '1') {
+                    if ($persona->vuelto === '0') {
+                        $pedido->vuelto = 0;
+                        $pedido->saldo =round($persona->total, 2);
+                    } else {
+                        $pedido->vuelto = 0;
+                        $pedido->saldo = round(abs($persona->total - $persona->monto),2);
+                    }
+                }
+
+            }
             DB::transaction(function () use ($pedido, $productos, $persona) {
                 $pedido->save();
                 $idpedidoreporte = $pedido->idPedido;

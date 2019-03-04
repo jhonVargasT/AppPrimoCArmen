@@ -240,7 +240,7 @@
                 <a href="/reportevendedor" class="btn btn-danger" data-toggle="ajax">
                     <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
                     Cancelar</a>
-                <button href="javascript:;" class="btn btn-success " onclick="enviarPedido()" id="enviarpedido">
+                <button href="javascript:;" class="btn btn-success " onclick="pagar()" id="enviarpedido">
                     <i class="fas fa-lg fa-fw m-r-10 fa-paper-plane"> </i>Enviar
                 </button>
             </div>
