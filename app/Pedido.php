@@ -175,6 +175,12 @@ class Pedido extends Model
                                 and day(now())= day(pedido.fechaEntrega)
                                 and pedido.estadoPedido between 3 and 4');
     }
+public static function obtenerDeudas(){
+    return DB::select('SELECT persona.idPersona,concat(persona.nombres,\', \',persona.apellidos) nom, persona.dni,sum(pedido.saldo) as tot FROM pedido join 
+        persona on persona.idPersona=pedido.idPersona where 
+        pedido.saldo is not null and pedido.saldo != 0
+      ');
+}
 
     public static function obtenerCajaDiariaVendedor($idUsuario)
     {

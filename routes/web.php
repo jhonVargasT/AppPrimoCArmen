@@ -113,6 +113,7 @@ Route::group(['can:administrador,vendedor'], function () {
 
     Route::get('/Clientes', 'PersonaController@index');
     Route::get('/deuda', 'DeudaController@index');
+
     Route::get('/actualizarCliente', 'PersonaController@actualizarCliente');
 
     Route::prefix('Cliente')->group(function () {
@@ -158,6 +159,7 @@ Route::group(['can:administrador,vendedor'], function () {
 //////////////////////////////////////DATATABLES///////////////////////////////////////////////
 
     Route::prefix('datatables')->group(function () {
+        Route::get('/obtenerDeudas', 'DeudaController@listardeudas')->name('datatable.deudas');
         Route::get('/listadoCliente', 'PersonaController@listado')->name('datatable.clientes');
         Route::get('/listadoUsuarios', 'UsuarioController@listado')->name('datatable.usuarios');
         Route::get('/listadoProductos', 'ProductoController@listado')->name('datatable.productos');
