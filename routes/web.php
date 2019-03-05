@@ -112,6 +112,7 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/session', 'IndexController@session');
 
     Route::get('/Clientes', 'PersonaController@index');
+    Route::get('/deuda', 'DeudaController@index');
     Route::get('/actualizarCliente', 'PersonaController@actualizarCliente');
 
     Route::prefix('Cliente')->group(function () {

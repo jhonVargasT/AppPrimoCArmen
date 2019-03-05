@@ -92,34 +92,41 @@
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
                     <a href="/Reportes" data-toggle="ajax">
-                        <i class="fas fa-lg fa-fw m-r-10 fa-chart-pie"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-chart-pie text-red"></i>
                         <span>Reporte</span>
                     </a>
                 </li>
                 <li class="has-sub">
                     <a href="/facturas" data-toggle="ajax">
-                        <i class="fas fa-lg fa-fw m-r-10 fa-calculator"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-calculator text-blue"></i>
                         <span>Facturas/Boletas</span>
                     </a>
                 </li>
+
                 <li class="has-sub">
                     <a href="/tienda" data-toggle="ajax">
 
-                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket text-yellow"></i>
                         <span>Tienda</span>
                     </a>
                 </li>
                 <li class="has-sub">
                     <a href="/Pedidos" data-toggle="ajax">
 
-                        <i class="fas fa-lg fa-fw m-r-10 fa-clipboard"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-clipboard text-purple"></i>
                         <span>Pedidos</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="/deuda" data-toggle="ajax">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-edit text-orange"></i>
+                        <span>Deudas</span>
                     </a>
                 </li>
                 <li class="has-sub">
                     <a href="/devolucion" data-toggle="ajax">
 
-                        <i class="fas fa-lg fa-fw m-r-10 fa-history"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-history text-aqua"></i>
                         <span>Devolucion</span>
                     </a>
                 </li>
@@ -127,7 +134,7 @@
                 <li class="has-sub">
                     <a href="javascript:;">
                         <b class="caret"></b>
-                        <i class="fas fa-lg fa-fw m-r-10 fa-database"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-database "></i>
                         <span>Administrar datos</span>
                     </a>
                     <ul class="sub-menu">

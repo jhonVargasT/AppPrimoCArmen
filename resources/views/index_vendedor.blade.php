@@ -91,21 +91,27 @@
                 <li class="nav-header"><b>OPCIONES</b></li>
                 <li class="has-sub">
                     <a href="/reportevendedor" data-toggle="ajax">
-                        <i class="fas fa-lg fa-fw m-r-10 fa-chart-pie"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-chart-pie text-red"></i>
                         <span>Pedidos vendedor</span>
                     </a>
                 </li>
                 <li class="has-sub">
                     <a href="/facturas" data-toggle="ajax">
-                        <i class="fas fa-lg fa-fw m-r-10 fa-calculator"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-calculator text-blue"></i>
                         <span>Facturas/Boletas</span>
                     </a>
                 </li>
                 <li class="has-sub">
                     <a href="/tienda" data-toggle="ajax">
 
-                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-shopping-basket text-yellow"></i>
                         <span>Tienda</span>
+                    </a>
+                </li>
+                <li class="has-sub">
+                    <a href="/facturas" data-toggle="ajax">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-edit text-purple"></i>
+                        <span>Deudas</span>
                     </a>
                 </li>
           <!--      <li class="has-sub">
@@ -118,7 +124,7 @@
                 <li class="has-sub">
                     <a href="/devolucion" data-toggle="ajax">
 
-                        <i class="fas fa-lg fa-fw m-r-10 fa-history"></i>
+                        <i class="fas fa-lg fa-fw m-r-10 fa-history text-orange"></i>
                         <span>Devolucion</span>
                     </a>
                 </li>
