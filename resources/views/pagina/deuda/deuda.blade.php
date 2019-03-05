@@ -116,7 +116,6 @@
             rowId: 'id',
             aaSorting: [[0, "desc"]],
             dom: 'lBfrtip',
-            sScrollX:100%,
             responsive: true,
             bAutoWidth: true,
             buttons: [
