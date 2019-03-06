@@ -175,12 +175,32 @@ class Pedido extends Model
                                 and day(now())= day(pedido.fechaEntrega)
                                 and pedido.estadoPedido between 3 and 4');
     }
-public static function obtenerDeudas(){
-    return DB::select('SELECT persona.idPersona,concat(persona.nombres,\', \',persona.apellidos) nom, persona.dni,sum(pedido.saldo) as tot FROM pedido join 
+
+    public static function obtenerDeudas()
+    {
+        return DB::select('SELECT persona.idPersona,concat(persona.nombres,\', \',persona.apellidos) nom, persona.dni,sum(pedido.saldo) as tot FROM pedido join 
         persona on persona.idPersona=pedido.idPersona where 
-        pedido.saldo is not null and pedido.saldo != 0
+        pedido.saldo is not null and pedido.saldo != 0 and pedido.estadoPedido between 3 and 4
       ');
-}
+    }
+
+    public static function obtenerDeudasPersona($idpersona)
+    {
+        return DB::select('SELECT pedido.idPedido,pedido.fechaCreacion,pedido.fechaEntrega,
+                pedido.totalPago montototal,pedido.totalPago-pedido.saldo pago, pedido.saldo
+                 FROM pedido join 
+                persona on persona.idPersona=pedido.idPersona where 
+                pedido.saldo is not null and pedido.saldo != 0 and pedido.idPersona = '.$idpersona.' and pedido.estadoPedido between 3 and 4
+      ');
+    }
+
+    public static function obtenerdatosPersonadeuda($idpersona)
+    {
+        return DB::select('SELECT persona.idPersona, persona.nombres,persona.apellidos,persona.dni,persona.nroCelular,persona.correo,sum(pedido.saldo)  tot
+                 FROM pedido join 
+                persona on persona.idPersona=pedido.idPersona where 
+                pedido.saldo is not null and pedido.saldo != 0 and pedido.idPersona = '.$idpersona.' and pedido.estadoPedido between 3 and 4');
+    }
 
     public static function obtenerCajaDiariaVendedor($idUsuario)
     {

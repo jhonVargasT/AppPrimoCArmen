@@ -113,6 +113,8 @@ Route::group(['can:administrador,vendedor'], function () {
 
     Route::get('/Clientes', 'PersonaController@index');
     Route::get('/deuda', 'DeudaController@index');
+    Route::get('/enviardeuda/{array}', 'DeudaController@pagarDeudas');
+    Route::get('/verdeuda/{idcliente}', 'DeudaController@verdeudas');
 
     Route::get('/actualizarCliente', 'PersonaController@actualizarCliente');
 
@@ -172,7 +174,7 @@ Route::group(['can:administrador,vendedor'], function () {
 
     Route::get('/listarPedidosAdmin/{val}/{fechaini}/{fechafin}', 'PedidoAdministrador@obtenerPedidos');
     Route::get('/listarPedidos/{val}', 'ReporteVendedorController@obtenerPedido')->name('datatable.pedidos');
-
+    Route::get('/listarDedudasPersona/{persona}', 'DeudaController@listardeudasPersona');
 
     Route::get('/compilarticket/{id}', 'ImpresionesController@notaVenta');
     Route::get('/ticket', 'ImpresionesController@ticketeraDirecta');
@@ -215,4 +217,3 @@ Route::group(['can:administrador,vendedor'], function () {
     Route::get('/reporteProductoRuta/{idvendedor}/{fechaini}/{fechafin}', 'ReporteController@reporteProductoPedido');
     Route::get('/reporteClienteIngresos/{fechaini}/{fechafin}', 'ReporteController@reporteClienteTotal');
 });
-/*

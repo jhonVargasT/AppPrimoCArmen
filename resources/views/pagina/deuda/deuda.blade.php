@@ -81,14 +81,6 @@
 
 
                 <br>
-                <div id="data-table-fixed-header_wrapper"
-                     class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
-
-                        </div>
-                    </div>
-                </div>
             </div>
             <!-- end panel-body -->
 
@@ -103,7 +95,7 @@
 <!---------------Inicio modal------------->
 <!-------------Fin modal--------------->
 <script>
-    App.setPageTitle('Devoluciones | ARPEMAR SAC');
+    App.setPageTitle('Deudas | ARPEMAR SAC');
     App.restartGlobalFunction();
     $(function () {
         $('#data-table-fixed-header').DataTable({
@@ -111,7 +103,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            // serverSide: true,
+           //serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
@@ -127,9 +119,16 @@
                 {data: 'dni', name: 'dni'},
                 {data: 'idPersona', name: 'idPersona'},
                 {data: 'tot', name: 'tot'},
-                {data: 'tot', name: 'tot'},
+                {
+                    data: function (row) {
 
+                            return '<div align="center">\n' +
+                                '<a   data-toggle="ajax" href="/verdeuda/'+row.idPersona+'" class="btn btn-link"  title="Ver deudas" >' +
+                                '<i class="fas fa-lg fa-fw  fa-eye text-success"></i></a>' +
+                                '</div>';
 
+                    }
+                }
 
 
             ]
