@@ -1,7 +1,6 @@
 <script language="JavaScript" type="text/javascript" src="../assets/reporte.js"></script>
 <script src="{{ asset('js/js_ajax/reporte.js') }}"></script>
 <script src="{{ asset('typeahead/bootstrap3-typeahead.js') }}"></script>
-<link href="https://code.jquery.com/jquery-3.3.1.js" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
@@ -174,11 +173,11 @@
         <div id="data">
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="data-table-fixed-header"
-                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                role="grid"
-                               aria-describedby="data-table-fixed-header_info">
+                               aria-describedby="data-table-fixed-header_info" width="100%">
                             <tbody>
                             </tbody>
                             <thead>
@@ -296,9 +295,11 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-         //   serverSide: true,
+            serverSide: true,
             select: true,
             destroy: true,
+            responsive: true,
+            bAutoWidth: true,
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'

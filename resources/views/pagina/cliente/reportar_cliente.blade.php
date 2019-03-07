@@ -40,9 +40,9 @@
             <br>
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="data-table-fixed-header"
-                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                role="grid"
                                aria-describedby="data-table-fixed-header_info" width="100%">
                             <tbody>
@@ -50,69 +50,80 @@
                             <thead>
                             <tr role="row">
 
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 159px;">
                                     Nombre Tienda
                                 </th>
 
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 159px;">
                                     Direccion Tienda
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
                                     Nombres y apellidos
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 159px;">
                                     Direccion Personal
                                 </th>
 
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                     style="width: 100%;; min-width: 60px;">
                                     DNI
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
                                     style="width: 100%;; min-width: 80px;">
                                     RUC
                                 </th>
 
 
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 70px;">
                                     Telefono
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
                                     Correo
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 60px;">
                                     Cliente
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 40px;">
                                     Estado
                                 </th>
-                                <th class="text-nowrap sorting text-center" tabindex="0" aria-controls="data-table-fixed-header"
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
                                     style="width: 100%;; min-width: 60px;">
@@ -156,8 +167,10 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-          //  serverSide: true,
+            serverSide: true,
             select: true,
+            responsive: true,
+            bAutoWidth: true,
             rowId: 'id',
             dom: 'lBfrtip',
             buttons: [

@@ -1,3 +1,8 @@
+<style>
+    table.dataTable.dataTable_width_auto {
+        width: auto;
+    }
+</style>
 <script src="{{ asset('js/js_ajax/devolucion.js') }}"></script>
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
@@ -29,55 +34,66 @@
                 </div>
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
-                <div class="panel-body" >
+                <div class="panel-body">
 
                     <br>
-                        <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer" >
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <table id="data-table-fixed-header"
-                                           class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
-                                           role="grid"
-                                           aria-describedby="data-table-fixed-header_info" width="100%">
-                                        <tbody>
-                                        </tbody>
-                                        <thead>
-                                        <tr role="row"  >
-                                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Rendering engine: activate to sort column ascending"
-                                                style="width: 100%; min-width:550px;text-align: center">Nombre cliente
-                                            </th>
+                    <div id="data-table-fixed-header_wrapper"
+                         class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <div class=" row">
+                            <div class="col-sm-12 table-responsive  ">
+                                <table id="data-table-fixed-header"
+                                       class="display dataTable_width_auto table table-striped  table-bordered dataTable no-footer dtr-inline"
+                                       role="grid"
+                                       aria-describedby="data-table-fixed-header_info" width="100%">
+                                    <tbody>
+                                    </tbody>
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="   min-width: 50%;text-align: center"
+                                        >Nombre cliente
+                                        </th>
 
-                                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Rendering engine: activate to sort column ascending"
-                                                style="width: 100%; min-width: 100%;text-align: center">Nro documento
-                                            </th>
-                                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Rendering engine: activate to sort column ascending"
-                                                style="width: 100%; min-width: 100%;text-align: center">Id cliente
-                                            </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="min-width: 20%;text-align: center"
+                                        >Nro documento
+                                        </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="min-width: 10%;text-align: center"
+                                        >Id cliente
+                                        </th>
 
-                                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Rendering engine: activate to sort column ascending"
-                                                style="width: 100%; min-width: 100%;text-align: center">Deuda acumulada
-                                            </th>
-                                            <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
-                                                rowspan="1" colspan="1"
-                                                aria-label="Rendering engine: activate to sort column ascending"
-                                                style="width: 100%; min-width: 100%;text-align: center">Opciones
-                                            </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="min-width: 10%;text-align: center"
+                                        >Deuda acumulada
+                                        </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
+                                            style="min-width:10%;text-align: center"
+                                        >Opciones
+                                        </th>
 
-                                        </tr>
-                                        </thead>
-                                    </table>
-                                </div>
+                                    </tr>
+                                    </thead>
+                                </table>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
                 <br>
@@ -98,12 +114,12 @@
     App.setPageTitle('Deudas | ARPEMAR SAC');
     App.restartGlobalFunction();
     $(function () {
-        $('#data-table-fixed-header').DataTable({
+        var table = $('#data-table-fixed-header').DataTable({
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-           //serverSide: true,
+            serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
@@ -122,16 +138,30 @@
                 {
                     data: function (row) {
 
-                            return '<div align="center">\n' +
-                                '<a   data-toggle="ajax" href="/verdeuda/'+row.idPersona+'" class="btn btn-link"  title="Ver deudas" >' +
-                                '<i class="fas fa-lg fa-fw  fa-eye text-success"></i></a>' +
-                                '</div>';
+                        return '<div align="center">\n' +
+                            '<a   data-toggle="ajax" href="/verdeuda/' + row.idPersona + '" class="btn btn-link"  title="Ver deudas" >' +
+                            '<i class="fas fa-lg fa-fw  fa-eye text-success"></i></a>' +
+                            '</div>';
 
                     }
                 }
 
 
             ]
+        });
+
+        $('#data-table-fixed-header tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                table.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        $('#button').click(function () {
+            table.row('.selected').remove().draw(false);
         });
     });
 

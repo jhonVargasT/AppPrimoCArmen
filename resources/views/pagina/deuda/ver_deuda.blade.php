@@ -60,9 +60,9 @@
                     <div id="data-table-fixed-header_wrapper"
                          class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 table-responsive">
                                 <table id="data-table-fixed-header"
-                                       class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                                       class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                        role="grid"
                                        aria-describedby="data-table-fixed-header_info" width="100%">
                                     <tbody>
@@ -135,7 +135,7 @@
                                         <th colspan="6"></th>
                                         <th class="text-green" valign="top">Total pagara:</th>
                                         <th>
-                                           <label class=" col-form-label" id="totalpago">0.00</label>
+                                            <label class=" col-form-label" id="totalpago">0.00</label>
                                         </th>
                                     </tr>
                                     <tr>
@@ -192,9 +192,9 @@
                          class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 table-responsive">
                                 <table id="data-table-fixed-header2"
-                                       class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                                       class="table table-striped   table-bordered dataTable no-footer dtr-inline"
                                        role="grid"
                                        aria-describedby="data-table-fixed-header_info" width="100%">
                                     <tbody>
@@ -247,16 +247,16 @@
     App.setPageTitle('Deudas | ARPEMAR SAC');
     App.restartGlobalFunction();
     $(function () {
-        var tot=number_format(parseFloat('{{$persona[0]->tot}}', 2).toFixed(1), 2);
+        var tot = number_format(parseFloat('{{$persona[0]->tot}}', 2).toFixed(1), 2);
 
         $('#total_deuda').text(tot);
 
-      $('#data-table-fixed-header').DataTable({
+        $('#data-table-fixed-header').DataTable({
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-         //  serverSide: true,
+            serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
@@ -291,7 +291,7 @@
                 {
                     data: function (row) {
                         return '<div align="center" >' +
-                            ''+number_format(parseFloat(row.montototal, 2).toFixed(1), 2)+'' +
+                            '' + number_format(parseFloat(row.montototal, 2).toFixed(1), 2) + '' +
                             '</div> ';
 
                     }
@@ -299,7 +299,7 @@
                 {
                     data: function (row) {
                         return '<div align="center" >' +
-                            ''+number_format(parseFloat(row.pago, 2).toFixed(1), 2)+'' +
+                            '' + number_format(parseFloat(row.pago, 2).toFixed(1), 2) + '' +
                             '</div> ';
 
                     }
@@ -307,7 +307,7 @@
                 {
                     data: function (row) {
                         return '<div align="center" >' +
-                            ''+number_format(parseFloat(row.saldo, 2).toFixed(1), 2)+'' +
+                            '' + number_format(parseFloat(row.saldo, 2).toFixed(1), 2) + '' +
                             '</div> ';
 
                     }

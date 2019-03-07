@@ -40,9 +40,9 @@
                     <div id="data-table-fixed-header_wrapper"
                          class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 table-responsive">
                                 <table id="data-table-fixed-header1"
-                                       class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                                       class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                        role="grid"
                                        aria-describedby="data-table-fixed-header_info" width="100%">
                                     <tbody>
@@ -126,8 +126,10 @@
                            onclick="agregarTipoPaquete()"><i
                                     class="fa fa-plus-circle"></i></a>
                     </div>
+
+                   <div class="col-sm-12 table-responsive">
                     <table id="data-table-fixed-header2"
-                           class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                           class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                            role="grid"
                            aria-describedby="data-table-fixed-header_info" width="100%">
                         <tbody>
@@ -167,6 +169,7 @@
                         </tr>
                         </thead>
                     </table>
+                   </div>
                 </div>
                 <!-- end panel-body -->
 
@@ -191,6 +194,8 @@
             serverSide: true,
             select: true,
             rowId: 'idTipoPaquete',
+            responsive: true,
+            bAutoWidth: true,
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'
@@ -238,6 +243,8 @@
             },
             processing: true,
             serverSide: true,
+            responsive: true,
+            bAutoWidth: true,
             select: true,
             rowId: 'idTipoProducto',
             dom: 'lBfrtip',

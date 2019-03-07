@@ -9,7 +9,9 @@
 <!-- ================== END PAGE LEVEL STYLE ================== -->
 <div id="response">
     <h1 class="page-header">Promociones
-        <small>Aqui puedo agregar promociones,visualizar los productos que tienen la promocion, eliminarlos o editarlos...</small>
+        <small>Aqui puedo agregar promociones,visualizar los productos que tienen la promocion, eliminarlos o
+            editarlos...
+        </small>
     </h1>
     <!-- final cabecera -->
 
@@ -38,9 +40,9 @@
             <br>
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="data-table-fixed-header"
-                               class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                role="grid"
                                aria-describedby="data-table-fixed-header_info" width="100%">
                             <tbody>
@@ -50,20 +52,20 @@
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
-                                    style="width: 100%;; min-width: 20px;  " >
-                                   Id
+                                    style="width: 100%;; min-width: 20px;  ">
+                                    Id
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 100px;">
-                                   Nombre
+                                    Nombre
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1"
                                     aria-label="Rendering engine: activate to sort column ascending"
                                     style="width: 100%;; min-width: 187px;">
-                                   Descripcion
+                                    Descripcion
                                 </th>
                                 <th class="text-nowrap sorting" tabindex="0" aria-controls="data-table-fixed-header"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
@@ -133,10 +135,12 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-           // serverSide: true,
+            serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
+            responsive: true,
+            bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
             ],
@@ -162,11 +166,11 @@
                     data: function (row) {
                         if (row.estado === '1') {
                             return '<div align="center">\n' +
-                                '<a   data-toggle="ajax" href="/verpromocionproducto/'+row.idPromocion+'" class="btn btn-link"  title="Ver productos" >' +
+                                '<a   data-toggle="ajax" href="/verpromocionproducto/' + row.idPromocion + '" class="btn btn-link"  title="Ver productos" >' +
                                 '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
                                 '<a href="promocion/' + row.idPromocion + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarPromocion(' + row.idPromocion +')">\n' +
+                                '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarPromocion(' + row.idPromocion + ')">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
                                 '</div>';
                         } else {
@@ -174,7 +178,7 @@
                                 '<a href="promocion/' + row.idPromocion + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
 
-                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarPromocion(' + row.idPromocion +')">\n' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarPromocion(' + row.idPromocion + ')">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
                                 '</div>';
                         }

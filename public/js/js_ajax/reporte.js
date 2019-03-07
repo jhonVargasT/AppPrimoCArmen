@@ -205,9 +205,9 @@ function htmlVendedorIngresos() {
     $('#vendedordiv').removeAttr('hidden');
     var html = '   <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
-        '                    <div class="col-sm-12">\n' +
+        '                    <div class="col-sm-12 table-responsive">\n' +
         '                        <table id="data-table-fixed-header"\n' +
-        '                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"\n' +
+        '                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"\n' +
         '                               role="grid"\n' +
         '                               aria-describedby="data-table-fixed-header_info">\n' +
         '                            <tbody>\n' +
@@ -281,9 +281,9 @@ function htmlProductoIngresos() {
     var html =
         '            <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
-        '                    <div class="col-sm-12">\n' +
+        '                    <div class="col-sm-12 table-responsive">\n' +
         '                        <table id="data-table-fixed-header"\n' +
-        '                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"\n' +
+        '                               class="table table-striped table-bordered dataTable no-footer dtr-inline"\n' +
         '                               role="grid"\n' +
         '                               aria-describedby="data-table-fixed-header_info">\n' +
         '                            <tbody>\n' +
@@ -344,9 +344,9 @@ function htmlProductoRuta() {
     $('#vendedordiv').removeAttr('hidden');
     var html = '     <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
-        '                    <div class="col-sm-12">\n' +
+        '                    <div class="col-sm-12 table-responsive">\n' +
         '                        <table id="data-table-fixed-header"\n' +
-        '                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"\n' +
+        '                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"\n' +
         '                               role="grid"\n' +
         '                               aria-describedby="data-table-fixed-header_info"  style="width: 100%; min-width: 100%">\n' +
         '                            <tbody>\n' +
@@ -392,9 +392,9 @@ function htmlProductoRuta() {
 function htmlClienteIngresos() {
     var html = '  <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">\n' +
         '                <div class="row">\n' +
-        '                    <div class="col-sm-12">\n' +
+        '                    <div class="col-sm-12 table-responsive">\n' +
         '                        <table id="data-table-fixed-header"\n' +
-        '                               class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"\n' +
+        '                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"\n' +
         '                               role="grid"\n' +
         '                               aria-describedby="data-table-fixed-header_info"  style="width: 100%;">\n' +
         '                            <tbody>\n' +
@@ -448,6 +448,8 @@ function vendedorIngresos() {
         serverSide: true,
         select: true,
         destroy: true,
+        responsive: true,
+        bAutoWidth: true,
         dom: 'lBfrtip',
         buttons: [
             'excel', 'pdf'
@@ -489,10 +491,12 @@ function productoIngresos() {
         processing: true,
         serverSide: true,
         select: true,
+        responsive: true,
+        bAutoWidth: true,
         destroy: true,
         dom: 'lBfrtip',
         buttons: [
-             'excel', 'pdf'
+            'excel', 'pdf'
         ],
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
@@ -526,6 +530,8 @@ function vendedorPtoductosRuta() {
         processing: true,
         serverSide: true,
         select: true,
+        responsive: true,
+        bAutoWidth: true,
         destroy: true,
         dom: 'lBfrtip',
         buttons: [
@@ -560,6 +566,8 @@ function clienteTotal() {
         processing: true,
         serverSide: true,
         select: true,
+        responsive: true,
+        bAutoWidth: true,
         destroy: true,
         dom: 'lBfrtip',
         buttons: [

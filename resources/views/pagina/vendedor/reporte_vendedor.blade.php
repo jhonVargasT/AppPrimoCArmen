@@ -1,6 +1,14 @@
-
 <script src="{{ asset('js/js_ajax/reporte_vendedor.js') }}"></script>
-<div  id="response">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<div id="response">
     <div class="row">
 
         <div class="col-lg-3 col-md-6">
@@ -81,11 +89,11 @@
                 <label class="col-md-2 col-sm-2 col-form-label">Estado Pedido
                     :</label>
                 <div class="col-md-3 col-sm-3">
-                    <select id="estado"  name="estado" class=" form-control">
+                    <select id="estado" name="estado" class=" form-control">
                         <option value="5">Seleccionar</option>
-                        <option style="color: green" value="3">  Entregado</option>
-                        <option style="color: green" value="4">  Entregadocon observacion  </option>
-                        <option style="color: rgba(186,184,0,0.78);"  value="2"> En Proceso</option>
+                        <option style="color: green" value="3"> Entregado</option>
+                        <option style="color: green" value="4"> Entregadocon observacion</option>
+                        <option style="color: rgba(186,184,0,0.78);" value="2"> En Proceso</option>
                         <option style="color: darkorange;" value="1"> En espera</option>
                         <option style="color: #ca0000;" value="0"> Cancelado</option>
                     </select>
@@ -98,9 +106,9 @@
             <br>
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="data-table-fixed-header"
-                               class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                role="grid"
                                aria-describedby="data-table-fixed-header_info" width="100%">
                             <tbody>
@@ -208,9 +216,9 @@
                          class="dataTables_wrapper form-inline dt-bootstrap no-footer">
 
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 table-responsive">
                                 <table id="data-table-fixed-header2"
-                                       class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                                       class="table table-striped   table-bordered dataTable no-footer dtr-inline"
                                        role="grid"
                                        aria-describedby="data-table-fixed-header_info" width="100%">
                                     <tbody>
@@ -285,28 +293,31 @@
     App.setPageTitle('Pedidos | ARPEMAR SAC');
     App.restartGlobalFunction();
     $(function () {
-        var val=5;
+        var val = 5;
         $('#data-table-fixed-header').DataTable({
 
             language: {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-          //  serverSide: true,
+            serverSide: true,
             select: true,
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'
             ],
             rowId: 'idPedido',
+            responsive: true,
+            bAutoWidth: true,
             aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
-            ajax: '/listarPedidos/'+val,
+            ajax: '/listarPedidos/' + val,
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombres', name: 'nombres'},
                 {data: 'nroCelular', name: 'nroCelular'},
                 {data: 'tienda', name: 'tienda'},
                 {data: 'cantidad', name: 'cantidad'},
+
                 {data: 'fechaEntrega', name: 'fechaEntrega'},
                 {data: 'totalPago', name: 'totalPago'},
                 {

@@ -43,6 +43,8 @@ function cambiarTabla() {
         serverSide: true,
         select: true,
         destroy: true,
+        responsive: true,
+        bAutoWidth: true,
         dom: 'lBfrtip',
         buttons: [
             'excel', 'pdf'
@@ -116,6 +118,8 @@ function llenarVerProductos(idpedido) {
         serverSide: true,
         destroy: true,
         select: true,
+        responsive: true,
+        bAutoWidth: true,
         rowId: 'idPedido',
         ajax: url,
         columns: [

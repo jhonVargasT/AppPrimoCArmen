@@ -34,9 +34,9 @@
             <br>
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="data-table-fixed-header"
-                               class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                               class="table table-striped   table-bordered dataTable no-footer dtr-inline"
                                role="grid"
                                aria-describedby="data-table-fixed-header_info" width="100%">
                             <tbody>
@@ -131,10 +131,12 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-          //  serverSide: true,
+            serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
+            responsive: true,
+            bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
             ],
@@ -147,13 +149,13 @@
                     data: function (row) {
                         if (row.activoCaja === '1') {
                             return '<div class="form-check">\n' +
-                                '<input class="form-check-input is-valid" id="validCheckbox" type="checkbox" value="" onclick="activarDesactivarProductoPromocion('+row.id+','+row.activoCaja+',1,'+row.idProducto+','+row.idpromo+')" checked>\n' +
+                                '<input class="form-check-input is-valid" id="validCheckbox" type="checkbox" value="" onclick="activarDesactivarProductoPromocion(' + row.id + ',' + row.activoCaja + ',1,' + row.idProducto + ',' + row.idpromo + ')" checked>\n' +
                                 '<label class="form-check-label" for="validCheckbox">Activo</label>\n' +
                                 '</div>';
                         }
                         else {
                             return '<div class="form-check">\n' +
-                                '<input class="form-check-input is-invalid" id="invalidCheckbox" type="checkbox" value="" onclick="activarDesactivarProductoPromocion('+row.id+','+row.activoCaja+',1,'+row.idProducto+','+row.idpromo+')" >\n' +
+                                '<input class="form-check-input is-invalid" id="invalidCheckbox" type="checkbox" value="" onclick="activarDesactivarProductoPromocion(' + row.id + ',' + row.activoCaja + ',1,' + row.idProducto + ',' + row.idpromo + ')" >\n' +
                                 '<label class="form-check-label" for="invalidCheckbox">Inactivo</label>\n' +
                                 '</div>';
                         }
@@ -163,13 +165,13 @@
                     data: function (row) {
                         if (row.activoUnidad === '1') {
                             return '<div class="form-check">\n' +
-                                '<input class="form-check-input is-valid" id="validCheckbox" type="checkbox" value="" onclick="activarDesactivarProductoPromocion('+row.id+','+row.activoUnidad+',0,'+row.idProducto+','+row.idpromo+')" checked>\n' +
+                                '<input class="form-check-input is-valid" id="validCheckbox" type="checkbox" value="" onclick="activarDesactivarProductoPromocion(' + row.id + ',' + row.activoUnidad + ',0,' + row.idProducto + ',' + row.idpromo + ')" checked>\n' +
                                 '<label class="form-check-label" for="validCheckbox" >Activo</label>\n' +
                                 '</div>';
                         }
                         else {
                             return '<div class="form-check">\n' +
-                                '<input class="form-check-input is-invalid" id="invalidCheckbox" type="checkbox" onclick="activarDesactivarProductoPromocion('+row.id+','+row.activoUnidad+',0,'+row.idProducto+','+row.idpromo+')" value="">\n' +
+                                '<input class="form-check-input is-invalid" id="invalidCheckbox" type="checkbox" onclick="activarDesactivarProductoPromocion(' + row.id + ',' + row.activoUnidad + ',0,' + row.idProducto + ',' + row.idpromo + ')" value="">\n' +
                                 '<label class="form-check-label" for="invalidCheckbox">Inactivo</label>\n' +
                                 '</div>';
                         }

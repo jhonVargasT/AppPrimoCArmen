@@ -1,4 +1,3 @@
-
 <script src="https://unpkg.com/sweetalert2@7.19.3/dist/sweetalert2.all.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
 <script src="{{ asset('js/js_ajax/cliente.js') }}"></script>
@@ -44,9 +43,9 @@
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-12 table-responsive">
                             <table id="data-table-fixed-header"
-                                   class="table table-striped table-responsive table-bordered dataTable no-footer dtr-inline"
+                                   class="table table-striped  table-bordered dataTable no-footer dtr-inline"
                                    role="grid"
                                    aria-describedby="data-table-fixed-header_info" width="100%">
                                 <tbody>
@@ -151,8 +150,10 @@
             buttons: [
                 'excel', 'pdf'
             ],
-          //  serverSide: true,
+            serverSide: true,
             select: true,
+            responsive: true,
+            bAutoWidth: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
             ajax: '{!! route('datatable.facturas') !!}',

@@ -38,9 +38,9 @@
             <br>
             <div id="data-table-fixed-header_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-responsive">
                         <table id="data-table-fixed-header"
-                               class="table table-striped  table-responsive table-bordered dataTable no-footer dtr-inline"
+                               class="table table-striped   table-bordered dataTable no-footer dtr-inline"
                                role="grid"
                                aria-describedby="data-table-fixed-header_info" width="100%">
                             <tbody>
@@ -145,10 +145,12 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-           // serverSide: true,
+            serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
+            responsive: true,
+            bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
             ],
