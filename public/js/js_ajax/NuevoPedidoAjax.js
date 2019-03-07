@@ -517,11 +517,42 @@ function llenarTabla() {
         language: {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
+        responsive: true,
+        bAutoWidth: true,
         destroy: true,
         processing: true,
         select: true,
         data: productos,
         aaSorting: [[0, "asc"]],
+        columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },{
+                "targets": 2,
+                "className": "text-center",
+            },{
+                "targets": 3,
+                "className": "text-center",
+            },
+            {
+                "targets": 4,
+                "className": "text-center",
+            },
+            {
+                "targets": 5,
+                "className": "text-center",
+            },
+            {
+                "targets": 6,
+                "className": "text-center",
+            },
+            {
+                "targets": 7,
+                "className": "text-center",
+            },
+
+        ],
         columns: [
             {title: "Codigo", data: ['id']},
             {title: "Nombre producto", data: ['nombre']},
@@ -532,12 +563,12 @@ function llenarTabla() {
             {title: "Monto total", data: ['total']},
             {
                 data: function (row) {
-                    return '<div align="center">\n' +
+                    return '<th>\n' +
                         /*'<a href="#modal-dialog" style="color: green" TITLE="Editar"   data-toggle="modal" onclick="editarProducto(event,' + row.nombre + ')">\n' +
                         '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +*/
                         '<a href="#" style="color: red" TITLE="Anular" onclick="eliminarProductoTabla(' + row.id + ')" >\n' +
                         '<i class="fas fa-lg fa-fw m-r-10 fa-times"> </i></a>\n' +
-                        '</div>';
+                        '</th>';
                 }
             }
         ]

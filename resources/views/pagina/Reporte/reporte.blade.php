@@ -295,7 +295,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+         //   serverSide: true,
             select: true,
             destroy: true,
             responsive: true,
@@ -303,6 +303,33 @@
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+
+                {
+                    "targets":2,
+                    "className": "text-center",
+                },
+                {
+                    "targets":3,
+                    "className": "text-center",
+                },
+                {
+                    "targets":4,
+                    "className": "text-center",
+                },
+                {
+                    "targets":5,
+                    "className": "text-center",
+                },
+                {
+                    "targets":6,
+                    "className": "text-center",
+                },
             ],
             rowId: 'idUsuario',
             aaSorting: [[0, "desc"]],

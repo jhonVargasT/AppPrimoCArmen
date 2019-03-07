@@ -240,7 +240,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+       //     serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
@@ -248,6 +248,50 @@
             bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    "targets": 1,
+                    "className": "text-center",
+                },
+                {
+                    "targets":2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                }, {
+                    "targets": 4,
+                    "className": "text-center",
+                }, {
+                    "targets":5,
+                    "className": "text-center",
+                }, {
+                    "targets": 6,
+                    "className": "text-center",
+                }, {
+                    "targets": 7,
+                    "className": "text-center",
+                }, {
+                    "targets": 8,
+                    "className": "text-center",
+                }, {
+                    "targets": 9,
+                    "className": "text-center",
+                }, {
+                    "targets": 10,
+                    "className": "text-center",
+                }, {
+                    "targets": 11,
+                    "className": "text-center",
+                }, {
+                    "targets": 12,
+                    "className": "text-center",
+                }, {
+                    "targets": 13,
+                    "className": "text-center",
+                },
             ],
             aaSorting: [[0, "desc"]],
             ajax: '{!! route('datatable.productos') !!}',
@@ -318,29 +362,29 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<label class="text-success">ACTIVO</label>';
+                            return '<span class="text-success">ACTIVO</span>';
                         }
                         else {
-                            return '<label class="text-danger">ANULADO</label>';
+                            return '<span class="text-danger">ANULADO</span>';
                         }
                     }
                 },
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div align="center">\n' +
-                                '<a href="Producto/' + row.idProducto + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
-                                '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: red" TITLE="Eliminar" onclick="actualizarProducto(' + row.idProducto + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
-                                '</div>';
+                            return '<th >' +
+                                '<a href="Producto/' + row.idProducto + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">' +
+                                '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>' +
+                                '<a href="#" style="color: red" TITLE="Eliminar" onclick="actualizarProducto(' + row.idProducto + ',0)">' +
+                                '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>' +
+                                '</th>';
                         } else {
-                            return '<div align="center">\n' +
-                                '<a href="Producto/' + row.idProducto + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
+                            return '<th >' +
+                                '<a href="Producto/' + row.idProducto + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarProducto(' + row.idProducto + ',1)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarProducto(' + row.idProducto + ',1)">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>' +
+                                '</th>';
                         }
                     }
                 }

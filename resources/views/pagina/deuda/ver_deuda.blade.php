@@ -30,7 +30,7 @@
                 <!-- end panel-heading -->
                 <!-- begin panel-body -->
                 <div class="panel-body">
-                    <div class="form-group row m-b-15">
+                    <div class="form-group row m-b-15 bg-green">
                         <span class="col-sm-1 col-form-label">Id persona</span>
                         <div class="col-sm-3">
                             <label class="col-sm-12 col-form-label">{{$persona[0]->idPersona}}</label>
@@ -85,7 +85,7 @@
                                             aria-controls="data-table-fixed-header"
                                             rowspan="1" colspan="1"
                                             aria-label="Rendering engine: activate to sort column ascending"
-                                            style="width: 100%; min-width:100px;text-align: center">Id Pedido
+                                            style="width: 100%; min-width:50px;text-align: center">Id Pedido
                                         </th>
 
                                         <th class="text-nowrap sorting" tabindex="0"
@@ -111,7 +111,7 @@
                                             aria-controls="data-table-fixed-header"
                                             rowspan="1" colspan="1"
                                             aria-label="Rendering engine: activate to sort column ascending"
-                                            style="width: 200px; min-width: 200px;text-align: center">Pagado
+                                            style="width: 200px; min-width: 20px;text-align: center">Pagado
                                         </th>
                                         <th class="text-nowrap sorting" tabindex="0"
                                             aria-controls="data-table-fixed-header"
@@ -124,28 +124,6 @@
                                     </tr>
                                     </thead>
                                     <tfoot>
-                                    <tr>
-                                        <th colspan="6"></th>
-                                        <th class="text-amber" valign="top">Total Deuda:</th>
-                                        <th>
-                                            <label class=" col-form-label" id="total_deuda"></label>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="6"></th>
-                                        <th class="text-green" valign="top">Total pagara:</th>
-                                        <th>
-                                            <label class=" col-form-label" id="totalpago">0.00</label>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th colspan="6"></th>
-                                        <th class="text-red" valign="top">Total sobrante:</th>
-                                        <th>
-                                            <label class=" col-form-label" id="total_sobrante">0.00</label>
-                                        </th>
-                                    </tr>
-
                                     </tfoot>
                                 </table>
                             </div>
@@ -154,6 +132,26 @@
 
                 </div>
                 <br>
+                <div class="bg-yellow">
+                    <div class="col-sm-12 row">
+                        <div class="col-sm-2"></div>
+                        <div class="text-amber col-sm-2">Total Deuda:</div>
+                        <div class="col-sm-1">
+                            <label class=" col-form-label" id="total_deuda"></label>
+                        </div>
+
+                        <div class="text-green col-sm-2">Total pagara:</div>
+                        <div class="col-sm-1">
+                            <label class="col-form-label" id="totalpago">0.00</label>
+                        </div>
+                        <div class="text-red col-sm-3">Total sobrante:</div>
+                        <div class="col-sm-1">
+                            <label class=" col-form-label" id="total_sobrante">0.00</label>
+                        </div>
+                    </div>
+                </div>
+                <br> <br>
+
                 <div class="col-md-12" align="center" id="opc">
                     <a href="/deuda" class="btn btn-danger" data-toggle="ajax">
                         <i class="fas fa-lg fa-fw m-r-10 fa-times-circle"></i>
@@ -256,7 +254,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+            //      serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
@@ -265,6 +263,33 @@
             bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 1,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                }
+                , {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
             ],
             ajax: '/listarDedudasPersona/{{$persona[0]->idPersona}}',
             columns: [
@@ -279,9 +304,9 @@
                 },
                 {
                     data: function (row) {
-                        return '<div align="center" >' +
+                        return '<th>' +
                             '<input  type="checkbox" name="check_' + row.idPedido + '" id="check_' + row.idPedido + '" onclick="agregarPagar(' + row.idPedido + ',' + row.saldo + ')">' +
-                            '</div> ';
+                            '</th> ';
 
                     }
                 },
@@ -290,25 +315,25 @@
                 {data: 'fechaEntrega', name: 'fechaEntrega'},
                 {
                     data: function (row) {
-                        return '<div align="center" >' +
+                        return '<th>' +
                             '' + number_format(parseFloat(row.montototal, 2).toFixed(1), 2) + '' +
-                            '</div> ';
+                            '</th> ';
 
                     }
                 },
                 {
                     data: function (row) {
-                        return '<div align="center" >' +
+                        return '<th >' +
                             '' + number_format(parseFloat(row.pago, 2).toFixed(1), 2) + '' +
-                            '</div> ';
+                            '</th> ';
 
                     }
                 },
                 {
                     data: function (row) {
-                        return '<div align="center" >' +
+                        return '<th  >' +
                             '' + number_format(parseFloat(row.saldo, 2).toFixed(1), 2) + '' +
-                            '</div> ';
+                            '</th> ';
 
                     }
                 },

@@ -33,7 +33,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-1">Nombre producto</label>
                         <div class="col-md-2">
-                            <input type="text" class="form-control m-b-5" placeholder="Nombre producto"
+                            <input type="text" class="form-control m-b-5"
                                    id="nombreproducto">
                             <script>
                                 $('#nombreproducto').typeahead({
@@ -168,13 +168,35 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+            //   serverSide: true,
             select: true,
             responsive: true,
             bAutoWidth: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
             dom: 'lBfrtip',
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+            ],
             buttons: [
                 'excel', 'pdf'
             ],
@@ -188,10 +210,16 @@
                 {
                     data: function (row) {
                         if (row.devuelto === '1') {
-                            return '<label class="text-success">Devuelto</label>';
+                            return '<tr >' +
+                                '<span class="text-green">Devuelto</span>' +
+                                '</tr>';
+
                         }
                         else {
-                            return '<label class="text-danger">No devuelto</label>';
+                            return '<tr >' +
+                                '<span class="text-red">No devuelto</span>' +
+                                '</tr>';
+
                         }
                     }
                 },
@@ -199,31 +227,31 @@
                     data: function (row) {
                         if (row.estado === '1') {
                             if (row.devuelto === '1') {
-                                return '<div align="center">\n' +
-                                    '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
-                                    '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
-                                    '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
-                                    '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
+                                return '<tr >' +
+                                    '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">' +
+                                    '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>' +
+                                    '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">' +
+                                    '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>' +
                                     '<a href="/devolucionespd/' + row.iddevolucion + '" class="btn btn-link"  title="Imprimir nota devolucion" >' +
                                     '<i  style="color: green" class=" fas fa-lg fa-fw  fa-print"></i></a>' +
-                                    '</div>';
+                                    '</tr>';
                             }
                             else {
-                                return '<div align="center">\n' +
-                                    '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
-                                    '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>\n' +
-                                    '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">\n' +
-                                    '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>\n' +
-                                    '</div>';
+                                return '<tr>' +
+                                    '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">' +
+                                    '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt "> </i></a>' +
+                                    '<a href="#" style="color: red" TITLE="Eliminar" onclick="eliminar(' + row.iddevolucion + ',0)">' +
+                                    '<i class="fas fa-lg fa-fw  fa-trash "> </i></a>' +
+                                    '</tr>';
                             }
 
                         } else {
-                            return '<div align="center">\n' +
-                                '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt"> </i></a>\n' +
-                                '<a href="#" style="color: green" TITLE="Activar" onclick="eliminar(' + row.iddevolucion + ',1)">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                            return '<tr>' +
+                                '<a href="#" style="color: blue" TITLE="Click para canjear producto" onclick="cambiar(' + row.iddevolucion + ',0)">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-exchange-alt"> </i></a>' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="eliminar(' + row.iddevolucion + ',1)">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>' +
+                                '</tr>';
                         }
                     }
                 }

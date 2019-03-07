@@ -300,7 +300,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+          //  serverSide: true,
             select: true,
             dom: 'lBfrtip',
             buttons: [
@@ -311,6 +311,42 @@
             bAutoWidth: true,
             aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
             ajax: '/listarPedidos/' + val,
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets":2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 8,
+                    "className": "text-center",
+                },
+
+
+            ],
             columns: [
                 {data: 'idPedido', name: 'idPedido'},
                 {data: 'nombres', name: 'nombres'},
@@ -323,22 +359,22 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div style="vertical-align: middle;"><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></div>';
+                            return '<th><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></th>';
                         }
                         else {
                             if (row.estado === '2') {
-                                return '<div><i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                return '<th><i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></th>';
                             }
                             else {
                                 if (row.estado === '3') {
-                                    return ' <div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                    return ' <th><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></th>';
                                 }
                                 else {
                                     if (row.estado === '4') {
-                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
+                                        return '<th><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></th>';
                                     } else {
 
-                                        return '<div><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                        return '<th><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></th>';
                                     }
 
                                 }

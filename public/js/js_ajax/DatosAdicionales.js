@@ -125,7 +125,7 @@ function cambEstadoTipoPaque(idtipopaque) {
     "use strict";
     swal({
         title: 'ALERTA',
-        text: "Desea camvbiar de estado?",
+        text: "Desea cambiar de estado?",
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',

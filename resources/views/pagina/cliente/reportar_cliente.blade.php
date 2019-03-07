@@ -167,7 +167,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+         //   serverSide: true,
             select: true,
             responsive: true,
             bAutoWidth: true,
@@ -175,6 +175,34 @@
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+
+                {
+                    "targets": 4,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 8,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 9,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 10,
+                    "className": "text-center",
+                },
+
             ],
             ajax: '{!! route('datatable.clientes') !!}',
             columns: [
@@ -189,40 +217,47 @@
                 {
                     data: function (row) {
                         if (row.tipoCliente === '1') {
-                            return '<label class="text-success">MINORISTA</label>';
+                            return '<tr >' +
+                                '<span class="text-green">MINORISTA</span>' +
+                                '</tr>';
                         }
                         else {
-                            return '<label class="text-purple">MAYORISTA</label>';
+                            return '<tr>' +
+                                '<span class="text-red">MAYORISTA</span>' +
+                                '</tr>';
                         }
                     }
                 },
                 {
                     data: function (row) {
                         if (row.pestado === '1') {
-                            return '<label class="text-success">ACTIVO</label>';
+                            return '<tr >\n' +
+                                '<span class="text-green">ACTIVO</span>' +
+                                '</tr>';
                         }
                         else {
-                            return '<label class="text-danger">ANULADO</label>';
+                            return '<tr>' +
+                                '<span class="text-red">ANULADO</span>' +
+                                '</tr>';
                         }
                     }
                 },
                 {
                     data: function (row) {
                         if (row.pestado === '1') {
-                            return '<div align="center">\n' +
+                            return '<tr >\n' +
                                 '<a href="Cliente/' + row.idPersona + '-' + row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',0)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
-
-                                '</div>';
+                                '</tr>';
                         } else {
-                            return '<div align="center">\n' +
+                            return '<tr >\n' +
                                 '<a href="Cliente/' + row.idPersona + '-' + row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarCliente(' + row.idPersona + ',' + row.tidTienda + ',' + row.dtidDireccionTienda + ',1)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                                '</tr>';
                         }
                     }
                 }

@@ -98,6 +98,14 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <div class="col-md-12" align="center" id="opc">
+                <a href="/promocion" class="btn btn-success" data-toggle="ajax">
+                    <i class="fas fa-lg fa-fw m-r-10 fa-backward"></i>
+                    atras</a>
+
+            </div>
+
         </div>
     </div>
 </div>
@@ -131,7 +139,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+        //    serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
@@ -139,6 +147,36 @@
             bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
             ],
             ajax: '/listarproductopromocion/{{$id}}',
             columns: [

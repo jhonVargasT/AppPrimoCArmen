@@ -128,6 +128,12 @@
                         <span>Devolucion</span>
                     </a>
                 </li>
+                <li class="has-sub">
+                    <a href="/deuda" data-toggle="ajax">
+                        <i class="fas fa-lg fa-fw m-r-10 fa-edit text-orange"></i>
+                        <span>Deudas</span>
+                    </a>
+                </li>
 
                 <li class="has-sub">
                     <a href="javascript:;">

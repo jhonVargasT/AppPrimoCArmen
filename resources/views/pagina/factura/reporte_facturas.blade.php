@@ -150,11 +150,53 @@
             buttons: [
                 'excel', 'pdf'
             ],
-            serverSide: true,
+            //   serverSide: true,
             select: true,
             responsive: true,
             bAutoWidth: true,
             rowId: 'id',
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 1,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 8,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 9,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 10,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 11,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 12,
+                    "className": "text-center",
+                },
+            ],
             aaSorting: [[0, "desc"]],
             ajax: '{!! route('datatable.facturas') !!}',
 

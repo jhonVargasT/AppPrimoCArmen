@@ -309,7 +309,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+         //   serverSide: true,
             select: true,
             responsive: true,
             bAutoWidth: true,
@@ -318,6 +318,52 @@
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 8,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 9,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 10,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 11,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 12,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 13,
+                    "className": "text-center",
+                },
             ],
             ajax: '/listarPedidosAdmin/' + val + '/' + 0 + '/' + 0,
             columns: [
@@ -336,22 +382,22 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div style="vertical-align: middle;"><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></div>';
+                            return '<th ><i style="color: orange" class="fas fa-lg fa-fw fa-circle "></i></th>';
                         }
                         else {
                             if (row.estado === '2') {
-                                return '<div><a href="#"  title="Click para entregar producto" onclick="cambiarEstadoPedido(' + row.idPedido + ')"> <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                return '<th><a href="#"  title="Click para entregar producto" onclick="cambiarEstadoPedido(' + row.idPedido + ')"> <i style="color: yellow" class="fas fa-lg fa-fw fa-circle"></i></a></th>';
                             }
                             else {
                                 if (row.estado === '3') {
-                                    return ' <div><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></div>';
+                                    return ' <th><i style="color: green" class="fas fa-lg fa-fw fa-circle"></i></th>';
                                 }
                                 else {
                                     if (row.estado === '4') {
-                                        return '<div><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></div>';
+                                        return '<th><i style="color: green" class="fas fa-lg  fa-circle"> </i> <i style="color: red" class="fas fa-sm m-r-5 fa-exclamation"> </i></th>';
                                     } else {
 
-                                        return '<div><a href="#"  title="Click para ver detalle de eliminacion" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></div>';
+                                        return '<th><a href="#"  title="Click para ver detalle de eliminacion" onclick="verDetalleEliminacion(' + row.idPedido + ')"><i style="color: red" class="fas fa-lg fa-fw fa-circle"></i></a></th>';
                                     }
 
                                 }

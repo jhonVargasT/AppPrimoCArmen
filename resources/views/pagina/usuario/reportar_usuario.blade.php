@@ -145,7 +145,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+          //  serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
@@ -153,6 +153,37 @@
             bAutoWidth: true,
             buttons: [
                 'excel', 'pdf'
+            ],
+            columnDefs: [
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
+                {
+                    "targets":8,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 9,
+                    "className": "text-center",
+                },
+
             ],
             ajax: '{!! route('datatable.usuarios') !!}',
             columns: [
@@ -167,29 +198,29 @@
                 {
                     data: function (row) {
                         if (row.uestado === '1') {
-                            return '<label class="text-success">ACTIVO</label>';
+                            return '<th><span class="text-success">ACTIVO</span></th>';
                         }
                         else {
-                            return '<label class="text-danger">ANULADO</label>';
+                            return '<th><span class="text-danger">ANULADO</span></th>';
                         }
                     }
                 },
                 {
                     data: function (row) {
                         if (row.uestado === '1') {
-                            return '<div align="center">\n' +
+                            return '<th >\n' +
                                 '<a href="Usuario/' + row.idUsuario + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarUsuario(' + row.idUsuario + ',' + row.idPersona + ',0)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
-                                '</div>';
+                                '</th>';
                         } else {
-                            return '<div align="center">\n' +
+                            return '<th >\n' +
                                 '<a href="Usuario/' + row.idUsuario + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarUsuario(' + row.idUsuario + ',' + row.idPersona + ',1)">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                                '</th>';
                         }
                     }
                 }

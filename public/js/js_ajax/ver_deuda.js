@@ -12,7 +12,7 @@ function llenarVerProductos(idpedido) {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
         processing: true,
-        serverSide: true,
+      //  serverSide: true,
         destroy: true,
         select: true,
         rowId: 'idPedido',

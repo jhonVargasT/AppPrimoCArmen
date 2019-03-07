@@ -53,6 +53,13 @@
                                             aria-controls="data-table-fixed-header"
                                             rowspan="1" colspan="1"
                                             aria-label="Rendering engine: activate to sort column ascending"
+                                            style="min-width: 10%;text-align: center"
+                                        >Id cliente
+                                        </th>
+                                        <th class="text-nowrap sorting" tabindex="0"
+                                            aria-controls="data-table-fixed-header"
+                                            rowspan="1" colspan="1"
+                                            aria-label="Rendering engine: activate to sort column ascending"
                                             style="   min-width: 50%;text-align: center"
                                         >Nombre cliente
                                         </th>
@@ -64,13 +71,7 @@
                                             style="min-width: 20%;text-align: center"
                                         >Nro documento
                                         </th>
-                                        <th class="text-nowrap sorting" tabindex="0"
-                                            aria-controls="data-table-fixed-header"
-                                            rowspan="1" colspan="1"
-                                            aria-label="Rendering engine: activate to sort column ascending"
-                                            style="min-width: 10%;text-align: center"
-                                        >Id cliente
-                                        </th>
+
 
                                         <th class="text-nowrap sorting" tabindex="0"
                                             aria-controls="data-table-fixed-header"
@@ -119,7 +120,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+              //   serverSide: true,
             select: true,
             rowId: 'id',
             aaSorting: [[0, "desc"]],
@@ -129,19 +130,38 @@
             buttons: [
                 'excel', 'pdf'
             ],
+            columnDefs: [
+
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 4,
+                    "className": "text-center",
+                },
+            ],
             ajax: '{!! route('datatable.deudas') !!}',
             columns: [
+                {data: 'idPersona', name: 'idPersona'},
                 {data: 'nom', name: 'nom'},
                 {data: 'dni', name: 'dni'},
-                {data: 'idPersona', name: 'idPersona'},
                 {data: 'tot', name: 'tot'},
                 {
                     data: function (row) {
 
-                        return '<div align="center">\n' +
+                        return '<tr >\n' +
                             '<a   data-toggle="ajax" href="/verdeuda/' + row.idPersona + '" class="btn btn-link"  title="Ver deudas" >' +
                             '<i class="fas fa-lg fa-fw  fa-eye text-success"></i></a>' +
-                            '</div>';
+                            '</tr>';
 
                     }
                 }

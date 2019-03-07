@@ -285,7 +285,7 @@ function htmlProductoIngresos() {
         '                        <table id="data-table-fixed-header"\n' +
         '                               class="table table-striped table-bordered dataTable no-footer dtr-inline"\n' +
         '                               role="grid"\n' +
-        '                               aria-describedby="data-table-fixed-header_info">\n' +
+        '                               aria-describedby="data-table-fixed-header_info" width="100%">\n' +
         '                            <tbody>\n' +
         '                            </tbody>\n' +
         '                            <thead>\n' +
@@ -445,7 +445,7 @@ function vendedorIngresos() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
         processing: true,
-        serverSide: true,
+    //    serverSide: true,
         select: true,
         destroy: true,
         responsive: true,
@@ -457,6 +457,34 @@ function vendedorIngresos() {
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
         ajax: url,
+        columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },
+            {
+                "targets": 2,
+                "className": "text-center",
+            },{
+                "targets": 3,
+                "className": "text-center",
+            },{
+                "targets": 4,
+                "className": "text-center",
+            },{
+                "targets": 5,
+                "className": "text-center",
+            },{
+                "targets": 6,
+                "className": "text-center",
+            },{
+                "targets": 7,
+                "className": "text-center",
+            },{
+                "targets": 8,
+                "className": "text-center",
+            },
+        ],
         columns: [
             {data: 'idUsuario', name: 'idUsuario'},
             {data: 'vendedor', name: 'vendedor'},
@@ -489,7 +517,7 @@ function productoIngresos() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
         processing: true,
-        serverSide: true,
+    //    serverSide: true,
         select: true,
         responsive: true,
         bAutoWidth: true,
@@ -501,6 +529,33 @@ function productoIngresos() {
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
         ajax: url,
+        columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },
+
+            {
+                "targets":2,
+                "className": "text-center",
+            },
+            {
+                "targets":3,
+                "className": "text-center",
+            },
+            {
+                "targets":4,
+                "className": "text-center",
+            },
+            {
+                "targets":5,
+                "className": "text-center",
+            },
+            {
+                "targets":6,
+                "className": "text-center",
+            },
+        ],
         columns: [
             {data: 'idProducto', name: 'idProducto'},
             {data: 'nombre', name: 'nombre'},
@@ -528,7 +583,7 @@ function vendedorPtoductosRuta() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
         processing: true,
-        serverSide: true,
+    //    serverSide: true,
         select: true,
         responsive: true,
         bAutoWidth: true,
@@ -540,6 +595,25 @@ function vendedorPtoductosRuta() {
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
         ajax: url,
+        columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },
+            {
+                "targets": 2,
+                "className": "text-center",
+            },
+            {
+                "targets": 3,
+                "className": "text-center",
+            },
+            {
+                "targets": 4,
+                "className": "text-center",
+            },
+
+        ],
         columns: [
             {data: 'usu', name: 'usu'},
             {data: 'nombre', name: 'nombre'},
@@ -564,7 +638,7 @@ function clienteTotal() {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         },
         processing: true,
-        serverSide: true,
+      //  serverSide: true,
         select: true,
         responsive: true,
         bAutoWidth: true,
@@ -576,6 +650,21 @@ function clienteTotal() {
         rowId: 'idUsuario',
         aaSorting: [[0, "desc"]],
         ajax: url,
+        columnDefs: [
+            {
+                "targets": 0,
+                "className": "text-center",
+            },
+            {
+                "targets": 2,
+                "className": "text-center",
+            },
+            {
+                "targets": 3,
+                "className": "text-center",
+            },
+
+        ],
         columns: [
             {data: 'idPersona', name: 'idPersona'},
             {data: 'nomb', name: 'nomb'},

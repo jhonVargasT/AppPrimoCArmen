@@ -135,7 +135,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+         //   serverSide: true,
             select: true,
             rowId: 'id',
             dom: 'lBfrtip',
@@ -145,6 +145,31 @@
                 'excel', 'pdf'
             ],
             ajax: '{!! route('datatable.promociones') !!}',
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },{
+                    "targets": 4,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 5,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 6,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 7,
+                    "className": "text-center",
+                },
+            ],
             columns: [
                 {data: 'idPromocion', name: 'idPromocion'},
                 {data: 'nombre', name: 'nombre'},
@@ -155,32 +180,32 @@
                 {
                     data: function (row) {
                         if (row.activo === '1') {
-                            return '<a><label class="text-success">SI</label></a>';
+                            return '<th><span class="text-success">SI</span></th>';
                         }
                         else {
-                            return '<a><label class="text-danger">NO</label>';
+                            return '<th><span class="text-danger">NO</span></th>';
                         }
                     }
                 },
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div align="center">\n' +
+                            return '<th >\n' +
                                 '<a   data-toggle="ajax" href="/verpromocionproducto/' + row.idPromocion + '" class="btn btn-link"  title="Ver productos" >' +
                                 '<i class="fas fa-lg fa-fw  fa-eye"></i></a>' +
                                 '<a href="promocion/' + row.idPromocion + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
                                 '<a href="#" style="color: red" TITLE="Anular" onclick="actualizarPromocion(' + row.idPromocion + ')">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
-                                '</div>';
+                                '</th>';
                         } else {
-                            return '<div align="center">\n' +
+                            return '<th >\n' +
                                 '<a href="promocion/' + row.idPromocion + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
                                 '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
 
                                 '<a href="#" style="color: green" TITLE="Activar" onclick="actualizarPromocion(' + row.idPromocion + ')">\n' +
                                 '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                                '</th>';
                         }
                     }
                 }

@@ -127,49 +127,49 @@
                                     class="fa fa-plus-circle"></i></a>
                     </div>
 
-                   <div class="col-sm-12 table-responsive">
-                    <table id="data-table-fixed-header2"
-                           class="table table-striped  table-bordered dataTable no-footer dtr-inline"
-                           role="grid"
-                           aria-describedby="data-table-fixed-header_info" width="100%">
-                        <tbody>
-                        </tbody>
-                        <thead>
-                        <tr role="row">
+                    <div class="col-sm-12 table-responsive">
+                        <table id="data-table-fixed-header2"
+                               class="table table-striped  table-bordered dataTable no-footer dtr-inline"
+                               role="grid"
+                               aria-describedby="data-table-fixed-header_info" width="100%">
+                            <tbody>
+                            </tbody>
+                            <thead>
+                            <tr role="row">
 
-                            <th class="text-nowrap sorting text-center" tabindex="0"
-                                aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 10%;; min-width: 20px;">
-                                Codigo
-                            </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 10%;; min-width: 20px;">
+                                    Codigo
+                                </th>
 
-                            <th class="text-nowrap sorting text-center" tabindex="0"
-                                aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 140px;">
-                                Nombre
-                            </th>
-                            <th class="text-nowrap sorting text-center" tabindex="0"
-                                aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 100%;; min-width: 60px;">
-                                Estado
-                            </th>
-                            <th class="text-nowrap sorting text-center" tabindex="0"
-                                aria-controls="data-table-fixed-header"
-                                rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending"
-                                style="width: 30%;; min-width: 60px;">
-                                Opciones
-                            </th>
-                        </tr>
-                        </thead>
-                    </table>
-                   </div>
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 140px;">
+                                    Nombre
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 100%;; min-width: 60px;">
+                                    Estado
+                                </th>
+                                <th class="text-nowrap sorting text-center" tabindex="0"
+                                    aria-controls="data-table-fixed-header"
+                                    rowspan="1" colspan="1"
+                                    aria-label="Engine version: activate to sort column ascending"
+                                    style="width: 30%;; min-width: 60px;">
+                                    Opciones
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
                 <!-- end panel-body -->
 
@@ -191,7 +191,7 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+            //    serverSide: true,
             select: true,
             rowId: 'idTipoPaquete',
             responsive: true,
@@ -200,6 +200,20 @@
             buttons: [
                 'excel', 'pdf'
             ],
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+            ],
             ajax: '{!! route('datatable.listarTipoPquete') !!}',
             columns: [
                 {data: 'idTipoPaquete', name: 'idTipoPaquete'},
@@ -207,29 +221,29 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<label class="text-success">ACTIVO</label>';
+                            return '<th>' +
+                                '<span class="text-success">ACTIVO</span>' +
+                                '</th>';
                         }
                         else {
-                            return '<label class="text-danger">ANULADO</label>';
+                            return '<th>' +
+                                '<span class="text-danger">ANULADO</span>' +
+                                '</th>';
                         }
                     }
                 }, {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div align="center">\n' +
-                                //    '<a href="#"  style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
-                                //    '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: red" TITLE="Anular" onclick="cambEstadoTipoPaque(' + row.idTipoPaquete + ')">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
+                            return '<th align="center">' +
+                                '<a href="#" style="color: red" TITLE="Anular" onclick="cambEstadoTipoPaque(' + row.idTipoPaquete + ')">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>' +
 
-                                '</div>';
+                                '</th>';
                         } else {
-                            return '<div align="center">\n' +
-                                //     '<a href="#" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
-                                //    '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: green" TITLE="Activar" onclick="cambEstadoTipoPaque(' + row.idTipoPaquete + ')">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                            return '<th align="center">' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="cambEstadoTipoPaque(' + row.idTipoPaquete + ')">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>' +
+                                '</th>';
                         }
                     }
                 }
@@ -242,12 +256,26 @@
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
             },
             processing: true,
-            serverSide: true,
+            //     serverSide: true,
             responsive: true,
             bAutoWidth: true,
             select: true,
             rowId: 'idTipoProducto',
             dom: 'lBfrtip',
+            columnDefs: [
+                {
+                    "targets": 0,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 2,
+                    "className": "text-center",
+                },
+                {
+                    "targets": 3,
+                    "className": "text-center",
+                },
+            ],
             buttons: [
                 'excel', 'pdf'
             ],
@@ -258,30 +286,31 @@
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<label class="text-success">ACTIVO</label>';
+                            return '<th>' +
+                            '<span class="text-success">ACTIVO</span>' +
+                            '</th>';
                         }
                         else {
-                            return '<label class="text-danger">ANULADO</label>';
+                            return '<th>' +
+                                '<span class="text-success">ANULADO</span>' +
+                                '</th>';
+
                         }
                     }
                 },
                 {
                     data: function (row) {
                         if (row.estado === '1') {
-                            return '<div align="center">\n' +
-                           //     '<a href="Cliente/' + row.idPersona + '-' + row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
-                         //       '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: red" TITLE="Anular" onclick="cambEstadoTipoProd(' + row.idTipoProducto + ')">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>\n' +
+                            return '<th>' +
+                                '<a href="#" style="color: red" TITLE="Anular" onclick="cambEstadoTipoProd(' + row.idTipoProducto + ')">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-trash"> </i></a>' +
 
-                                '</div>';
+                                '</th>';
                         } else {
-                            return '<div align="center">\n' +
-                            //    '<a href="Cliente/' + row.idPersona + '-' + row.dtidDireccionTienda + '/edit" style="color: green" TITLE="Editar" data-toggle="ajax">\n' +
-                             //   '<i class="far fa-lg fa-fw m-r-10 fa-edit"> </i></a>\n' +
-                                '<a href="#" style="color: green" TITLE="Activar" onclick="cambEstadoTipoProd(' + row.idTipoProducto + ')">\n' +
-                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>\n' +
-                                '</div>';
+                            return '<th>' +
+                                '<a href="#" style="color: green" TITLE="Activar" onclick="cambEstadoTipoProd(' + row.idTipoProducto + ')">' +
+                                '<i class="fas fa-lg fa-fw m-r-10 fa-check"> </i></a>' +
+                                '</th>';
                         }
                     }
                 }
