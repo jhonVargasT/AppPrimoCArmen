@@ -314,7 +314,7 @@
             responsive: true,
             bAutoWidth: true,
             rowId: 'idPedido',
-            aaSorting: [[10, "asc"], [8, "asc"], [0, "desc"], [1, "asc"]],
+            aaSorting: [0, "desc"],
             dom: 'lBfrtip',
             buttons: [
                 'excel', 'pdf'

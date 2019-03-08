@@ -309,7 +309,7 @@
             rowId: 'idPedido',
             responsive: true,
             bAutoWidth: true,
-            aaSorting: [[5, "desc"], [0, "desc"], [1, "asc"], [8, "asc"]],
+            aaSorting: [0, "desc"],
             ajax: '/listarPedidos/' + val,
             columnDefs: [
                 {
