@@ -161,7 +161,7 @@ function cambiarEstadProducto(idpedido, idpropedi, estadoProd) {
 function cambiarEstadoPedido(idpedido) {
     "use strict";
     var url = "cambiarEstadoPedido/" + idpedido;
-    swal({
+    swal.fire({
         title: 'ALERTA',
         text: "Desea hacer la entrega de este pedido?",
         type: 'warning',
@@ -202,7 +202,7 @@ function pedidoRealizado(id) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'El pedido se entrego correctamente! Pedido nro '+id,
     })
@@ -215,7 +215,7 @@ function error(mensaje) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: mensaje
     })
@@ -228,7 +228,7 @@ function ok(mensaje) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: mensaje
     })
@@ -257,14 +257,14 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'El pedido se ha preparado el pedido correctamente'
     })
 }
 
 function eliminarPedido(idpedido) {
-    swal({
+    swal.fire({
         title: 'Ingrese motivo de eliminacion',
         confirmButtonText: 'Aceptar',
         html:

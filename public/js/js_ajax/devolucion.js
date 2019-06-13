@@ -4,7 +4,7 @@ function agregarDevolucion() {
     var cantuni = $('#cantuni').val();
     var motivo = $('#motivo').val();
     var url = "/enviarDevolucion/" + nombreproducto + '/' + cantuni + '/' + motivo;
-    swal({
+    swal.fire({
         title: 'ALERTA',
         text: "Desea agregar una devolucion?",
         type: 'warning',
@@ -49,7 +49,7 @@ function redirect() {
     });
 }
 function eliminar(id) {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Este registro se cambiara de estado!",
         type: 'warning',
@@ -76,7 +76,7 @@ function eliminar(id) {
     })
 }
 function cambiar(id) {
-    swal({
+    swal.fire({
         title: 'Desea hacer el cambio de producto al cliente?',
         type: 'warning',
         showCancelButton: true,
@@ -108,7 +108,7 @@ function ok() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos registrados'
     })
@@ -121,7 +121,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -134,7 +134,7 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Error'
     })

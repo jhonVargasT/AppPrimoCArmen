@@ -5,7 +5,7 @@ var productos = [];
 });*/
 
 function dividirPaquete() {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Desea partir  1 paquete en unidades?",
         type: 'warning',
@@ -235,7 +235,6 @@ function autocompletarProductoPromocion() {
             data: '_token = <?php echo csrf_token() ?>',
             success: function (data) {
                 if (data.error === 1) {
-
                     $("#totpaque").html('');
                     $("#totunu").html('');
                     $("#total").html('');
@@ -243,13 +242,11 @@ function autocompletarProductoPromocion() {
                     $("#numero_unidades").val(0);
                     $("#sumtotales").html('');
                     $("#enviar").addClass('disabled');
-
                     $("#id_producto").val(data.idproducto);
                     $("#nompro").html(data.nombre);
                     $("#tippro").html(data.tipoproducto);
                     $("#tippa").html(data.tipopaquete);
                     $("#capa").html(data.cantpaquuni);
-
                     $("#cantidadpa").html(data.cantidadpaq);
                     $("#preciopa").html(data.precioventapaq);
                     $("#cantidadun").html(data.cantidaduni);
@@ -260,8 +257,6 @@ function autocompletarProductoPromocion() {
                     $("#numero_unidades").removeAttr('readOnly');
                     // buscarPromocion(data.idproducto);
                 } else {
-
-
                     $('#hijos').remove()
                     error();
                 }
@@ -503,7 +498,7 @@ function llenarTabla() {
 
 function eliminarProductoTabla(id) {
 
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Este registro se eliminara!",
         type: 'warning',
@@ -535,7 +530,7 @@ function correcto(data) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Registro correcto, pedido numero ' + data
     })
@@ -672,50 +667,50 @@ function enviarPedido(monto,vuelto,estado) {
 
 
 
-            "use strict";
-            var idpersona = $('#idpersona').val();
-            var iddireccion = $('#direcciones').find('option:selected').attr('id');
-            var fechaentrega = new Date($('#datepicker-autoClose').val());
-            var costototal = $('#total').text();
-            var tipousuario = $("#tipousuario").val();
+    "use strict";
+    var idpersona = $('#idpersona').val();
+    var iddireccion = $('#direcciones').find('option:selected').attr('id');
+    var fechaentrega = new Date($('#datepicker-autoClose').val());
+    var costototal = $('#total').text();
+    var tipousuario = $("#tipousuario").val();
 
-            var datosper = {
-                persona: idpersona,
-                tienda: iddireccion,
-                fechaentrega: fechaentrega,
-                tipousuario: tipousuario,
-                total: costototal,
-                monto:monto,
-                vuelto:vuelto,
-                estado:estado
-            };
+    var datosper = {
+        persona: idpersona,
+        tienda: iddireccion,
+        fechaentrega: fechaentrega,
+        tipousuario: tipousuario,
+        total: costototal,
+        monto:monto,
+        vuelto:vuelto,
+        estado:estado
+    };
 
-            var datos = {persona: datosper, productos: productos};
-            var arr = JSON.stringify(datos);
+    var datos = {persona: datosper, productos: productos};
+    var arr = JSON.stringify(datos);
 
-            var url = "enviarpedidosTienda/" + arr;
-            $.ajax({
-                type: "GET",
-                url: url,
-                cache: false,
-                dataType: 'json',
-                data: '_token = <?php echo csrf_token() ?>',
-                success: function (data) {
-                    if (data.error === 0) {
-                        correcto(data.id);
+    var url = "enviarpedidosTienda/" + arr;
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        dataType: 'json',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function (data) {
+            if (data.error === 0) {
+                correcto(data.id);
 
-                        agreimpirmir(data.id);
+                agreimpirmir(data.id);
 
-                    }
-                    else {
-                        //   redirect();
-                        error(data.error);
-                    }
+            }
+            else {
+                //   redirect();
+                error(data.error);
+            }
 
-                }, beforeSend: function () {
-                    $("#enviarpedido").prop('disabled', true);
-                }
-            });
+        }, beforeSend: function () {
+            $("#enviarpedido").prop('disabled', true);
+        }
+    });
 
 
 

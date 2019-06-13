@@ -104,7 +104,7 @@ function pagar() {
     var arr = JSON.stringify(deudas);
 
     var url = "/enviardeuda/" + arr;
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Se pagara la deuda por el monto de : S./" + pagoto + ",resta un monto de : S./" + totsob + " !",
         type: 'info',
@@ -143,7 +143,7 @@ function correcto() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'la deuda se ha pagado correctamete'
     })
@@ -157,7 +157,7 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Hubo un error al pagar la deuda'
     })

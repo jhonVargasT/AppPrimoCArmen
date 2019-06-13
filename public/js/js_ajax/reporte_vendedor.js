@@ -357,7 +357,7 @@ function error(mensaje) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: mensaje
     })
@@ -370,7 +370,7 @@ function ok(mensaje) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: mensaje
     })

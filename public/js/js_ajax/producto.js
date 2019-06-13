@@ -43,7 +43,7 @@ function ok() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos registrados'
     })
@@ -56,7 +56,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -69,7 +69,7 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Error'
     })
@@ -151,7 +151,7 @@ function actualizarStock() {
 
 //Activar y anular producto
 function actualizarProducto(id, estado) {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Este registro se actualizara!",
         type: 'warning',
@@ -276,7 +276,7 @@ function cargarSelectTipoPaquete() {
 
 
 function dividirPaquete(id) {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Desea partir  1 paquete en unidades?",
         type: 'warning',
@@ -310,7 +310,7 @@ function dividirPaquete(id) {
 }
 
 function unirunidadespaquete(id) {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Desea juntar undades en un paquete?",
         type: 'warning',

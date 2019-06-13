@@ -36,7 +36,7 @@ function ok() {
         timer: 3000
     });
 
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Registrado Correctamente'
     })
@@ -50,7 +50,7 @@ function error() {
         timer: 3000
     });
 
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Registro no Registrado'
     })
@@ -63,7 +63,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })

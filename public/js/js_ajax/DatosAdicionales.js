@@ -163,7 +163,7 @@ function cambEstadoTipoPaque(idtipopaque) {
 
 function cambiarNombre(id, nombre, tip) {
     "use strict";
-    swal({
+    swal.fire({
         title: 'ALERTA',
         text: "Desea camvbiar de estado?",
         type: 'warning',
@@ -216,7 +216,7 @@ function ok() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos registrados'
     })
@@ -229,7 +229,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -242,7 +242,7 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Error'
     })

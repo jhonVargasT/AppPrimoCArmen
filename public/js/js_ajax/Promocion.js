@@ -43,7 +43,7 @@ function ok() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos registrados'
     })
@@ -56,7 +56,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -69,7 +69,7 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Error'
     })
@@ -112,7 +112,7 @@ function editarProducto() {
 
 //Activar y anular producto
 function actualizarPromocion(id) {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Este registro se actualizara!",
         type: 'warning',

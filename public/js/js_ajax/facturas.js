@@ -137,7 +137,7 @@ function ok(mensaje) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: mensaje
     })
@@ -150,7 +150,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -163,7 +163,7 @@ function error(mensaje) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'Error',
         title: mensaje
     })
@@ -199,7 +199,7 @@ function enviarFacturaSunat() {
 
     var datos = {cabezafactura: cabezafactura, productos: productos, piefactura: piefactura};
     var arr = JSON.stringify(datos);
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "La factura se remitira a la sunat!",
         type: 'warning',
@@ -253,7 +253,7 @@ function ok(mensaje) {
         showConfirmButton: false,
         timer: 5000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: mensaje
     })

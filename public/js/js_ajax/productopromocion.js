@@ -1,6 +1,6 @@
 function activarDesactivarProductoPromocion(id,estado,tipo,prod,prom) {
 
-     swal({
+     swal.fire({
          title: 'Esta seguro?',
          text: "Este registro se actualizara!",
          type: 'warning',
@@ -46,7 +46,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -59,7 +59,7 @@ function error() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Error'
     })

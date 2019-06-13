@@ -580,7 +580,7 @@ function llenarTabla() {
 
 function eliminarProductoTabla(id) {
 
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Este registro se eliminara!",
         type: 'warning',
@@ -612,7 +612,7 @@ function correcto(data) {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Registro correcto, pedido numero '+data
     })

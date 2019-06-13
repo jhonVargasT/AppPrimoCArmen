@@ -39,7 +39,7 @@ function ok() {
         timer: 3000
     });
 
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Registrado Correctamente'
     })
@@ -53,7 +53,7 @@ function error() {
         timer: 3000
     });
 
-    toast({
+    toast.fire({
         type: 'error',
         title: 'Registro no Registrado'
     })
@@ -66,7 +66,7 @@ function actualizado() {
         showConfirmButton: false,
         timer: 3000
     });
-    toast({
+    toast.fire({
         type: 'success',
         title: 'Datos actualizados'
     })
@@ -108,7 +108,7 @@ function editarCliente() {
 
 //Activar y anular producto
 function actualizarCliente(idp, idt, iddt, estado) {
-    swal({
+    swal.fire({
         title: 'Esta seguro?',
         text: "Este registro se actualizara!",
         type: 'warning',
