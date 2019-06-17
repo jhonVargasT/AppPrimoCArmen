@@ -6,6 +6,7 @@ use App\Http\Middleware\Vendedor;
 use App\Pedido;
 use App\Persona;
 use App\Producto;
+use App\Promocion;
 use App\Usuario;
 use App\util;
 use Illuminate\Http\Request;
@@ -92,6 +93,7 @@ class ReporteController extends Controller
     public function obtenerProductoMasvendido()
     {
         try {
+            Promocion::cambiarEstadoPromociones();
             $result = Producto::obetnerProductoMasVendido();
             foreach ($result as $res) {
                 $comision = $res->nombre;

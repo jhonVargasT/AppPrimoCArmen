@@ -123,7 +123,7 @@ function actualizarPromocion(id) {
     }).then(function (result) {
         if (result.value) {
             $.ajax({
-                url: "/verpromocionproducto/"+id,
+                url: "/eliminarpromocion/"+id,
                 type: "GET",
                 success: function (data) {
                     if (data === 'success') {

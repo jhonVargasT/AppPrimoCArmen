@@ -14,7 +14,14 @@ class Promocion extends Model
     public static function actualizarPromocion($id, $estado)
     {
         static::where('idPromocion', $id)
-            ->update(['estado' => $estado]);
+            ->update(['estado' => $estado,'activo'=>$estado]);
+    }
+
+    public static function cambiarEstadoPromociones()
+    {
+        return DB::update('update promocion
+                set activo = 0
+                where date(fechaVigencia) < date(now())');
     }
 
     public static function obtenerProductoPromocion($id)

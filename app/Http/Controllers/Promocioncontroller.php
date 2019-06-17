@@ -61,7 +61,7 @@ class Promocioncontroller extends Controller
     public function edit($id)
     {
         $promocion = Promocion::where('idPromocion', $id)->firstOrFail();
-        return view('pagina.promociones.editar_promocion')->with('promocion', $promocion);
+        return view('pagina.Promociones.editar_promocion')->with('promocion', $promocion);
     }
 
     /**
@@ -97,10 +97,10 @@ class Promocioncontroller extends Controller
         try {
             DB::transaction(function () use ($id) {
                 $promocion = Promocion::findOrFail($id);
-                if ($promocion->estado === 1)
-                    $estado = 0;
+                if ($promocion->estado === '1')
+                    $estado = '0';
                 else
-                    $estado = 1;
+                    $estado = '1';
                 Promocion::actualizarPromocion($id, $estado);
             });
             return 'success';
